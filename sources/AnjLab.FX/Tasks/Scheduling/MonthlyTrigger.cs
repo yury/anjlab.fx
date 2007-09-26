@@ -1,0 +1,69 @@
+using System;
+using AnjLab.FX.System;
+
+
+namespace AnjLab.FX.Tasks.Scheduling
+{
+    internal class MonthlyTrigger: ITrigger
+    {
+        private readonly string _tag;
+        private readonly TimeSpan _timeOfDay;
+        private readonly int _monthDay;
+
+
+        public MonthlyTrigger(string tag, int monthDay, TimeSpan timeOfDay)
+        {
+            Guard.ArgumentBetweenInclusive("monthDay", monthDay, 1, 31);
+
+            _tag = tag;
+            _timeOfDay = timeOfDay;
+            _monthDay = monthDay;
+        }
+
+        public DateTime? GetNextTriggerTime(DateTime currentTime)
+        {
+            DateTime result = currentTime.Date;
+            if (result.Day == _monthDay && currentTime.TimeOfDay <= _timeOfDay)
+                return result.Add(_timeOfDay);
+            else if (result.Day < _monthDay)
+            {
+                result = result.AddDays(_monthDay - result.Day);
+                if (result.Month != currentTime.Month)
+                {
+                    return GetNextTriggerTime(currentTime.AddMonths(1));
+                }
+                return result.Add(_timeOfDay);
+            } 
+            else
+            {
+                result = result.AddDays(-result.Day + 1).AddMonths(1).AddDays(_monthDay - 1);
+                int monthDiff = Math.Abs(currentTime.Month - result.Month);
+                if (monthDiff == 1 || (monthDiff == 11 && currentTime.Month == 12))
+                    return result.Add(_timeOfDay);
+                else
+                    return GetNextTriggerTime(currentTime.AddMonths(1));
+            }
+        }
+
+        public string Tag
+        {
+            get { return _tag; }
+        }
+
+        public int MonthDay
+        {
+            get { return _monthDay; }
+        }
+
+        public TimeSpan TimeOfDay
+        {
+            get { return _timeOfDay; }
+        }
+
+
+        public override string ToString()
+        {
+            return string.Format("[{1}] monthly every {2} day at {0}", _timeOfDay, _tag, _monthDay);
+        }
+    }
+}

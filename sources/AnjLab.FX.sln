@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX", "AnjLab.FX\AnjLab.FX.csproj", "{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.Tests", "AnjLab.FX.Tests\AnjLab.FX.Tests.csproj", "{1C326391-297C-42CB-9480-E5C04F131C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.Web", "AnjLab.FX.Web\AnjLab.FX.Web.csproj", "{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C326391-297C-42CB-9480-E5C04F131C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C326391-297C-42CB-9480-E5C04F131C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C326391-297C-42CB-9480-E5C04F131C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C326391-297C-42CB-9480-E5C04F131C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

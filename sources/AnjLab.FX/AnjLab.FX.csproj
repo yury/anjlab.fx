@@ -1,0 +1,82 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AnjLab.FX</RootNamespace>
+    <AssemblyName>AnjLab.FX</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Drawing\Palette.cs" />
+    <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="IO\BitReader.cs" />
+    <Compile Include="IO\BitWriter.cs" />
+    <Compile Include="Patterns\Generic\KeyedFactory.cs" />
+    <Compile Include="System\AttributeSearcher.cs" />
+    <Compile Include="System\Command.cs" />
+    <Compile Include="System\EventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Guard.cs" />
+    <Compile Include="System\ICommand.cs" />
+    <Compile Include="System\Lst.cs" />
+    <Compile Include="System\MemberAttribute.cs" />
+    <Compile Include="System\OpenService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System\Pair.cs" />
+    <Compile Include="System\PropertyComparer.cs" />
+    <Compile Include="System\SortableBindingList.cs" />
+    <Compile Include="System\VoidAction.cs" />
+    <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\EventQueue.cs" />
+    <Compile Include="Tasks\Scheduling\HourlyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\IEventQueue.cs" />
+    <Compile Include="Tasks\Scheduling\IntervalTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\ITrigger.cs" />
+    <Compile Include="Tasks\Scheduling\MonthlyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\OnceTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\Scheduler.cs" />
+    <Compile Include="Tasks\Scheduling\Trigger.cs" />
+    <Compile Include="Tasks\Scheduling\WeeklyTrigger.cs" />
+    <Compile Include="UI\IStatusStripProvider.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
