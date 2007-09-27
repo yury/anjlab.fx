@@ -1,9 +1,5 @@
 using AnjLab.FX.Patterns.Generic;
 using AnjLab.FX.System;
-using AnjLab.FX.Patterns.Generic;
-using AnjLab.FX.System;
-using AnjLab.FX.Patterns.Generic;
-using AnjLab.FX.System;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
