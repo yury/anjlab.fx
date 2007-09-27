@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Guard.cs" />
     <Compile Include="System\ICommand.cs" />
+    <Compile Include="System\InitObjectAction.cs" />
     <Compile Include="System\Lst.cs" />
     <Compile Include="System\MemberAttribute.cs" />
     <Compile Include="System\OpenService.cs">
