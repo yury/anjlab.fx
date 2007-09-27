@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using AnjLab.FX.Drawing;
-using AnjLab.FX.Drawing;
-using AnjLab.FX.Drawing;
 using NUnit.Framework;
 
 namespace AnjLab.FX.Tests.Drawing

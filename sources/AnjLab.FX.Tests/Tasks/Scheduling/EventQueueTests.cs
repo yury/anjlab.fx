@@ -2,10 +2,6 @@ using System;
 using System.Threading;
 using AnjLab.FX.System;
 using AnjLab.FX.Tasks.Scheduling;
-using AnjLab.FX.System;
-using AnjLab.FX.Tasks.Scheduling;
-using AnjLab.FX.System;
-using AnjLab.FX.Tasks.Scheduling;
 using NUnit.Framework;
 
 namespace AnjLab.FX.Tests.Tasks.Scheduling
