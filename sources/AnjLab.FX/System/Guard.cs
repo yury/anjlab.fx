@@ -29,7 +29,7 @@ namespace AnjLab.FX.System
         public static void ArgumentNotNullOrEmpty(string argument, string value)
         {
             if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("can't null or empty", argument);
+                throw new ArgumentException("Can't be null or empty", argument);
         }
     }
 }

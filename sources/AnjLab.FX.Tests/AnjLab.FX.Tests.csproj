@@ -47,6 +47,7 @@
     <Compile Include="IO\BitReaderTests.cs" />
     <Compile Include="IO\BitWriterTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
+    <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />

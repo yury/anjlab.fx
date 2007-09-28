@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
+using AnjLab.FX.System;
 
 namespace AnjLab.FX.Patterns.Generic
 {
     public class KeyedFactory<TKey, TProduct>
     {
-        public delegate TProduct FactoryMethod();
-
-        public delegate TCProduct PrototypeFactoryMethod<TCProduct>()
-            where TCProduct: ICloneable;
-
-        readonly Dictionary<TKey, FactoryMethod> _factoryMethods =  new Dictionary<TKey, FactoryMethod>();
+        readonly Dictionary<TKey, FactoryMethod<TProduct>> _factoryMethods =  new Dictionary<TKey, FactoryMethod<TProduct>>();
 
         public ICollection<TKey> Keys
         {
@@ -22,7 +18,7 @@ namespace AnjLab.FX.Patterns.Generic
 
         public TProduct Create(TKey key)
         {
-            FactoryMethod method;
+            FactoryMethod<TProduct> method;
             if (_factoryMethods.TryGetValue(key, out method))
                 return method();
             else
@@ -40,8 +36,10 @@ namespace AnjLab.FX.Patterns.Generic
                 _factoryMethods.Remove(key);
         }
 
-        public void RegisterMethod(TKey key, FactoryMethod method)
+        public void RegisterMethod(TKey key, FactoryMethod<TProduct> method)
         {
+            Guard.ArgumentNotNull("method", method);
+
             _factoryMethods.Add(key, method);
         }
 
@@ -62,8 +60,10 @@ namespace AnjLab.FX.Patterns.Generic
             RegisterMethod(key, delegate { return (TProduct) instance.Clone(); });   
         }
 
-        public void RegisterLasyImmutable(TKey key, FactoryMethod method)
+        public void RegisterLasyImmutable(TKey key, FactoryMethod<TProduct> method)
         {
+            Guard.ArgumentNotNull("method", method);
+
             RegisterMethod(key, delegate {
                                     TProduct p = method();
                                     Unregister(key);
@@ -75,6 +75,8 @@ namespace AnjLab.FX.Patterns.Generic
         public void RegisterLasyPrototype<TConcreteProduct>(TKey key, PrototypeFactoryMethod<TConcreteProduct> method)
             where TConcreteProduct: TProduct, ICloneable
         {
+            Guard.ArgumentNotNull("method", method);
+
             RegisterMethod(key, delegate {
                                     TConcreteProduct p = method();
                                     Unregister(key);

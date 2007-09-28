@@ -52,6 +52,7 @@
     <Compile Include="System\Command.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\FactoryMethod.cs" />
     <Compile Include="System\Guard.cs" />
     <Compile Include="System\ICommand.cs" />
     <Compile Include="System\InitObjectAction.cs" />
@@ -62,6 +63,7 @@
     </Compile>
     <Compile Include="System\Pair.cs" />
     <Compile Include="System\PropertyComparer.cs" />
+    <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
     <Compile Include="System\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
