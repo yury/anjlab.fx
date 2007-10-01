@@ -44,6 +44,8 @@
     <Compile Include="Controls\DateValidator.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
     <Compile Include="BindMembersControl.cs" />
+    <Compile Include="DataTableSourceView.cs" />
+    <Compile Include="Controls\ListDataSourceControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateAttribute.cs" />
     <Compile Include="TemplatedControl.cs" />
