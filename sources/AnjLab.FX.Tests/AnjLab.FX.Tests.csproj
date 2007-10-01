@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datetime\DatetimeUtilsTests.cs" />
     <Compile Include="Drawing\PaletteTests.cs" />
+    <Compile Include="Finance\YieldTests.cs" />
     <Compile Include="IO\BitReaderTests.cs" />
     <Compile Include="IO\BitWriterTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
