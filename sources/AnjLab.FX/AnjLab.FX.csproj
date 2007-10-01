@@ -51,12 +51,16 @@
     <Compile Include="IO\BitWriter.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
+    <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
+    <Compile Include="System\ComparerFactory.cs" />
+    <Compile Include="System\DataTableAdapterFactory.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\FactoryMethod.cs" />
     <Compile Include="System\Guard.cs" />
     <Compile Include="System\ICommand.cs" />
+    <Compile Include="System\IDataTableAdapter.cs" />
     <Compile Include="System\InitObjectAction.cs" />
     <Compile Include="System\Lst.cs" />
     <Compile Include="System\MemberAttribute.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="System\PropertyComparer.cs" />
     <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
+    <Compile Include="System\TypeReflector.cs" />
     <Compile Include="System\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
     <Compile Include="Tasks\Scheduling\EventQueue.cs" />
