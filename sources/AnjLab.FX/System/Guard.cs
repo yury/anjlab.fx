@@ -9,6 +9,12 @@ namespace AnjLab.FX.System
             if (value.Ticks <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, "Should be greater then zero");
         }
+        
+        public static void ArgumentGreaterThenZero(string argument, decimal value)
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException(argument, value, "Should be greater then zero");
+        }
 
         public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
         {
