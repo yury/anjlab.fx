@@ -23,6 +23,18 @@ namespace AnjLab.FX.System
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
 
+        public static void ArgumentGreaterThenZero(string argument, float value)
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
+        }
+
+        public static void ArgumentGreaterThenZero(string argument, double value)
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
+        }
+
         public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
         {
             if (value < a || b < value)

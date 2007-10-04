@@ -73,6 +73,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="System\Pair.cs" />
+    <Compile Include="System\Predicate.cs" />
     <Compile Include="System\PropertyComparer.cs" />
     <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
