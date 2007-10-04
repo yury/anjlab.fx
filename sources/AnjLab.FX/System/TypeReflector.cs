@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
 {
@@ -74,7 +75,7 @@ namespace AnjLab.FX.System
             FillMembersType(type.GetProperties(bf), types);
         }
 
-        private void FillMembersType(ICollection<FieldInfo> members, Dictionary<Type, object> types)
+        private void FillMembersType(IEnumerable<FieldInfo> members, Dictionary<Type, object> types)
         {
             foreach (FieldInfo info in members)
             {
@@ -87,7 +88,7 @@ namespace AnjLab.FX.System
             }
         }
 
-        private void FillMembersType(ICollection<PropertyInfo> members, Dictionary<Type, object> types)
+        private void FillMembersType(IEnumerable<PropertyInfo> members, Dictionary<Type, object> types)
         {
             foreach (PropertyInfo info in members)
             {
@@ -155,7 +156,7 @@ namespace AnjLab.FX.System
                     if (pi != null)
                         type = pi.PropertyType;
                     else
-                        throw new ArgumentException("Can't find member:" + memberName);
+                        throw new ArgumentException(string.Format(Resources.CantFindMember_Name, memberName));
                 }
             }
 

@@ -2,6 +2,7 @@ using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using AnjLab.FX.Properties;
 using Diag = System.Diagnostics;
 
 namespace AnjLab.FX.System
@@ -62,7 +63,7 @@ namespace AnjLab.FX.System
             {
                 foreach (object error in cr.Errors)
                     Diag.Debug.WriteLine(error);
-                throw new Exception("Code generation error");
+                throw new Exception(Resources.CodeGenerationError);
             }
             return cr.CompiledAssembly.GetType(_namespace + "." + name);
         }

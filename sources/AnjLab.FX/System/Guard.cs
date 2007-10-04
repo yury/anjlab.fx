@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
 {
@@ -7,13 +8,19 @@ namespace AnjLab.FX.System
         public static void ArgumentGreaterThenZero(string argument, TimeSpan value)
         {
             if (value.Ticks <= 0)
-                throw new ArgumentOutOfRangeException(argument, value, "Should be greater then zero");
+                throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
         
         public static void ArgumentGreaterThenZero(string argument, decimal value)
         {
             if (value <= 0)
-                throw new ArgumentOutOfRangeException(argument, value, "Should be greater then zero");
+                throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
+        }
+
+        public static void ArgumentGreaterThenZero(string argument, int value)
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
 
         public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
@@ -21,7 +28,7 @@ namespace AnjLab.FX.System
             if (value < a || b < value)
                 throw new ArgumentOutOfRangeException( argument
                                                      , value
-                                                     , string.Format("Should be between [{0},{1}]"
+                                                     , string.Format(Resources.ShouldBeBetween_A_B
                                                                     , a
                                                                     , b));
         }
@@ -29,13 +36,13 @@ namespace AnjLab.FX.System
         public static void ArgumentNotNull(string argument, object value)
         {
             if (value == null)
-                throw new ArgumentNullException(argument, "Can't be null");
+                throw new ArgumentNullException(argument, Resources.CantBeNull);
         }
 
         public static void ArgumentNotNullOrEmpty(string argument, string value)
         {
             if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Can't be null or empty", argument);
+                throw new ArgumentException(Resources.CantBeNullOrEmpty, argument);
         }
     }
 }

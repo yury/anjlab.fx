@@ -5,6 +5,7 @@ using System.CodeDom;
 using System.Data;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
 {
@@ -71,7 +72,7 @@ namespace AnjLab.FX.System
             {
                 foreach (object error in cr.Errors)
                     global::System.Diagnostics.Debug.WriteLine(error);
-                throw new Exception("Code generation error");
+                throw new Exception(Resources.CodeGenerationError);
             }
             return cr.CompiledAssembly.GetType(_namespace + "." + name);
         }

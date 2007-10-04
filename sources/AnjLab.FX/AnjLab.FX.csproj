@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -50,6 +50,11 @@
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
@@ -85,6 +90,13 @@
     <Compile Include="Tasks\Scheduling\Trigger.cs" />
     <Compile Include="Tasks\Scheduling\WeeklyTrigger.cs" />
     <Compile Include="UI\IStatusStripProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

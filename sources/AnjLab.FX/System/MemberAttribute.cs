@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
 {
@@ -20,7 +21,7 @@ namespace AnjLab.FX.System
                 if (property != null)
                     return property.GetValue(obj, null);
 
-                throw new InvalidOperationException("You can get value only for field or property member");
+                throw new InvalidOperationException(Resources.CanGetValueOnlyForFieldOrPropertyMember);
             }
             set
             {
@@ -33,7 +34,7 @@ namespace AnjLab.FX.System
                     if (property != null)
                         property.SetValue(obj, value, null);
                     else
-                        throw new InvalidOperationException("You can set value only for field or property member");
+                        throw new InvalidOperationException(Resources.CanSetValueOnlyForFieldOrPropertyMember);
                 }
             }
         }

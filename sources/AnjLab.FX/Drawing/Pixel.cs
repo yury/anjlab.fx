@@ -11,12 +11,6 @@ namespace AnjLab.FX.Drawing
         private readonly Point location;
         private Color color = Color.Empty;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Pixel"/> class.
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        /// <param name="colorValue">The color value.</param>
         public Pixel(int x, int y, int colorValue)
         {
             this.colorValue = colorValue;
@@ -47,10 +41,6 @@ namespace AnjLab.FX.Drawing
             }
         }
 
-        /// <summary>
-        /// Gets the Color of this pixel.  Use <see cref="T:ColorValue"/> when possible as it is more efficient.
-        /// </summary>
-        /// <value>The Color of this pixel.</value>
         public Color Color
         {
             get
