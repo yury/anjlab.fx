@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing.Design;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using AnjLab.FX.System;
 using System.Collections;
 
@@ -12,26 +14,9 @@ namespace AnjLab.FX.Web.Controls
     ParseChildren(true)]
     public class ListDataSourceControl : DataTableSourceContol
     {
-        private DataTableSourceView _view;
         private DataTableAdapterConfig _dataTableConfig = new DataTableAdapterConfig();
         private DataTable _dataTable;
-        private const string DefaultViewName = "DefaultView";
-
-        public ListDataSourceControl()
-        {
-            _view = new DataTableSourceView(this, DefaultViewName);
-        }
-
-        protected override DataSourceView GetView(string viewName)
-        {
-            return this._view;
-        }
-
-        protected override ICollection GetViewNames()
-        {
-            return new string[] {DefaultViewName};
-        }
-
+        
         public void SetDataSource<T>(IList<T> list)
         {
             IDataTableAdapter<T> adapter = DataTableAdapterFactory.Singleton.New<T>(DataTableConfig.PropertyColumns);

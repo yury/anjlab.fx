@@ -1,4 +1,6 @@
+using System;
 using System.Web.UI;
+using System.Collections.Generic;
 
 namespace AnjLab.FX.Web
 {
@@ -23,6 +25,21 @@ namespace AnjLab.FX.Web
                 }
             }
             return null;
+        }
+
+        public static IList<T> FindControls<T>(Control container) where T : Control
+        {
+            List<T> controls = new List<T>();
+            foreach (Control child in container.Controls)
+            {
+                if (child.GetType() == typeof(T))
+                    controls.Add((T)child);
+
+                if(child.HasControls())
+                    controls.AddRange(FindControls<T>(child));
+            }
+
+            return controls;
         }
     }
 }

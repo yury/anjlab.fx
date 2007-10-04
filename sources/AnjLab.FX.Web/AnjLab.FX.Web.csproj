@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -44,6 +46,7 @@
     <Compile Include="Controls\DateValidator.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
     <Compile Include="BindMembersControl.cs" />
+    <Compile Include="TemplatedDataBoundControl.cs" />
     <Compile Include="DataTableSourceView.cs" />
     <Compile Include="Controls\ListDataSourceControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
