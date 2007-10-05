@@ -5,6 +5,8 @@ namespace AnjLab.FX.System
 {
     public static class Guard
     {
+        #region ArgumentGreaterThenZero overloads
+
         public static void ArgumentGreaterThenZero(string argument, TimeSpan value)
         {
             if (value.Ticks <= 0)
@@ -34,6 +36,8 @@ namespace AnjLab.FX.System
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
+
+        #endregion
 
         public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
         {

@@ -78,6 +78,7 @@
     <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
     <Compile Include="System\TypeReflector.cs" />
+    <Compile Include="System\UniqueList.cs" />
     <Compile Include="System\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
     <Compile Include="Tasks\Scheduling\EventQueue.cs" />
