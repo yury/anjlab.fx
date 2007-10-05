@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1C326391-297C-42CB-9480-E5C04F131C6B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\ComparerFactoryTests.cs" />
     <Compile Include="System\DataTableAdapterFactoryTests.cs" />
+    <Compile Include="System\UniqueListTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />
   </ItemGroup>
