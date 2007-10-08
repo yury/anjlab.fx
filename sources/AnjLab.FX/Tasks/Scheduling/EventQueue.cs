@@ -6,7 +6,7 @@ using AnjLab.FX.System;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    public class EventQueue: IEventQueue
+    public class EventQueue
     {
         private readonly List<Pair<ITrigger, DateTime>> _innerQueue;
         

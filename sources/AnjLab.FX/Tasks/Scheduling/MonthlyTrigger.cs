@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 using AnjLab.FX.System;
 
 
@@ -63,7 +64,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public override string ToString()
         {
-            return string.Format("[{1}] monthly every {2} day at {0}", _timeOfDay, _tag, _monthDay);
+            return string.Format(Resources.MonthlyEveryDayAt_TimeOfDay_Tag_DateTime, _timeOfDay, _tag, _monthDay);
         }
     }
 }

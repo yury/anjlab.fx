@@ -115,6 +115,51 @@ namespace AnjLab.FX.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [{1}] Daily at {0}.
+        /// </summary>
+        internal static string DailyAt_TimeOfDay_Tag {
+            get {
+                return ResourceManager.GetString("DailyAt_TimeOfDay_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{1}] every {0} starting from {2}.
+        /// </summary>
+        internal static string EveryTimeStartingFrom_Interval_Tag_StartTime {
+            get {
+                return ResourceManager.GetString("EveryTimeStartingFrom_Interval_Tag_StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{1}] Hourly at {0} min.
+        /// </summary>
+        internal static string HourlyAt_Minutes_Tag {
+            get {
+                return ResourceManager.GetString("HourlyAt_Minutes_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{1}] monthly every {2} day at {0}.
+        /// </summary>
+        internal static string MonthlyEveryDayAt_TimeOfDay_Tag_DateTime {
+            get {
+                return ResourceManager.GetString("MonthlyEveryDayAt_TimeOfDay_Tag_DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{1}] Once at {0}.
+        /// </summary>
+        internal static string OnceAt_Time_Tag {
+            get {
+                return ResourceManager.GetString("OnceAt_Time_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Should be between [{0},{1}].
         /// </summary>
         internal static string ShouldBeBetween_A_B {
@@ -129,6 +174,15 @@ namespace AnjLab.FX.Properties {
         internal static string ShouldBeGreaterThenZero {
             get {
                 return ResourceManager.GetString("ShouldBeGreaterThenZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{1}] Weekly on {0} at {2}.
+        /// </summary>
+        internal static string Weekly_OnTime_AtTimeOfDay_Tag {
+            get {
+                return ResourceManager.GetString("Weekly_OnTime_AtTimeOfDay_Tag", resourceCulture);
             }
         }
     }

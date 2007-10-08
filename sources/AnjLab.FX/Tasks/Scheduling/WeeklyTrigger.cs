@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -72,10 +73,9 @@ namespace AnjLab.FX.Tasks.Scheduling
             get { return _timeOfDay; }
         }
 
-
         public override string ToString()
         {
-            return string.Format("[{1}] Weekly on {0} at {2}", Lst.ToString(_weekDays), _tag, _timeOfDay);
+            return string.Format(Resources.Weekly_OnTime_AtTimeOfDay_Tag, Lst.ToString(_weekDays), _tag, _timeOfDay);
         }
     }
 }

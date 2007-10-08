@@ -57,7 +57,7 @@ namespace AnjLab.FX.System
                 param.ReferencedAssemblies.Add(assemblyPath);
             }
 
-            param.ReferencedAssemblies.Add(typeof (IDataTableAdapter<>).Assembly.Location);
+            param.ReferencedAssemblies.Add(typeof(IDataTableAdapter<>).Assembly.Location);
             param.ReferencedAssemblies.Add(typeof(DataTable).Assembly.Location);
             param.ReferencedAssemblies.Add(typeof(IListSource).Assembly.Location);
             param.ReferencedAssemblies.Add(typeof(IXmlSerializable).Assembly.Location);

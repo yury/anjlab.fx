@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
@@ -34,7 +35,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public override string ToString()
         {
-            return string.Format("[{1}] Daily at {0}", _timeOfDay, _tag);
+            return string.Format(Resources.DailyAt_TimeOfDay_Tag, _timeOfDay, _tag);
         }
     }
 }

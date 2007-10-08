@@ -135,10 +135,28 @@
   <data name="CodeGenerationError" xml:space="preserve">
     <value>Code generation error</value>
   </data>
+  <data name="DailyAt_TimeOfDay_Tag" xml:space="preserve">
+    <value>[{1}] Daily at {0}</value>
+  </data>
+  <data name="EveryTimeStartingFrom_Interval_Tag_StartTime" xml:space="preserve">
+    <value>[{1}] every {0} starting from {2}</value>
+  </data>
+  <data name="HourlyAt_Minutes_Tag" xml:space="preserve">
+    <value>[{1}] Hourly at {0} min</value>
+  </data>
+  <data name="MonthlyEveryDayAt_TimeOfDay_Tag_DateTime" xml:space="preserve">
+    <value>[{1}] monthly every {2} day at {0}</value>
+  </data>
+  <data name="OnceAt_Time_Tag" xml:space="preserve">
+    <value>[{1}] Once at {0}</value>
+  </data>
   <data name="ShouldBeBetween_A_B" xml:space="preserve">
     <value>Should be between [{0},{1}]</value>
   </data>
   <data name="ShouldBeGreaterThenZero" xml:space="preserve">
     <value>Should be greater then zero</value>
+  </data>
+  <data name="Weekly_OnTime_AtTimeOfDay_Tag" xml:space="preserve">
+    <value>[{1}] Weekly on {0} at {2}</value>
   </data>
 </root>

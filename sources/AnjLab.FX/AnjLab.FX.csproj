@@ -83,7 +83,6 @@
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
     <Compile Include="Tasks\Scheduling\EventQueue.cs" />
     <Compile Include="Tasks\Scheduling\HourlyTrigger.cs" />
-    <Compile Include="Tasks\Scheduling\IEventQueue.cs" />
     <Compile Include="Tasks\Scheduling\IntervalTrigger.cs" />
     <Compile Include="Tasks\Scheduling\ITrigger.cs" />
     <Compile Include="Tasks\Scheduling\MonthlyTrigger.cs" />

@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -50,7 +51,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public override string ToString()
         {
-            return string.Format("[{1}] Hourly at {0} min", _minutes, _tag);
+            return string.Format(Resources.HourlyAt_Minutes_Tag, _minutes, _tag);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
@@ -38,7 +39,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public override string ToString()
         {
-            return string.Format("[{1}] Once at {0}",_dateTime, _tag);
+            return string.Format(Resources.OnceAt_Time_Tag, _dateTime, _tag);
         }
     }
 }

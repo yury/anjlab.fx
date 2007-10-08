@@ -1,4 +1,5 @@
 using System;
+using AnjLab.FX.Properties;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -46,7 +47,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public override string ToString()
         {
-            return string.Format("[{1}] every {0} starting from {2}", _interval, _tag, _startTime);
+            return string.Format(Resources.EveryTimeStartingFrom_Interval_Tag_StartTime, _interval, _tag, _startTime);
         }
     }
 }
