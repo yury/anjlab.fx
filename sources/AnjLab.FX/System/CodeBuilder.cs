@@ -15,6 +15,21 @@ namespace AnjLab.FX.System
             return BuildStatement(string.Format(format, args));
         }
 
+        public static CodeSnippetExpression BuildExpression(string expression)
+        {
+            return new CodeSnippetExpression(expression);
+        }
+
+        public static CodeSnippetExpression BuildExpression(string format, params string [] args)
+        {
+            return BuildExpression(string.Format(format, args));
+        }
+
+        public static CodeCastExpression BuildCastExpression(Type targetType, string expression, params string [] args)
+        {
+            return new CodeCastExpression(targetType, BuildExpression(expression, args));
+        }
+
         public static Type GetGenericType(Type genericType, Type typeArgument)
         {
             return genericType.MakeGenericType(typeArgument);
