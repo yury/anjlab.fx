@@ -33,9 +33,22 @@ namespace AnjLab.FX.Web.Controls
             Controls.Clear();
             ascx.InstantiateIn(this);
             Controls[0].ID = "_";
-            
-            _templateElements = AttributeSearcher.GetMemberAttributes<TemplateElementAttribute>(GetType(), true);
+
+            _templateElements = GetBindableMembers();
             BindTemplateElements(false);
+        }
+
+        private IList<TemplateElementAttribute> GetBindableMembers()
+        {
+            List<TemplateElementAttribute> list = new List<TemplateElementAttribute>();
+            Type type = GetType();
+
+            while (type != typeof(TemplatedControl))
+            {
+                list.AddRange(AttributeSearcher.GetMemberAttributes<TemplateElementAttribute>(type, false));
+                type = type.BaseType;
+            }
+            return list;
         }
 
         protected static ITemplate GetTemplate(string path)
