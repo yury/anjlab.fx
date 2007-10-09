@@ -80,7 +80,7 @@ namespace AnjLab.FX.Web
             DataTable dt = _owner.GetDataTable();
             if(dt == null) return new DataTable().DefaultView;
 
-            _dataView = new DataView(dt);//.DefaultView);
+            _dataView = new DataView(dt);
 
             PerformFiltering();
 
@@ -91,8 +91,6 @@ namespace AnjLab.FX.Web
 
         private void PerformFiltering()
         {
-            //_dataView.RowFilter = string.Empty;
-
             foreach (ControlParameter parameter in SelectParameters)
             {
                 Control control = ControlsSearcher.FindControl(_owner.Page, parameter.ControlID);
