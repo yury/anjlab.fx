@@ -10,7 +10,8 @@ namespace AnjLab.FX.Finance
         {
             Guard.ArgumentNotNull("currentDate", currentDate);
             Guard.ArgumentNotNull("futureDate", futureDate);
-            
+            Guard.ArgumentGreaterThenZero("pricePercent", pricePercent);
+
             return (100*(100 - pricePercent))/(GetTimeInterval(currentDate, futureDate)*pricePercent);
         }
 
