@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 
+#if NET_3_5
+using System.Linq;
+#endif
+
 namespace AnjLab.FX.System
 {
     public static class Lst
@@ -17,25 +21,32 @@ namespace AnjLab.FX.System
         public static List<T> ToList<T>(IEnumerable<T> list)
         {
             Guard.ArgumentNotNull("list", list);
-
+#if NET_3_5
+            return list.ToList();
+#else 
             List<T> result = new List<T>();
 
             foreach (T t in list)
                 result.Add(t);
 
             return result;
+#endif
         }
 
         public static T [] ToArray<T>(IEnumerable<T> list)
         {
             Guard.ArgumentNotNull("list", list);
 
+#if NET_3_5
+            return list.ToArray();
+#else 
             List<T> result = new List<T>();
             
             foreach (T t in list)
                 result.Add(t);
 
             return result.ToArray();
+#endif
         }
 
         public static string ToString<T>(IEnumerable<T> list, string separator)
@@ -62,7 +73,9 @@ namespace AnjLab.FX.System
         {
             Guard.ArgumentNotNull("list", list);
             Guard.ArgumentNotNull("predicate", predicate);
-
+#if NET_3_5
+            return list.Any((x) => predicate(x));
+#else 
             foreach (T item in list)
             {
                 if (predicate(item))
@@ -70,6 +83,7 @@ namespace AnjLab.FX.System
             }
 
             return false;
+#endif
         }
     }
 }

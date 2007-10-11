@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}</ProjectGuid>
+    <ProjectGuid>{6E082F4B-3507-49CE-9E28-635B12EE4AB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AnjLab.FX.Web</RootNamespace>
@@ -14,13 +14,14 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET_2_0</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET_3_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -28,12 +29,15 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NET_2_0</DefineConstants>
+    <DefineConstants>TRACE;NET_3_5</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -57,12 +61,6 @@
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.csproj">
-      <Project>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</Project>
-      <Name>AnjLab.FX</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Scripts\core.js" />
     <EmbeddedResource Include="Scripts\sys.js" />
     <EmbeddedResource Include="Scripts\unitTesting.js" />
@@ -72,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\finance.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX_3_5.csproj">
+      <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
+      <Name>AnjLab.FX_3_5</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\tests\" />
