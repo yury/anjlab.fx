@@ -6,7 +6,7 @@ namespace AnjLab.FX.System
 
         public Command(VoidAction action)
         {
-            Guard.ArgumentNotNull("action", action);
+            Guard.NotNull("action", action);
             _action = action;
         }
 

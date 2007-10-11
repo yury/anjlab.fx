@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -59,6 +59,7 @@
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
     <Compile Include="System\ComparerFactory.cs" />
+    <Compile Include="System\Action.cs" />
     <Compile Include="System\DataTableAdapterFactory.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

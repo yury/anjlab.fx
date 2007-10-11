@@ -8,11 +8,11 @@ namespace AnjLab.FX.Finance
     {
         public static decimal Calculate(DateTime currentDate, DateTime futureDate, decimal pricePercent)
         {
-            Guard.ArgumentNotNull("currentDate", currentDate);
-            Guard.ArgumentNotNull("futureDate", futureDate);
-            Guard.ArgumentGreaterThenZero("pricePercent", pricePercent);
+            Guard.NotNull("currentDate", currentDate);
+            Guard.NotNull("futureDate", futureDate);
+            Guard.GreaterThenZero("pricePercent", pricePercent);
 
-            return (100*(100 - pricePercent))/(GetTimeInterval(currentDate, futureDate)*pricePercent);
+            return ((100 * (100 - pricePercent)) / (GetTimeInterval(currentDate, futureDate) * pricePercent));
         }
 
         private static decimal GetTimeInterval(DateTime currentDate, DateTime futureDate)

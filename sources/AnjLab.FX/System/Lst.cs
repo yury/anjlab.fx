@@ -7,8 +7,8 @@ namespace AnjLab.FX.System
     {
         public static void ForEach<T>(IEnumerable<T> list, Action<T> action)
         {
-            Guard.ArgumentNotNull("list", list);
-            Guard.ArgumentNotNull("action", action);
+            Guard.NotNull("list", list);
+            Guard.NotNull("action", action);
 
             foreach (T t in list)
                 action(t);
@@ -16,7 +16,7 @@ namespace AnjLab.FX.System
 
         public static List<T> ToList<T>(IEnumerable<T> list)
         {
-            Guard.ArgumentNotNull("list", list);
+            Guard.NotNull("list", list);
 
             List<T> result = new List<T>();
 
@@ -28,7 +28,7 @@ namespace AnjLab.FX.System
 
         public static T [] ToArray<T>(IEnumerable<T> list)
         {
-            Guard.ArgumentNotNull("list", list);
+            Guard.NotNull("list", list);
 
             List<T> result = new List<T>();
             
@@ -40,8 +40,8 @@ namespace AnjLab.FX.System
 
         public static string ToString<T>(IEnumerable<T> list, string separator)
         {
-            Guard.ArgumentNotNull("list", list);
-            Guard.ArgumentNotNull("separator", separator);
+            Guard.NotNull("list", list);
+            Guard.NotNull("separator", separator);
 
             List<string> strings = new List<string>();
 
@@ -53,15 +53,15 @@ namespace AnjLab.FX.System
 
         public static string ToString<T>(IEnumerable<T> list)
         {
-            Guard.ArgumentNotNull("list", list);
+            Guard.NotNull("list", list);
 
             return ToString(list, ", ");
         }
 
         public static bool Exists<T>(IEnumerable<T> list, Predicate<T> predicate)
         {
-            Guard.ArgumentNotNull("list", list);
-            Guard.ArgumentNotNull("predicate", predicate);
+            Guard.NotNull("list", list);
+            Guard.NotNull("predicate", predicate);
 
             foreach (T item in list)
             {

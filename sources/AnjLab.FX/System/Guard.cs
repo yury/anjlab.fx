@@ -5,33 +5,33 @@ namespace AnjLab.FX.System
 {
     public static class Guard
     {
-        #region ArgumentGreaterThenZero overloads
+        #region GreaterThenZero overloads
 
-        public static void ArgumentGreaterThenZero(string argument, TimeSpan value)
+        public static void GreaterThenZero(string argument, TimeSpan value)
         {
             if (value.Ticks <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
         
-        public static void ArgumentGreaterThenZero(string argument, decimal value)
+        public static void GreaterThenZero(string argument, decimal value)
         {
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
 
-        public static void ArgumentGreaterThenZero(string argument, int value)
+        public static void GreaterThenZero(string argument, int value)
         {
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
 
-        public static void ArgumentGreaterThenZero(string argument, float value)
+        public static void GreaterThenZero(string argument, float value)
         {
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
 
-        public static void ArgumentGreaterThenZero(string argument, double value)
+        public static void GreaterThenZero(string argument, double value)
         {
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
@@ -39,7 +39,7 @@ namespace AnjLab.FX.System
 
         #endregion
 
-        public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
+        public static void BetweenInclusive(string argument, int value, int a, int b)
         {
             if (value < a || b < value)
                 throw new ArgumentOutOfRangeException( argument
@@ -49,13 +49,13 @@ namespace AnjLab.FX.System
                                                                     , b));
         }
 
-        public static void ArgumentNotNull(string argument, object value)
+        public static void NotNull(string argument, object value)
         {
             if (value == null)
                 throw new ArgumentNullException(argument, Resources.CantBeNull);
         }
 
-        public static void ArgumentNotNullOrEmpty(string argument, string value)
+        public static void NotNullNorEmpty(string argument, string value)
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException(Resources.CantBeNullOrEmpty, argument);
