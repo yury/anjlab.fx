@@ -46,6 +46,7 @@
     <Compile Include="Controls\DateValidator.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
     <Compile Include="BindMembersControl.cs" />
+    <Compile Include="Scripts\Namespaces.cs" />
     <Compile Include="TemplatedDataBoundControl.cs" />
     <Compile Include="DataTableSourceView.cs" />
     <Compile Include="Controls\ListDataSourceControl.cs" />
@@ -60,6 +61,20 @@
       <Project>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</Project>
       <Name>AnjLab.FX</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\core.js" />
+    <EmbeddedResource Include="Scripts\sys.js" />
+    <EmbeddedResource Include="Scripts\unitTesting.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\browser.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\finance.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
