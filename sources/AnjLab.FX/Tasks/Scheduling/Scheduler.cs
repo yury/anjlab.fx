@@ -11,7 +11,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public Scheduler(KeyedFactory<string, TTask> taskFactory)
         {
-            Guard.NotNull("taskFactory", taskFactory);
+            Guard.ArgumentNotNull("taskFactory", taskFactory);
 
             _taskFactory = taskFactory;
             _eventQueue.EventOccurs += eventQueue_EventOccurs;

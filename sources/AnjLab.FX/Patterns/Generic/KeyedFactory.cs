@@ -38,7 +38,7 @@ namespace AnjLab.FX.Patterns.Generic
 
         public void RegisterMethod(TKey key, FactoryMethod<TProduct> method)
         {
-            Guard.NotNull("method", method);
+            Guard.ArgumentNotNull("method", method);
 
             _factoryMethods.Add(key, method);
         }
@@ -62,7 +62,7 @@ namespace AnjLab.FX.Patterns.Generic
 
         public void RegisterLasyImmutable(TKey key, FactoryMethod<TProduct> method)
         {
-            Guard.NotNull("method", method);
+            Guard.ArgumentNotNull("method", method);
 
             RegisterMethod(key, delegate {
                                     TProduct p = method();
@@ -75,7 +75,7 @@ namespace AnjLab.FX.Patterns.Generic
         public void RegisterLasyPrototype<TConcreteProduct>(TKey key, PrototypeFactoryMethod<TConcreteProduct> method)
             where TConcreteProduct: TProduct, ICloneable
         {
-            Guard.NotNull("method", method);
+            Guard.ArgumentNotNull("method", method);
 
             RegisterMethod(key, delegate {
                                     TConcreteProduct p = method();

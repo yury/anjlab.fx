@@ -11,7 +11,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public HourlyTrigger(string tag, int minutes)
         {
-            Guard.BetweenInclusive("minutes", minutes, 0, 59);
+            Guard.ArgumentBetweenInclusive("minutes", minutes, 0, 59);
 
             _tag = tag;
             _minutes = minutes % 60;

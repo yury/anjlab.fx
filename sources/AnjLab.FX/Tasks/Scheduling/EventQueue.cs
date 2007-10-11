@@ -29,7 +29,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public void Register(ITrigger trigger)
         {
-            Guard.NotNull("trigger", trigger);
+            Guard.ArgumentNotNull("trigger", trigger);
             DateTime date = DateTime.Now;
             
             DateTime? time = trigger.GetNextTriggerTime(date);

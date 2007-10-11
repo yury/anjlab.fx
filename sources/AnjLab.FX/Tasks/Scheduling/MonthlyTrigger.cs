@@ -14,7 +14,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public MonthlyTrigger(string tag, int monthDay, TimeSpan timeOfDay)
         {
-            Guard.BetweenInclusive("monthDay", monthDay, 1, 31);
+            Guard.ArgumentBetweenInclusive("monthDay", monthDay, 1, 31);
 
             _tag = tag;
             _timeOfDay = timeOfDay;

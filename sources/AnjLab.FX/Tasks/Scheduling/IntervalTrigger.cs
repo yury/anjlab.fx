@@ -12,7 +12,7 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public IntervalTrigger(string tag, DateTime startTime, TimeSpan interval)
         {
-            Guard.GreaterThenZero("interval", interval);
+            Guard.ArgumentGreaterThenZero("interval", interval);
 
             _tag = tag;
             _startTime = startTime;
