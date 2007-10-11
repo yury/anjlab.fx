@@ -72,9 +72,9 @@
     <EmbeddedResource Include="Scripts\finance.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX_3_5.csproj">
+    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
       <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
-      <Name>AnjLab.FX_3_5</Name>
+      <Name>AnjLab.FX.v3.5</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

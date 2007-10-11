@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.Tests", "AnjLab.F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.Web", "AnjLab.FX.Web\AnjLab.FX.Web.csproj", "{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX_3_5", "AnjLab.FX\AnjLab.FX_3_5.csproj", "{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.v3.5.Web", "AnjLab.FX.Web\AnjLab.FX.v3.5.Web.csproj", "{6E082F4B-3507-49CE-9E28-635B12EE4AB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX_3_5.Tests", "AnjLab.FX.Tests\AnjLab.FX_3_5.Tests.csproj", "{05E36FA2-0361-4D18-BA64-6718B8883ACB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.v3.5", "AnjLab.FX\AnjLab.FX.v3.5.csproj", "{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX_3_5.Web", "AnjLab.FX.Web\AnjLab.FX_3_5.Web.csproj", "{6E082F4B-3507-49CE-9E28-635B12EE4AB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.v3.5.Tests", "AnjLab.FX.Tests\AnjLab.FX.v3.5.Tests.csproj", "{05E36FA2-0361-4D18-BA64-6718B8883ACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +31,10 @@ Global
 		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,10 +43,6 @@ Global
 		{05E36FA2-0361-4D18-BA64-6718B8883ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05E36FA2-0361-4D18-BA64-6718B8883ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05E36FA2-0361-4D18-BA64-6718B8883ACB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E082F4B-3507-49CE-9E28-635B12EE4AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
