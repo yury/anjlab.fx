@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Hosting;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.Web.Controls
@@ -85,6 +87,18 @@ namespace AnjLab.FX.Web.Controls
         {
             BindTemplateElements(true);
             base.OnLoad(e);
+        }
+
+        public string Render()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter writer = new HtmlTextWriter(sw))
+                {
+                    this.RenderControl(writer);
+                    return sw.ToString();
+                }
+            }
         }
 
         #region Properties
