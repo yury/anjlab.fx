@@ -66,7 +66,7 @@ namespace AnjLab.FX.System
             NotNull(value, Resources.CantBeNull);
         }
 
-        public static void ArgumentNotNullNorEmpty(string argument, string value)
+        public static void ArgumentNotNullOrEmpty(string argument, string value)
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException(Resources.CantBeNullOrEmpty, argument);
