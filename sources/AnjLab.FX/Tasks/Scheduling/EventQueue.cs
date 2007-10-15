@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using AnjLab.FX.System;
 
-
 namespace AnjLab.FX.Tasks.Scheduling
 {
     public class EventQueue
