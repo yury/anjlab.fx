@@ -50,6 +50,7 @@
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Drawing\Palette.cs" />
     <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Finance\TimeInterval.cs" />
     <Compile Include="Finance\Yield.cs" />
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
