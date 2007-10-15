@@ -53,6 +53,8 @@
     <Compile Include="Finance\Yield.cs" />
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
+    <Compile Include="IO\ILog.cs" />
+    <Compile Include="IO\TraceLog.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
