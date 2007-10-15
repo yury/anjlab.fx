@@ -1,7 +1,8 @@
 
 AnjLab.Finance = {
     calcYield: function(price, earlyDate, laterDate){
-        return (100*(100 - price))/(AnjLab.Finance.getTimeInterval(earlyDate, laterDate)*price);
+        var time = AnjLab.Finance.getTimeInterval(earlyDate, laterDate);
+        return (time != 0) ? Math.roundTo((100*(100 - price))/(time *price), 4) : 0;
     },
     
     getTimeInterval: function(currentDate, futureDate){
