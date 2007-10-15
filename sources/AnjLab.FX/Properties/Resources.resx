@@ -153,6 +153,9 @@
   <data name="ShouldBeBetween_A_B" xml:space="preserve">
     <value>Should be between [{0},{1}]</value>
   </data>
+  <data name="ShouldBeGreater_A_B" xml:space="preserve">
+    <value>Should be greater then {1}, but was {0}</value>
+  </data>
   <data name="ShouldBeGreaterThenZero" xml:space="preserve">
     <value>Should be greater then zero</value>
   </data>

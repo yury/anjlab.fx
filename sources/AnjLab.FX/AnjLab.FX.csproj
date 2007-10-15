@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,6 +46,7 @@
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Drawing\Palette.cs" />
     <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Finance\TimeInterval.cs" />
     <Compile Include="Finance\Yield.cs" />
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />

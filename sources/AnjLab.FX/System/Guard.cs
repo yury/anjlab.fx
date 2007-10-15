@@ -66,6 +66,17 @@ namespace AnjLab.FX.System
             NotNull(value, Resources.CantBeNull);
         }
 
+        public static void GreaterThan(int value, int than)
+        {
+            GreaterThan(value, than, Resources.ShouldBeGreater_A_B, value, than);
+        }
+
+        public static void GreaterThan(int value, int then, string msg, params object[] args)
+        {
+            if (value <= then)
+                throw new ArgumentOutOfRangeException(String.Format(msg, args));
+        }
+
         public static void ArgumentNotNullNorEmpty(string argument, string value)
         {
             if (string.IsNullOrEmpty(value))
