@@ -61,6 +61,7 @@
     <Compile Include="System\Command.cs" />
     <Compile Include="System\ComparerFactory.cs" />
     <Compile Include="System\Action.cs" />
+    <Compile Include="System\GetObjectAction.cs" />
     <Compile Include="System\DataTableAdapterFactory.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
