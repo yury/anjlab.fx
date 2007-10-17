@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace AnjLab.FX.IO
 {
     public class TraceLog: ILog
     {
-        public void Info(string message, params string[] args)
+        public void Info(string message, params object[] args)
         {
-            Trace.WriteLine(string.Format(message, args), "Info");
+            Trace.TraceInformation(message, args);
         }
 
-        public void Warning(string message, params string[] args)
+        public void Warning(string message, params object[] args)
         {
-            Trace.WriteLine(string.Format(message, args), "Warning");
+            Trace.TraceWarning(message, args);
         }
 
-        public void Error(string message, params string[] args)
+        public void Error(string message, params object[] args)
         {
-            Trace.WriteLine(string.Format(message, args), "Error");
+            Trace.TraceError(message, args);
         }
 
-        public void Fatal(string message, params string[] args)
+        public void Fatal(string message, params object[] args)
         {
-            Trace.WriteLine(string.Format(message, args), "Fatal");
+            Trace.TraceError(message, args);
         }
     }
 }
