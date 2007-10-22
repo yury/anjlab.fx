@@ -37,5 +37,15 @@ namespace AnjLab.FX.System
         {
             return (_a.GetHashCode().ToString() + _b.GetHashCode().ToString()).GetHashCode();
         }
+
+        
+    }
+
+    public class Pair
+    {
+        public static Pair<TAA, TBB> New<TAA, TBB>(TAA a, TBB b)
+        {
+            return new Pair<TAA, TBB>(a, b);
+        }
     }
 }
