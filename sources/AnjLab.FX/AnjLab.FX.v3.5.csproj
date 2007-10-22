@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\IRepository.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Devices\BytesFilter.cs" />
     <Compile Include="Devices\Convert.cs" />
