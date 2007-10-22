@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datetime\DateUtils.cs" />
+    <Compile Include="Devices\BytesFilter.cs" />
+    <Compile Include="Devices\Convert.cs" />
+    <Compile Include="Devices\CheckSum.cs" />
     <Compile Include="Drawing\Palette.cs" />
     <Compile Include="Drawing\Pixel.cs" />
     <Compile Include="Finance\TimeInterval.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
     <Compile Include="IO\ILog.cs" />
+    <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -162,4 +162,7 @@
   <data name="Weekly_OnTime_AtTimeOfDay_Tag" xml:space="preserve">
     <value>[{1}] Weekly on {0} at {2}</value>
   </data>
+  <data name="CantBeFalse" xml:space="preserve">
+    <value>Should be true</value>
+  </data>
 </root>

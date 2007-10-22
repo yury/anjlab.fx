@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
@@ -12,7 +13,7 @@ namespace AnjLab.FX.System
             if (value.Ticks <= 0)
                 throw new ArgumentOutOfRangeException(argument, value, Resources.ShouldBeGreaterThenZero);
         }
-        
+
         public static void ArgumentGreaterThenZero(string argument, decimal value)
         {
             if (value <= 0)
@@ -42,7 +43,7 @@ namespace AnjLab.FX.System
         public static void ArgumentBetweenInclusive(string argument, int value, int a, int b)
         {
             if (value < a || b < value)
-                throw new ArgumentOutOfRangeException( argument
+                throw new ArgumentOutOfRangeException(argument
                                                      , value
                                                      , string.Format(Resources.ShouldBeBetween_A_B
                                                                     , a
@@ -81,6 +82,17 @@ namespace AnjLab.FX.System
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException(Resources.CantBeNullOrEmpty, argument);
+        }
+
+        public static void IsTrue(bool value)
+        {
+            IsTrue(value, Resources.CantBeFalse);
+        }
+
+        public static void IsTrue(bool value, string msg, params object[] args)
+        {
+            if (!value)
+                throw new InvalidOperationException(String.Format(msg, args));
         }
     }
 }
