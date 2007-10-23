@@ -21,7 +21,8 @@ namespace AnjLab.FX.Patterns.Generic.Inject
         }
 
         private FieldInfo _fieldInfo;
-        private static Regex _nameSpaceRegex = new Regex("clr-namespace:(?<namespace>[^;]+)(;assembly=(?<assembly>.+))?", RegexOptions.IgnorePatternWhitespace);
+        
+        private static readonly int nsIndex0 = "clr-namespace:".Length;
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -31,11 +32,20 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             ParserContext context = GetContext(serviceProvider);
             string[] prefixName = Name.Split(':');
             string namespce = context.XmlnsDictionary.LookupNamespace(prefixName[0]);
-            Match match = _nameSpaceRegex.Match(namespce);
-            if (match.Success)
+            int i = namespce.IndexOf(";assembly=");
+            string ns = string.Empty;
+            string am = string.Empty;
+            if (i < 0)
+                ns = namespce.Substring(nsIndex0);
+            else
             {
-                return Assembly.CreateQualifiedName(match.Groups["assembly"].Value, match.Groups["namespace"].Value + "." + prefixName[1]);
+                ns = namespce.Substring(nsIndex0, i - nsIndex0);
+                am = namespce.Substring(i + ";assembly=".Length);
             }
+        
+            if (!string.IsNullOrEmpty(ns) && !string.IsNullOrEmpty(am))
+                return Assembly.CreateQualifiedName(am, ns + "." + prefixName[1]);
+
             return string.Empty;
         }
 

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Windows.Markup;
-using System.Xml;
-using AnjLab.FX.System;
+using SysActivator = System.Activator;
 
 namespace AnjLab.FX.Patterns.Generic.Inject
 {
@@ -72,11 +69,12 @@ namespace AnjLab.FX.Patterns.Generic.Inject
                 {
                     Definition def = _module.Definitions[bind.To];
                     Type factoryType = build[bind.To];
+                    Activator activator = bind.Activation;
                     _defaultScopeFactory.RegisterLasyImmutable(bind.Type, delegate
                                                                               {
                                                                                   return
-                                                                                      bind.Activation.Create(def,
-                                                                                          (IObjectFactory)global::System.Activator.
+                                                                                      activator.Create(def,
+                                                                                          (IObjectFactory)SysActivator.
                                                                                               CreateInstance(factoryType));
                                                                               });
                 }
