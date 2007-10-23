@@ -75,7 +75,7 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             _compileUnit.Namespaces.Add(cn);
         }
 
-        private void BuildInitMethod(CodeTypeDeclaration ctd, Ctor ctor)
+        private void BuildInitMethod(CodeTypeDeclaration ctd, Definition def)
         {
             CodeMemberMethod cmm = new CodeMemberMethod();
             cmm.Name = "Init";
@@ -160,32 +160,42 @@ namespace AnjLab.FX.Patterns.Generic.Inject
                 if (!info.IsPublic && !info.IsAssembly)
                     continue;
 
-                ParameterInfo[] parameters = info.GetParameters();
-                
-                if (parameters.Length != ctor.Args.Count)
-                    continue;
-
-                if (parameters.Length == 0)
+                if (ParametersMatched(ctor, info.GetParameters()))
                     return info;
+            }
+            return null;
+        }
 
-                bool allMatched = true;
-                for (int i = 0; i < parameters.Length; i++)
-                {
-                    object value = ctor.Args[i];
-                    ParameterInfo param = parameters[i];
-                    if (value == null && param.ParameterType.IsValueType)
-                    {
-                        allMatched = false;
-                        break;
-                    }
+        private static bool ParametersMatched(Definition def, ParameterInfo [] parms)
+        {
+            if (parms.Length != def.Args.Count)
+                return false;
 
-                    if (!parameters[i].ParameterType.IsAssignableFrom(ctor.Args[i].GetType()))
-                    {
-                        allMatched = false;
-                        break;
-                    }
-                }
-                if (allMatched)
+            if (parms.Length == 0 && def.Args.Count == 0)
+                return true;
+
+            for (int i = 0; i < parms.Length; i++)
+            {
+                object value = def.Args[i];
+                ParameterInfo param = parms[i];
+                if (value == null && param.ParameterType.IsValueType)
+                    return false;
+
+                if (!parms[i].ParameterType.IsAssignableFrom(def.Args[i].GetType()))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static MethodInfo GetMethod(Method method)
+        {
+            MethodInfo[] methods = method.Type.GetMethods(BindingFlags.Static | BindingFlags.Public);
+            foreach (MethodInfo info in methods)
+            {
+                if (info.Name != method.Name)
+                    continue;
+                if (ParametersMatched(method, info.GetParameters()))
                     return info;
             }
             return null;
@@ -193,7 +203,52 @@ namespace AnjLab.FX.Patterns.Generic.Inject
 
         public void BuildFromMethodDefinition(Method method)
         {
-            
+            CodeNamespace cn = new CodeNamespace("Generated" + _namespaceIndex++);
+            CodeTypeDeclaration ctd = new CodeTypeDeclaration("Factory");
+            ctd.Attributes = MemberAttributes.Public;
+            ctd.BaseTypes.Add(typeof(IObjectFactory));
+            cn.Types.Add(ctd);
+
+            BuildNewMethodFromMethod(ctd, method);
+            BuildInitMethod(ctd, method);
+            _factories.Add(method.Key, cn.Name + ".Factory");
+
+            _compileUnit.Namespaces.Add(cn);
+        }
+
+        private static void BuildNewMethodFromMethod(CodeTypeDeclaration ctd, Method method)
+        {
+            MethodInfo mi = GetMethod(method);
+            if (mi == null)
+                throw new InvalidOperationException(
+                    string.Format("Can't find suitable static method for {0}", method.Key));
+
+            CodeMemberMethod cmm = new CodeMemberMethod();
+            cmm.Name = "New";
+            cmm.Attributes = MemberAttributes.Public;
+            cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(object[]), "args"));
+            cmm.ReturnType = new CodeTypeReference(typeof(object));
+
+            ParameterInfo[] pars = mi.GetParameters();
+            List<CodeExpression> varRefs = new List<CodeExpression>();
+            for (int i = 0; i < pars.Length; i++)
+            {
+                cmm.Statements.Add(
+                    new CodeVariableDeclarationStatement(pars[i].ParameterType, "p" + i,
+                                                         new CodeCastExpression(pars[i].ParameterType,
+                                                                                new CodeArrayIndexerExpression(
+                                                                                    new CodeArgumentReferenceExpression
+                                                                                        ("args"),
+                                                                                    new CodePrimitiveExpression(i)))));
+                varRefs.Add(new CodeVariableReferenceExpression("p" + i));
+            }
+            cmm.Statements.Add(new CodeMethodReturnStatement(
+                                   new CodeMethodInvokeExpression(
+                                       new CodeTypeReferenceExpression(method.Type), method.Name,
+                                       varRefs.ToArray())));
+
+
+            ctd.Members.Add(cmm);
         }
     }
 }
