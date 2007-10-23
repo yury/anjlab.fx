@@ -1,0 +1,21 @@
+﻿<Module xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="clr-namespace:AnjLab.FX.Patterns.Generic.Inject;assembly=AnjLab.FX"  
+          
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
+        xmlns:fx.io="clr-namespace:AnjLab.FX.IO;assembly=AnjLab.FX"
+        xmlns:fx.sys="clr-namespace:AnjLab.FX.System;assembly=AnjLab.FX"
+        xmlns:fx.tests="clr-namespace:AnjLab.FX.Tests.Patterns.Generic.Inject;assembly=AnjLab.FX.Tests">
+        
+    <Module.Definitions>
+        <Ctor x:Key="log" Type="fx.io:TraceLog"/>
+        <Ctor x:Key="a" Type="fx.tests:B"/>
+    </Module.Definitions>
+    
+    <Module.Bindings>
+        <Scope Name="default">
+            <Bind Type="fx.io:ILog" To="log" Activation="{x:Static Activator.Singleton}"/>
+            <Bind Type="fx.tests:A" To="a" Activation="{x:Static Activator.Singleton}"/>
+        </Scope>
+    </Module.Bindings>
+</Module>
