@@ -12,7 +12,7 @@ namespace AnjLab.FX.Patterns.Generic
         {
             get
             {
-                return _factoryMethods.Keys;
+                return new List<TKey>(_factoryMethods.Keys);
             }
         }
 
