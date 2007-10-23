@@ -46,7 +46,7 @@ namespace AnjLab.FX.Tests.Patterns.Generic.Inject
         }
 
         [Test]
-        public void TestSingleton()
+        public void TestSingletonActivation()
         {
             ObjectFactory.Clear();
             ObjectFactory.ReadXaml(@"Properties\sample.xaml");
@@ -55,10 +55,18 @@ namespace AnjLab.FX.Tests.Patterns.Generic.Inject
             ILog log3 = ObjectFactory.Get<ILog>();
             Assert.AreSame(log1, log2);
             Assert.AreSame(log3, log2);
+        }
+
+        [Test]
+        public void TestPerCallActivation()
+        {
+            ObjectFactory.Clear();
+            ObjectFactory.ReadXaml(@"Properties\sample.xaml");
 
             A a1 = ObjectFactory.Get<A>();
             A a2 = ObjectFactory.Get<A>();
-            Assert.AreSame(a1, a2);
+
+            Assert.AreNotSame(a1, a2);
         }
 
         [Test]

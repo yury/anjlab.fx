@@ -15,7 +15,7 @@
     <Module.Bindings>
         <Scope Name="default">
             <Bind Type="fx.io:ILog" To="log" Activation="{x:Static Activator.Singleton}"/>
-            <Bind Type="fx.tests:A" To="a" Activation="{x:Static Activator.Singleton}"/>
+            <Bind Type="fx.tests:A" To="a" Activation="{x:Static Activator.PerCall}"/>
         </Scope>
     </Module.Bindings>
 </Module>
