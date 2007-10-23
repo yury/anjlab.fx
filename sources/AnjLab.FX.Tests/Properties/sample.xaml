@@ -9,7 +9,7 @@
         
     <Module.Definitions>
         <Ctor x:Key="log" Type="fx.io:TraceLog"/>
-        <Ctor x:Key="a" Type="fx.tests:B"/>
+        <Ctor x:Key="a" InternalType="{TypeRef Name=fx.tests:B}"/>
     </Module.Definitions>
     
     <Module.Bindings>

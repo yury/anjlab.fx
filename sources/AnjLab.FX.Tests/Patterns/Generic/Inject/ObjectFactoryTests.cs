@@ -13,7 +13,7 @@ namespace AnjLab.FX.Tests.Patterns.Generic.Inject
         
     }
 
-    public class B: A
+    internal class B: A
     {
         
     }
@@ -56,7 +56,9 @@ namespace AnjLab.FX.Tests.Patterns.Generic.Inject
             Assert.AreSame(log1, log2);
             Assert.AreSame(log3, log2);
 
-            A a = ObjectFactory.Get<A>();
+            A a1 = ObjectFactory.Get<A>();
+            A a2 = ObjectFactory.Get<A>();
+            Assert.AreSame(a1, a2);
         }
 
         [Test]
