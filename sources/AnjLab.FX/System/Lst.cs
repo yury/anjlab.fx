@@ -53,16 +53,16 @@ namespace AnjLab.FX.System
         {
             Guard.ArgumentNotNull("list", list);
 
-#if NET_3_5
-            return list.ToArray();
-#else 
-            List<T> result = new List<T>();
+            List<T> result = list as List<T>;
+            if (result != null)
+                return result.ToArray();
+
+            result = new List<T>(list);
             
             foreach (T t in list)
                 result.Add(t);
 
             return result.ToArray();
-#endif
         }
 
         public static string ToString<T>(IEnumerable<T> list, string separator)
