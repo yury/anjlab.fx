@@ -6,6 +6,7 @@ using AnjLab.FX.Web.Scripts;
 [assembly: WebResource(Namespaces.UnitTesting, "text/javascript")]
 [assembly: WebResource(Namespaces.Browser, "text/javascript")]
 [assembly: WebResource(Namespaces.Finance, "text/javascript")]
+[assembly: WebResource(Namespaces.Dom, "text/javascript")]
 
 namespace AnjLab.FX.Web.Scripts
 {
@@ -16,5 +17,6 @@ namespace AnjLab.FX.Web.Scripts
         public const string Core = "AnjLab.FX.Web.Scripts.core.js";
         public const string UnitTesting = "AnjLab.FX.Web.Scripts.unitTesting.js";
         public const string Finance = "AnjLab.FX.Web.Scripts.finance.js";
+        public const string Dom = "AnjLab.FX.Web.Scripts.dom.js";
     }
 }
