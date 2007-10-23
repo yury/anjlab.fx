@@ -82,6 +82,7 @@
     <Compile Include="Patterns\Generic\Inject\PerCallActivator.cs" />
     <Compile Include="Patterns\Generic\Inject\Scope.cs" />
     <Compile Include="Patterns\Generic\Inject\SingletonActivator.cs" />
+    <Compile Include="Patterns\Generic\Inject\TypeRefExtension.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

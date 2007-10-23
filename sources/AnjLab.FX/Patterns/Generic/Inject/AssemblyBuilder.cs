@@ -43,11 +43,14 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             }
 
             CSharpCodeProvider provider = new CSharpCodeProvider();
-            CompilerParameters pars = new CompilerParameters(Lst.ToArray(ab._references), ObjectFactory.GeneratedAssemblyName);
+            CompilerParameters pars = new CompilerParameters();
+            pars.ReferencedAssemblies.AddRange(Lst.ToArray(ab._references));
+            pars.OutputAssembly = ObjectFactory.GeneratedAssemblyName+".dll";
+            
             CompilerResults results = provider.CompileAssemblyFromDom(pars, ab._compileUnit);
             if (results.Errors.HasErrors)
                 throw new Exception(results.Errors[0].ToString());
-
+            
             Dictionary<string, Type> factories = new Dictionary<string, Type>();
             foreach (KeyValuePair<string, string> pair in ab._factories)
             {
@@ -118,6 +121,7 @@ namespace AnjLab.FX.Patterns.Generic.Inject
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
                             new CodeTypeReferenceExpression(typeof (global::System.Activator)), "CreateInstance",
+                            new CodeTypeOfExpression(ctor.Type),
                             new CodeArgumentReferenceExpression("args"))));
             }
             ctd.Members.Add(cmm);

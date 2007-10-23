@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Windows.Markup;
 using System.Xml;
 using AnjLab.FX.System;
@@ -46,9 +49,21 @@ namespace AnjLab.FX.Patterns.Generic.Inject
 
         public static void ReadXaml(string pathToXaml)
         {
-            using (XmlReader reader = XmlReader.Create(pathToXaml))
+            ParserContext context = new ParserContext();
+            
+            using (Stream stream = new FileStream(pathToXaml, FileMode.Open))
             {
-                _module = (Module) XamlReader.Load(reader);
+                _module = (Module) XamlReader.Load(stream, context);
+            }
+            foreach (Definition def in _module.Definitions.Values)
+            {
+                Ctor c = def as Ctor;
+                if (c == null)
+                    continue;
+                if (!string.IsNullOrEmpty(c.InternalType))
+                {
+                    c.Type = Type.GetType(c.InternalType);
+                }
             }
             Dictionary<string, Type> build = AssemblyBuilder.Build(_module);
             foreach (Scope scope in _module.Bindings)
