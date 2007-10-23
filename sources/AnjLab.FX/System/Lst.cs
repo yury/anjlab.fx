@@ -33,6 +33,22 @@ namespace AnjLab.FX.System
 #endif
         }
 
+        public static List<TResult> ToList<TResult, TSource>(IEnumerable<TSource> list) where TSource : TResult
+        {
+            Guard.ArgumentNotNull("list", list);
+#if NET_3_5
+            return list.Cast<TResult>().ToList();
+#else
+
+            List<TResult> result = new List<TResult>();
+
+            foreach (TSource t in list)
+                result.Add(t);
+
+            return result;
+#endif
+        }
+
         public static T [] ToArray<T>(IEnumerable<T> list)
         {
             Guard.ArgumentNotNull("list", list);
