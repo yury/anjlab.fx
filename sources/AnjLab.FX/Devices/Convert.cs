@@ -10,8 +10,9 @@ namespace AnjLab.FX.Devices
         public static StringBuilder BytesToHexString(byte[] bytes)
         {
             StringBuilder str = new StringBuilder();
-            foreach (byte b in bytes)
-                str.Append(ByteToHexString(b));
+            if (bytes != null)
+                foreach (byte b in bytes)
+                    str.Append(ByteToHexString(b));
             return str;
         }
 
