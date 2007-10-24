@@ -7,12 +7,13 @@ namespace AnjLab.FX.Data
 {
     public interface IRepository<T>
     {
-        T GetById(object id);
+        T GetByID(object id);
         IList<T> GetAll();
         IList<T> GetAll(string orderByField, bool ascending);
         IList<T> GetFirst(int count);
         int GetCount();
         IList<T> GetPage(int startIndex, int count, string orderByField, bool ascending);
+        IList<T> GetByProperty(string propertyName, object value);
         IList<T> GetByExample(T exampleInstance, params string[] propertiesToExclude);
         T GetUniqueByExample(T exampleInstance, params string[] propertiesToExclude);
         T Save(T entity);
@@ -20,6 +21,5 @@ namespace AnjLab.FX.Data
         void Delete(T entity);
         void CommitChanges();
         void Refresh(T entity);
-
     }
 }
