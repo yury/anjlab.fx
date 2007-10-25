@@ -3,13 +3,13 @@ using System.IO;
 
 namespace AnjLab.FX.IO
 {
-    public class BitWriter: BinaryWriter 
+    public class BasedBitWriter: BinaryWriter 
     {
         private readonly int _bitsCount = 8;
         private byte _buffer;
         private int _part = 0;
 
-        public BitWriter(Stream output, int writeBase) :base (output)
+        public BasedBitWriter(Stream output, int writeBase) :base (output)
         {
             if (writeBase <= 16)
                 _bitsCount = 4;

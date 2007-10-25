@@ -36,6 +36,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -43,6 +45,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -65,8 +68,9 @@
     <Compile Include="Drawing\Pixel.cs" />
     <Compile Include="Finance\TimeInterval.cs" />
     <Compile Include="Finance\Yield.cs" />
+    <Compile Include="IO\BasedBitReader.cs" />
+    <Compile Include="IO\BasedBitWriter.cs" />
     <Compile Include="IO\BitReader.cs" />
-    <Compile Include="IO\BitWriter.cs" />
     <Compile Include="IO\ILog.cs" />
     <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
@@ -89,6 +93,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StreamMapping\AssemblyBuilder.cs" />
+    <Compile Include="StreamMapping\MapInfo.cs" />
+    <Compile Include="StreamMapping\MapBytes.cs" />
+    <Compile Include="StreamMapping\MapBits.cs" />
+    <Compile Include="StreamMapping\MapInfoElement.cs" />
+    <Compile Include="StreamMapping\IMapInfoElement.cs" />
+    <Compile Include="StreamMapping\BinaryMapper.cs" />
+    <Compile Include="StreamMapping\IMapInfo.cs" />
+    <Compile Include="StreamMapping\IMapper.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />

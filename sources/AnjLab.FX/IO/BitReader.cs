@@ -1,82 +1,59 @@
 using System.IO;
+using AnjLab.FX.System;
 
 namespace AnjLab.FX.IO
 {
     public class BitReader: BinaryReader 
     {
-        private readonly int _bitsCount = 8;
-        private byte _buffer;
-        private int _part = 0;
+        private readonly int _bitsInByte = 8;
+        private byte? _buffer = null;
+        private int _bufferPosition = 0;
 
-        public BitReader(Stream input, int readBase) : base(input)
+        public BitReader(Stream input)
+            : base(input)
         {
-            if (readBase <= 16)
-                _bitsCount = 4;
-            if (readBase <= 4)
-                _bitsCount = 2;
         }
 
-        public int ReadReduced()
+        public byte ReadBits(int count)
         {
-            return Read7BitEncodedInt();
-        }
+            Guard.ArgumentBetweenInclusive("count", count, 0, 8);
 
-        public byte ReadBits()
-        {
-            if (_bitsCount == 8)
-                return ReadByte();
-            else if (_bitsCount == 4)
+            if (_buffer == null || BitsInBuffer == 0)
             {
-                if (_part == 0)
-                {
-                    _part++;
-                    _buffer = ReadByte();
-                    byte value = _buffer;
-                    return (byte)(value >> 4);
-                } 
-                else
-                {
-                    _part = 0;
-                    return (byte)(0x0f & _buffer);
-                }
-            } 
-            else if (_bitsCount == 2)
-            {
-                if (_part == 0)
-                {
-                    _part++;
-                    _buffer = ReadByte();
-                    byte value = _buffer;
-                    return (byte) (value >> 6);
-                }
-                else if (_part == 1)
-                {
-                    _part++;
-                    byte value = _buffer;
-                    return (byte) (0x03 & (value >> 4));
-                } 
-                else if (_part == 2)
-                {
-                    _part++;
-                    byte value = _buffer;
-                    return (byte) (0x03 & (value >> 2));
-                } 
-                else
-                {
-                    _part = 0;
-                    byte value = _buffer;
-                    return (byte) (0x03 & (value));
-                }
+                _buffer = ReadByte();
+                _bufferPosition = 0;
             }
-            return 0;
+
+            if (BitsInBuffer >= count)
+            {
+                return GetValueFromBuffer(count);
+            }
+            else
+            {
+                byte nextByteBitsCount = (byte) (count - BitsInBuffer);
+                byte value = GetValueFromBuffer(BitsInBuffer);
+
+                byte lowBits = ReadBits(nextByteBitsCount);
+                return (byte)((value << nextByteBitsCount) + lowBits);
+            }
+        }
+
+        private byte GetValueFromBuffer(int count)
+        {
+            byte value = (byte)(_buffer.Value << _bufferPosition);
+            value = (byte)(value >> (_bitsInByte - count));
+            _bufferPosition += count;
+            return value;
+        }
+
+        private int BitsInBuffer
+        {
+            get { return _bitsInByte - _bufferPosition; }
         }
 
         public  bool IsBuffered
         {
-            get
-            {
-                return _part != 0;
-            }
+            get { return _buffer != null; }
         }
     }
 }

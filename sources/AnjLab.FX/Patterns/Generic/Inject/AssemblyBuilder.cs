@@ -2,10 +2,8 @@
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 using AnjLab.FX.System;
 using Microsoft.CSharp;
 
@@ -45,7 +43,7 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CompilerParameters pars = new CompilerParameters();
             pars.ReferencedAssemblies.AddRange(Lst.ToArray(ab._references));
-            pars.OutputAssembly = ObjectFactory.GeneratedAssemblyName+".dll";
+            pars.OutputAssembly = ObjectFactory.GeneratedAssemblyName + ".dll";
             
             CompilerResults results = provider.CompileAssemblyFromDom(pars, ab._compileUnit);
             if (results.Errors.HasErrors)
@@ -60,7 +58,7 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             return factories;
         }
 
-        public void BuildFromContructorDefinition(Ctor ctor)
+        public void BuildFromConstructorDefinition(Ctor ctor)
         {
             CodeNamespace cn = new CodeNamespace("Generated" + _namespaceIndex++ );
             CodeTypeDeclaration ctd = new CodeTypeDeclaration("Factory");

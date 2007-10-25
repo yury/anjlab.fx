@@ -84,6 +84,12 @@ namespace AnjLab.FX.System
                 throw new ArgumentException(Resources.CantBeNullOrEmpty, argument);
         }
 
+        public static void NotNullNorEmpty(string value, string message, params object[] args)
+        {
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentOutOfRangeException(String.Format(message, args));
+        }
+
         public static void IsTrue(bool value)
         {
             IsTrue(value, Resources.CantBeFalse);
