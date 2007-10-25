@@ -1,7 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Reflection;
-using AnjLab.FX.System;
+﻿using System.CodeDom;
 
 namespace AnjLab.FX.StreamMapping
 {
@@ -22,17 +19,6 @@ namespace AnjLab.FX.StreamMapping
             set { _length = value; }
         }
 
-        public abstract CodeStatementCollection GenerateMapStatements(AssemblyBuilder info, CodeVariableReferenceExpression binaryReader,
-            CodeVariableReferenceExpression result);
-
-        protected PropertyInfo GetPropertyToSet(IMapInfo info)
-        {
-            if (String.IsNullOrEmpty(To))
-                return null;
-
-            PropertyInfo pInfo = info.MapedType.GetProperty(To);
-            Guard.NotNull(pInfo, "Property '{0}' not found in '{1}'", To, info.MapedType.FullName);
-            return pInfo;
-        }
+        public abstract void BuildMapElementMethod(AssemblyBuilder info, CodeMemberMethod method);
     }
 }

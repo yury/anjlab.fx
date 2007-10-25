@@ -163,6 +163,15 @@ namespace AnjLab.FX.System
             return type;
         }
 
+        public static PropertyInfo GetProperty(Type type, string name)
+        {
+            Guard.ArgumentNotNullNorEmpty("name", name);
+            Guard.ArgumentNotNull("type", type);
+
+            PropertyInfo pInfo = type.GetProperty(name);
+            Guard.NotNull(pInfo, "Property '{0}' not found in '{1}'", name, type.FullName);
+            return pInfo;
+        }
 
     }
 }

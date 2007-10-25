@@ -1,57 +1,61 @@
 ﻿using System;
 using System.CodeDom;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using AnjLab.FX.System;
 
 namespace AnjLab.FX.StreamMapping
 {
     public class MapBytes : MapInfoElement
     {
-        public override CodeStatementCollection GenerateMapStatements(AssemblyBuilder builder,
-                                                              CodeVariableReferenceExpression binaryReader,
-                                                              CodeVariableReferenceExpression result)
+        public override void BuildMapElementMethod(AssemblyBuilder builder, CodeMemberMethod method)
         {
-            CodeStatementCollection statements = new CodeStatementCollection();
-            PropertyInfo pInfo = GetPropertyToSet(builder.MapInfo);
+            PropertyInfo pInfo = null;
+            if (!String.IsNullOrEmpty(To))
+                pInfo = TypeReflector.GetProperty(builder.MappedType, To);
+
             builder.AddReference(typeof(MemoryStream));
+            builder.AddReference(typeof(BinaryReader));
             builder.AddReference(typeof(byte));
 
+            // BinarryReader reader = new BinarryReader(dataStream);
+            method.Statements.Add(new CodeVariableDeclarationStatement(typeof(BinaryReader), "reader",
+                new CodeObjectCreateExpression(typeof(BinaryReader), 
+                    new CodeArgumentReferenceExpression(method.Parameters[0].Name))));
+            
+            CodeVariableReferenceExpression reader = new CodeVariableReferenceExpression("reader");
+
             // byte[] bytes = reader.ReadBytes(length);
-            statements.Add(new CodeVariableDeclarationStatement(typeof(byte[]), "bytes",
-                new CodeMethodInvokeExpression(binaryReader, "ReadBytes", new CodePrimitiveExpression(Length))));
+            method.Statements.Add(new CodeVariableDeclarationStatement(typeof(byte[]), "bytes",
+                new CodeMethodInvokeExpression(reader, "ReadBytes", new CodePrimitiveExpression(Length))));
 
             if (pInfo != null)
             {
-                // MemoryStream newStream = new MemoryStream(bytes);
+                // MemoryStream stream2 = new MemoryStream(bytes);
                 CodeVariableReferenceExpression bytes = new CodeVariableReferenceExpression("bytes");
-                statements.Add(new CodeVariableDeclarationStatement(typeof(MemoryStream), GetVariabeName("stream"), 
+                method.Statements.Add(new CodeVariableDeclarationStatement(typeof(MemoryStream), "stream2", 
                     new CodeObjectCreateExpression(typeof(MemoryStream), bytes)));
 
-                // BinarryReader newReader = new BinarryReader(newStream);
-                CodeVariableReferenceExpression newStream = new CodeVariableReferenceExpression(GetVariabeName("stream"));
-                statements.Add(new CodeVariableDeclarationStatement(typeof(BinaryReader), GetVariabeName("reader"),
-                    new CodeObjectCreateExpression(typeof(BinaryReader), newStream)));
+                // BinaryReader newReader = new BinarryReader(stream2);
+                CodeVariableReferenceExpression stream2 = new CodeVariableReferenceExpression("stream2");
+                method.Statements.Add(new CodeVariableDeclarationStatement(typeof(BinaryReader), "reader2",
+                    new CodeObjectCreateExpression(typeof(BinaryReader), stream2)));
 
-                //result.PropName = ?
-                CodeVariableReferenceExpression newReader = new CodeVariableReferenceExpression(GetVariabeName("reader"));
-                CodePropertyReferenceExpression property = new CodePropertyReferenceExpression(result, pInfo.Name);
-                statements.Add(new CodeAssignStatement(property, GetPropertyValueExpression(pInfo.PropertyType, newReader)));
+                //resultObject.PropName = ?
+                CodeVariableReferenceExpression reader2 = new CodeVariableReferenceExpression("reader2");
+                CodePropertyReferenceExpression property = new CodePropertyReferenceExpression(
+                    new CodeArgumentReferenceExpression(method.Parameters[1].Name), pInfo.Name);
+                method.Statements.Add(new CodeAssignStatement(property, GetPropertyValueExpression(pInfo.PropertyType, reader2)));
 
                 // newReader.Dispose();
-                statements.Add(new CodeMethodInvokeExpression(newReader, "Close"));
+                method.Statements.Add(new CodeMethodInvokeExpression(reader2, "Close"));
                 // newStream.Dispose();
-                statements.Add(new CodeMethodInvokeExpression(newStream, "Close"));
+                method.Statements.Add(new CodeMethodInvokeExpression(stream2, "Close"));
             }
 
-            return statements;
+            // reader.Dispose();
+            //method.Statements.Add(new CodeMethodInvokeExpression(reader, "Close"));
         }
-
-        private string GetVariabeName(string name)
-        {
-            return string.Format("{0}For{1}", name, To);
-        }
-
 
         private CodeExpression GetPropertyValueExpression(Type propertyType, CodeVariableReferenceExpression binaryReader)
         {
@@ -61,8 +65,14 @@ namespace AnjLab.FX.StreamMapping
             if (propertyType == typeof(short))
                 return new CodeMethodInvokeExpression(binaryReader, "ReadInt16");
 
+            if (propertyType == typeof(ushort))
+                return new CodeMethodInvokeExpression(binaryReader, "ReadUInt16");
+
             if (propertyType == typeof(int))
                 return new CodeMethodInvokeExpression(binaryReader, "ReadInt32");
+            
+            if (propertyType == typeof(uint))
+                return new CodeMethodInvokeExpression(binaryReader, "ReadUInt32");
 
             if (propertyType == typeof(float))
                 return new CodeMethodInvokeExpression(binaryReader, "ReadSingle");

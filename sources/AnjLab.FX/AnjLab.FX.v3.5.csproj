@@ -100,8 +100,7 @@
     <Compile Include="StreamMapping\MapInfoElement.cs" />
     <Compile Include="StreamMapping\IMapInfoElement.cs" />
     <Compile Include="StreamMapping\BinaryMapper.cs" />
-    <Compile Include="StreamMapping\IMapInfo.cs" />
-    <Compile Include="StreamMapping\IMapper.cs" />
+    <Compile Include="StreamMapping\IBinaryMapper.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />

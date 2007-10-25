@@ -4,11 +4,8 @@ namespace AnjLab.FX.StreamMapping
 {
     public class MapBits : MapInfoElement
     {
-        public override CodeStatementCollection GenerateMapStatements(AssemblyBuilder info,
-                                                                      CodeVariableReferenceExpression binaryReader,
-                                                                      CodeVariableReferenceExpression result)
+        public override void BuildMapElementMethod(AssemblyBuilder info, CodeMemberMethod method)
         {
-            return new CodeStatementCollection();
         }
     }
 }

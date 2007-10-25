@@ -9,34 +9,32 @@ namespace AnjLab.FX.StreamMapping
     public class BinaryMapper<TResult> 
         where TResult:class, new()
     {
-        private static IMapper<TResult> _mapper = null;
+        private static IBinaryMapper<TResult> binaryMapper = null;
 
         public TResult Map(byte[] data) 
         {
             Guard.ArgumentNotNull("data", data);
             Guard.ArgumentGreaterThenZero("data.Length", data.Length);
 
-            if (_mapper == null)
-                _mapper = GenerateMapper();
-            return _mapper.Map(data);
+            if (binaryMapper == null)
+                binaryMapper = GenerateMapper();
+            return binaryMapper.Map(data);
         }
 
-        private IMapper<TResult> GenerateMapper()
+        private IBinaryMapper<TResult> GenerateMapper()
         {
-            IMapInfo info = GetFormat(typeof(TResult));
-            return (IMapper<TResult>)AssemblyBuilder.BuildMapper(info);
+            MapInfo info = GetFormat(typeof(TResult));
+            return AssemblyBuilder.BuildBinaryMapper<TResult>(info);
         }
 
-        private IMapInfo GetFormat(Type type)
+        private MapInfo GetFormat(Type type)
         {
             string formatName = FindFormatName(type.Assembly, type.Name);
             Guard.NotNullNorEmpty(formatName, "Binary format not found for type {0}", type.FullName);
 
             Stream stream = type.Assembly.GetManifestResourceStream(formatName);
-            IMapInfo info = XamlReader.Load(stream) as IMapInfo;
+            MapInfo info = XamlReader.Load(stream) as MapInfo;
             Guard.NotNull(info, "Error in binary format file {0}", formatName);
-
-            info.MapedType = type;
             return info;
         }
 
