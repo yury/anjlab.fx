@@ -7,13 +7,13 @@ namespace AnjLab.FX.Tests.IO
     using FX.IO;
 
     [TestFixture]
-    public class BitWriterTests: IOTestFixture
+    public class BasedBitWriterTests: IOTestFixture
     {
         [Test]
         public void TestWriteReduced()
         {
             MemoryStream stream = new MemoryStream();
-            BitWriter writer = new BitWriter(stream, 4);
+            BasedBitWriter writer = new BasedBitWriter(stream, 4);
 
             writer.WriteReduced(1);
             ExpectFlushedPosition(1, stream);
@@ -35,7 +35,7 @@ namespace AnjLab.FX.Tests.IO
         public void TestWriteBits()
         {
             MemoryStream stream = new MemoryStream();
-            BitWriter writer = new BitWriter(stream, 4);
+            BasedBitWriter writer = new BasedBitWriter(stream, 4);
             writer.WriteBits(0);
             ExpectPosition(0, stream);
             writer.WriteBits(1);
@@ -57,7 +57,7 @@ namespace AnjLab.FX.Tests.IO
             Expect(stream.GetBuffer()[1], EqualTo(0xe4));
 
             stream = new MemoryStream();
-            writer = new BitWriter(stream, 16);
+            writer = new BasedBitWriter(stream, 16);
             writer.WriteBits(0x4);
             ExpectPosition(0, stream);
             writer.WriteBits(0xf);
