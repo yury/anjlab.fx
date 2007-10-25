@@ -3,5 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:map="clr-namespace:AnjLab.FX.StreamMapping;assembly=AnjLab.FX">
 
-  <map:MapBytes Length="2" To="ShortProperty"/>
+	<map:MapBytes Length="1" To="ByteProperty"/>
+	<map:MapBytes Length="2" To="ShortProperty"/>
+	<map:MapBytes Length="4" To="IntProperty"/>
 </map:MapInfo>
