@@ -8,6 +8,7 @@ namespace AnjLab.FX.IO
         private readonly int _bitsInByte = 8;
         private byte? _buffer = null;
         private int _bufferPosition = 0;
+        private long _streamPositionAfterBitReading = 0;
 
         public BitReader(Stream input)
             : base(input)
@@ -18,15 +19,20 @@ namespace AnjLab.FX.IO
         {
             Guard.ArgumentBetweenInclusive("count", count, 0, 8);
 
+            if (_streamPositionAfterBitReading != this.BaseStream.Position) // there was byte reading operation
+                ClearBuffer();
+
             if (_buffer == null || BitsInBuffer == 0)
             {
                 _buffer = ReadByte();
                 _bufferPosition = 0;
+                _streamPositionAfterBitReading = this.BaseStream.Position;
             }
 
+            byte result;
             if (BitsInBuffer >= count)
             {
-                return GetValueFromBuffer(count);
+                result = GetValueFromBuffer(count);
             }
             else
             {
@@ -34,8 +40,9 @@ namespace AnjLab.FX.IO
                 byte value = GetValueFromBuffer(BitsInBuffer);
 
                 byte lowBits = ReadBits(nextByteBitsCount);
-                return (byte)((value << nextByteBitsCount) + lowBits);
+                result = (byte)((value << nextByteBitsCount) + lowBits);
             }
+            return result;
         }
 
         private byte GetValueFromBuffer(int count)
@@ -46,14 +53,25 @@ namespace AnjLab.FX.IO
             return value;
         }
 
-        private int BitsInBuffer
+        private void ClearBuffer()
         {
-            get { return _bitsInByte - _bufferPosition; }
+            _buffer = null;
+            _bufferPosition = 0;
+        }
+
+        public int BitsInBuffer
+        {
+            get { return (IsBuffered) ? _bitsInByte - _bufferPosition : 0; }
         }
 
         public  bool IsBuffered
         {
             get { return _buffer != null; }
+        }
+
+        public long BytesAvailable
+        {
+            get { return this.BaseStream.Length - this.BaseStream.Position; }
         }
     }
 }

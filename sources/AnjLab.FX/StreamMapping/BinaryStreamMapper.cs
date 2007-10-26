@@ -6,7 +6,7 @@ using AnjLab.FX.System;
 
 namespace AnjLab.FX.StreamMapping
 {
-    public class BinaryMapper<TResult> 
+    public class BinaryStreamMapper<TResult> 
         where TResult:class, new()
     {
         private static IBinaryMapper<TResult> binaryMapper = null;

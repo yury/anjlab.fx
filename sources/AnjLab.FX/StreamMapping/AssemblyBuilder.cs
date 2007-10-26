@@ -1,8 +1,9 @@
 ﻿using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
+using AnjLab.FX.IO;
 using Microsoft.CSharp;
 
 namespace AnjLab.FX.StreamMapping
@@ -14,6 +15,7 @@ namespace AnjLab.FX.StreamMapping
         readonly string _typeFormat = "{0}Mapper";
 
         private CompilerParameters _compileParameters;
+        private CodeTypeDeclaration _generatedMapper;
         private MapInfo _mapInfo;
         private Type _mappedType;
 
@@ -30,6 +32,10 @@ namespace AnjLab.FX.StreamMapping
             _compileParameters = new CompilerParameters();
             _compileParameters.OutputAssembly = MapperAssemblyName + ".dll";
             _compileParameters.TempFiles.KeepFiles = true;
+            
+            #if DEBUG
+            _compileParameters.IncludeDebugInformation = true;
+            #endif
 
             CompilerResults results = new CSharpCodeProvider().CompileAssemblyFromDom(_compileParameters, GenerateCompileUnit());
             if (results.Errors.HasErrors)
@@ -49,13 +55,14 @@ namespace AnjLab.FX.StreamMapping
             AddReference(typeof(IBinaryMapper<>));
             AddReference(MappedType);
 
-            CodeTypeDeclaration imapper = new CodeTypeDeclaration(MapperTypeName);
-            imapper.Attributes = MemberAttributes.Public;
-            imapper.BaseTypes.Add(new CodeTypeReference(typeof(IBinaryMapper<>).MakeGenericType(MappedType)));
-            GenerateMapCode(imapper);
+            GeneratedMapper = new CodeTypeDeclaration(MapperTypeName);
+            GeneratedMapper.Attributes = MemberAttributes.Public;
+            GeneratedMapper.BaseTypes.Add(new CodeTypeReference(typeof(IBinaryMapper<>).MakeGenericType(MappedType)));
+            
+            GenerateMapCode();
 
             CodeNamespace ns = new CodeNamespace(_namespace);
-            ns.Types.Add(imapper);
+            ns.Types.Add(GeneratedMapper);
             ns.Imports.Add(new CodeNamespaceImport("System = global::System"));
 
             CodeCompileUnit unit = new CodeCompileUnit();
@@ -64,10 +71,10 @@ namespace AnjLab.FX.StreamMapping
             return unit;
         }
 
-        private void GenerateMapCode(CodeTypeDeclaration imapper)
+        private void GenerateMapCode()
         {
-            AddReference(typeof(Stream));
-            AddReference(typeof(Debugger));
+            AddReference(typeof(MemoryStream));
+            AddReference(typeof(BitReader));
 
             CodeMemberMethod map = new CodeMemberMethod();
             map.Name = "Map";
@@ -75,44 +82,62 @@ namespace AnjLab.FX.StreamMapping
             map.ReturnType = new CodeTypeReference(MappedType);
             map.ImplementationTypes.Add(new CodeTypeReference(typeof(IBinaryMapper<>).MakeGenericType(MappedType)));
             map.Parameters.Add(new CodeParameterDeclarationExpression(typeof(byte[]), "data"));
+            CodeArgumentReferenceExpression data = new CodeArgumentReferenceExpression("data");
+            GeneratedMapper.Members.Add(map);
 
+            GeneratedMapper.Members.Add(new CodeMemberField(typeof(byte[]), "_data"));
+            CurrentDataCodeReference = new CodeVariableReferenceExpression("_data");
+
+            map.Statements.Add(new CodeAssignStatement(CurrentDataCodeReference, data));
             // TypeName result = new TypeName();
-            map.Statements.Add(new CodeVariableDeclarationStatement(MappedType, "result",
-                new CodeObjectCreateExpression(MappedType)));
-            // MemoryStream stream = new MemoryStream(data);
-            map.Statements.Add(new CodeVariableDeclarationStatement(typeof(MemoryStream), "stream",
-                new CodeObjectCreateExpression(typeof(MemoryStream), new CodeArgumentReferenceExpression("data"))));
-            
-            CodeExpression stream = new CodeVariableReferenceExpression("stream");
+            map.Statements.Add(new CodeVariableDeclarationStatement(MappedType, "result", new CodeObjectCreateExpression(MappedType)));
             CodeExpression result = new CodeVariableReferenceExpression("result");
-            foreach (IMapInfoElement element in _mapInfo.Elements)
-            {
-                // this.MapPropName(stream, result);
-                CodeMemberMethod mapElementMethod = CreateMapElementMethod(element);
-                map.Statements.Add(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(),
-                    mapElementMethod.Name, stream, result));
-                imapper.Members.Add(mapElementMethod);
-            }
 
-            // stream.Dispose();
+            map.Statements.Add(new CodeVariableDeclarationStatement(
+                typeof(MemoryStream), "stream", new CodeObjectCreateExpression(typeof(MemoryStream), data)));
+            CodeExpression stream = new CodeVariableReferenceExpression("stream");
+
+             map.Statements.Add(new CodeVariableDeclarationStatement(
+                 typeof(BitReader), "reader", new CodeObjectCreateExpression(typeof(BitReader), stream)));
+            CodeExpression reader = new CodeVariableReferenceExpression("reader");
+
+            GenerateElementsMapCode(_mapInfo.Elements, map, reader, result, MappedType);
+
+            map.Statements.Add(new CodeMethodInvokeExpression(reader, "Close"));
             map.Statements.Add(new CodeMethodInvokeExpression(stream, "Close"));
-            // return result;
             map.Statements.Add(new CodeMethodReturnStatement(result));
-
-            imapper.Members.Add(map);
         }
 
         private int _methodIndex = 0;
-        private CodeMemberMethod CreateMapElementMethod(IMapInfoElement element)
+        public void AddMethod(CodeMemberMethod method)
+        {
+            method.Name += "UniqueIndex" + _methodIndex++;
+            GeneratedMapper.Members.Add(method);
+        }
+       
+        public void GenerateElementsMapCode(IList<IMapElement> elements, CodeMemberMethod rootMethod, CodeExpression reader, CodeExpression result, Type resultType)
+        {
+            foreach (IMapElement element in elements)
+            {
+                CodeMemberMethod mapElementMethod = GenerateElementMapMethod(element, resultType);
+                AddMethod(mapElementMethod);
+
+                rootMethod.Statements.Add(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(),
+                    mapElementMethod.Name, reader, result));
+            }
+        }
+
+        public CodeMemberMethod GenerateElementMapMethod(IMapElement element, Type resultType)
         {
             CodeMemberMethod mapElement = new CodeMemberMethod();
-            mapElement.Name = "MapProperty" + _methodIndex++;
+            mapElement.Name = "MapProperty";
             mapElement.Attributes = MemberAttributes.Private;
 
-            mapElement.Parameters.Add(new CodeParameterDeclarationExpression(typeof(Stream), "dataStream") );
-            mapElement.Parameters.Add(new CodeParameterDeclarationExpression(MappedType, "mappedObject"));
+            mapElement.Parameters.Add(new CodeParameterDeclarationExpression(typeof(BitReader), "bitReader"));
+            mapElement.Parameters.Add(new CodeParameterDeclarationExpression(resultType, "mappedObject"));
 
-            element.BuildMapElementMethod(this, mapElement);
+            element.MappedType = resultType;
+            element.BuildMapMethod(this, mapElement);
             return mapElement;
         }
 
@@ -131,9 +156,22 @@ namespace AnjLab.FX.StreamMapping
             get { return _mapInfo; }
         }
 
-        public Type MappedType
+        private Type MappedType
         {
             get { return _mappedType; }
+        }
+
+        private CodeVariableReferenceExpression _currentData;
+        public CodeVariableReferenceExpression CurrentDataCodeReference
+        {
+            get { return _currentData; }
+            private set { _currentData = value; }
+        }
+
+        private CodeTypeDeclaration GeneratedMapper
+        {
+            get { return _generatedMapper; }
+            set { _generatedMapper = value; }
         }
     }
 }
