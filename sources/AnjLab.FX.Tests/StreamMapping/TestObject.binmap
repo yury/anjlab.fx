@@ -1,9 +1,32 @@
 ﻿<map:MapInfo
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:map="clr-namespace:AnjLab.FX.StreamMapping;assembly=AnjLab.FX">
+    xmlns:map="clr-namespace:AnjLab.FX.StreamMapping;assembly=AnjLab.FX"
+    xmlns:operation="clr-namespace:AnjLab.FX.StreamMapping.Operations;assembly=AnjLab.FX">
 
-	<map:MapBytes Length="1" To="ByteProperty"/>
-	<map:MapBytes Length="2" To="ShortProperty"/>
-	<map:MapBytes Length="4" To="IntProperty"/>
+	<map:MapBytes Length="1" To="ByteProperty" />
+	<map:MapBytes Length="2" To="ShortProperty" >
+    <map:MapBytes.Operations>
+        <operation:Sub Value="128" />
+        <operation:Add Value="1" />
+    </map:MapBytes.Operations>
+  </map:MapBytes>
+  <map:MapBytes Length="4" To="IntProperty"/>
+  
+  <map:MapBytes Length="1" />
+  <map:MapBits Length="8" />
+  
+  <map:MapBits Length="4" To="ShortPropertyWithTwoParts" />
+  <map:MapBits Length="4" To="ShortPropertyWithTwoParts">
+    <map:MapBits.Operations>
+      <operation:LeftShift Value="4" />
+      <operation:AddPropertyValue />
+    </map:MapBits.Operations>
+  </map:MapBits>
+  <map:MapBits Length="1" To="BoolProperty" />
+  <map:MapBits Length="1" To="BoolProperty2" />
+  <map:MapBits Length="6" />
+
+  <map:MapBytes Length="1" To="EnumProperty"/>
+  
 </map:MapInfo>

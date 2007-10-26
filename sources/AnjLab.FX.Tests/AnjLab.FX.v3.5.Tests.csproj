@@ -59,7 +59,7 @@
     <Compile Include="Patterns\Generic\Inject\ObjectFactoryTests.cs" />
     <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreamMapping\BinaryMapperTests.cs" />
+    <Compile Include="StreamMapping\BinaryStreamMapperTests.cs" />
     <Compile Include="StreamMapping\TestObject.cs" />
     <Compile Include="System\ComparerFactoryTests.cs" />
     <Compile Include="System\DataTableAdapterFactoryTests.cs" />

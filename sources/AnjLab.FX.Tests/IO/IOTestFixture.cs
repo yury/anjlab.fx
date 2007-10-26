@@ -7,7 +7,7 @@ namespace AnjLab.FX.Tests.IO
     {
         protected static void ExpectPosition(int expectedPos, MemoryStream stream)
         {
-            Assert.AreEqual(stream.Position, expectedPos);
+            Assert.AreEqual(expectedPos, stream.Position);
         }
     }
 }
