@@ -20,7 +20,7 @@
   <map:MapBits Length="4" To="ShortPropertyWithTwoParts">
     <map:MapBits.Operations>
       <operation:LeftShift Value="4" />
-      <operation:AddPropertyValue />
+      <operation:Add Property="ShortPropertyWithTwoParts" />
     </map:MapBits.Operations>
   </map:MapBits>
   <map:MapBits Length="1" To="BoolProperty" />
