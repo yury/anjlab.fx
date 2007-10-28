@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AnjLab.FX.StreamMapping
+﻿namespace AnjLab.FX.StreamMapping
 {
     /// <summary>
     /// Implementations are dynamically generated at runtime by AssebmlyBuilder

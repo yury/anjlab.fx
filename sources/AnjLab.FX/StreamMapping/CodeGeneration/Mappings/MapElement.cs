@@ -4,18 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Markup;
+using AnjLab.FX.StreamMapping.CodeGeneration;
 
 namespace AnjLab.FX.StreamMapping
 {
     [ContentProperty("Operations")]
-    public abstract class MapElement : IMapElement
+    public abstract class MapElement : ICodeGeneratorNode
     {
         private int _length = 0;
         private string _to = "";
         List<IOperation> _operations = new List<IOperation>();
-        private Type _mappedType;
         private PropertyInfo _mappedProperty;
-
 
         protected CodeStatementCollection GenerateSetMappedPropertyCode(CodeExpression targetObj, CodeExpression value)
         {
@@ -36,6 +35,20 @@ namespace AnjLab.FX.StreamMapping
                 statements.Add(new CodeAssignStatement(property, value));
 
             return statements;
+        }
+
+        protected CodeExpression GetMappedProperty(CodeExpression targetObj)
+        {
+            CodePropertyReferenceExpression property = new CodePropertyReferenceExpression(targetObj, MappedProperty.Name);
+            if (IsCollection(_mappedProperty.PropertyType))
+            {
+                return new CodeIndexerExpression(property,
+                    new CodeBinaryOperatorExpression(
+                        new CodePropertyReferenceExpression(property, "Count"), 
+                        CodeBinaryOperatorType.Subtract, new CodePrimitiveExpression(1)));
+
+            }
+            return property;
         }
 
         private bool IsCollection(Type type)
@@ -66,18 +79,12 @@ namespace AnjLab.FX.StreamMapping
             set { _operations = value; }
         }
 
-        public Type MappedType
-        {
-            get { return _mappedType; }
-            set { _mappedType = value; }
-        }
-
         public PropertyInfo MappedProperty
         {
             get { return _mappedProperty; }
             protected set { _mappedProperty = value; }
         }
 
-        public abstract void BuildMapMethod(AssemblyBuilder info, CodeMemberMethod method);
+        public abstract void GenerateMappingCode(CodeGenerationContext ctx, CodeMemberMethod method);
     }
 }

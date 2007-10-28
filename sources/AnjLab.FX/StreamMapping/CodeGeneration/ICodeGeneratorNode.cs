@@ -1,14 +1,14 @@
 ﻿using System;
 using System.CodeDom;
 using System.Reflection;
+using AnjLab.FX.StreamMapping.CodeGeneration;
 
 namespace AnjLab.FX.StreamMapping
 {
-    public interface IMapElement
+    public interface ICodeGeneratorNode
     {
-        Type MappedType{ get; set;}
         String To { get; set; }
         PropertyInfo MappedProperty { get; }
-        void BuildMapMethod(AssemblyBuilder builer, CodeMemberMethod method);
+        void GenerateMappingCode(CodeGenerationContext ctx, CodeMemberMethod method);
     }
 }

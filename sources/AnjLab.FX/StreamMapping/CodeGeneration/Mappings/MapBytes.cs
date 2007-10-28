@@ -1,23 +1,21 @@
 ﻿using System;
 using System.CodeDom;
 using System.IO;
+using AnjLab.FX.StreamMapping.CodeGeneration;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.StreamMapping
 {
     public class MapBytes : MapElement
     {
-        public override void BuildMapMethod(AssemblyBuilder builder, CodeMemberMethod method)
+        public override void GenerateMappingCode(CodeGenerationContext ctx, CodeMemberMethod method)
         {
             if (!String.IsNullOrEmpty(To))
-                MappedProperty = TypeReflector.GetProperty(MappedType, To);
-
-            CodeArgumentReferenceExpression bitReader = new CodeArgumentReferenceExpression(method.Parameters[0].Name);
-            CodeArgumentReferenceExpression resultObj = new CodeArgumentReferenceExpression(method.Parameters[1].Name);
+                MappedProperty = TypeReflector.GetProperty(ctx.MappedObjectType, To);
 
             // byte[] bytes = reader.ReadBytes(length);
             method.Statements.Add(new CodeVariableDeclarationStatement(typeof(byte[]), "bytes",
-                new CodeMethodInvokeExpression(bitReader, "ReadBytes", new CodePrimitiveExpression(Length))));
+                new CodeMethodInvokeExpression(ctx.DataReader, "ReadBytes", new CodePrimitiveExpression(Length))));
 
             if (MappedProperty != null)
             {
@@ -40,9 +38,9 @@ namespace AnjLab.FX.StreamMapping
 
                 // add operations code
                 foreach (IOperation op in Operations)
-                    method.Statements.AddRange(op.BuildOperation(this, value, resultObj));
+                    method.Statements.AddRange(op.BuildOperation(ctx, this, value));
 
-                method.Statements.AddRange(GenerateSetMappedPropertyCode(resultObj, value));
+                method.Statements.AddRange(GenerateSetMappedPropertyCode(ctx.MappedObject, value));
 
                 // newReader.Dispose();
                 method.Statements.Add(new CodeMethodInvokeExpression(reader2, "Close"));

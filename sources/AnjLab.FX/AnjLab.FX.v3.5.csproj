@@ -93,26 +93,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StreamMapping\AssemblyBuilder.cs" />
-    <Compile Include="StreamMapping\MapInfo.cs" />
-    <Compile Include="StreamMapping\Mappings\ContainerMapElement.cs" />
-    <Compile Include="StreamMapping\Mappings\Do.cs" />
-    <Compile Include="StreamMapping\Mappings\If.cs" />
-    <Compile Include="StreamMapping\Mappings\MapByName.cs" />
-    <Compile Include="StreamMapping\Mappings\MapBytes.cs" />
-    <Compile Include="StreamMapping\Mappings\MapBits.cs" />
-    <Compile Include="StreamMapping\Mappings\MapBytesSegment.cs" />
-    <Compile Include="StreamMapping\Mappings\MapElement.cs" />
-    <Compile Include="StreamMapping\IMapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\AssemblyBuilder.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\MapInfo.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\ContainerMapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\ICondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\Do.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\If.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapByName.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytes.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBits.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytesSegment.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\ICodeGeneratorNode.cs" />
     <Compile Include="StreamMapping\BinaryStreamMapper.cs" />
     <Compile Include="StreamMapping\IBinaryMapper.cs" />
-    <Compile Include="StreamMapping\IOperation.cs" />
-    <Compile Include="StreamMapping\Operations\AddPropertyValue.cs" />
-    <Compile Include="StreamMapping\Operations\Add.cs" />
-    <Compile Include="StreamMapping\Operations\Sub.cs" />
-    <Compile Include="StreamMapping\Operations\RightShift.cs" />
-    <Compile Include="StreamMapping\Operations\LeftShift.cs" />
-    <Compile Include="StreamMapping\Operations\ValueOperation.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\IOperation.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Add.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Sub.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\RightShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\LeftShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\ValueOperation.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
