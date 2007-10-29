@@ -10,7 +10,7 @@ namespace AnjLab.FX.StreamMapping.Operations
         {
             CodeStatementCollection statemets = new CodeStatementCollection();
             statemets.Add(new CodeSnippetExpression(
-                string.Format("{0} = ({2})({0} << {1})", value.VariableName, Value, element.MappedProperty.PropertyType.FullName)));
+                string.Format("{0} = ({2})({0} << {1})", value.VariableName, Value, GetValueType(element.MappedProperty).FullName)));
             return statemets;
         }
 

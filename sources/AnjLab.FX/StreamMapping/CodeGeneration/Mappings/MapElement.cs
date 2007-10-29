@@ -12,28 +12,43 @@ namespace AnjLab.FX.StreamMapping
     public abstract class MapElement : ICodeGeneratorNode
     {
         private int _length = 0;
+        private int _index = 0;
         private string _to = "";
         List<IOperation> _operations = new List<IOperation>();
         private PropertyInfo _mappedProperty;
 
+        protected Type GetPropertyValueType()
+        {
+            if (_mappedProperty.PropertyType.IsArray)
+                return _mappedProperty.PropertyType.GetElementType();
+            return _mappedProperty.PropertyType;
+        }
+
         protected CodeStatementCollection GenerateSetMappedPropertyCode(CodeExpression targetObj, CodeExpression value)
         {
             CodeStatementCollection statements = new CodeStatementCollection();
-             
+
             CodePropertyReferenceExpression property = new CodePropertyReferenceExpression(targetObj, MappedProperty.Name);
+
+            if (_mappedProperty.PropertyType.IsArray)
+            {
+                statements.Add(new CodeAssignStatement(
+                    new CodeIndexerExpression(property, new CodePrimitiveExpression(_index)), value));
+                return statements;
+            }
 
             if (IsCollection(_mappedProperty.PropertyType))
             {
-                CodeBinaryOperatorExpression isNull = 
-                    new CodeBinaryOperatorExpression(property, CodeBinaryOperatorType.ValueEquality,  new CodeSnippetExpression("null"));
+                CodeBinaryOperatorExpression isNull =
+                    new CodeBinaryOperatorExpression(property, CodeBinaryOperatorType.ValueEquality, new CodeSnippetExpression("null"));
                 CodeAssignStatement create = new CodeAssignStatement(property, new CodeObjectCreateExpression(_mappedProperty.PropertyType));
 
                 statements.Add(new CodeConditionStatement(isNull, create));
                 statements.Add(new CodeMethodInvokeExpression(property, "Add", value));
+                return statements;
             }
-            else
-                statements.Add(new CodeAssignStatement(property, value));
 
+            statements.Add(new CodeAssignStatement(property, value));
             return statements;
         }
 
@@ -48,6 +63,10 @@ namespace AnjLab.FX.StreamMapping
                         CodeBinaryOperatorType.Subtract, new CodePrimitiveExpression(1)));
 
             }
+
+            if (_mappedProperty.PropertyType.IsArray)
+                return new CodeIndexerExpression(property, new CodePrimitiveExpression(_index));
+
             return property;
         }
 
@@ -77,6 +96,12 @@ namespace AnjLab.FX.StreamMapping
         {
             get { return _operations; }
             set { _operations = value; }
+        }
+
+        public int Index
+        {
+            get { return _index; }
+            set { _index = value; }
         }
 
         public PropertyInfo MappedProperty

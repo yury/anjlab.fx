@@ -33,7 +33,7 @@ namespace AnjLab.FX.StreamMapping
 
                 //Type value = ?
                 method.Statements.Add(new CodeVariableDeclarationStatement(
-                    MappedProperty.PropertyType, "value", GetPropertyValueExpression(MappedProperty.PropertyType, reader2)));
+                    GetPropertyValueType(), "value", GetPropertyValueExpression(MappedProperty.PropertyType, reader2)));
                 CodeVariableReferenceExpression value = new CodeVariableReferenceExpression("value");
 
                 // add operations code

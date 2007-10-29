@@ -17,13 +17,13 @@ namespace AnjLab.FX.StreamMapping
                 if (MapNotBoolProperty)
                 {
                     // type value = bitReader.ReadBits(length);
-                    method.Statements.Add(new CodeVariableDeclarationStatement(MappedProperty.PropertyType, "value",
+                    method.Statements.Add(new CodeVariableDeclarationStatement(GetPropertyValueType(), "value",
                         new CodeMethodInvokeExpression(ctx.DataReader, "ReadBits", new CodePrimitiveExpression(Length))));
                 }
                 else
                 {
                     method.Statements.Add(
-                        new CodeVariableDeclarationStatement(MappedProperty.PropertyType, "value",
+                        new CodeVariableDeclarationStatement(GetPropertyValueType(), "value",
                             new CodeBinaryOperatorExpression(
                                 new CodeMethodInvokeExpression(ctx.DataReader, "ReadBits", new CodePrimitiveExpression(Length)),
                                 CodeBinaryOperatorType.GreaterThan, new CodePrimitiveExpression(0))));
@@ -45,7 +45,16 @@ namespace AnjLab.FX.StreamMapping
 
         private bool MapNotBoolProperty
         {
-            get { return MappedProperty.PropertyType != typeof (bool); }
+            get
+            {
+                if (MappedProperty.PropertyType == typeof(bool))
+                    return false;
+
+                if (MappedProperty.PropertyType.HasElementType && MappedProperty.PropertyType.GetElementType() == typeof(bool))
+                    return false;
+
+                return true;
+            }
         }
     }
 }
