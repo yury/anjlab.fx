@@ -8,7 +8,7 @@ namespace AnjLab.FX.StreamMapping.Operations
         private int? _value = null;
         private string _property = null;
 
-        public CodeStatementCollection BuildOperation(CodeGenerationContext ctx, ICodeGeneratorNode element, CodeVariableReferenceExpression value)
+        public virtual CodeStatementCollection BuildOperation(CodeGenerationContext ctx, ICodeGeneratorNode element, CodeVariableReferenceExpression value)
         {
             CodeStatementCollection statemets = new CodeStatementCollection();
             if (!string.IsNullOrEmpty(_property))

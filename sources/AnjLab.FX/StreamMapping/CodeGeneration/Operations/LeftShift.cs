@@ -6,7 +6,7 @@ namespace AnjLab.FX.StreamMapping.Operations
 {
     public class LeftShift : ValueOperation
     {
-        public CodeStatementCollection BuildOperation(CodeGenerationContext ctx, ICodeGeneratorNode element, CodeVariableReferenceExpression value)
+        public override CodeStatementCollection BuildOperation(CodeGenerationContext ctx, ICodeGeneratorNode element, CodeVariableReferenceExpression value)
         {
             CodeStatementCollection statemets = new CodeStatementCollection();
             statemets.Add(new CodeSnippetExpression(
