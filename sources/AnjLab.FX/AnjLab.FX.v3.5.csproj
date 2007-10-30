@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="StreamMapping\CodeGeneration\AssemblyBuilder.cs" />
     <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\While.cs" />
     <Compile Include="StreamMapping\CodeGeneration\MapInfo.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Mappings\ContainerMapElement.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Instructions\ICondition.cs" />
