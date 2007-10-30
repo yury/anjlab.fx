@@ -43,19 +43,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\IRepository.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
+    <Compile Include="Devices\BytesFilter.cs" />
+    <Compile Include="Devices\CheckSum.cs" />
+    <Compile Include="Devices\Convert.cs" />
     <Compile Include="Drawing\Palette.cs" />
     <Compile Include="Drawing\Pixel.cs" />
     <Compile Include="Finance\TimeInterval.cs" />
     <Compile Include="Finance\Yield.cs" />
+    <Compile Include="IO\BasedBitReader.cs" />
+    <Compile Include="IO\BasedBitWriter.cs" />
     <Compile Include="IO\BitReader.cs" />
-    <Compile Include="IO\BitWriter.cs" />
+    <Compile Include="IO\ILog.cs" />
+    <Compile Include="IO\Ports\SerialPortDelay.cs" />
+    <Compile Include="IO\TraceLog.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StreamMapping\BinaryStreamMapper.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\AssemblyBuilder.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\ICodeGeneratorNode.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\Do.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\ICondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\If.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\While.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\MapInfo.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\ContainerMapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBits.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapByName.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytes.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytesSegment.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Add.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\IOperation.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\LeftShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\RightShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Sub.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\ValueOperation.cs" />
+    <Compile Include="StreamMapping\IBinaryMapper.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />

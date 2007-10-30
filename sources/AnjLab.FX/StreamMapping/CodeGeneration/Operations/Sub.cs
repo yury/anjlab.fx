@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿#if NET_3_5
+using System.CodeDom;
 
 namespace AnjLab.FX.StreamMapping.Operations
 {
@@ -10,3 +11,4 @@ namespace AnjLab.FX.StreamMapping.Operations
         }
     }
 }
+#endif

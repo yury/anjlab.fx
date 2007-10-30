@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿#if NET_3_5
+using System.CodeDom;
 using AnjLab.FX.StreamMapping.CodeGeneration;
 using AnjLab.FX.System;
 
@@ -28,3 +29,4 @@ namespace AnjLab.FX.StreamMapping
         }
     }
 }
+#endif

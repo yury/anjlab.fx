@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NET_3_5
+using System.Collections.Generic;
 using System.Windows.Markup;
 
 namespace AnjLab.FX.StreamMapping
@@ -28,3 +29,4 @@ namespace AnjLab.FX.StreamMapping
         }
     }
 }
+#endif

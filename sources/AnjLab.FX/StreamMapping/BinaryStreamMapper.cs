@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET_3_5
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows.Markup;
@@ -47,3 +48,5 @@ namespace AnjLab.FX.StreamMapping
         }
     }
 }
+
+#endif

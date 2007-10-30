@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿#if NET_3_5
+using System.CodeDom;
 using AnjLab.FX.StreamMapping.CodeGeneration;
 
 namespace AnjLab.FX.StreamMapping.Instructions
@@ -8,3 +9,4 @@ namespace AnjLab.FX.StreamMapping.Instructions
         CodeExpression GetCondition(CodeGenerationContext ctx, CodeMemberMethod method);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET_3_5
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,3 +24,4 @@ namespace AnjLab.FX.Data
         void Refresh(T entity);
     }
 }
+#endif
