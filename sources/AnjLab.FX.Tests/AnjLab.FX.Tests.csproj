@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1C326391-297C-42CB-9480-E5C04F131C6B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,9 +46,11 @@
     <Compile Include="Datetime\DatetimeUtilsTests.cs" />
     <Compile Include="Drawing\PaletteTests.cs" />
     <Compile Include="Finance\YieldTests.cs" />
+    <Compile Include="IO\BasedBitReaderTests.cs" />
+    <Compile Include="IO\BasedBitWriterTests.cs" />
     <Compile Include="IO\BitReaderTests.cs" />
-    <Compile Include="IO\BitWriterTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
+    <Compile Include="IO\TraceLogTests.cs" />
     <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\ComparerFactoryTests.cs" />
