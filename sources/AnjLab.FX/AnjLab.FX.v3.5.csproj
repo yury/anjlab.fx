@@ -108,6 +108,7 @@
     <Compile Include="StreamMapping\CodeGeneration\Mappings\MapElement.cs" />
     <Compile Include="StreamMapping\CodeGeneration\ICodeGeneratorNode.cs" />
     <Compile Include="StreamMapping\BinaryStreamMapper.cs" />
+    <Compile Include="StreamMapping\AbstractBinaryStreamMapper.cs" />
     <Compile Include="StreamMapping\IBinaryMapper.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Operations\IOperation.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Operations\Add.cs" />

@@ -8,7 +8,7 @@ using AnjLab.FX.System;
 
 namespace AnjLab.FX.StreamMapping
 {
-    public class BinaryStreamMapper<TResult> : IBinaryMapper<TResult>
+    public class BinaryStreamMapper<TResult> : AbstractBinaryStreamMapper, IBinaryMapper<TResult>
         where TResult:class, new()
     {
         private static readonly IBinaryMapper<TResult> binaryMapper = GenerateMapper();
@@ -19,6 +19,11 @@ namespace AnjLab.FX.StreamMapping
             Guard.ArgumentGreaterThenZero("data.Length", data.Length);
             
             return binaryMapper.Map(data);
+        }
+
+        public override object MapObject(byte[] data)
+        {
+            return Map(data);
         }
 
         private static IBinaryMapper<TResult> GenerateMapper()
