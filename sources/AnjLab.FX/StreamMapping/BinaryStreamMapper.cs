@@ -17,8 +17,8 @@ namespace AnjLab.FX.StreamMapping
         {
             Guard.ArgumentNotNull("data", data);
             Guard.ArgumentGreaterThenZero("data.Length", data.Length);
-            
-            return binaryMapper.Map(data);
+
+            return (binaryMapper.Clone() as IBinaryMapper<TResult>).Map(data);
         }
 
         public override object MapObject(byte[] data)
@@ -50,6 +50,11 @@ namespace AnjLab.FX.StreamMapping
                 if (res.EndsWith(typeName))
                     return res;
             return null;
+        }
+
+        public object Clone()
+        {
+            return new BinaryStreamMapper<TResult>();
         }
     }
 }

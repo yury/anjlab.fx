@@ -54,8 +54,10 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
             _generatedMapper = new CodeTypeDeclaration(MapperTypeName);
             _generatedMapper.Attributes = MemberAttributes.Public;
             _generatedMapper.BaseTypes.Add(new CodeTypeReference(typeof(IBinaryMapper<>).MakeGenericType(_mappedType)));
+            _generatedMapper.BaseTypes.Add(typeof(ICloneable));
             
             GenerateMapCode();
+            GenerateCloneCode();
 
             CodeNamespace ns = new CodeNamespace(_namespace);
             ns.Types.Add(_generatedMapper);
@@ -65,6 +67,19 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
             unit.Namespaces.Add(ns);
             
             return unit;
+        }
+
+        private void GenerateCloneCode()
+        {
+            CodeMemberMethod clone = new CodeMemberMethod();
+            clone.Name = "Clone";
+            clone.Attributes = MemberAttributes.Public;
+            clone.ReturnType = new CodeTypeReference(typeof(object));
+            clone.ImplementationTypes.Add(typeof(ICloneable));
+
+            clone.Statements.Add(new CodeMethodReturnStatement(new CodeObjectCreateExpression(_namespace + "." + MapperTypeName)));
+
+            _generatedMapper.Members.Add(clone);
         }
 
         private void GenerateMapCode()
