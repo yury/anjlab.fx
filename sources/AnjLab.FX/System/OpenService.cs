@@ -27,7 +27,7 @@ namespace AnjLab.FX.System
         {
             foreach (OpenService service in services)
             {
-                service.OnStart(new string[] { });
+                service.OnStop();
             }
         }
     }

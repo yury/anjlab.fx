@@ -26,6 +26,8 @@ namespace AnjLab.FX.Patterns.Generic.Inject
         {
             AssemblyBuilder ab = new AssemblyBuilder();
 
+            ab.AddReference(ab.GetType());
+
             foreach (Scope scope in module.Bindings)
             {
                 foreach (Bind bind in scope)
@@ -39,6 +41,8 @@ namespace AnjLab.FX.Patterns.Generic.Inject
                 ab.AddReference(definition.Type);
                 definition.Build(ab);
             }
+
+            
 
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CompilerParameters pars = new CompilerParameters();
