@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ByteBitArray.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Devices\BytesFilter.cs" />
