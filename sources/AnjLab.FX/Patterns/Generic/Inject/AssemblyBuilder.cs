@@ -47,6 +47,7 @@ namespace AnjLab.FX.Patterns.Generic.Inject
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CompilerParameters pars = new CompilerParameters();
             pars.ReferencedAssemblies.AddRange(Lst.ToArray(ab._references));
+            pars.GenerateInMemory = true;
             pars.OutputAssembly = ObjectFactory.GeneratedAssemblyName + ".dll";
             
             CompilerResults results = provider.CompileAssemblyFromDom(pars, ab._compileUnit);
