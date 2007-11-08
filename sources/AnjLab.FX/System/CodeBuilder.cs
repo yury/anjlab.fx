@@ -34,5 +34,10 @@ namespace AnjLab.FX.System
         {
             return genericType.MakeGenericType(typeArgument);
         }
+
+        public static CodeParameterDeclarationExpression Parameter(Type type, string name)
+        {
+            return new CodeParameterDeclarationExpression(type, name);
+        }
     }
 }
