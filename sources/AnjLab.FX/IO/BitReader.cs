@@ -73,5 +73,21 @@ namespace AnjLab.FX.IO
         {
             get { return this.BaseStream.Length - this.BaseStream.Position; }
         }
+
+        public bool CanRead
+        {
+            get
+            {
+                return BytesAvailable > 0 || BitsInBuffer > 0;
+            }
+        }
+
+        public long BitsAvailable
+        {
+            get
+            {
+                return BytesAvailable * 8 + BitsInBuffer;
+            }
+        }
     }
 }

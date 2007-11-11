@@ -52,9 +52,20 @@ namespace AnjLab.FX.Devices
             return result;
         }
 
-        public static byte[] ReverseBytes(byte[] bytes)
+        public static byte[] ReverseBitsInBytes(byte[] data)
         {
-            return BitStringToBytes(BytesToBitString(bytes, 0, bytes.Length, false), true);
+            byte[] reverse = new byte[data.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                byte reverseByte = data[i];
+                for (int k = 0; k < 8; k++)
+                {
+                    byte lowBit = (byte)(reverseByte & 0x01);
+                    reverse[i] = (byte)(reverse[i] | (lowBit << 7 - k));
+                    reverseByte = (byte)(reverseByte >> 1);
+                }
+            }
+            return reverse;
         }
 
         public static StringBuilder BytesToBitString(byte[] bytes, int fromInclusive, int toExlusive, bool reverseBytes)

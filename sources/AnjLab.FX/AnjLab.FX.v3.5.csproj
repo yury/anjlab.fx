@@ -67,11 +67,13 @@
     <Compile Include="Devices\CheckSum.cs" />
     <Compile Include="Drawing\Palette.cs" />
     <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Devices\Ax25.cs" />
     <Compile Include="Finance\TimeInterval.cs" />
     <Compile Include="Finance\Yield.cs" />
     <Compile Include="IO\BasedBitReader.cs" />
     <Compile Include="IO\BasedBitWriter.cs" />
     <Compile Include="IO\BitReader.cs" />
+    <Compile Include="IO\BitWriter.cs" />
     <Compile Include="IO\ILog.cs" />
     <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
