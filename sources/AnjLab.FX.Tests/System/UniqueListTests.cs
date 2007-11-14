@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using AnjLab.FX.System;
+using System.Collections.Generic;
+using AnjLab.FX.Collections;
 using NUnit.Framework;
 
 namespace AnjLab.FX.Tests.System
