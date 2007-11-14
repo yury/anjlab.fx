@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace AnjLab.FX.System
+namespace AnjLab.FX.Collections
 {
     public class UniqueList<TItem>: IList<TItem>
     {
@@ -34,6 +35,11 @@ namespace AnjLab.FX.System
         {
             get { return _innerList[index]; }
             set { _innerList[index] = value; }
+        }
+
+        public void Add(object obj)
+        {
+            Add((TItem) obj);
         }
 
         public void Add(TItem item)

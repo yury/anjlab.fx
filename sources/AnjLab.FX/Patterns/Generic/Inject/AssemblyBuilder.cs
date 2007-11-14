@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using AnjLab.FX.Collections;
 using AnjLab.FX.System;
 using Microsoft.CSharp;
 
