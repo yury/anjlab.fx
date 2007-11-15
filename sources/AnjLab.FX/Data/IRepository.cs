@@ -12,6 +12,7 @@ namespace AnjLab.FX.Data
         IList<T> GetAll();
         IList<T> GetAll(string orderByField, bool ascending);
         IList<T> GetFirst(int count);
+        IList<T> GetLast(string dateTimeProperty, DateTime dateTime, bool ascending);
         int GetCount();
         IList<T> GetPage(int startIndex, int count, string orderByField, bool ascending);
         IList<T> GetByProperty(string propertyName, object value);
