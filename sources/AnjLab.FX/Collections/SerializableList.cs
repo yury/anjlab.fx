@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.Specialized;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -10,7 +9,7 @@ using AnjLab.FX.System;
 
 namespace AnjLab.FX.Collections
 {
-    public class SerializableList<T> : List<T>, IXmlSerializable
+    public class SerializableList<T> : List<T>, INotifyCollectionChanged, IXmlSerializable
     {
         List<TypeAlias> _aliases = new List<TypeAlias>();
         private const string XmlSchemaInstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
@@ -30,7 +29,7 @@ namespace AnjLab.FX.Collections
             writer.WriteEndElement();
 
             writer.WriteStartElement("Items");
-            writer.WriteAttributeString("count", "", this.Count.ToString());
+            writer.WriteAttributeString("count", "", Count.ToString());
             writer.WriteAttributeString("xmlns", "xsi", null, XmlSchemaInstanceNamespace);
             writer.WriteAttributeString("xmlns", "xsd", null, XmlSchemaNamespace);
             foreach (T item in this)
@@ -50,7 +49,7 @@ namespace AnjLab.FX.Collections
             reader.ReadToFollowing("Aliases");
             reader.MoveToContent();
             reader.Read(); // skip Aliases tag
-            _aliases = (List<TypeAlias>)DeserializeObject(reader, typeof(List<TypeAlias>));
+            _aliases = (List<TypeAlias>)ReadObject(reader, typeof(List<TypeAlias>));
 
             // read items
             reader.ReadToFollowing("Items");
@@ -63,7 +62,7 @@ namespace AnjLab.FX.Collections
                 TypeAlias typeAlias = GetTypeAlias(reader.LocalName);
                 Guard.NotNull(typeAlias, "TypeAlias:{0} not found", reader.LocalName);
 
-                this.Add((T) DeserializeObject(reader, typeAlias.Type, typeAlias.Alias));
+                Add((T) ReadObject(reader, typeAlias.Type, typeAlias.Alias));
             }
             
             reader.ReadEndElement();
@@ -108,17 +107,63 @@ namespace AnjLab.FX.Collections
             return null;
         }
 
-        object DeserializeObject(XmlReader reader, Type type)
+        object ReadObject(XmlReader reader, Type type)
         {
             XmlSerializer xs = new XmlSerializer(type);
             return xs.Deserialize(reader);
         }
         
-        object DeserializeObject(XmlReader reader, Type type, string elementName)
+        object ReadObject(XmlReader reader, Type type, string elementName)
         {
             XmlSerializer xs = new XmlSerializer(type, new XmlRootAttribute(elementName));
             return xs.Deserialize(reader);
         }
+
+        #region INotifyCollectionChanged
+
+        public new void Add(T item)
+        {
+            base.Add(item);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, item);
+        }
+
+        public new void Insert(int index, T item)
+        {
+            base.Insert(index, item);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, item);
+        }
+
+        public void AddRange(IList<T> items)
+        {
+            base.AddRange(items);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, items);
+        }
+
+        public new void AddRange(IEnumerable<T> items)
+        {
+            throw new NotSupportedException("Please use AddRange(IList<T> items)");
+        }
+
+        public new void Remove(T item)
+        {
+            base.Remove(item);
+            OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        void OnCollectionChanged(NotifyCollectionChangedAction action, T item)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, item));
+        }
+
+        void OnCollectionChanged(NotifyCollectionChangedAction action, IList<T> items)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, items));
+        }
+
+        #endregion
     }
 
     [XmlType("TypeAlias")]
