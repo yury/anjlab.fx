@@ -11,7 +11,7 @@ namespace AnjLab.FX.Tests.Collections
     public class SerializableListTests
     {
         [Test]
-        public void TestSerialization()
+        public void TestSerializationDeserialization()
         {
             SerializableList<ITest> list = new SerializableList<ITest>();
 
