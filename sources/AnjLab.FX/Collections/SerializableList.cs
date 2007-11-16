@@ -9,6 +9,7 @@ using AnjLab.FX.System;
 
 namespace AnjLab.FX.Collections
 {
+    [Serializable]
     public class SerializableList<T> : List<T>, INotifyCollectionChanged, IXmlSerializable
     {
         List<TypeAlias> _aliases = new List<TypeAlias>();
@@ -28,13 +29,25 @@ namespace AnjLab.FX.Collections
             WriteObject(writer, _aliases, false);
             writer.WriteEndElement();
 
+            List<T> serializable = GetSerializableItems();
             writer.WriteStartElement("Items");
-            writer.WriteAttributeString("count", "", Count.ToString());
+            writer.WriteAttributeString("count", "", serializable.Count.ToString());
             writer.WriteAttributeString("xmlns", "xsi", null, XmlSchemaInstanceNamespace);
             writer.WriteAttributeString("xmlns", "xsd", null, XmlSchemaNamespace);
-            foreach (T item in this)
+            foreach (T item in serializable)
                 WriteObject(writer, item, true);
+            
             writer.WriteEndElement();
+            writer.WriteElementString("End", "");
+        }
+
+        private List<T> GetSerializableItems()
+        {
+            List<T> serializable = new List<T>();
+            foreach (T item in this)
+                if (!(item is INonSerializableItem))
+                    serializable.Add(item);
+            return serializable;
         }
 
         private void GenerateAliases()
@@ -55,16 +68,21 @@ namespace AnjLab.FX.Collections
             reader.ReadToFollowing("Items");
             reader.MoveToFirstAttribute();
             int count = int.Parse(reader.Value);
-            reader.MoveToContent();
-            reader.Read();// skip Items tag
-            for(int i = 0; i < count; i++)
+            if (count > 0)
             {
-                TypeAlias typeAlias = GetTypeAlias(reader.LocalName);
-                Guard.NotNull(typeAlias, "TypeAlias:{0} not found", reader.LocalName);
+                reader.MoveToContent();
+                reader.Read(); // skip Items tag
+                for (int i = 0; i < count; i++)
+                {
+                    TypeAlias typeAlias = GetTypeAlias(reader.LocalName);
+                    Guard.NotNull(typeAlias, "TypeAlias:{0} not found", reader.LocalName);
 
-                Add((T) ReadObject(reader, typeAlias.Type, typeAlias.Alias));
+                    Add((T) ReadObject(reader, typeAlias.Type, typeAlias.Alias));
+                }
             }
-            
+
+            reader.ReadToFollowing("End");
+            reader.Read();
             reader.ReadEndElement();
         }
 
@@ -72,7 +90,6 @@ namespace AnjLab.FX.Collections
         {
             Type type = obj.GetType();
             XmlSerializer xs = (useAlias) ? new XmlSerializer(type, new XmlRootAttribute(GetAlias(type))) : new XmlSerializer(type);
-
             xs.Serialize(writer, obj);
         }
 
@@ -147,6 +164,13 @@ namespace AnjLab.FX.Collections
         public new void Remove(T item)
         {
             base.Remove(item);
+            OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+        }
+
+        public new void RemoveAt(int index)
+        {
+            T item = this[index];
+            base.RemoveAt(index);
             OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
         }
 
