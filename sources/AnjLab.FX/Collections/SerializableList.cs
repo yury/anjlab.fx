@@ -150,22 +150,13 @@ namespace AnjLab.FX.Collections
                 return _serializers[hash];
 
             XmlSerializer xs = (String.IsNullOrEmpty(elementName)) ? new XmlSerializer(type) : new XmlSerializer(type, new XmlRootAttribute(elementName));
-            SaveSerializer(type, elementName, xs);
-            return xs;
-        }
-
-        public void SaveSerializer(Type type, string elementName, XmlSerializer serializer)
-        {
-            string hash = type.GetHashCode() + elementName;
-            if (_serializers.ContainsKey(hash))
-                return;
-
             lock (_serializers)
             {
-                if (_serializers.ContainsKey(hash))
-                    return;
+                if (_serializers.ContainsKey(hash)) // double check
+                    return _serializers[hash];
 
-                _serializers[hash] = serializer;
+                _serializers[hash] = xs;
+                return xs;
             }
         }
 
