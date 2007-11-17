@@ -89,7 +89,12 @@ namespace AnjLab.FX.Collections
         void WriteObject(XmlWriter writer, object obj, bool useAlias)
         {
             Type type = obj.GetType();
-            XmlSerializer xs = (useAlias) ? new XmlSerializer(type, new XmlRootAttribute(GetAlias(type))) : new XmlSerializer(type);
+            XmlSerializer xs;
+            if (useAlias)
+                xs = GetSerializer(type, GetAlias(type));
+            else
+                xs = GetSerializer(type, "");
+
             xs.Serialize(writer, obj);
         }
 
@@ -126,15 +131,45 @@ namespace AnjLab.FX.Collections
 
         object ReadObject(XmlReader reader, Type type)
         {
-            XmlSerializer xs = new XmlSerializer(type);
-            return xs.Deserialize(reader);
+            return GetSerializer(type, "").Deserialize(reader);
         }
         
         object ReadObject(XmlReader reader, Type type, string elementName)
         {
-            XmlSerializer xs = new XmlSerializer(type, new XmlRootAttribute(elementName));
-            return xs.Deserialize(reader);
+            return GetSerializer(type, elementName).Deserialize(reader);
         }
+
+        #region XmlSerializer cache
+
+        static readonly Dictionary<string, XmlSerializer> _serializers = new Dictionary<string, XmlSerializer>();
+
+        public XmlSerializer GetSerializer(Type type, string elementName)
+        {
+            string hash = type.GetHashCode() + elementName;
+            if (_serializers.ContainsKey(hash))
+                return _serializers[hash];
+
+            XmlSerializer xs = (String.IsNullOrEmpty(elementName)) ? new XmlSerializer(type) : new XmlSerializer(type, new XmlRootAttribute(elementName));
+            SaveSerializer(type, elementName, xs);
+            return xs;
+        }
+
+        public void SaveSerializer(Type type, string elementName, XmlSerializer serializer)
+        {
+            string hash = type.GetHashCode() + elementName;
+            if (_serializers.ContainsKey(hash))
+                return;
+
+            lock (_serializers)
+            {
+                if (_serializers.ContainsKey(hash))
+                    return;
+
+                _serializers[hash] = serializer;
+            }
+        }
+
+        #endregion
 
         #region INotifyCollectionChanged
 
