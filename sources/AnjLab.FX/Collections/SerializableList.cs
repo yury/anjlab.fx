@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
@@ -23,13 +24,13 @@ namespace AnjLab.FX.Collections
 
         public void WriteXml(XmlWriter writer)
         {
-            GenerateAliases();
+            List<T> serializable = GetSerializableItems();
+            GenerateAliases(serializable);
 
             writer.WriteStartElement("Aliases");
             WriteObject(writer, _aliases, false);
             writer.WriteEndElement();
 
-            List<T> serializable = GetSerializableItems();
             writer.WriteStartElement("Items");
             writer.WriteAttributeString("count", "", serializable.Count.ToString());
             writer.WriteAttributeString("xmlns", "xsi", null, XmlSchemaInstanceNamespace);
@@ -50,12 +51,6 @@ namespace AnjLab.FX.Collections
             return serializable;
         }
 
-        private void GenerateAliases()
-        {
-            foreach (T item in this)
-                GetAlias(item.GetType());
-        }
-
         public void ReadXml(XmlReader reader)
         {
             // read aliases
@@ -74,7 +69,7 @@ namespace AnjLab.FX.Collections
                 reader.Read(); // skip Items tag
                 for (int i = 0; i < count; i++)
                 {
-                    TypeAlias typeAlias = GetTypeAlias(reader.LocalName);
+                    TypeAlias typeAlias = GetAliasByName(reader.LocalName);
                     Guard.NotNull(typeAlias, "TypeAlias:{0} not found", reader.LocalName);
 
                     Add((T) ReadObject(reader, typeAlias.Type, typeAlias.Alias));
@@ -91,24 +86,41 @@ namespace AnjLab.FX.Collections
             Type type = obj.GetType();
             XmlSerializer xs;
             if (useAlias)
-                xs = GetSerializer(type, GetAlias(type));
+                xs = GetSerializer(type, GetAliasByType(type));
             else
                 xs = GetSerializer(type, "");
 
             xs.Serialize(writer, obj);
         }
 
-        private string GetAlias(Type type)
+        object ReadObject(XmlReader reader, Type type)
+        {
+            return GetSerializer(type, "").Deserialize(reader);
+        }
+
+        object ReadObject(XmlReader reader, Type type, string elementName)
+        {
+            return GetSerializer(type, elementName).Deserialize(reader);
+        }
+
+        private void GenerateAliases(IEnumerable<T> items)
+        {
+            _aliases = new List<TypeAlias>();
+            foreach (T item in items)
+                GetAliasByType(item.GetType());
+        }
+
+        private string GetAliasByType(Type type)
         {
             TypeAlias alias = new TypeAlias(type.Name, type);
-            TypeAlias existAlias = GetTypeAlias(alias.Alias);
+            TypeAlias existAlias = GetAliasByName(alias.Alias);
 
             if (existAlias != null)
             {
                 if (existAlias.TypeDesc != alias.TypeDesc)
                 {
                     int i = 0;
-                    while (GetTypeAlias(alias.Alias + i) != null)
+                    while (GetAliasByName(alias.Alias + i) != null)
                         i++;
 
                     alias.Alias = alias.Alias + 1;
@@ -121,22 +133,12 @@ namespace AnjLab.FX.Collections
             return alias.Alias;
         }
 
-        private TypeAlias GetTypeAlias(string alias)
+        private TypeAlias GetAliasByName(string alias)
         {
             foreach (TypeAlias a in _aliases)
                 if (a.Alias == alias)
                     return a;
             return null;
-        }
-
-        object ReadObject(XmlReader reader, Type type)
-        {
-            return GetSerializer(type, "").Deserialize(reader);
-        }
-        
-        object ReadObject(XmlReader reader, Type type, string elementName)
-        {
-            return GetSerializer(type, elementName).Deserialize(reader);
         }
 
         #region XmlSerializer cache
@@ -229,7 +231,7 @@ namespace AnjLab.FX.Collections
         public TypeAlias(string alias, Type type)
         {
             _alias = alias;
-            _typeDesc = type.Assembly.ManifestModule.FullyQualifiedName + "$" + type.FullName;
+            _typeDesc = type.Assembly.ManifestModule.Name + "$" + type.FullName;
         }
 
         [XmlAttribute]
@@ -254,12 +256,20 @@ namespace AnjLab.FX.Collections
                 if (_type  == null)
                 {
                     string [] parts = _typeDesc.Split('$');
-                    string assembly = parts[0];
+                    string assemblyName = parts[0];
                     string typeName = parts[1];
-                    _type = Assembly.LoadFrom(assembly).GetType(typeName);
+                    Assembly asm = FindAssembly(assemblyName);
+                    Guard.NotNull(asm, "Assembly {0} was not found", assemblyName);
+                    _type = asm.GetType(typeName);
                 }
                 return _type;
             }
+        }
+
+        private Assembly FindAssembly(string name)
+        {
+            string asmPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
+            return Assembly.LoadFrom(asmPath);
         }
     }
 }
