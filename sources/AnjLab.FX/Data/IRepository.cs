@@ -21,6 +21,7 @@ namespace AnjLab.FX.Data
         T Save(T entity);
         T SaveOrUpdate(T entity);
         void Delete(T entity);
+        void DeleteAll();
         void CommitChanges();
         void Refresh(T entity);
     }
