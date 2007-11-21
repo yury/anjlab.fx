@@ -9,6 +9,11 @@ namespace AnjLab.FX.IO
             Trace.TraceInformation(message, args);
         }
 
+        public void Debug(string message, params object[] args)
+        {
+            Info(message, args);
+        }
+
         public void Warning(string message, params object[] args)
         {
             Trace.TraceWarning(message, args);
