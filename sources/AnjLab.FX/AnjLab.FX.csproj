@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ByteBitArray.cs" />
+    <Compile Include="Collections\INonSerializableItem.cs" />
+    <Compile Include="Collections\SerializableList.cs" />
+    <Compile Include="Collections\UniqueList.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Devices\BytesFilter.cs" />
@@ -111,7 +115,6 @@
     <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
     <Compile Include="System\TypeReflector.cs" />
-    <Compile Include="System\UniqueList.cs" />
     <Compile Include="System\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
     <Compile Include="Tasks\Scheduling\EventQueue.cs" />

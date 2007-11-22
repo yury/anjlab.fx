@@ -8,9 +8,11 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using AnjLab.FX.System;
 
+#if NET_3_5
 namespace AnjLab.FX.Collections
 {
     [Serializable]
+
     public class SerializableList<T> : List<T>, INotifyCollectionChanged, IXmlSerializable
     {
         List<TypeAlias> _aliases = new List<TypeAlias>();
@@ -141,7 +143,7 @@ namespace AnjLab.FX.Collections
             return null;
         }
 
-        #region XmlSerializer cache
+#region XmlSerializer cache
 
         static readonly Dictionary<string, XmlSerializer> _serializers = new Dictionary<string, XmlSerializer>();
 
@@ -164,7 +166,7 @@ namespace AnjLab.FX.Collections
 
         #endregion
 
-        #region INotifyCollectionChanged
+#region INotifyCollectionChanged
 
         public new void Add(T item)
         {
@@ -273,3 +275,4 @@ namespace AnjLab.FX.Collections
         }
     }
 }
+#endif
