@@ -159,6 +159,7 @@
     <Compile Include="Tasks\Scheduling\Trigger.cs" />
     <Compile Include="Tasks\Scheduling\WeeklyTrigger.cs" />
     <Compile Include="UI\IStatusStripProvider.cs" />
+    <Compile Include="UI\RuNumberFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
