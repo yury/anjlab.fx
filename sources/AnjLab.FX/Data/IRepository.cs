@@ -1,8 +1,7 @@
 ﻿#if NET_3_5
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AnjLab.FX.Data
 {
@@ -26,6 +25,8 @@ namespace AnjLab.FX.Data
         void DeleteAll();
         void CommitChanges();
         void Refresh(T entity);
+
+        IList SqlQuery(string sqlQuery, Type returnType);
     }
 }
 #endif
