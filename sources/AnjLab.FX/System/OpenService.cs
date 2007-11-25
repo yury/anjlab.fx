@@ -16,7 +16,7 @@ namespace AnjLab.FX.System
             private ServiceControllerStatus _winState;
             private string _name;
             private string _displayName;
-            private bool _Registered;
+            private bool _installed;
 
             public ServiceControllerStatus WinState
             {
@@ -36,10 +36,10 @@ namespace AnjLab.FX.System
                 set { _displayName = value; }
             }
 
-            public bool Registered
+            public bool Installed
             {
-                get { return _Registered; }
-                set { _Registered = value; }
+                get { return _installed; }
+                set { _installed = value; }
             }
         }
 
@@ -100,11 +100,11 @@ namespace AnjLab.FX.System
             {
                 info.WinState = sc.Status;
                 info.DisplayName = sc.DisplayName;
-                info.Registered = true;
+                info.Installed = true;
             } 
             catch (InvalidOperationException)
             {
-                info.Registered = false;    
+                info.Installed = false;    
             }
             return info;
         }
@@ -132,7 +132,7 @@ namespace AnjLab.FX.System
         public void StartWinService()
         {
             ServiceInfo info = GetInfo();
-            Guard.IsTrue(info.Registered, "Service should be installed");
+            Guard.IsTrue(info.Installed, "Service should be installed");
 
             ServiceController sc = GetServiceController();
             if (info.WinState == ServiceControllerStatus.Stopped)

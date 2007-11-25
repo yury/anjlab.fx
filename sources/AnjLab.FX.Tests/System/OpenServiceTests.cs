@@ -16,7 +16,7 @@ namespace AnjLab.FX.Tests.System
             os.ServiceName = "doesn't exists";
             OpenService.ServiceInfo info = os.GetInfo();
             Assert.IsNotNull(info);
-            Assert.IsFalse(info.Registered);
+            Assert.IsFalse(info.Installed);
             Assert.AreEqual(0, (int)info.WinState);
             Assert.AreEqual(os.ServiceName, info.Name);
             Assert.IsNull(info.DisplayName);
