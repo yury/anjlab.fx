@@ -17,6 +17,8 @@ namespace AnjLab.FX.System
 
         public static ICommand FromAction(VoidAction action)
         {
+            Guard.ArgumentNotNull("action", action);
+
             return new Command(action);
         }
     }

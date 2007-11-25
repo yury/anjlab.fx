@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -124,6 +125,7 @@
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
+    <Compile Include="System\CommandArgsProcessor.cs" />
     <Compile Include="System\ComparerFactory.cs" />
     <Compile Include="System\Action.cs" />
     <Compile Include="System\DataTableAdapterFactory.cs" />

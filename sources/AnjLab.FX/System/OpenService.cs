@@ -1,7 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration.Install;
 using System.ServiceProcess;
-using System.Threading;
 
 namespace AnjLab.FX.System
 {
@@ -10,6 +11,38 @@ namespace AnjLab.FX.System
     /// </summary>
     public class OpenService : ServiceBase
     {
+        public class ServiceInfo
+        {
+            private ServiceControllerStatus _winState;
+            private string _name;
+            private string _displayName;
+            private bool _Registered;
+
+            public ServiceControllerStatus WinState
+            {
+                get { return _winState; }
+                set { _winState = value; }
+            }
+
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+
+            public string DisplayName
+            {
+                get { return _displayName; }
+                set { _displayName = value; }
+            }
+
+            public bool Registered
+            {
+                get { return _Registered; }
+                set { _Registered = value; }
+            }
+        }
+
         private delegate void StartHandler(string[] args);
 
         public static void Run(OpenService[] servicesToRun, bool asWinService)
@@ -51,6 +84,86 @@ namespace AnjLab.FX.System
 
             foreach (Pair<VoidAction, IAsyncResult> result in results)
                 result.A.EndInvoke(result.B);
+        }
+
+        public ServiceController GetServiceController()
+        {
+            return new ServiceController(ServiceName);
+        }
+
+        public ServiceInfo GetInfo()
+        {
+            ServiceInfo info = new ServiceInfo();
+            ServiceController sc = GetServiceController();
+            info.Name = ServiceName;
+            try
+            {
+                info.WinState = sc.Status;
+                info.DisplayName = sc.DisplayName;
+                info.Registered = true;
+            } 
+            catch (InvalidOperationException)
+            {
+                info.Registered = false;    
+            }
+            return info;
+        }
+
+        public void Install()
+        {
+            ServiceProcessInstaller spi = new ServiceProcessInstaller();
+            spi.Account = ServiceAccount.LocalSystem;
+            spi.Username = null;
+            spi.Password = null;
+            spi.Context = new InstallContext("install.txt", new string[0]);
+            spi.Context.Parameters["assemblypath"] = GetType().Assembly.Location;
+            AddInstaller(spi);
+            spi.Install(new Hashtable());
+        }
+
+        public void AddInstaller(ServiceProcessInstaller spi)
+        {
+            ServiceInstaller installer = new ServiceInstaller();
+            installer.StartType = ServiceStartMode.Automatic;
+            installer.ServiceName = ServiceName;
+            spi.Installers.Add(installer);
+        }
+
+        public void StartWinService()
+        {
+            ServiceInfo info = GetInfo();
+            Guard.IsTrue(info.Registered, "Service should be installed");
+
+            ServiceController sc = GetServiceController();
+            if (info.WinState == ServiceControllerStatus.Stopped)
+                sc.Start();
+            else if (info.WinState == ServiceControllerStatus.Paused)
+                sc.Continue();
+        }
+
+        public void Uninstall()
+        {
+            ServiceProcessInstaller spi = new ServiceProcessInstaller();
+            ServiceInstaller installer = new ServiceInstaller();
+            spi.Installers.Add(installer);
+            installer.Context = new InstallContext("uninstall.txt", new string[0]);
+            installer.Context.Parameters["assemblypath"] = GetType().Assembly.Location;
+            installer.ServiceName = ServiceName;
+            installer.Uninstall(null);
+        }
+
+        public static void Install(Type exeType, IEnumerable<OpenService> services)
+        {
+            ServiceProcessInstaller spi = new ServiceProcessInstaller();
+            spi.Account = ServiceAccount.LocalSystem;
+            spi.Username = null;
+            spi.Password = null;
+            spi.Context = new InstallContext("install.txt", new string[0]);
+            spi.Context.Parameters["assemblypath"] = exeType.Assembly.Location;
+            foreach (OpenService service in services)
+                service.AddInstaller(spi);
+
+            spi.Install(new Hashtable());
         }
     }
 }

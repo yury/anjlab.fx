@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using AnjLab.FX.Collections;
 using NUnit.Framework;
 
-namespace AnjLab.FX.Tests.System
+namespace AnjLab.FX.Tests.Collections
 {
     [TestFixture]
     public class UniqueListTests
