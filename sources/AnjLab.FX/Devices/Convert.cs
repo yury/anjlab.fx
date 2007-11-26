@@ -28,6 +28,8 @@ namespace AnjLab.FX.Devices
                 throw new ArgumentNullException("str", "is null or empty");
 
             str = str.Trim();
+            str = str.Replace(" ", "");
+
             if (str.Length % 2 != 0)
                 throw new FormatException("String length must be even");
 
