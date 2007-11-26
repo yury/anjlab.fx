@@ -77,6 +77,7 @@
     <Compile Include="IO\BasedBitWriter.cs" />
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
+    <Compile Include="IO\CSVExport.cs" />
     <Compile Include="IO\ILog.cs" />
     <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
