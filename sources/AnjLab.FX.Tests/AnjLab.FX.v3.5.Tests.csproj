@@ -75,6 +75,7 @@
     <Compile Include="System\DataTableAdapterFactoryTests.cs" />
     <Compile Include="Collections\UniqueListTests.cs" />
     <Compile Include="System\OpenServiceTests.cs" />
+    <Compile Include="System\StrTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />
   </ItemGroup>
