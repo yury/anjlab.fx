@@ -7,32 +7,32 @@ namespace AnjLab.FX.IO.Ports
 {
     public class SerialPortDelay
     {
-        private SerialPort _Port;
+        private SerialPort _port;
         TimeSpan _PreWrite = TimeSpan.FromMilliseconds(0);
         TimeSpan _PostWrite = TimeSpan.FromMilliseconds(0);
 
         public SerialPortDelay(SerialPort serialPort)
         {
-            _Port = serialPort;
+            _port = serialPort;
         }
 
         public void Write(byte[] data)
         {
-            Guard.IsTrue(_Port.IsOpen);
+            Guard.IsTrue(_port.IsOpen);
 
             Thread.Sleep(_PreWrite);
-            _Port.RtsEnable = true;
+            _port.RtsEnable = true;
 
-            _Port.Write(data, 0, data.Length);
+            _port.Write(data, 0, data.Length);
 
             Thread.Sleep(_PostWrite);
-            _Port.RtsEnable = false;
+            _port.RtsEnable = false;
         }
 
         public SerialPort Port
         {
-            get { return _Port; }
-            set { _Port = value; }
+            get { return _port; }
+            set { _port = value; }
         }
 
         public TimeSpan PreWrite
