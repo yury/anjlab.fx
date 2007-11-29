@@ -126,6 +126,8 @@ namespace AnjLab.FX.System
             ServiceInstaller installer = new ServiceInstaller();
             installer.StartType = ServiceStartMode.Automatic;
             installer.ServiceName = ServiceName;
+            if (DependedOn != null)
+                installer.ServicesDependedOn = DependedOn;
             spi.Installers.Add(installer);
         }
 
@@ -164,6 +166,11 @@ namespace AnjLab.FX.System
                 service.AddInstaller(spi);
 
             spi.Install(new Hashtable());
+        }
+
+        public virtual string [] DependedOn
+        {
+            get { return null; }
         }
     }
 }
