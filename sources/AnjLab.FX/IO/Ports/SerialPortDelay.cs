@@ -7,7 +7,7 @@ namespace AnjLab.FX.IO.Ports
 {
     public class SerialPortDelay
     {
-        private SerialPort _port;
+        private readonly SerialPort _port;
         TimeSpan _preWrite = TimeSpan.FromMilliseconds(0);
         TimeSpan _postWrite = TimeSpan.FromMilliseconds(0);
 
@@ -39,7 +39,6 @@ namespace AnjLab.FX.IO.Ports
         public SerialPort Port
         {
             get { return _port; }
-            set { _port = value; }
         }
 
         public TimeSpan PreWrite
