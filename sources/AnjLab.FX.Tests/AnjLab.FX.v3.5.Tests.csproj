@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\satellite.libraries\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,6 +81,7 @@
     <Compile Include="System\StrTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />
+    <Compile Include="Windows\Data\EnumHelperValueConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
@@ -94,6 +98,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="StreamMapping\TestObject.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
