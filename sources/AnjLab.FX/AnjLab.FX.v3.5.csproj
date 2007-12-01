@@ -123,6 +123,7 @@
     <Compile Include="StreamMapping\CodeGeneration\Operations\RightShift.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Operations\LeftShift.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Operations\ValueOperation.cs" />
+    <Compile Include="System\AssemblyBuildDateAttribute.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />

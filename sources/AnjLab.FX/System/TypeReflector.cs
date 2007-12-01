@@ -5,7 +5,7 @@ using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.System
 {
-    class TypeReflector
+    public class TypeReflector
     {
         private Dictionary<Type, object> _wellKnownTypes = new Dictionary<Type, object>();
 
@@ -173,5 +173,13 @@ namespace AnjLab.FX.System
             return pInfo;
         }
 
+        public static Version GetEntryAssemblyVersion()
+        {
+            foreach (AssemblyFileVersionAttribute attribute in Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true))
+            {
+                return new Version(attribute.Version);
+            }
+            return null;
+        }
     }
 }
