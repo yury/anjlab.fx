@@ -1,4 +1,6 @@
-﻿using AnjLab.FX.IO;
+﻿using System;
+using System.Globalization;
+using AnjLab.FX.IO;
 using NUnit.Framework;
 
 namespace AnjLab.FX.Tests.IO
@@ -14,6 +16,8 @@ namespace AnjLab.FX.Tests.IO
             log.Warning("test warning {0}", 2);
             log.Error("test error {0}", 3);
             log.Fatal("test fatal {0}", 4);
+
+            Console.WriteLine(DateTime.Now.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture));
         }
     }
 }

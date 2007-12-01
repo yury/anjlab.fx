@@ -19,7 +19,7 @@ namespace AnjLab.FX.MSBuild.Tasks
     // 4. Generates AssemblyGeneretedInfo.cs and writes info there
     public class ProductInfo: Task
     {
-        string [] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices" };
+        string[] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices", "AnjLab.FX.System" };
 
         private string _infoFile;
         private string _outputFile;
@@ -93,6 +93,12 @@ namespace AnjLab.FX.MSBuild.Tasks
                 new CodeAttributeDeclaration("AssemblyFileVersion",
                                              new CodeAttributeArgument(
                                                  new CodePrimitiveExpression(version)));
+            ccu.AssemblyCustomAttributes.Add(cad);
+
+
+            cad = new CodeAttributeDeclaration("AssemblyBuildDate",
+                                 new CodeAttributeArgument(
+                                     new CodePrimitiveExpression(DateTime.Now.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
             ccu.AssemblyCustomAttributes.Add(cad);
 
             if (!string.IsNullOrEmpty(_company))
