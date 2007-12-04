@@ -9,7 +9,7 @@ using Microsoft.CSharp;
 
 namespace AnjLab.FX.StreamMapping.CodeGeneration
 {
-    public class AssemblyBuilder
+    public class StreamMapperBuilder
     {
         readonly string _namespace = "AnjLab.FX.Generated.StreamMapping";
         readonly string _assemblyFormat = "GeneratedFor{0}";
@@ -22,7 +22,7 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
 
         public static IBinaryMapper<TResult> BuildBinaryMapper<TResult>(MapInfo info)
         {
-            return new AssemblyBuilder().InternalBuildBinaryMapper<TResult>(info);
+            return new StreamMapperBuilder().InternalBuildBinaryMapper<TResult>(info);
         }
 
         private IBinaryMapper<TResult> InternalBuildBinaryMapper<TResult>(MapInfo info)
@@ -124,6 +124,8 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
             ctx.DataArray = dataArray;
             ctx.DataReader = reader;
             ctx.MappedObject = result;
+            ctx.ResultObject = result;
+            ctx.ResultObjectName = result.VariableName;
 
             map.Statements.AddRange(NewElementsMappingCode(ctx, ctx.MapInfo.Nodes));
 

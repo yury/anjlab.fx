@@ -29,6 +29,7 @@ namespace AnjLab.FX.Devices
 
             str = str.Trim();
             str = str.Replace(" ", "");
+            str = str.Replace("0x", "");
 
             if (str.Length % 2 != 0)
                 throw new FormatException("String length must be even");

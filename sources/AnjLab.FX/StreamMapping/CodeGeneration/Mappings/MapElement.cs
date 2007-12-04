@@ -18,13 +18,6 @@ namespace AnjLab.FX.StreamMapping
         List<IOperation> _operations = new List<IOperation>();
         private PropertyInfo _mappedProperty;
 
-        protected Type GetPropertyValueType()
-        {
-            if (_mappedProperty.PropertyType.IsArray)
-                return _mappedProperty.PropertyType.GetElementType();
-            return _mappedProperty.PropertyType;
-        }
-
         protected CodeStatementCollection GenerateSetMappedPropertyCode(CodeExpression targetObj, CodeExpression value)
         {
             CodeStatementCollection statements = new CodeStatementCollection();
@@ -109,6 +102,23 @@ namespace AnjLab.FX.StreamMapping
         {
             get { return _mappedProperty; }
             protected set { _mappedProperty = value; }
+        }
+
+        protected Type MappedValueType
+        {
+            get
+            {
+                if (_mappedProperty.PropertyType.HasElementType)
+                    return _mappedProperty.PropertyType.GetElementType();
+
+                if (_mappedProperty.PropertyType.IsArray)
+                    return _mappedProperty.PropertyType.GetElementType();
+
+                if (_mappedProperty.PropertyType.IsGenericType)
+                    return _mappedProperty.PropertyType.GetGenericArguments()[0];
+
+                return _mappedProperty.PropertyType;
+            }
         }
 
         public abstract void GenerateMappingCode(CodeGenerationContext ctx, CodeMemberMethod method);

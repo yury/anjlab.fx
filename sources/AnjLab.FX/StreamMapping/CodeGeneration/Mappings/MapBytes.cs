@@ -34,13 +34,13 @@ namespace AnjLab.FX.StreamMapping
 
                 //Type value = ?
                 method.Statements.Add(new CodeVariableDeclarationStatement(
-                    GetPropertyValueType(), "value", GetPropertyValueExpression(MappedProperty.PropertyType, reader2)));
+                    MappedValueType, "value", GetPropertyValueExpression(MappedValueType, reader2)));
                 CodeVariableReferenceExpression value = new CodeVariableReferenceExpression("value");
 
                 // add operations code
                 foreach (IOperation op in Operations)
                     method.Statements.AddRange(op.BuildOperation(ctx, this, value));
-
+                
                 method.Statements.AddRange(GenerateSetMappedPropertyCode(ctx.MappedObject, value));
 
                 // newReader.Dispose();
@@ -76,8 +76,7 @@ namespace AnjLab.FX.StreamMapping
             if (propertyType.IsEnum)
             {
                 Type enumBaseType = Enum.GetUnderlyingType(propertyType);
-                return new CodeCastExpression(MappedProperty.PropertyType,
-                                           GetPropertyValueExpression(enumBaseType, binaryReader));
+                return new CodeCastExpression(propertyType, GetPropertyValueExpression(enumBaseType, binaryReader));
             }
 
             throw new NotSupportedException(String.Format("'{0}' doesn't support properties of type '{1}'", 

@@ -1,4 +1,4 @@
-﻿#if NET_3_5
+#if NET_3_5
 using System;
 using System.IO;
 using System.Reflection;
@@ -29,7 +29,7 @@ namespace AnjLab.FX.StreamMapping
         private static IBinaryMapper<TResult> GenerateMapper()
         {
             MapInfo info = GetMapInfo(typeof(TResult));
-            return AssemblyBuilder.BuildBinaryMapper<TResult>(info);
+            return StreamMapperBuilder.BuildBinaryMapper<TResult>(info);
         }
 
         private static MapInfo GetMapInfo(Type type)

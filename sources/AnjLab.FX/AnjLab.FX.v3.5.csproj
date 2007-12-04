@@ -100,8 +100,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StreamMapping\CodeGeneration\AssemblyBuilder.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\NextBytesCondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\StreamMapperBuilder.cs" />
     <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\ValueCondition.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Instructions\While.cs" />
     <Compile Include="StreamMapping\CodeGeneration\MapInfo.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Mappings\ContainerMapElement.cs" />

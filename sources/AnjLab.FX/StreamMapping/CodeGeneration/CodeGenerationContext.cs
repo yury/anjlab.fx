@@ -1,4 +1,4 @@
-﻿#if NET_3_5
+#if NET_3_5
 using System;
 using System.CodeDom;
 using AnjLab.FX.StreamMapping.CodeGeneration;
@@ -12,7 +12,15 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
         private CodeVariableReferenceExpression _dataArray;
         private CodeVariableReferenceExpression _reader;
         private CodeExpression _mappedObject;
-        private AssemblyBuilder _builder;
+        private CodeExpression _resultObject;
+        private StreamMapperBuilder _builder;
+        private string _resultObjectName = "";
+
+        public string ResultObjectName
+        {
+            get { return _resultObjectName; }
+            set { _resultObjectName = value; }
+        }
 
         public MapInfo MapInfo
         {
@@ -44,22 +52,21 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
             set { _mappedObject = value; }
         }
 
-        public AssemblyBuilder Builder
+        public StreamMapperBuilder Builder
         {
             get { return _builder; }
             set { _builder = value; }
         }
 
+        public CodeExpression ResultObject
+        {
+            get { return _resultObject; }
+            set { _resultObject = value; }
+        }
+
         public CodeGenerationContext Clone()
         {
-            CodeGenerationContext clone = new CodeGenerationContext();
-            clone.Builder = Builder;
-            clone.DataArray = DataArray;
-            clone.DataReader = DataReader;
-            clone.MapInfo = MapInfo;
-            clone.MappedObject = MappedObject;
-            clone.MappedObjectType = MappedObjectType;
-            return clone;
+            return (CodeGenerationContext)MemberwiseClone();
         }
     }
 }

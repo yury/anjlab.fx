@@ -18,11 +18,20 @@ namespace AnjLab.FX.StreamMapping.Instructions
             Guard.NotNull(_true, "'True' property can't be null in If mapping");
 
             CodeMemberMethod trueMethod = ctx.Builder.NewElementMappingMethod(ctx, _true);
-            CodeMemberMethod falseMethod = ctx.Builder.NewElementMappingMethod(ctx, _false);
 
-            method.Statements.Add(new CodeConditionStatement(_condition.GetCondition(ctx, method),
-                new CodeStatement[] { new CodeSnippetStatement(String.Format("this.{0}();", trueMethod.Name)) },
-                new CodeStatement[] { new CodeSnippetStatement(String.Format("this.{0}();", falseMethod.Name)) }));
+            if (_false != null)
+            {
+                CodeMemberMethod falseMethod = ctx.Builder.NewElementMappingMethod(ctx, _false);
+                method.Statements.Add(new CodeConditionStatement(_condition.GetCondition(ctx, method),
+                    new CodeStatement[] { new CodeSnippetStatement(String.Format("this.{0}();", trueMethod.Name)) },
+                    new CodeStatement[] { new CodeSnippetStatement(String.Format("this.{0}();", falseMethod.Name)) }));
+            }
+            else
+            {
+                method.Statements.Add(new CodeConditionStatement(_condition.GetCondition(ctx, method),
+                    new CodeStatement[] { new CodeSnippetStatement(String.Format("this.{0}();", trueMethod.Name)) }));
+            }
+
         }
 
         public ICondition Condition
