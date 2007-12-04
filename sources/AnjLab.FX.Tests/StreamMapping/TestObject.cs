@@ -1,4 +1,6 @@
-﻿namespace AnjLab.FX.Tests.StreamMapping
+﻿using System.Collections.Generic;
+
+namespace AnjLab.FX.Tests.StreamMapping
 {
     public enum TestEnum : byte
     {
@@ -15,6 +17,9 @@
         private bool _boolProperty;
         private bool _boolProperty2;
         private TestEnum _enumProperty;
+
+        List<byte> _bytes = new List<byte>();
+        private byte _byteFlag = 0;
 
         public byte ByteProperty
         {
@@ -56,6 +61,18 @@
         {
             get { return _enumProperty; }
             set { _enumProperty = value; }
+        }
+
+        public List<byte> Bytes
+        {
+            get { return _bytes; }
+            set { _bytes = value; }
+        }
+
+        public byte ByteFlag
+        {
+            get { return _byteFlag; }
+            set { _byteFlag = value; }
         }
     }
 }

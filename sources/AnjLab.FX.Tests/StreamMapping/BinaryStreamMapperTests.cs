@@ -22,7 +22,7 @@ namespace AnjLab.FX.Tests.StreamMapping
         private void AssertMapper()
         {
             BinaryStreamMapper<TestObject> bd = new BinaryStreamMapper<TestObject>();
-            TestObject testObj = bd.Map(Convert.HexStringToBytes("0AAAFFFFFFFFFF0000e77702"));
+            TestObject testObj = bd.Map(Convert.HexStringToBytes("0AAAFFFFFFFFFF0000e7770201fe02fe03fe04fe05ff"));
 
             Assert.IsNotNull(testObj);
 
@@ -34,6 +34,12 @@ namespace AnjLab.FX.Tests.StreamMapping
             Assert.AreEqual(true, testObj.BoolProperty2);
             Assert.AreEqual(TestEnum.Second, testObj.EnumProperty);
 
+            Assert.AreEqual(5, testObj.Bytes.Count);
+            Assert.AreEqual(1, testObj.Bytes[0]);
+            Assert.AreEqual(2, testObj.Bytes[1]);
+            Assert.AreEqual(3, testObj.Bytes[2]);
+            Assert.AreEqual(4, testObj.Bytes[3]);
+            Assert.AreEqual(5, testObj.Bytes[4]);
         }
     }
 }

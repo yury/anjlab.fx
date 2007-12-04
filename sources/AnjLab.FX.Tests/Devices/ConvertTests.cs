@@ -28,5 +28,12 @@ namespace AnjLab.FX.Tests.Devices
                                                                 testCase[0]));
             }
         }
+
+        [Test]
+        public void TestHexStringToBytes()
+        {
+            Assert.AreEqual("ffff", Convert.BytesToHexString(Convert.HexStringToBytes("ffff")).ToString());
+            Assert.AreEqual("ffff", Convert.BytesToHexString(Convert.HexStringToBytes("0xffff")).ToString());
+        }
     }
 }
