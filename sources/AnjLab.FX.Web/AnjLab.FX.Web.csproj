@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0B97A9EF-BB61-4651-8E80-3BC61A3281DB}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -55,12 +55,6 @@
     <Compile Include="TemplatedControl.cs" />
     <Compile Include="TemplateElementAttribute.cs" />
     <Compile Include="Validator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.csproj">
-      <Project>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</Project>
-      <Name>AnjLab.FX</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\core.js" />

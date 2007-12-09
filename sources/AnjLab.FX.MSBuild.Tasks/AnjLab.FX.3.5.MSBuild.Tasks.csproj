@@ -47,9 +47,9 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.csproj">
-      <Project>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</Project>
-      <Name>AnjLab.FX</Name>
+    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
+      <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
+      <Name>AnjLab.FX.v3.5</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
