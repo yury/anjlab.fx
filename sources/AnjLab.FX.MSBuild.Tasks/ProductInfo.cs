@@ -13,10 +13,7 @@ using Microsoft.CSharp;
 
 namespace AnjLab.FX.MSBuild.Tasks
 {
-    // 1. Reads start date major and minor versions from file
-    // 2. Generates build number == (DateTime.Now.Date - StartDate).DaysCount
-    // 3. Gets revision number from svn client utility
-    // 4. Generates AssemblyGeneretedInfo.cs and writes info there
+
     public class ProductInfo: Task
     {
         string[] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices", "AnjLab.FX.System" };
@@ -45,6 +42,16 @@ namespace AnjLab.FX.MSBuild.Tasks
         private int _buildNumber;
         private string _company;
         private string _product;
+
+        [Output]
+        public string Version
+        {
+            get
+            {
+                return string.Format("{0}.{1}.{2}.{3}", _majorVersion, _minorVersion,
+                                     _buildNumber, _revision);
+            }
+        }
 
         public override bool Execute()
         {
@@ -81,8 +88,7 @@ namespace AnjLab.FX.MSBuild.Tasks
                 cn.Imports.Add(new CodeNamespaceImport(import));
             }
             ccu.Namespaces.Add(cn);
-            string version = string.Format("{0}.{1}.{2}.{3}", _majorVersion, _minorVersion,
-                                           _buildNumber, _revision);
+            string version = Version;
             CodeAttributeDeclaration cad =
                 new CodeAttributeDeclaration("AssemblyVersion",
                                              new CodeAttributeArgument(
