@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9CEA924B-D8F0-4D5A-BACB-878D3D12C5F3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceProcess" />
@@ -69,7 +70,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StreamMapping\BinaryStreamMapper.cs" />
-    <Compile Include="StreamMapping\CodeGeneration\AssemblyBuilder.cs" />
     <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
     <Compile Include="StreamMapping\CodeGeneration\ICodeGeneratorNode.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Instructions\Do.cs" />
@@ -90,11 +90,14 @@
     <Compile Include="StreamMapping\CodeGeneration\Operations\Sub.cs" />
     <Compile Include="StreamMapping\CodeGeneration\Operations\ValueOperation.cs" />
     <Compile Include="StreamMapping\IBinaryMapper.cs" />
+    <Compile Include="System\AssemblyBuildDateAttribute.cs" />
     <Compile Include="System\AttributeSearcher.cs" />
     <Compile Include="System\CodeBuilder.cs" />
     <Compile Include="System\Command.cs" />
+    <Compile Include="System\CommandArgsProcessor.cs" />
     <Compile Include="System\ComparerFactory.cs" />
     <Compile Include="System\Action.cs" />
+    <Compile Include="System\EnumHelper.cs" />
     <Compile Include="System\GetObjectAction.cs" />
     <Compile Include="System\DataTableAdapterFactory.cs" />
     <Compile Include="System\EventArgs.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="System\PropertyComparer.cs" />
     <Compile Include="System\PrototypeFactoryMethod.cs" />
     <Compile Include="System\SortableBindingList.cs" />
+    <Compile Include="System\Str.cs" />
     <Compile Include="System\TypeReflector.cs" />
     <Compile Include="System\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />

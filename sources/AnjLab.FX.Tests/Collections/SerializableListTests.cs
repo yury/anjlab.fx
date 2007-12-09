@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using AnjLab.FX.Collections;
 using NUnit.Framework;
 
+#if NET_3_5
 namespace AnjLab.FX.Tests.Collections
 {
     [TestFixture]
@@ -76,3 +77,4 @@ namespace AnjLab.FX.Tests.Collections
         }
     }
 }
+#endif
