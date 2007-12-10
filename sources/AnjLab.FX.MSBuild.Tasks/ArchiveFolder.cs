@@ -79,8 +79,10 @@ namespace AnjLab.FX.MSBuild.Tasks
             Process p = new Process();
             p.StartInfo = psi;
             p.Start();
-            if (!p.WaitForExit(10 * 1000))
+            if (!p.WaitForExit(10 * 10 * 1000))
             {
+                Log.LogError("Timouted");
+                Log.LogError(p.StandardError.ReadToEnd());
                 return false;
             }
             return true;
