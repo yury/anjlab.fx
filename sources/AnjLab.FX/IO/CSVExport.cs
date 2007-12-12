@@ -9,7 +9,7 @@ namespace AnjLab.FX.IO
 {
     public class CSVExport
     {
-        private static readonly string ColumnSeparator = ",";
+        private static readonly string ColumnSeparator = ";";
 
         public static void Export(DataTable table, string fileName, Encoding encoding)
         {
