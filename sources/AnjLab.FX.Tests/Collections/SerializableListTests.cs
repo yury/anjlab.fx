@@ -69,12 +69,6 @@ namespace AnjLab.FX.Tests.Collections
             get { return _int; }
             set { _int = value;}
         }
-
-        public override bool Equals(object obj)
-        {
-            Test1 t2 = (Test1) obj;
-            return Int == t2.Int && Str == t2.Str;
-        }
     }
 }
 #endif
