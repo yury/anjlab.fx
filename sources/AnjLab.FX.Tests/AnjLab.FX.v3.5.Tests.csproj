@@ -67,6 +67,7 @@
     <Compile Include="IO\BitWriterTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
     <Compile Include="IO\TraceLogTests.cs" />
+    <Compile Include="Net\HttpRequestResponseTests.cs" />
     <Compile Include="Patterns\Generic\Inject\ObjectFactoryTests.cs" />
     <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="System\ComparerFactoryTests.cs" />
     <Compile Include="System\DataTableAdapterFactoryTests.cs" />
     <Compile Include="Collections\UniqueListTests.cs" />
+    <Compile Include="System\LstTests.cs" />
     <Compile Include="System\OpenServiceTests.cs" />
     <Compile Include="System\StrTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />

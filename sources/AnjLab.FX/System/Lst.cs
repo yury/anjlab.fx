@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 #if NET_3_5
 using System.Linq;
+using System.Text;
+
 #endif
 
 namespace AnjLab.FX.System
@@ -70,12 +72,32 @@ namespace AnjLab.FX.System
             Guard.ArgumentNotNull("list", list);
             Guard.ArgumentNotNull("separator", separator);
 
-            List<string> strings = new List<string>();
+            StringBuilder sb = new StringBuilder();
 
-            foreach (T item in list)
-                strings.Add(string.Format("{0}", item));
+            foreach (T t in list)
+            {
+                sb.Append(t);
+                sb.Append(separator);
+            }
 
-            return string.Join(separator, strings.ToArray());
+            return sb.ToString(0, sb.Length - separator.Length);
+        }
+
+        public static string ToString<TA, TB>(IEnumerable<KeyValuePair<TA, TB>> list, string format, string separator)
+        {
+            Guard.ArgumentNotNull("list", list);
+            Guard.ArgumentNotNull("format", format);
+            Guard.ArgumentNotNull("separator", separator);
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (KeyValuePair<TA, TB> pair in list)
+            {
+                sb.AppendFormat(format, pair.Key, pair.Value);
+                sb.Append(separator);
+            }
+
+            return sb.ToString(0, sb.Length - separator.Length);
         }
 
         public static string ToString<T>(IEnumerable<T> list)

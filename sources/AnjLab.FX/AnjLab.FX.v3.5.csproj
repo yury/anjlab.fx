@@ -79,6 +79,8 @@
     <Compile Include="IO\ILog.cs" />
     <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
+    <Compile Include="Net\HttpRequest.cs" />
+    <Compile Include="Net\HttpResponse.cs" />
     <Compile Include="Patterns\Generic\Inject\Activator.cs" />
     <Compile Include="Patterns\Generic\Inject\AssemblyBuilder.cs" />
     <Compile Include="Patterns\Generic\Inject\Bind.cs" />

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace AnjLab.FX.System
 {
     public class Pair<TA, TB>
@@ -46,6 +48,17 @@ namespace AnjLab.FX.System
         public static Pair<TAA, TBB> New<TAA, TBB>(TAA a, TBB b)
         {
             return new Pair<TAA, TBB>(a, b);
+        }
+
+        public static Dictionary<TAA, TBB> ToDictionary<TAA, TBB>(Pair<TAA, TBB> [] arr)
+        {
+            Dictionary<TAA, TBB> dict = new Dictionary<TAA, TBB>(arr.Length);
+
+            foreach (Pair<TAA, TBB> pair in arr)
+            {
+                dict.Add(pair.A, pair.B);
+            }
+            return dict;
         }
     }
 }
