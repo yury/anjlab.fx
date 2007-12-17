@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.v3.5.Tests", "Anj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.3.5.MSBuild.Tasks", "AnjLab.FX.MSBuild.Tasks\AnjLab.FX.3.5.MSBuild.Tasks.csproj", "{5FC52267-CEB9-4E07-984E-B47DAF2DF0F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.DirectoryServices", "AnjLab.FX.DirectoryServices\AnjLab.FX.DirectoryServices.csproj", "{76B00C49-2719-484A-B6DF-6B6334D77232}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{5FC52267-CEB9-4E07-984E-B47DAF2DF0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC52267-CEB9-4E07-984E-B47DAF2DF0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC52267-CEB9-4E07-984E-B47DAF2DF0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B00C49-2719-484A-B6DF-6B6334D77232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B00C49-2719-484A-B6DF-6B6334D77232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B00C49-2719-484A-B6DF-6B6334D77232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B00C49-2719-484A-B6DF-6B6334D77232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -100,5 +100,11 @@ namespace AnjLab.FX.System
             if (!value)
                 throw new InvalidOperationException(String.Format(msg, args));
         }
+
+        public static void IsNull(object value, string message)
+        {
+            if (value != null)
+                throw new InvalidOperationException(message);
+        }
     }
 }
