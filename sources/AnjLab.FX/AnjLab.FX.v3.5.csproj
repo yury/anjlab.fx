@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -76,9 +76,11 @@
     <Compile Include="IO\BitReader.cs" />
     <Compile Include="IO\BitWriter.cs" />
     <Compile Include="IO\CSVExport.cs" />
+    <Compile Include="IO\DirectoryHelper.cs" />
     <Compile Include="IO\ILog.cs" />
     <Compile Include="IO\Ports\SerialPortDelay.cs" />
     <Compile Include="IO\TraceLog.cs" />
+    <Compile Include="Mathematics\DiscreteVariate.cs" />
     <Compile Include="Net\HttpRequest.cs" />
     <Compile Include="Net\HttpResponse.cs" />
     <Compile Include="Patterns\Generic\Inject\Activator.cs" />
