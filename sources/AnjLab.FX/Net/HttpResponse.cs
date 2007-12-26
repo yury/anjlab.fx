@@ -10,11 +10,16 @@ namespace AnjLab.FX.Net
 {
     public class HttpResponse
     {
-        private HttpWebResponse _res;
+        private readonly HttpWebResponse _res;
+        private readonly IWebProxy _proxy;
 
-        internal HttpResponse(HttpWebResponse response)
+        internal HttpResponse(HttpWebResponse response, IWebProxy proxy)
         {
-            _res = response;   
+            Guard.ArgumentNotNull("response", response);
+            Guard.ArgumentNotNull("proxy", proxy);
+
+            _res = response;
+            _proxy = proxy;
         }
 
         public string Server
@@ -58,6 +63,7 @@ namespace AnjLab.FX.Net
         {
             HttpRequest req = HttpRequest.NewGet(uri, vars);
             req.Cookies.Add(_res.Cookies);
+            req.Proxy = _proxy;
             return req;
         }
 
@@ -65,6 +71,7 @@ namespace AnjLab.FX.Net
         {
             HttpRequest req = HttpRequest.NewPost(uri, vars);
             req.Cookies.Add(_res.Cookies);
+            req.Proxy = _proxy;
             return req;
         }
 

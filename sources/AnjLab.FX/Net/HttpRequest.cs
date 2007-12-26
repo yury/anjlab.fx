@@ -12,6 +12,12 @@ namespace AnjLab.FX.Net
     {
         private readonly HttpWebRequest _req;
 
+        public IWebProxy Proxy
+        {
+            get { return _req.Proxy; }
+            set { _req.Proxy = value; }
+        }
+
         public HttpRequest(string uri, string method, IDictionary<string, string> vars)
         {
             if (method.Equals("GET", StringComparison.InvariantCultureIgnoreCase))
@@ -22,18 +28,15 @@ namespace AnjLab.FX.Net
             _req = (HttpWebRequest) WebRequest.Create(uri);
             _req.Method = method;
             _req.CookieContainer = new CookieContainer();
-            if (method.Equals("POST", StringComparison.InvariantCultureIgnoreCase))
+            
+            if (vars != null && vars.Keys.Count > 0)
             {
-                if (vars != null && vars.Keys.Count > 0)
+                using (StreamWriter writer = new StreamWriter(_req.GetRequestStream()))
                 {
-                    using (StreamWriter writer = new StreamWriter(_req.GetRequestStream()))
-                    {
-                        writer.Write(Lst.ToString(vars, "{0}={1}", "&"));
-                        writer.Flush();
-                    }        
+                    writer.Write(Lst.ToString(vars, "{0}={1}", "&"));
+                    writer.Flush();
                 }
             }
-            
         }
 
         public static HttpRequest NewGet(string uri, params Pair<string, string>[] vars)
@@ -43,7 +46,7 @@ namespace AnjLab.FX.Net
 
         public HttpResponse GetResponse()
         {
-            return new HttpResponse((HttpWebResponse) _req.GetResponse());
+            return new HttpResponse((HttpWebResponse) _req.GetResponse(), Proxy);
         }
 
         public CookieContainer Cookies
