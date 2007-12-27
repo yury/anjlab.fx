@@ -80,11 +80,16 @@ namespace AnjLab.FX.Net
             return _res.GetResponseStream();
         }
 
+        private string _responseText;
+
         public string GetResponseText()
         {
+            if (_responseText != null)
+                return _responseText;
+
             using (StreamReader reader = new StreamReader(_res.GetResponseStream(), Encoding.GetEncoding(_res.CharacterSet)))
             {
-                return reader.ReadToEnd();
+                return _responseText = reader.ReadToEnd();
             }
         }
 
