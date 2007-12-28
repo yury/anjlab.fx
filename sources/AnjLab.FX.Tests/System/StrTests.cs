@@ -20,7 +20,7 @@ line2
 line3
 ";
             string res = "";
-            foreach (string line in Str.LinesFrom(new StringReader(src)))
+            foreach (string line in Str.LinesFrom(src))
             {
                 res += line + Environment.NewLine;
             }

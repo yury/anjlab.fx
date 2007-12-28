@@ -65,5 +65,17 @@ namespace AnjLab.FX.Net
         {
             return new HttpRequest(uri, "POST", Pair.ToDictionary(vars));
         }
+
+        public string UserAgent
+        {
+            get
+            {
+                return _req.UserAgent;
+            }
+            set
+            {
+                _req.UserAgent = value;
+            }
+        }
     }
 }

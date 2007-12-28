@@ -38,5 +38,10 @@ namespace AnjLab.FX.System
                 }
             }
         }
+
+        public static IEnumerable<string> LinesFrom(string txt)
+        {
+            return LinesFrom(new StringReader(txt));
+        }
     }
 }
