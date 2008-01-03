@@ -12,14 +12,16 @@ namespace AnjLab.FX.Net
     {
         private readonly HttpWebResponse _res;
         private readonly IWebProxy _proxy;
+        private readonly string _userAgent = string.Empty;
 
-        internal HttpResponse(HttpWebResponse response, IWebProxy proxy)
+        internal HttpResponse(HttpWebResponse response, IWebProxy proxy, string userAgent)
         {
             Guard.ArgumentNotNull("response", response);
             Guard.ArgumentNotNull("proxy", proxy);
 
             _res = response;
             _proxy = proxy;
+            _userAgent = userAgent;
         }
 
         public string Server
@@ -62,17 +64,23 @@ namespace AnjLab.FX.Net
         public HttpRequest NewGet(string uri, params Pair<string, string> [] vars)
         {
             HttpRequest req = HttpRequest.NewGet(uri, vars);
-            req.Cookies.Add(_res.Cookies);
-            req.Proxy = _proxy;
+            InitRequest(req);
             return req;
         }
 
         public HttpRequest NewPost(string uri, params Pair<string, string> [] vars)
         {
             HttpRequest req = HttpRequest.NewPost(uri, vars);
+            InitRequest(req);
+            return req;
+        }
+
+        private void InitRequest(HttpRequest req)
+        {
             req.Cookies.Add(_res.Cookies);
             req.Proxy = _proxy;
-            return req;
+            if (_userAgent != null)
+                req.UserAgent = _userAgent;
         }
 
         public Stream GetResponseStream()

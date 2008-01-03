@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using AnjLab.FX.System;
 
 namespace AnjLab.FX.Net
@@ -46,7 +44,7 @@ namespace AnjLab.FX.Net
 
         public HttpResponse GetResponse()
         {
-            return new HttpResponse((HttpWebResponse) _req.GetResponse(), Proxy);
+            return new HttpResponse((HttpWebResponse) _req.GetResponse(), Proxy, UserAgent);
         }
 
         public CookieContainer Cookies

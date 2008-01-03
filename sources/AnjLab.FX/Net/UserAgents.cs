@@ -34,6 +34,11 @@ namespace AnjLab.FX.Net
                 GoogleBot_2_1
             });
 
+        public static string RandomHumanAgent()
+        {
+            return AllHumans[Rnd.Next(AllHumans.Count)];
+        }
+
         public static readonly ReadOnlyCollection<string> AllHumans = Array.AsReadOnly(new string[]
             {
                 Opera_9_20_Win,
@@ -44,5 +49,7 @@ namespace AnjLab.FX.Net
                 FireFox_2_0_0_9_Mac,
                 Safari_3_Mac,
             });
+
+        private static readonly Random Rnd = new Random();
     }
 }
