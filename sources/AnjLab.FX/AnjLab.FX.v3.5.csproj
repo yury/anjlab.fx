@@ -150,6 +150,7 @@
     <Compile Include="System\OpenService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="System\Operation.cs" />
     <Compile Include="System\Pair.cs" />
     <Compile Include="System\Predicate.cs" />
     <Compile Include="System\PropertyComparer.cs" />
