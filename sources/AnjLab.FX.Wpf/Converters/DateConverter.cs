@@ -11,6 +11,9 @@ namespace AnjLab.FX.Wpf.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return String.Empty;
+
             DateTime date = (DateTime)value;
             return date.ToString(_format, CultureInfo.InvariantCulture);
         }
