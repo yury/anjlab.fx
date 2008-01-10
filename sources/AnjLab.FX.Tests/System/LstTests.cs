@@ -23,5 +23,12 @@ namespace AnjLab.FX.Tests.System
 
             Assert.AreEqual("a = 1, b = 2", Lst.ToString(dict, "{0} = {1}", ", "));
         }
+
+        [Test]
+        public void TestEmptyListToString()
+        {
+            int[] arr = new int[]{};
+            Assert.AreEqual(string.Empty, Lst.ToString(arr));
+        }
     }
 }

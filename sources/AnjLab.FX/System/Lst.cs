@@ -79,8 +79,11 @@ namespace AnjLab.FX.System
                 sb.Append(t);
                 sb.Append(separator);
             }
-
-            return sb.ToString(0, sb.Length - separator.Length);
+            int size = sb.Length - separator.Length;
+            if (size > 0)
+                return sb.ToString(0, size);
+            else
+                return sb.ToString();
         }
 
         public static string ToString<TA, TB>(IEnumerable<KeyValuePair<TA, TB>> list, string format, string separator)
@@ -97,7 +100,11 @@ namespace AnjLab.FX.System
                 sb.Append(separator);
             }
 
-            return sb.ToString(0, sb.Length - separator.Length);
+            int size = sb.Length - separator.Length;
+            if (size > 0)
+                return sb.ToString(0, size);
+            else
+                return sb.ToString();
         }
 
         public static string ToString<T>(IEnumerable<T> list)

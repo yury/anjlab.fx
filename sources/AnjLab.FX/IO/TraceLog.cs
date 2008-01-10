@@ -31,6 +31,31 @@ namespace AnjLab.FX.IO
         }
 
 
+        public void Info(string message)
+        {
+            Trace.TraceInformation(message);
+        }
+
+        public void Warning(string message)
+        {
+            Trace.TraceWarning(message);
+        }
+
+        public void Error(string message)
+        {
+            Trace.TraceError(message);
+        }
+
+        public void Fatal(string message)
+        {
+            Trace.TraceError(message);
+        }
+
+        public void Debug(string message)
+        {
+            Info(message);
+        }
+
         public bool IsInfoEnabled
         {
             get { return true; }
