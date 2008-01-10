@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace AnjLab.FX.IO
 {
@@ -27,6 +28,32 @@ namespace AnjLab.FX.IO
         public void Fatal(string message, params object[] args)
         {
             Trace.TraceError(message, args);
+        }
+
+
+        public bool IsInfoEnabled
+        {
+            get { return true; }
+        }
+
+        public bool IsWarnEnabled
+        {
+            get { return true; }
+        }
+
+        public bool IsErrorEnabled
+        {
+            get { return true; }
+        }
+
+        public bool IsFatalEnabled
+        {
+            get { return true; }
+        }
+
+        public bool IsDebugEnabled
+        {
+            get { return true; }
         }
     }
 }
