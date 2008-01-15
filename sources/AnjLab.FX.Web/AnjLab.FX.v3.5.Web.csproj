@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlsSearcher.cs" />
+    <Compile Include="Controls\BulkEditGridView.cs" />
+    <Compile Include="Controls\GridViewInsertEventArgs.cs" />
+    <Compile Include="Controls\GridViewInsertEventHandler.cs" />
     <Compile Include="Controls\NumberValidator.cs" />
     <Compile Include="Controls\DateValidator.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
