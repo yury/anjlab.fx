@@ -56,6 +56,13 @@ namespace AnjLab.FX.System
                 throw new ArgumentNullException(argument, Resources.CantBeNull);
         }
 
+        public static void ArgumentGreaterThan(string argument, int value, int than)
+        {
+            if (value <= than)
+                throw new ArgumentOutOfRangeException(argument, value,
+                                                      string.Format(Resources.ShouldBeGreater_A_B, than, value));
+        }
+
         public static void NotNull(object value, string msg, params object[] args)
         {
             if (value == null)
