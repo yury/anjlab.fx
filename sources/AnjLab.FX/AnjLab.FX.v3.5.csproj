@@ -84,19 +84,6 @@
     <Compile Include="Net\HttpRequest.cs" />
     <Compile Include="Net\HttpResponse.cs" />
     <Compile Include="Net\UserAgents.cs" />
-    <Compile Include="Patterns\Generic\Inject\Activator.cs" />
-    <Compile Include="Patterns\Generic\Inject\AssemblyBuilder.cs" />
-    <Compile Include="Patterns\Generic\Inject\Bind.cs" />
-    <Compile Include="Patterns\Generic\Inject\Ctor.cs" />
-    <Compile Include="Patterns\Generic\Inject\Definition.cs" />
-    <Compile Include="Patterns\Generic\Inject\IObjectFactory.cs" />
-    <Compile Include="Patterns\Generic\Inject\Method.cs" />
-    <Compile Include="Patterns\Generic\Inject\Module.cs" />
-    <Compile Include="Patterns\Generic\Inject\ObjectFactory.cs" />
-    <Compile Include="Patterns\Generic\Inject\PerCallActivator.cs" />
-    <Compile Include="Patterns\Generic\Inject\Scope.cs" />
-    <Compile Include="Patterns\Generic\Inject\SingletonActivator.cs" />
-    <Compile Include="Patterns\Generic\Inject\TypeRefExtension.cs" />
     <Compile Include="Patterns\Generic\KeyedFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

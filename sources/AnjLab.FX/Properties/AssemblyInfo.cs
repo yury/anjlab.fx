@@ -3,11 +3,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-#if NET_3_5
-using System.Windows.Markup;
-using AnjLab.FX.Patterns.Generic.Inject;
-#endif
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
@@ -26,10 +21,6 @@ using AnjLab.FX.Patterns.Generic.Inject;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-#if NET_3_5
-[assembly: InternalsVisibleTo(ObjectFactory.GeneratedAssemblyName)]
-[assembly: XmlnsDefinition("http://schemas.anjlab.com/patterns/generic/inject", "AnjLab.FX.Patterns.Generic.Inject")]
-#endif
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("c4545760-82a6-4b54-b40c-0ad0fdf03026")]
 
