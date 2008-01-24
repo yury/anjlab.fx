@@ -29,22 +29,36 @@ line3
         }
 
         [Test]
-        public void TestContainsInvariantIgnoreCase()
+        public void TestInvariantIgnoreCaseIsPartAnyOf()
         {
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "x"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "yx"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "xy"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "xyx"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "x"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "yx"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "xy"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "xyx"));
 
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "x", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "yx", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "xy", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "xyx", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "x", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "yx", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "xy", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "xyx", "y"));
 
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "z", "x", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "z", "yx", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "z", "xy", "y"));
-            Assert.IsTrue(Str.ContainsInvariantIgnoreCase("x", "z", "xyx", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "z", "x", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "z", "yx", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "z", "xy", "y"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseIsPartAnyOf("x", "z", "xyx", "y"));
+        }
+
+        [Test]
+        public void TestInvariantIgnoreCaseContainsAnyOf()
+        {
+            Assert.IsFalse(Str.InvariantIgnoreCaseContainsAnyOf("a", "b"));
+
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("ab", "a"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("ba", "a"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("bab", "bab"));
+
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("a", "a", "b"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("b", "b", "a"));
+            Assert.IsTrue(Str.InvariantIgnoreCaseContainsAnyOf("ab", "b", "a", "b"));
         }
     }
 }

@@ -11,18 +11,40 @@ namespace AnjLab.FX.System
             return string.Equals(a, b, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public static bool ContainsInvariantIgnoreCase(string src, params string[] dest)
+        [Obsolete("Use Str.InvariantIgnoreCaseIsPartAnyOf")]
+        public static bool ContainsInvariantIgnoreCase(string src, params string[] anyOf)
         {
-            if (dest == null || src == null)
+            return InvariantIgnoreCaseIsPartAnyOf(src, anyOf);
+        }
+
+        public static bool InvariantIgnoreCaseIsPartAnyOf(string src, params string[] anyOf)
+        {
+            if (anyOf == null || src == null)
                 return false;
 
-            for (int i = 0; i < dest.Length; i++)
+            for (int i = 0; i < anyOf.Length; i++)
             {
-                string d = dest[i];
+                string d = anyOf[i];
                 if (d == null)
                     continue;
 
                 if (d.IndexOf(src, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    return true;
+            }
+            return false;
+        }
+
+        public static bool InvariantIgnoreCaseContainsAnyOf(string src, params string [] anyOf)
+        {
+            if (anyOf == null || src == null)
+                return false;
+
+            for (int i = 0; i < anyOf.Length; i++)
+            {
+                string p = anyOf[i];
+                if (p == null)
+                    continue;
+                if (src.IndexOf(p, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     return true;
             }
             return false;
