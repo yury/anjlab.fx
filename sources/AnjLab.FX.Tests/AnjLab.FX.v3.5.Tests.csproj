@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\ByteBitArrayTests.cs" />
+    <Compile Include="Collections\PriorityQueueTests.cs" />
     <Compile Include="Collections\SerializableListTests.cs" />
     <Compile Include="Datetime\DatetimeUtilsTests.cs" />
     <Compile Include="Devices\Ax25Tests.cs" />

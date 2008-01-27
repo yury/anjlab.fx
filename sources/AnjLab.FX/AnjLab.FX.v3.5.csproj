@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Collections\ByteBitArray.cs" />
     <Compile Include="Collections\INonSerializableItem.cs" />
+    <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\SerializableList.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
