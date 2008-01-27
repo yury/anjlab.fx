@@ -1,0 +1,25 @@
+<!--
+// ****************************************************************************
+// Copyright Swordfish Computing Australia 2006                              **
+// http://www.swordfish.com.au/                                              **
+//                                                                           **
+// Filename: Swordfish.WPF.Charts\TestPage.xaml                              **
+// Authored by: John Stewien of Swordfish Computing                          **
+// Date: April 2006                                                          **
+//                                                                           **
+// - Change Log -                                                            **
+//*****************************************************************************
+-->
+<Grid x:Class="AnjLab.FX.Wpf.Swordfish.WPF.Charts.TestPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:SwordfishCharts="clr-namespace:AnjLab.FX.Wpf.Swordfish.WPF.Charts"
+    >
+  <Border x:Name="plotToCopy" BorderBrush="Black" BorderThickness="1" CornerRadius="8" Background="#FFFFF0D0" Margin="0">
+    <SwordfishCharts:XYLineChart x:Name="xyLineChart" RenderTransformOrigin="0.5,0.5"/>
+  </Border>
+  <Border HorizontalAlignment="Left" VerticalAlignment="Top" Padding="1,0,1,0" BorderBrush="Black" Background="#A0005500" BorderThickness="0" CornerRadius="8">
+    <SwordfishCharts:CopyToClipboard x:Name="copyToClipboard"/>
+  </Border>
+</Grid>
+

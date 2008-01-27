@@ -1,0 +1,114 @@
+<!--
+// ****************************************************************************
+// Copyright Swordfish Computing Australia 2006                              **
+// http://www.swordfish.com.au/                                              **
+//                                                                           **
+// Filename: Swordfish.WPF.Charts\XYLineChart.xaml                           **
+// Authored by: John Stewien of Swordfish Computing                          **
+// Date: April 2006                                                          **
+//                                                                           **
+// - Change Log -                                                            **
+//*****************************************************************************
+-->
+<UserControl x:Class="AnjLab.FX.Wpf.Swordfish.WPF.Charts.XYLineChart"
+    xmlns:local="clr-namespace:AnjLab.FX.Wpf.Swordfish.WPF.Charts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="Transparent">
+    <Grid IsHitTestVisible="False">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Margin="0,0,0,0" x:Name="titleBox" Grid.Column="2" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Text="Title" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center">
+        <TextBlock.Background>
+          <RadialGradientBrush>
+            <RadialGradientBrush.GradientStops>
+              <GradientStopCollection>
+                <GradientStop Color="#FFFFFFFF" Offset="0.59999999999999942"/>
+                <GradientStop Color="sc#0, 1, 1, 1" Offset="1"/>
+              </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+          </RadialGradientBrush>
+        </TextBlock.Background>
+      </TextBlock>
+      <local:UniformWrapPanel Margin="0,0,0,0" x:Name="legendBox" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Background="#2F000000"/>
+      <TextBlock Margin="0,0,0,0" x:Name="xAxisLabel" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" RenderTransformOrigin="0.5,0.5" Text="X Label" TextAlignment="Center">
+        <TextBlock.Background>
+          <RadialGradientBrush>
+            <RadialGradientBrush.GradientStops>
+              <GradientStopCollection>
+                <GradientStop Color="#FFFFFFFF" Offset="0.59999999999999942"/>
+                <GradientStop Color="sc#0, 1, 1, 1" Offset="1"/>
+              </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+          </RadialGradientBrush>
+        </TextBlock.Background>
+      </TextBlock>
+      <TextBlock Margin="0,0,0,0" x:Name="yAxisLabel" Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" Text="Y Label" TextAlignment="Center">
+        <TextBlock.Background>
+          <RadialGradientBrush>
+            <RadialGradientBrush.GradientStops>
+              <GradientStopCollection>
+                <GradientStop Color="#FFFFFFFF" Offset="0.59999999999999942"/>
+                <GradientStop Color="sc#0, 1, 1, 1" Offset="1"/>
+              </GradientStopCollection>
+            </RadialGradientBrush.GradientStops>
+          </RadialGradientBrush>
+        </TextBlock.Background>
+        <TextBlock.LayoutTransform>
+          <TransformGroup>
+            <TranslateTransform X="0" Y="0"/>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <SkewTransform AngleX="0" AngleY="0"/>
+            <RotateTransform Angle="-90"/>
+            <TranslateTransform X="0" Y="0"/>
+            <TranslateTransform X="0" Y="0"/>
+          </TransformGroup>
+        </TextBlock.LayoutTransform>
+      </TextBlock>
+      <Rectangle Fill="sc#0.5, 1, 1, 1" Margin="2,0,0,2" x:Name="xGridlineLabels" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" RenderTransformOrigin="0.5,0.5" Stroke="{x:Null}" MinHeight="4"/>
+      <Rectangle Fill="sc#0.5, 1, 1, 1" Margin="2,0,0,2" x:Name="yGridLineLabels" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" MinHeight="4" Stroke="{x:Null}">
+        <Rectangle.LayoutTransform>
+          <TransformGroup>
+            <TranslateTransform X="0" Y="0"/>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <SkewTransform AngleX="0" AngleY="0"/>
+            <RotateTransform Angle="-90"/>
+            <TranslateTransform X="0" Y="0"/>
+            <TranslateTransform X="0" Y="0"/>
+          </TransformGroup>
+        </Rectangle.LayoutTransform>
+      </Rectangle>
+      <Canvas Margin="0,0,0,0" x:Name="textCanvas" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.5"/>
+      <local:DrawingSurface Margin="0,0,0,0" x:Name="clippedPlotCanvas" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.5,0.5" ClipToBounds="False" Background="Transparent" >
+        <local:DrawingSurface.RenderTransform>
+          <TransformGroup>
+            <TranslateTransform X="0" Y="0"/>
+            <ScaleTransform ScaleX="1" ScaleY="-1"/>
+            <SkewTransform AngleX="0" AngleY="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform X="0" Y="0"/>
+            <TranslateTransform X="0" Y="0"/>
+          </TransformGroup>
+        </local:DrawingSurface.RenderTransform>
+      </local:DrawingSurface>
+      <ListView x:Name="subNotes" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" FontSize="10">
+        <ListView.Template>
+          <ControlTemplate>
+            <Border Background="#20000000" SnapsToDevicePixels="True" BorderBrush="Transparent" BorderThickness="1" Padding="1,1,1,1" CornerRadius="8">
+              <ItemsPresenter x:Name="ItemsPresenter"/>
+            </Border>
+          </ControlTemplate>
+        </ListView.Template>
+      </ListView>
+    </Grid>
+</UserControl>

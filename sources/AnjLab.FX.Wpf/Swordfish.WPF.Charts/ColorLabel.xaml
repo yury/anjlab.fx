@@ -1,0 +1,57 @@
+<!--
+// ****************************************************************************
+// Copyright Swordfish Computing Australia 2006                              **
+// http://www.swordfish.com.au/                                              **
+//                                                                           **
+// Filename: Swordfish\WPF\Controls\ColorLabel.xaml                          **
+// Authored by: John Stewien of Swordfish Computing                          **
+// Date: April 2006                                                          **
+//                                                                           **
+// - Change Log -                                                            **
+//*****************************************************************************
+-->
+<Controls:UserControl x:Class="AnjLab.FX.Wpf.Swordfish.WPF.Charts.ColorLabel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework">
+
+  <!--Set up a grid of 2 columns and one row for holding a color indicator and a text label-->
+  <Controls:Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!--Draw a colored ellipse-->    
+    
+    <Ellipse x:Name ="colorSize" Width ="20" Height="Auto" Grid.Column="0" Grid.Row="0" Margin="1,1,2,1">
+      <Ellipse.Fill>
+        <RadialGradientBrush GradientOrigin="0.713524269001633,0.222658979042552">
+          <RadialGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="#FFFFFFFF" Offset="0"/>
+              <GradientStop Color="#FF000000" Offset="0.8051282051282046" x:Name="color"/>
+            </GradientStopCollection>
+          </RadialGradientBrush.GradientStops>
+					<RadialGradientBrush.RelativeTransform>
+						<TransformGroup>
+							<TranslateTransform X="0" Y="0"/>
+							<ScaleTransform ScaleX="1" ScaleY="1"/>
+							<SkewTransform AngleX="0" AngleY="0"/>
+							<RotateTransform Angle="0"/>
+							<TranslateTransform X="0" Y="0"/>
+							<TranslateTransform X="0.13631346658315804" Y="-0.095419426608209776"/>
+						</TransformGroup>
+					</RadialGradientBrush.RelativeTransform>
+        </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+
+    <!--Add a text box-->
+    
+    <TextBlock x:Name ="textBlock" Text="Legend" Grid.Column="1" Grid.Row="0"/>
+  </Controls:Grid>
+</Controls:UserControl>

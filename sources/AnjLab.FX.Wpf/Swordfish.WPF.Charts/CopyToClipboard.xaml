@@ -1,0 +1,32 @@
+<!--
+// ****************************************************************************
+// Copyright Swordfish Computing Australia 2006                              **
+// http://www.swordfish.com.au/                                              **
+//                                                                           **
+// Filename: Swordfish.WPF.Charts\CopyToClipboard.xaml                       **
+// Authored by: John Stewien of Swordfish Computing                          **
+// Date: April 2006                                                          **
+//                                                                           **
+// - Change Log -                                                            **
+//*****************************************************************************
+-->
+<UserControl x:Class="AnjLab.FX.Wpf.Swordfish.WPF.Charts.CopyToClipboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent">
+  <Grid>
+    <StackPanel Orientation="Vertical">
+      <TextBlock Text="COPY" HorizontalAlignment="Center" Margin="16,0,16,0" Foreground="White"/>
+      <StackPanel x:Name="copyOptions" Orientation="Vertical" >
+        <Button Content="Copy 640x480" Click="bCopy640x480_Click"/>
+        <Button Content="Copy 800x600" Click="bCopy800x600_Click" />
+        <Button Content="Copy 1024x768" Click="bCopy1024x768_Click" />
+        <Button Content="Copy 1280x1024" Click="bCopy1280x1024_Click" />
+        <Button Content="Copy Custom" Click="bCopyCustom_Click" />
+        <UniformGrid Columns="2">
+          <TextBox Grid.Column="0" Text="1920" x:Name="tbWidth"/>
+          <TextBox Grid.Column="1" Text="1200" x:Name="tbHeight"/>
+        </UniformGrid>
+      </StackPanel>
+    </StackPanel>
+  </Grid>
+</UserControl>
