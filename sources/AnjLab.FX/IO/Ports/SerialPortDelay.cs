@@ -27,8 +27,8 @@ namespace AnjLab.FX.IO.Ports
         {
             Guard.IsTrue(_port.IsOpen);
 
-            Thread.Sleep(_preWrite);
             _port.RtsEnable = true;
+            Thread.Sleep(_preWrite);
 
             _port.Write(data, 0, data.Length);
 
