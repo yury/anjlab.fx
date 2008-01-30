@@ -79,7 +79,9 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
 
         private DateTime minDate = DateTime.MaxValue;
         private DateTime maxDate = DateTime.MinValue;
-        private string dateFormat = null;
+        private string axisDateFormat = null;
+        private string coordinatDateFormat = null;
+        private string coordinatFormatString = "{0},{1}";
         private bool yTextForDigitalView = true;
 
 		#endregion Private Fields
@@ -357,7 +359,7 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
                 if (MinDate != DateTime.MaxValue)
                 {
                     DateTime date = MinDate.AddSeconds(xValue);
-                    text.Text = (dateFormat != null) ? date.ToString(dateFormat) : date.ToString();
+                    text.Text = (axisDateFormat != null) ? date.ToString(axisDateFormat) : date.ToString();
                 }
                 else
                 {
@@ -512,12 +514,23 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
 	        set { maxDate = value; }
 	    }
 
-	    public string DateFormat
+	    public string AxisDateFormat
 	    {
-	        get { return dateFormat; }
-	        set { dateFormat = value; }
+	        get { return axisDateFormat; }
+	        set { axisDateFormat = value; }
 	    }
 
+        public string CoordinatDateFormat
+        {
+            get { return coordinatDateFormat; }
+            set { coordinatDateFormat = value; }
+        }
+
+        public string CoordinatFormatString
+        {
+            get { return coordinatFormatString; }
+            set { coordinatFormatString = value; }
+        }
         public bool YTextForDigitalView
         {
             get { return yTextForDigitalView; }

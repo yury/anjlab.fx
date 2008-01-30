@@ -117,16 +117,18 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
 			Point coordinate = locked ? lockPoint : inverse.Transform(mousePoint);
 
 		    string coordinateText;
-            if (xyLineChart.MinDate == DateTime.MaxValue)
-            {
-                coordinateText = coordinate.X.ToString(xFormat) + "," + coordinate.Y.ToString(yFormat);
-            }
-            else
+            string xText = coordinate.X.ToString(xFormat);
+            string yText = coordinate.Y.ToString(yFormat);
+            if (xyLineChart.MinDate != DateTime.MaxValue)
             {
                 DateTime dateTime = xyLineChart.MinDate.AddSeconds(coordinate.X);
-                coordinateText = dateTime + "," + coordinate.Y.ToString(yFormat);
+                xText = ((xyLineChart.CoordinatDateFormat != null)
+                                    ? dateTime.ToString(xyLineChart.CoordinatDateFormat)
+                                    : dateTime.ToString());
             }
-		    drawingContext.PushTransform(new ScaleTransform(1, -1));
+            coordinateText = string.Format(xyLineChart.CoordinatFormatString, xText, yText);
+
+            drawingContext.PushTransform(new ScaleTransform(1, -1));
 			FormattedText formattedText = new FormattedText(coordinateText, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, blackBrush);
 			Pen textBoxPen = new Pen(new SolidColorBrush(Color.FromArgb(127, 255, 255, 255)), 1);
 
