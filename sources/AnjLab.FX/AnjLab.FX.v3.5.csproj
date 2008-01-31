@@ -146,6 +146,7 @@
     <Compile Include="System\Predicate.cs" />
     <Compile Include="System\PropertyComparer.cs" />
     <Compile Include="System\PrototypeFactoryMethod.cs" />
+    <Compile Include="System\Reflector.cs" />
     <Compile Include="System\SortableBindingList.cs" />
     <Compile Include="System\Str.cs" />
     <Compile Include="System\TypeReflector.cs" />
