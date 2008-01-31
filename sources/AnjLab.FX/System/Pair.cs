@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace AnjLab.FX.System
 {
+    [DataContract]
     public class Pair<TA, TB>
     {
         private TA _a;
@@ -17,12 +19,14 @@ namespace AnjLab.FX.System
             _b = b;
         }
 
+        [DataMember]
         public TA A
         {
             get { return _a; }
             set { _a = value; }
         }
 
+        [DataMember]
         public TB B
         {
             get { return _b; }
