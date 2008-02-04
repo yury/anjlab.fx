@@ -14,11 +14,7 @@ namespace AnjLab.FX.Collections
 
         public void CopyTo(Array array, int index)
         {
-            ArrayList items = new ArrayList(Count);
-            foreach (TItem item in this)
-            {
-                items.Add(item);
-            }
+            ArrayList items = new ArrayList(this);
             items.CopyTo(array, index);
         }
 
