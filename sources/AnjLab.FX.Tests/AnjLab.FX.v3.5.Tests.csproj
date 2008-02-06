@@ -68,9 +68,15 @@
     <Compile Include="IO\BitWriterTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
     <Compile Include="IO\TraceLogTests.cs" />
+    <Compile Include="Net\Feeds\AtomFeedTests.cs" />
     <Compile Include="Net\HttpRequestResponseTests.cs" />
     <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="StreamMapping\BinaryStreamMapperTests.cs" />
     <Compile Include="StreamMapping\TestObject.cs" />
     <Compile Include="System\CommandArgsProcessorTests.cs" />
@@ -94,10 +100,19 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="StreamMapping\TestObject.map" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Net\Feeds\AtomFeed1.xml" />
+    <Content Include="Net\Feeds\AtomFeed2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

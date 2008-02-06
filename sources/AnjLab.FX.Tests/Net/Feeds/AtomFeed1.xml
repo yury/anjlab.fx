@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns:gr="http://www.google.com/schemas/reader/atom/" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+  <!--
+Content-type: Preventing XSRF in IE.
+
+-->
+  <generator uri="http://www.google.com/reader">Google Reader</generator>
+  <id>tag:google.com,2005:reader/user/08735471787465251095/label/test</id>
+  <title>"test" via Yury in Google Reader</title>
+  <link rel="self" href="http://www.google.com/reader/atom/user/08735471787465251095/label/test"/>
+  <author>
+    <name>Yury</name>
+  </author>
+  <updated>2008-02-04T21:14:27Z</updated>
+  <gr:sharing readable-by="all"/>
+</feed>

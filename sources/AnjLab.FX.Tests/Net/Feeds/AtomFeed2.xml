@@ -1,0 +1,81 @@
+﻿<?xml version="1.0"?>
+<feed xmlns:gr="http://www.google.com/schemas/reader/atom/" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+  <!--
+Content-type: Preventing XSRF in IE.
+
+-->
+  <generator uri="http://www.google.com/reader">Google Reader</generator>
+  <id>tag:google.com,2005:reader/user/08735471787465251095/label/test</id>
+  <title>"test" via Yury in Google Reader</title>
+  <link rel="self" href="http://www.google.com/reader/atom/user/08735471787465251095/label/test"/>
+  <author>
+    <name>Yury</name>
+  </author>
+  <updated>2008-02-04T21:14:27Z</updated>
+  <gr:sharing readable-by="all"/>
+  <entry gr:crawl-timestamp-msec="1202159667856">
+    <id gr:original-id="http://seregaborzov.wordpress.com/2008/02/05/%d0%9f%d0%be%d0%bb%d0%b5%d0%b7%d0%bd%d1%8b%d0%b9-seo-%d0%b1%d0%bb%d0%be%d0%b3/">tag:google.com,2005:reader/item/f301e5f8beb266f0</id>
+    <category term="user/08735471787465251095/state/com.google/read" scheme="http://www.google.com/reader/" label="read"/>
+    <category term="user/08735471787465251095/state/com.google/reading-list" scheme="http://www.google.com/reader/" label="reading-list"/>
+    <category term="user/08735471787465251095/label/test" scheme="http://www.google.com/reader/" label="test"/>
+    <category term="user/08735471787465251095/state/com.google/fresh" scheme="http://www.google.com/reader/" label="fresh"/>
+    <category term="SEO"/>
+    <title type="html">Полезный SEO блог…</title>
+    <published>2008-02-04T21:13:21Z</published>
+    <updated>2008-02-04T21:13:21Z</updated>
+    <link rel="alternate" href="http://feeds.feedburner.com/~r/seregaborzov/~3/229146423/" type="text/html"/>
+    <media:group>
+      <media:content url="http://a.wordpress.com/avatar/seregaborzov-128.jpg"/>
+    </media:group>
+    <content xml:base="http://seregaborzov.wordpress.com/" type="html">
+      &lt;div&gt;&lt;br&gt;&lt;p&gt;Их конечно очень много, но я вот &lt;a href="http://www.mmorpg.su/forum/blog.php?u=1"&gt;этот&lt;/a&gt; я хочу представить по подробней. Парень решил заработать на новенький &lt;a href="http://www.mmorpg.su/forum/blog.php?u=1"&gt;chrysler 300c&lt;/a&gt; =). Что ж обычная цель =) для всех стартующих оптимизаторов и seo-бомжей =).  Но самое прикольное, то что парень пишет не только про &lt;a href="http://www.mmorpg.su/forum/blog.php?u=1"&gt;заработок в интернет&lt;/a&gt; и &lt;a href="http://www.mmorpg.su/forum/blog.php?u=1"&gt;партнерские программы&lt;/a&gt;, но и дает массу полезной инфы для тех, кто тоже пытается срубить чуток на “своем детище” (я в их числе -). Рекомендую к прочтению и осмыслению:&lt;/p&gt;
+
+      &lt;p&gt;&lt;a href="http://www.mmorpg.su/forum/blog.php?s=8ed744381e591bd92fecdf37909cdeed&amp;amp;b=55"&gt;Что такое CPA (Cost Per Action)?&lt;/a&gt; - базовые знания&lt;/p&gt;
+      &lt;p&gt;&lt;a href="http://www.mmorpg.su/forum/blog.php?b=36"&gt;10 причин, по которым стоит заниматься блогом&lt;/a&gt; - избитая тема, но лишний раз приятно почитать =)&lt;/p&gt;
+
+      &lt;p&gt;&lt;a href="http://www.mmorpg.su/forum/blog.php?b=35" title="http://www.mmorpg.su/forum/blog.php?b=35"&gt;Источники трафика для блога и сайта помимо поисковых систем&lt;/a&gt; - полезные ссылки на соц.сети для рега постов. (рега =))))&lt;/p&gt;
+      &lt;p&gt;&lt;a href="http://www.mmorpg.su/forum/blog.php?b=32"&gt;Линкаторы - халява или попандос?&lt;/a&gt; - разбираемся…&lt;/p&gt;
+      &lt;p&gt;&lt;a href="http://www.mmorpg.su/forum/blog.php?b=21"&gt;Что такое контекстная реклама и как на ней заработать?&lt;/a&gt; - палим…&lt;/p&gt;
+
+      &lt;p&gt;Как всегда не все так просто, но что-то можно наковырять. Кто не понял, тот значит еще не пытался заработать =).&lt;/p&gt;
+      &lt;p&gt;Удачи!&lt;/p&gt;
+      &lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/categories/seregaborzov.wordpress.com/546/"&gt; &lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/tags/seregaborzov.wordpress.com/546/"&gt; &lt;a rel="nofollow" href="http://feeds.wordpress.com/1.0/gocomments/seregaborzov.wordpress.com/546/"&gt;&lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/comments/seregaborzov.wordpress.com/546/"&gt;&lt;/a&gt; &lt;a rel="nofollow" href="http://feeds.wordpress.com/1.0/godelicious/seregaborzov.wordpress.com/546/"&gt;&lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/delicious/seregaborzov.wordpress.com/546/"&gt;&lt;/a&gt; &lt;a rel="nofollow" href="http://feeds.wordpress.com/1.0/gostumble/seregaborzov.wordpress.com/546/"&gt;&lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/stumble/seregaborzov.wordpress.com/546/"&gt;&lt;/a&gt; &lt;a rel="nofollow" href="http://feeds.wordpress.com/1.0/godigg/seregaborzov.wordpress.com/546/"&gt;&lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/digg/seregaborzov.wordpress.com/546/"&gt;&lt;/a&gt; &lt;a rel="nofollow" href="http://feeds.wordpress.com/1.0/goreddit/seregaborzov.wordpress.com/546/"&gt;&lt;img alt="" border="0" src="http://feeds.wordpress.com/1.0/reddit/seregaborzov.wordpress.com/546/"&gt;&lt;/a&gt; &lt;img alt="" border="0" src="http://stats.wordpress.com/b.gif?host=seregaborzov.wordpress.com&amp;amp;blog=432906&amp;amp;post=546&amp;amp;subd=seregaborzov&amp;amp;ref=&amp;amp;feed=1"&gt;&lt;/div&gt;&lt;div&gt;
+
+      &lt;a href="http://feeds.feedburner.com/~f/seregaborzov?a=azuzJME"&gt;&lt;img src="http://feeds.feedburner.com/~f/seregaborzov?i=azuzJME" border="0"&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/seregaborzov?a=qtvSGne"&gt;&lt;img src="http://feeds.feedburner.com/~f/seregaborzov?i=qtvSGne" border="0"&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/seregaborzov?a=J5w3xiE"&gt;&lt;img src="http://feeds.feedburner.com/~f/seregaborzov?i=J5w3xiE" border="0"&gt;&lt;/a&gt; &lt;a href="http://feeds.feedburner.com/~f/seregaborzov?a=WJa0JJe"&gt;&lt;img src="http://feeds.feedburner.com/~f/seregaborzov?i=WJa0JJe" border="0"&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    </content>
+    <author>
+      <name>seregaborzov</name>
+    </author>
+    <source gr:stream-id="feed/http://feeds.feedburner.com/seregaborzov">
+      <id>tag:google.com,2005:reader/feed/http://feeds.feedburner.com/seregaborzov</id>
+      <title type="html">seregaborzov&amp;#39;s blog</title>
+      <link rel="alternate" href="http://seregaborzov.wordpress.com" type="text/html"/>
+    </source>
+  </entry>
+  <entry gr:crawl-timestamp-msec="1201825004647">
+    <id gr:original-id="http://seregaborzov.wordpress.com/?p=545">tag:google.com,2005:reader/item/cd1045c5afce3397</id>
+    <category term="user/08735471787465251095/state/com.google/read" scheme="http://www.google.com/reader/" label="read"/>
+    <category term="user/08735471787465251095/state/com.google/reading-list" scheme="http://www.google.com/reader/" label="reading-list"/>
+    <category term="user/08735471787465251095/label/test" scheme="http://www.google.com/reader/" label="test"/>
+    <category term="user/08735471787465251095/state/com.google/fresh" scheme="http://www.google.com/reader/" label="fresh"/>
+    <category term="Blogging"/>
+    <category term="Юмор"/>
+    <title type="html">11 способов написать про 11 способов…=)</title>
+    <published>2008-01-31T23:42:54Z</published>
+    <updated>2008-01-31T23:42:54Z</updated>
+    <link rel="alternate" href="http://feeds.feedburner.com/~r/seregaborzov/~3/226865276/" type="text/html"/>
+    <media:group>
+      <media:content url="http://a.wordpress.com/avatar/seregaborzov-128.jpg"/>
+    </media:group>
+    <content xml:base="http://seregaborzov.wordpress.com/" type="html">
+      &lt;div&gt;&lt;br&gt;&lt;p align="right"&gt;&lt;em&gt;Рекурсивный ты человек все-таки Серёга. &lt;/em&gt;&lt;/p&gt;
+
+      &lt;p align="right"&gt;&lt;em&gt;&lt;strong&gt;Кто-то Из. Тех.&lt;/strong&gt;, &lt;/em&gt;&lt;/p&gt;
+      &lt;p align="right"&gt;&lt;em&gt;кто придумывает фразы про которые все потом думают: “Дааа, точно, круто сказал, надо запомнить”, а в итоге все говорят: “Знание - сила” или “Нос цэ ту ипсум”&lt;/em&gt;&lt;/p&gt;
+      &lt;p align="left"&gt;И сразу объясняю, что пост &lt;a href="http://arn.ro/node/200"&gt;конкурсный&lt;/a&gt;, ну и немного юморной. Так что участвуйте, а то трафик сэкономите. А я сейчас расскажу Вам о том, &lt;strong&gt;как можно написать&lt;/strong&gt; про 11 способов чего угодно. От жарки вареной картошки до намазывания подсолнечным маслом черного хлеба, а потом солью еще посыпать. Главное что я Вам хочу рассказать &lt;strong&gt;не о том, про какие&lt;/strong&gt; 11 способов надо писать, &lt;strong&gt;а о том как&lt;/strong&gt; написать эти 11 способов. Естественно их будет 11. Думаю блоггерам будет полезно узнать. Итак. Внимание. Фарш:&lt;/p&gt;
+
+      &lt;ol&gt;
+    </content>
+  </entry>
+</feed>
