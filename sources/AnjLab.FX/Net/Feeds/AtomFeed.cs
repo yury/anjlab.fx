@@ -63,14 +63,15 @@ namespace AnjLab.FX.Net.Feeds
             ReadAuthor(feed["author"], result._author);
             ReadLink(feed["link"], result._link);
             ReadGenerator(feed["generator"], result._generator);
-            ReadUpdated(feed["updated"], out result._updated);
+            ReadDate(feed["updated"], out result._updated);
             ReadEntries(feed.GetElementsByTagName("entry"), result._entries);
             return result;
         }
 
-        private static void ReadEntries(XmlNodeList nodes, List<FeedEntry> entries)
+        private static void ReadEntries(XmlNodeList nodes, ICollection<FeedEntry> entries)
         {
             Guard.ArgumentNotNull("entries", entries);
+
             if (nodes == null)
                 return;
             foreach (XmlNode node in nodes)
@@ -78,12 +79,57 @@ namespace AnjLab.FX.Net.Feeds
                 FeedEntry entry = new FeedEntry();
                 entry.ID = node["id"].InnerText;
                 entry.Title = node["title"].InnerText;
+
+                ReadAuthor(node["author"], entry.Author);
+                DateTime updated, published;
+                ReadDate(node["updated"], out updated);
+                ReadDate(node["published"], out published);
+                entry.Published = published;
+                entry.Updated = updated;
+                ReadLink(node["link"], entry.Link);
+                ReadContent(node["content"], entry.Content);
+                ReadCategories(((XmlElement)node).GetElementsByTagName("category"), entry.Categories);
+
+
+                entries.Add(entry);
             }
         }
 
-        private static void ReadUpdated(XmlNode node, out DateTime updated)
+        private static void ReadCategories(XmlNodeList nodes, ICollection<string> categories)
+        {
+            foreach (XmlNode node in nodes)
+            {
+                XmlAttribute label = node.Attributes["label"];
+                if (label != null)
+                {
+                    categories.Add(label.Value);
+                    continue;
+                }
+                XmlAttribute term = node.Attributes["term"];
+                if (term != null)
+                {
+                    categories.Add(term.Value);
+                }
+            }
+        }
+
+        private static void ReadContent(XmlNode node, FeedContent content)
+        {
+            Guard.ArgumentNotNull("content", content);
+
+            if (node == null)
+                return;
+
+            XmlAttribute type = node.Attributes["type"];
+            if (type != null)
+                content.Type = type.Value;
+            content.Value = node.InnerXml;
+        }
+
+        private static void ReadDate(XmlNode node, out DateTime updated)
         {
             updated = DateTime.MinValue;
+
             if (node == null)
                 return;
 

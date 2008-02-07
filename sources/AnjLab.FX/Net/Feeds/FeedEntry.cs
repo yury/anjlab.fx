@@ -10,8 +10,9 @@ namespace AnjLab.FX.Net.Feeds
         private string _title;
         private DateTime _updated;
         private DateTime _published;
-        private FeedLink _link = new FeedLink();
-        private FeedAuthor _author = new FeedAuthor();
+        private readonly FeedLink _link = new FeedLink();
+        private readonly FeedAuthor _author = new FeedAuthor();
+        private readonly FeedContent _content = new FeedContent();
 
         public List<string> Categories
         {
@@ -45,13 +46,16 @@ namespace AnjLab.FX.Net.Feeds
         public FeedLink Link
         {
             get { return _link; }
-            set { _link = value; }
         }
 
         public FeedAuthor Author
         {
             get { return _author; }
-            set { _author = value; }
+        }
+
+        public FeedContent Content
+        {
+            get { return _content; }
         }
     }
 }

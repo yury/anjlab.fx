@@ -87,6 +87,7 @@
     <Compile Include="Mathematics\DiscreteVariate.cs" />
     <Compile Include="Net\Feeds\AtomFeed.cs" />
     <Compile Include="Net\Feeds\FeedAuthor.cs" />
+    <Compile Include="Net\Feeds\FeedContent.cs" />
     <Compile Include="Net\Feeds\FeedEntry.cs" />
     <Compile Include="Net\Feeds\FeedGenerator.cs" />
     <Compile Include="Net\Feeds\FeedLink.cs" />
