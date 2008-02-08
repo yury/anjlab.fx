@@ -14,7 +14,7 @@ namespace AnjLab.FX.Web.Controls
     ParseChildren(true)]
     public class ListDataSourceControl : DataTableSourceContol
     {
-        private DataTableAdapterConfig _dataTableConfig = new DataTableAdapterConfig();
+        private readonly DataTableAdapterConfig _dataTableConfig = new DataTableAdapterConfig();
         private DataTable _dataTable;
         
         public void SetDataSource<T>(IList<T> list)

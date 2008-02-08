@@ -41,7 +41,7 @@ namespace AnjLab.FX.Tests.Collections
     }
 
     [Serializable]
-    public class Test1 : ITest
+    public class Test1 : ITest, IEquatable<Test1>
     {
         private string _str = "str";
         private int _int = 0;
@@ -68,6 +68,24 @@ namespace AnjLab.FX.Tests.Collections
         {
             get { return _int; }
             set { _int = value;}
+        }
+
+
+        public bool Equals(Test1 test1)
+        {
+            if (test1 == null) return false;
+            return Equals(_str, test1._str) && _int == test1._int;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj)) return true;
+            return Equals(obj as Test1);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_str != null ? _str.GetHashCode() : 0) + 29*_int;
         }
     }
 }
