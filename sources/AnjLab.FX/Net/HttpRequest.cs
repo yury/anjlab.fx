@@ -27,7 +27,7 @@ namespace AnjLab.FX.Net
             _req.Method = method;
             _req.CookieContainer = new CookieContainer();
             
-            if (vars != null && vars.Keys.Count > 0)
+            if (vars != null && vars.Keys.Count > 0 && Str.EqualsInvariantIgnoreCase(method, "POST"))
             {
                 using (StreamWriter writer = new StreamWriter(_req.GetRequestStream()))
                 {
