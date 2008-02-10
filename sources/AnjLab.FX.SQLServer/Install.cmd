@@ -3,7 +3,7 @@
 set server=.\sqlexpress
 set database=master
 set user=sa
-set password=Friday13
+set password=sa
 
 
 svn up
