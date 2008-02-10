@@ -181,5 +181,26 @@ namespace AnjLab.FX.System
             }
             return null;
         }
+
+        public static string GetEntryAssemblyProduct()
+        {
+            foreach (AssemblyProductAttribute attribute in Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), true))
+            {
+                return attribute.Product;
+            }
+            return null;
+        }
+
+        public static string GetAnjLabProductInfo()
+        {
+            DateTime? buildDate = AssemblyBuildDateAttribute.GetEntryAssemblyBuildDate();
+            Version version = GetEntryAssemblyVersion();
+            string product = GetEntryAssemblyProduct();
+
+            return string.Format("©{0} {1} v{2}",
+                                 (buildDate ?? DateTime.Today).Year,
+                                 product ?? "AnjLab.NoName",
+                                 version ?? new Version("0.0.0.1"));
+        }
     }
 }
