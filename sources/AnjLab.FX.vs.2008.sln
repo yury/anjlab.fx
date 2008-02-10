@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.DirectoryServices
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnjLab.FX.Wpf", "AnjLab.FX.Wpf\AnjLab.FX.Wpf.csproj", "{52E4A8B3-517D-43F1-9ECC-256C3CF44CF3}"
 EndProject
+Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "AnjLab.FX.SQLServer", "AnjLab.FX.SQLServer\AnjLab.FX.SQLServer.dbp", "{3ABC978C-1C77-4DD4-9794-B5D471912C85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,10 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "AnjLab.FX.SQLServer", "AnjLab.FX.SQLServer.dbp", "{F9EC1893-F675-483A-8D20-1565468AB0B8}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
