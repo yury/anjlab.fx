@@ -66,6 +66,7 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\SerializableList.cs" />
     <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\RepositoryFilterType.cs" />
     <Compile Include="Datetime\DateUtils.cs" />
     <Compile Include="Devices\BytesFilter.cs" />
     <Compile Include="Devices\Convert.cs" />
