@@ -27,6 +27,8 @@ namespace AnjLab.FX.System.Console
     ///         Console.ReadKey();
     ///     }
     /// }
+    /// 
+    /// Sample cammand line: file.exe url http://yandex.ru depth 3 tofile 1.txt someBoolArg
     /// </summary>
     public class CommandArgs
     {
