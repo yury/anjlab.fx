@@ -53,6 +53,13 @@
   <ItemGroup>
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
+    <Compile Include="GenericTreeView\ItemMonitor.cs" />
+    <Compile Include="GenericTreeView\RoutedTreeItemEventArgs.cs" />
+    <Compile Include="GenericTreeView\TreeLayout.cs" />
+    <Compile Include="GenericTreeView\TreeUtil.cs" />
+    <Compile Include="GenericTreeView\GenericTreeView.cs" />
+    <Compile Include="GenericTreeView\TreeViewBase.cs" />
+    <Compile Include="GenericTreeView\TreeViewBase.Declarations.cs" />
     <Compile Include="Markup\ObjectReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
