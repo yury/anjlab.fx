@@ -62,6 +62,7 @@
     <Compile Include="Devices\ConvertTests.cs" />
     <Compile Include="Drawing\PaletteTests.cs" />
     <Compile Include="Finance\YieldTests.cs" />
+    <Compile Include="Gsm\ModemTests.cs" />
     <Compile Include="Html\HtmlProcessorTests.cs" />
     <Compile Include="IO\BasedBitReaderTests.cs" />
     <Compile Include="IO\BasedBitWriterTests.cs" />
