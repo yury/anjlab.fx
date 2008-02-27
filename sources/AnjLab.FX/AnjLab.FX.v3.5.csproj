@@ -65,6 +65,14 @@
     <Compile Include="Collections\INonSerializableItem.cs" />
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\SerializableList.cs" />
+    <Compile Include="Gsm\ATRequest.cs" />
+    <Compile Include="Gsm\ATResponse.cs" />
+    <Compile Include="Gsm\Exceptions.cs" />
+    <Compile Include="Gsm\IModem.cs" />
+    <Compile Include="Gsm\GenericModem.cs" />
+    <Compile Include="Gsm\Sms.cs" />
+    <Compile Include="Gsm\SmsBase.cs" />
+    <Compile Include="Gsm\SmsStatusReport.cs" />
     <Compile Include="System\Console\BoolArg.cs" />
     <Compile Include="System\Console\CommandArg.cs" />
     <Compile Include="System\Console\ICommandArg.cs" />
