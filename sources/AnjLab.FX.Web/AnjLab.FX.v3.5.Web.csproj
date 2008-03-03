@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlsSearcher.cs" />
+    <Compile Include="Controls\EnumDropDownList.cs" />
     <Compile Include="Controls\NumberValidator.cs" />
     <Compile Include="Controls\DateValidator.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
