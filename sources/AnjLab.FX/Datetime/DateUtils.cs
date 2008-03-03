@@ -23,5 +23,15 @@ namespace AnjLab.FX.Datetime
         {
             return new DateTime(year.Year, 12, 31);
         }
+
+        public static DateTime BeginOfDay(DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day);
+        }
+
+        public static DateTime EndOfDay(DateTime date)
+        {
+            return BeginOfDay(date).AddDays(1).AddMilliseconds(-1);
+        }
     }
 }
