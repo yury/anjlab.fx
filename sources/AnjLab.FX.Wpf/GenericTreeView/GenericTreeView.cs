@@ -85,13 +85,6 @@ namespace AnjLab.FX.Wpf.GenericTreeView
 
         public void DeleteElement(object element, string key, string parentKey)
         {
-            if (_dictionary.ContainsKey(key))
-            {
-                _dictionary.Remove(key);
-                _keys.Remove(element);
-                _childRelations.Remove(element);
-            }
-
             if(!string.IsNullOrEmpty(parentKey))
             {
                 if (_dictionary.ContainsKey(parentKey))
@@ -103,6 +96,13 @@ namespace AnjLab.FX.Wpf.GenericTreeView
                     if (_parentRelations.ContainsKey(element))
                         _parentRelations.Remove(element);
                 }
+            }
+
+            if (_dictionary.ContainsKey(key))
+            {
+                _dictionary.Remove(key);
+                _keys.Remove(element);
+                _childRelations.Remove(element);
             }
         }
 
@@ -116,7 +116,7 @@ namespace AnjLab.FX.Wpf.GenericTreeView
             if (_keys.ContainsKey(item))
                 return _keys[item];
             else
-                return item.GetHashCode().ToString();
+                throw new ArgumentNullException("item", "UI TreeView contains item that is already deleted from inner dictionaries.");
         }
 
         public object SelectedValue
