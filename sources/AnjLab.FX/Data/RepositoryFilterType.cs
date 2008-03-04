@@ -7,12 +7,13 @@ namespace AnjLab.FX.Data
 {
     public enum RepositoryFilterType
     {
-        ByMinute  = 0,
-        ByHour    = 1,
-        ByDay     = 2,
-        ByWeek    = 3,
-        ByMonth   = 4,
-        ByQuarter = 5,
-        ByYear    = 6
+        None      = 0,
+        ByMinute  = 1,
+        ByHour    = 2,
+        ByDay     = 3,
+        ByWeek    = 4,
+        ByMonth   = 5,
+        ByQuarter = 6,
+        ByYear    = 7
     }
 }
