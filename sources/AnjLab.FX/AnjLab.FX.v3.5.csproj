@@ -76,6 +76,7 @@
     <Compile Include="Gsm\Sms.cs" />
     <Compile Include="Gsm\SmsBase.cs" />
     <Compile Include="Gsm\SmsStatusReport.cs" />
+    <Compile Include="System\CaseFormatProvider.cs" />
     <Compile Include="System\Console\BoolArg.cs" />
     <Compile Include="System\Console\CommandArg.cs" />
     <Compile Include="System\Console\ICommandArg.cs" />
