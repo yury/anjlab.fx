@@ -115,8 +115,10 @@ namespace AnjLab.FX.Wpf.GenericTreeView
         {
             if (_keys.ContainsKey(item))
                 return _keys[item];
-            else
-                throw new ArgumentNullException("item", "UI TreeView contains item that is already deleted from inner dictionaries.");
+
+            return item.GetHashCode().ToString();
+            //else
+            //    throw new ArgumentNullException("item", "UI TreeView contains item that is already deleted from inner dictionaries.");
         }
 
         public object SelectedValue
