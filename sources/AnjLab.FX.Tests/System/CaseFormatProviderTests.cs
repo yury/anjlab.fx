@@ -23,7 +23,7 @@ namespace AnjLab.FX.Tests.System
             Assert.AreEqual(2.2222.ToString("F2"), string.Format(provider, "{0:F2}", 2.2222));
             Assert.AreEqual(2.2299.ToString("0.00"), string.Format(provider, "{0:0.00}", 2.2299));
             Assert.AreEqual("2=Two", string.Format("{0:2=Two}", 2));
-            Assert.AreEqual("57%", string.Format(provider, "{0:p0}", 0.57));
+            Assert.AreEqual(0.57.ToString("p0"), string.Format(provider, "{0:p0}", 0.57));
             Assert.AreEqual(string.Empty, string.Format("{0:2=Two}", new object[] {null}));
         }
     }
