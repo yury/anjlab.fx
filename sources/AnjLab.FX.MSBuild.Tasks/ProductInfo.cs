@@ -59,14 +59,19 @@ namespace AnjLab.FX.MSBuild.Tasks
                 return true;
 
             _buildNumber = GenerateBuildNumber();
-            if (!GetRevisionFromSvn())
-            {
+            if (!GetRevistionFromEnvironment() && !GetRevisionFromSvn())
                 _revision = 0;
-            }
 
             GenerateFile();
             
             return true;
+        }
+
+        private bool GetRevistionFromEnvironment() {
+            string version = Environment.GetEnvironmentVariable("BUILD_VCS_NUMBER.1");
+            if (string.IsNullOrEmpty(version))
+                return false;
+            return int.TryParse(version, out _revision);
         }
 
         private void GenerateFile()
