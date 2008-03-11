@@ -42,6 +42,9 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -49,8 +52,11 @@
     <Compile Include="Controls\EnumDropDownList.cs" />
     <Compile Include="Controls\NumberValidator.cs" />
     <Compile Include="Controls\DateValidator.cs" />
+    <Compile Include="Controls\PersistentScrollPosition.cs" />
+    <Compile Include="Controls\PersistentScrollPositionDesigner.cs" />
     <Compile Include="Controls\PriceValidator.cs" />
     <Compile Include="BindMembersControl.cs" />
+    <Compile Include="Controls\ScrollSaver.cs" />
     <Compile Include="Scripts\Namespaces.cs" />
     <Compile Include="TemplatedDataBoundControl.cs" />
     <Compile Include="DataTableSourceView.cs" />
@@ -83,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\dom.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\PersistentScrollPosition.debug.js" />
+    <EmbeddedResource Include="Controls\PersistentScrollPosition.release.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\tests\" />
