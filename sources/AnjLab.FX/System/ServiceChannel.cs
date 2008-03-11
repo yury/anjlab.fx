@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Channels;
 using System.Text;
+using AnjLab.FX.IO;
 
 namespace AnjLab.FX.System
 {
@@ -23,11 +24,15 @@ namespace AnjLab.FX.System
 
         public void Dispose()
         {
-            if (_service == null)
-                return;
-            var channel = _service as IChannel;
-            if (channel != null)
-                channel.Close();
+            try {
+                if (_service == null)
+                    return;
+                var channel = _service as IChannel;
+                if (channel != null)
+                    channel.Close();
+            } catch(Exception x) {
+                
+            } 
         }
     }
 }
