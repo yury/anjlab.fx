@@ -57,6 +57,7 @@
     <Compile Include="Collections\ByteBitArrayTests.cs" />
     <Compile Include="Collections\PriorityQueueTests.cs" />
     <Compile Include="Collections\SerializableListTests.cs" />
+    <Compile Include="Data\RepositoryFilterTests.cs" />
     <Compile Include="Datetime\DatetimeUtilsTests.cs" />
     <Compile Include="Devices\Ax25Tests.cs" />
     <Compile Include="Devices\ConvertTests.cs" />

@@ -68,6 +68,7 @@
     <Compile Include="Collections\INonSerializableItem.cs" />
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\SerializableList.cs" />
+    <Compile Include="Data\RepositoryFilter.cs" />
     <Compile Include="Gsm\ATRequest.cs" />
     <Compile Include="Gsm\ATResponse.cs" />
     <Compile Include="Gsm\Exceptions.cs" />
