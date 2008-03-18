@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AnjLab.FX.IO;
 using System.IO;
 
@@ -10,7 +7,7 @@ namespace AnjLab.FX.Log4Net
     class Log4NetLog : ILog
     {
         private readonly log4net.ILog _log;
-        private static readonly string _relativePathToConfig = @"Properties\log4net.config";
+        private const string _relativePathToConfig = @"Properties\log4net.config";
 
         public static void LoadLog4NetConfig()
         {
