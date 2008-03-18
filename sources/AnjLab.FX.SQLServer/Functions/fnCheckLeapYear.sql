@@ -1,15 +1,15 @@
-if exists (select * from sysobjects where id = object_id(N'tools.fnCheckLeapYear') and xtype in (N'FN', N'IF', N'TF'))
-drop function tools.fnCheckLeapYear
+if exists (select * from sysobjects where id = object_id(N'fx.fnCheckLeapYear') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.fnCheckLeapYear
 go
 
 /*
 This function returns 1 if year of input date is leap or 0 in other case
 Author: Alex M. Zakharov
 Example: 
-print tools.fnCheckLeapYear(getDate())
+print fx.fnCheckLeapYear(getDate())
 */
 
-CREATE FUNCTION tools.fnCheckLeapYear(@dt datetime)
+CREATE FUNCTION fx.fnCheckLeapYear(@dt datetime)
 RETURNS bit AS
 BEGIN
   declare @y int

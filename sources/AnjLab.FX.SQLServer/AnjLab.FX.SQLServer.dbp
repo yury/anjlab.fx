@@ -21,7 +21,8 @@ Begin DataProject = "AnjLab.FX.SQLServer"
       Script = "Indexing foreign key fields.sql"
    End
    Begin Folder = "Tables"
-      Script = "Country.sql"
-      Script = "IdentityCardType.sql"
+      Script = "BusinessLegalForms.sql"
+      Script = "Countries.sql"
+      Script = "IdentityCardTypes.sql"
    End
 End
