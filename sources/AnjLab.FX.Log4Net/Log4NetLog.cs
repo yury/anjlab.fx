@@ -4,7 +4,7 @@ using System.IO;
 
 namespace AnjLab.FX.Log4Net
 {
-    class Log4NetLog : ILog
+    public class Log4NetLog : ILog
     {
         private readonly log4net.ILog _log;
         private const string _relativePathToConfig = @"Properties\log4net.config";
