@@ -35,5 +35,12 @@ namespace AnjLab.FX.Tests.Devices
             Assert.AreEqual("ffff", Convert.BytesToHexString(Convert.HexStringToBytes("ffff")).ToString());
             Assert.AreEqual("ffff", Convert.BytesToHexString(Convert.HexStringToBytes("0xffff")).ToString());
         }
+
+        [Test]
+        public void TestHexStringToUInt16()
+        {
+            Assert.AreEqual(0xffff, Convert.HexStringToUInt16("ffff"));
+            Assert.AreEqual(0xffaf, Convert.HexStringToUInt16("afff"));
+        }
     }
 }
