@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using AnjLab.FX.System;
 
@@ -103,6 +104,12 @@ namespace AnjLab.FX.Devices
                 res[i] = byteStr[byteStr.Length - 1 - i];
 
             return new string(res);
+        }
+
+        public static ushort HexStringToUInt16(string str)
+        {
+            BinaryReader reader = new BinaryReader(new MemoryStream(HexStringToBytes(str)));
+            return reader.ReadUInt16();
         }
     }
 }
