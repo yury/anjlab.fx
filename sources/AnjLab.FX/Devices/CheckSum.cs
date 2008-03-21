@@ -31,5 +31,19 @@
             }
             return (short)sum;
         }
+
+        public static byte NmeaChecksum(string sentence)
+        {
+            byte actualCheckSum = 0;
+            int dollar = sentence.IndexOf('$');
+            int asterix = sentence.IndexOf('*');
+            if (dollar != -1 && asterix != -1)
+                sentence = sentence.Substring(dollar + 1, asterix - dollar - 1);
+
+            foreach (char symbol in sentence)
+                actualCheckSum = (byte)(actualCheckSum ^ (byte)symbol);
+
+            return actualCheckSum;
+        }
     }
 }
