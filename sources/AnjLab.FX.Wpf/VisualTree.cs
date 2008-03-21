@@ -23,6 +23,7 @@ namespace AnjLab.FX.Wpf
             return parent;
         }
 
+
         public static TParent GetParent<TParent>(DependencyObject childObject) where TParent : DependencyObject
         {
             DependencyObject parent = childObject;

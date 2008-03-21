@@ -60,6 +60,7 @@
     <Compile Include="GenericTreeView\GenericTreeView.cs" />
     <Compile Include="GenericTreeView\TreeViewBase.cs" />
     <Compile Include="GenericTreeView\TreeViewBase.Declarations.cs" />
+    <Compile Include="LogicalTree.cs" />
     <Compile Include="Markup\ObjectReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

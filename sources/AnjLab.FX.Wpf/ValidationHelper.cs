@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace AnjLab.FX.Wpf
 {
@@ -12,7 +13,7 @@ namespace AnjLab.FX.Wpf
                 if (element == null)
                     continue;
 
-                if (System.Windows.Controls.Validation.GetHasError(element))
+                if (Validation.GetHasError(element))
                     return true;
 
                 if (GetHasErrors(element))

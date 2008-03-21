@@ -31,6 +31,8 @@ namespace AnjLab.FX.Wpf.GenericTreeView
 
         public void AddSource<T>(IEnumerable<T> source, Func<T, string> getKeyFunc, Func<T, string> getParentKeyFunc)
         {
+            if(source == null) return;
+
             foreach (T element in source)
             {
                 AddElement(element, getKeyFunc(element), getParentKeyFunc(element));
@@ -132,7 +134,7 @@ namespace AnjLab.FX.Wpf.GenericTreeView
             if (_childRelations.ContainsKey(parent))
                 return _childRelations[parent];
             else
-                throw new InvalidOperationException();
+                return new ObservableCollection<object>();
         }
 
         public override object GetParentItem(object item)
