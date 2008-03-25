@@ -27,6 +27,7 @@ Begin DataProject = "AnjLab.FX.SQLServer"
    Begin Folder = "Tables"
       Script = "BusinessLegalForms.sql"
       Script = "Countries.sql"
+      Script = "Currencies.sql"
       Script = "IdentityCardTypes.sql"
    End
 End
