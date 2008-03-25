@@ -111,5 +111,12 @@ namespace AnjLab.FX.Devices
             BinaryReader reader = new BinaryReader(new MemoryStream(HexStringToBytes(str)));
             return reader.ReadUInt16();
         }
+
+        public static string UInt16ToReversedHexString(ushort n)
+        {
+            byte high = (byte)(n >> 8);
+            byte low = (byte)((n << 8) >> 8);
+            return ByteToHexString(high) + ByteToHexString(low);
+        }
     }
 }
