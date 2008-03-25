@@ -42,5 +42,12 @@ namespace AnjLab.FX.Tests.Devices
             Assert.AreEqual(0xffff, Convert.HexStringToUInt16("ffff"));
             Assert.AreEqual(0xffaf, Convert.HexStringToUInt16("afff"));
         }
+
+        [Test]
+        public void TestUInt16ToReversedHexString()
+        {
+            Assert.AreEqual("1234", Convert.UInt16ToReversedHexString(0x1234));
+            Assert.AreEqual("1e34", Convert.UInt16ToReversedHexString(0x1e34));
+        }
     }
 }
