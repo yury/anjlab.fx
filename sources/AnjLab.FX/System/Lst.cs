@@ -132,5 +132,19 @@ namespace AnjLab.FX.System
             return false;
 #endif
         }
+
+        public static IList<T> Clone<T>(IList<T> src) 
+            where T: ICloneable
+        {
+            if (src == null)
+                return null;
+
+            var result = new List<T>(src.Count);
+            foreach (var item in src) {
+                var clone = (T)item.Clone();
+                result.Add(clone);
+            }
+            return result;
+        }
     }
 }
