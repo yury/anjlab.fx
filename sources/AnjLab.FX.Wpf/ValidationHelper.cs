@@ -7,16 +7,21 @@ namespace AnjLab.FX.Wpf
     {
         public static bool GetHasErrors(FrameworkElement root)
         {
-            foreach (object child in LogicalTreeHelper.GetChildren(root))
+            return GetHasErrors(root, false);
+        }
+
+        public static bool GetHasErrors(FrameworkElement root, bool checkUnvisible)
+        {
+            foreach (var child in LogicalTreeHelper.GetChildren(root))
             {
-                FrameworkElement element = child as FrameworkElement;
+                var element = child as FrameworkElement;
                 if (element == null)
                     continue;
 
-                if (Validation.GetHasError(element))
+                if (element.IsVisible && Validation.GetHasError(element))
                     return true;
 
-                if (GetHasErrors(element))
+                if (element.IsVisible && GetHasErrors(element, checkUnvisible))
                     return true;
             }
             return false;
