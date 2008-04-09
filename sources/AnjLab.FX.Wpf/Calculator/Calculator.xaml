@@ -18,7 +18,7 @@
                            Stroke="{TemplateBinding Foreground}" Fill="{TemplateBinding Background}"
                            HorizontalAlignment="Center" VerticalAlignment="Center" >
                                         <Rectangle.BitmapEffect>
-                                            <BevelBitmapEffect BevelWidth="1" />
+                                            <BevelBitmapEffect BevelWidth="1"  EdgeProfile="Linear" Relief="0.2" />
                                         </Rectangle.BitmapEffect>
                                     </Rectangle>
                                     <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" 
@@ -116,7 +116,8 @@
             <Button Name="BMemPlus" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="4"  ToolTip="Add To Memory">M+</Button>
             <TextBlock  Name="BMemBox" Visibility="Collapsed"	Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">Memory: [empty]</TextBlock>
 
-            <TextBox Grid.ColumnSpan="4" Grid.Row="0" Margin="5" Name="DisplayBox" VerticalAlignment="Center" PreviewGotKeyboardFocus="displayBox_PreviewGotKeyboardFocus" />
+            <TextBox Grid.ColumnSpan="4" Grid.Row="0" Margin="5" Name="DisplayBox" VerticalAlignment="Center" PreviewGotKeyboardFocus="displayBox_PreviewGotKeyboardFocus" >
+            </TextBox>
         </Grid>
     </DockPanel>
 </UserControl>
