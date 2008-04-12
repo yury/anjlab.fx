@@ -103,7 +103,8 @@
     <Compile Include="IO\CSVExport.cs" />
     <Compile Include="IO\DirectoryHelper.cs" />
     <Compile Include="IO\ILog.cs" />
-    <Compile Include="IO\Ports\SerialPortDelay.cs" />
+    <Compile Include="IO\Ports\SerialPortDelay.cs">
+    </Compile>
     <Compile Include="IO\TraceLog.cs" />
     <Compile Include="Mathematics\DiscreteVariate.cs" />
     <Compile Include="Net\Feeds\AtomFeed.cs" />

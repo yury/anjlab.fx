@@ -15,7 +15,7 @@ namespace AnjLab.FX.Devices
         }
 
         private object _syncObj = new object();
-        byte[] _currentPacket = null;
+        byte[] _buffer = null;
         public byte[][] Proccess(byte[] bytes)
         {
             lock (_syncObj)
@@ -23,27 +23,27 @@ namespace AnjLab.FX.Devices
                 List<byte[]> packets = new List<byte[]>();
                 for (int i = 0; i < bytes.Length; i++)
                 {
-                    if (bytes[i] == _packetStart && _currentPacket == null)
+                    if (bytes[i] == _packetStart && _buffer == null)
                     {
-                        _currentPacket = AddByteIntoArray(new byte[0], bytes[i]);
+                        _buffer = AddByteIntoArray(new byte[0], bytes[i]);
                         continue;
                     }
 
                     if (bytes[i] == _packetEnd)
                     {
-                        _currentPacket = AddByteIntoArray(_currentPacket, bytes[i]);
-                        if (_currentPacket != null)
+                        _buffer = AddByteIntoArray(_buffer, bytes[i]);
+                        if (_buffer != null)
                         {
-                            byte[] newPacket = new byte[_currentPacket.Length];
-                            _currentPacket.CopyTo(newPacket, 0);
-                            _currentPacket = null;
+                            byte[] newPacket = new byte[_buffer.Length];
+                            _buffer.CopyTo(newPacket, 0);
+                            _buffer = null;
                             packets.Add(newPacket);
                         }
                         continue;
                     }
 
-                    if (_currentPacket != null) // append to packet
-                        _currentPacket = AddByteIntoArray(_currentPacket, bytes[i]);
+                    if (_buffer != null) // append to packet
+                        _buffer = AddByteIntoArray(_buffer, bytes[i]);
                 }
                 return packets.ToArray();
             }
@@ -67,7 +67,12 @@ namespace AnjLab.FX.Devices
         public void Clear()
         {
             lock (_syncObj)
-                _currentPacket = null;
+                _buffer = null;
+        }
+
+        public byte[] Buffer
+        {
+            get { return _buffer; }
         }
     }
 }
