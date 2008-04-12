@@ -61,6 +61,7 @@
     <Compile Include="Datetime\DatetimeUtilsTests.cs" />
     <Compile Include="Devices\Ax25Tests.cs" />
     <Compile Include="Devices\ConvertTests.cs" />
+    <Compile Include="Devices\BytesFilterTests.cs" />
     <Compile Include="Drawing\PaletteTests.cs" />
     <Compile Include="Finance\YieldTests.cs" />
     <Compile Include="Gsm\ModemTests.cs" />
