@@ -24,5 +24,26 @@ namespace AnjLab.FX.Wpf
             else
                 return null;
         }
+
+        public static IList<TChild> FindChildren<TChild>(DependencyObject parentObject) where TChild : DependencyObject
+        {
+            List<TChild> result = new List<TChild>();
+            FindChildren(parentObject, result);
+            return result;
+        }
+
+        private static void FindChildren<TChild>(DependencyObject parentObject, IList<TChild> result) where TChild : DependencyObject
+        {
+            foreach (var child in LogicalTreeHelper.GetChildren(parentObject))
+            {
+                var obj = child as DependencyObject;
+                if(obj == null) continue;
+
+                if (obj is TChild)
+                    result.Add((TChild)obj);
+
+                FindChildren(obj, result);
+            }
+        }
     }
 }
