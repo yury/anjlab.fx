@@ -36,15 +36,20 @@ namespace AnjLab.FX.System
         public override bool Equals(object obj)
         {
             Pair<TA, TB> o = obj as Pair<TA, TB>;
-            return o != null && _a.Equals(o._a) && _b.Equals(o.B);
+            return o != null && AreEqual(_a, o._a) && AreEqual(_b, o._b);
+        }
+
+        private bool AreEqual(object a1, object a2)
+        {
+            if (a1 == null && a2 == null)
+                return true;
+            return a1 != null && a2 != null && a1.Equals(a2);
         }
 
         public override int GetHashCode()
         {
             return (_a.GetHashCode().ToString() + _b.GetHashCode().ToString()).GetHashCode();
         }
-
-        
     }
 
     public class Pair
