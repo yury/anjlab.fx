@@ -17,7 +17,10 @@ namespace AnjLab.FX.System
                 string[] path = valuePath.Split('.');
 
                 foreach (string pathPart in path)
+                {
+                    if(obj == null) return null;
                     obj = obj.GetType().GetProperty(pathPart, flags).GetValue(obj, null);
+                }
 
                 return obj;
             }
