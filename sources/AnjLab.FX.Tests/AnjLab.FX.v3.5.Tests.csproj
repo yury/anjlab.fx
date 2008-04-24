@@ -83,15 +83,15 @@
     </Compile>
     <Compile Include="StreamMapping\BinaryStreamMapperTests.cs" />
     <Compile Include="StreamMapping\TestObject.cs" />
-    <Compile Include="System\CaseFormatProviderTests.cs" />
-    <Compile Include="System\CommandArgsProcessorTests.cs" />
-    <Compile Include="System\ComparerFactoryTests.cs" />
-    <Compile Include="System\DataTableAdapterFactoryTests.cs" />
     <Compile Include="Collections\UniqueListTests.cs" />
-    <Compile Include="System\LstTests.cs" />
-    <Compile Include="System\OpenServiceTests.cs" />
-    <Compile Include="System\PairTests.cs" />
-    <Compile Include="System\StrTests.cs" />
+    <Compile Include="Sys\CaseFormatProviderTests.cs" />
+    <Compile Include="Sys\CommandArgsProcessorTests.cs" />
+    <Compile Include="Sys\ComparerFactoryTests.cs" />
+    <Compile Include="Sys\DataTableAdapterFactoryTests.cs" />
+    <Compile Include="Sys\LstTests.cs" />
+    <Compile Include="Sys\OpenServiceTests.cs" />
+    <Compile Include="Sys\PairTests.cs" />
+    <Compile Include="Sys\StrTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />
     <Compile Include="Windows\Data\EnumHelperValueConverterTests.cs" />
