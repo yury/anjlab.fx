@@ -180,6 +180,7 @@
     <Compile Include="Sys\ServiceChannel.cs" />
     <Compile Include="Sys\SortableBindingList.cs" />
     <Compile Include="Sys\Str.cs" />
+    <Compile Include="Sys\StringExtentions.cs" />
     <Compile Include="Sys\TypeReflector.cs" />
     <Compile Include="Sys\VoidAction.cs" />
     <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
