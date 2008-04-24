@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Collections;
 using System.Data;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Wpf.Controls
 {
@@ -49,6 +50,8 @@ namespace AnjLab.FX.Wpf.Controls
 
         private static void OnObjectSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            var presenter = d as ObjectContentPresenter;
+            presenter.TryToFindObject();
         }
 
         public IEnumerable ObjectSource
@@ -91,35 +94,36 @@ namespace AnjLab.FX.Wpf.Controls
             }
         }
 
-        private static void OnKeyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private void TryToFindObject()
         {
-            // When the Key changes, try to find the data row that has the new key.
-            // If it is not found, return null.
-            var presenter = sender as ObjectContentPresenter;
+            if(ObjectSource == null || Key == null) return;
 
-            if (presenter.ObjectSource == null)
-                throw new InvalidOperationException("There is no ObjectSource associated with this ObjectSourcePresneter. The Initialize method has, most likely, not been called.");
-
-            if (!presenter._isBeingChanged)
+            if (!_isBeingChanged)
             {
-                presenter._isBeingChanged = true;
+                _isBeingChanged = true;
 
                 try
                 {
-                    foreach (var obj in presenter.ObjectSource)
+                    foreach (var obj in ObjectSource)
                     {
-                        //if (presenter.Key.Equals(fx.Reflector.GetValue(obj, presenter.KeyMemberPath)))
-                        //{
-                        //    presenter.Object = obj;
-                        //    break;
-                        //}
+                        if (Key.Equals(Reflector.GetValue(obj, KeyMemberPath)))
+                        {
+                            Object = obj;
+                            break;
+                        }
                     }
                 }
                 finally
                 {
-                    presenter._isBeingChanged = false;
+                    _isBeingChanged = false;
                 }
             }
+        }
+
+        private static void OnKeyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var presenter = sender as ObjectContentPresenter;
+            presenter.TryToFindObject();
         }
 
     }
