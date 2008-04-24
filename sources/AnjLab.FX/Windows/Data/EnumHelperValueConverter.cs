@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Windows.Data
 {

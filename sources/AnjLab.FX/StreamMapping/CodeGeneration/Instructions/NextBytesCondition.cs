@@ -1,7 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using AnjLab.FX.StreamMapping.CodeGeneration;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.StreamMapping.Instructions
 {

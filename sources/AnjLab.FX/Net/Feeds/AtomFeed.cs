@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Net.Feeds
 {

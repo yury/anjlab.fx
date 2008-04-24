@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 #if NET_3_5
 namespace AnjLab.FX.Collections

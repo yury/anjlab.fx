@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnjLab.FX.Net;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 using NUnit.Framework;
 
 namespace AnjLab.FX.Tests.Net

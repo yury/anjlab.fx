@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Threading;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.IO.Ports
 {

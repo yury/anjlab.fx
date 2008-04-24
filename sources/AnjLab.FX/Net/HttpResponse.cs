@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Net
 {

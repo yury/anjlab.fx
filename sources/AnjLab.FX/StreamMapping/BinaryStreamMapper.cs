@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Markup;
 using AnjLab.FX.StreamMapping.CodeGeneration;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.StreamMapping
 {

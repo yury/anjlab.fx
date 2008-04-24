@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Patterns.Generic
 {

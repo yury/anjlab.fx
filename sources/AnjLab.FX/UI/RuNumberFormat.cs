@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.UI
 {

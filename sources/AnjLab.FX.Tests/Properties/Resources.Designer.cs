@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace AnjLab.FX.Tests.Properties {
-    using System;
+    using Sys;
     
     
     /// <summary>

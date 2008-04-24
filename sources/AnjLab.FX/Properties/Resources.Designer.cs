@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace AnjLab.FX.Properties {
-    using System;
+    using Sys;
     
     
     /// <summary>

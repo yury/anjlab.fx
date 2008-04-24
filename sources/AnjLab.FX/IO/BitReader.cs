@@ -1,5 +1,5 @@
 using System.IO;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.IO
 {

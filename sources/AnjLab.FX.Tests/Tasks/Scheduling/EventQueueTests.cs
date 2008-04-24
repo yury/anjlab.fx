@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 using AnjLab.FX.Tasks.Scheduling;
 using NUnit.Framework;
 

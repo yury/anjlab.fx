@@ -1,6 +1,6 @@
 using System;
 using AnjLab.FX.Properties;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 
 
 namespace AnjLab.FX.Tasks.Scheduling
