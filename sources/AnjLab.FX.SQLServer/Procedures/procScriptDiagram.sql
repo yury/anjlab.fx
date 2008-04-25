@@ -5,12 +5,11 @@ END
 GO
 /**
 <summary>
-Script Sql Server 2005 diagrams
-(inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty)
+Script Sql Server 2005 diagrams (inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty)
 </summary>
 <example>
---NOTE: Scalar-valued Function [Tool_VarbinaryToVarcharHex] must exist before this script is run
-EXEC Tool_ScriptDiagram2005 'DatabaseName'
+NOTE: Scalar-valued Function [Tool_VarbinaryToVarcharHex] must exist before this script is run
+EXEC fx.procScriptDiagram 'DatabaseName'
 </example>
 <author>Craig Dunn</author>
 <remarks>
@@ -61,14 +60,14 @@ Diagram name [' + @name + '] could not be found.
 		-- Now with the diagram_id, do all the work
 		PRINT '/**'
 		PRINT '<summary>'
-		PRINT 'Restore diagram ''' + @name + ''''
+		PRINT 'Restoring diagram ''' + @name + ''''
 		PRINT '</summary>'
 		PRINT '<remarks>'
 		PRINT 'Will attempt to create [sysdiagrams] table if it doesn''t already exist'
 		PRINT '</remarks>'
 		PRINT '<generated>' + LEFT(CONVERT(VARCHAR(23), GETDATE(), 121), 16) + '</generated>'
 		PRINT '*/'
-		PRINT 'PRINT ''=== Tool_ScriptDiagram2005 restore diagram [' + @name + '] ==='''
+		PRINT 'PRINT ''=== Restoring diagram [' + @name + '] ==='''
 		PRINT '	-- If the sysdiagrams table has not been created in this database, create it!
 				IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ''sysdiagrams'')
 				BEGIN
@@ -137,8 +136,8 @@ Diagram name [' + @name + '] could not be found.
 			SET @index = @index + @chunk
 		END
 		PRINT ''
-		PRINT '    PRINT ''=== Finished writing diagram id '' + CAST(@newid AS VARCHAR(100)) + ''  ==='''
-		PRINT '    PRINT ''=== Refresh your Databases-[DbName]-Database Diagrams to see the new diagram ==='''
+		PRINT '    PRINT ''Finished writing diagram id '' + CAST(@newid AS VARCHAR(100)) + ''  '''
+		PRINT '    PRINT ''Refresh your Databases-[DbName]-Database Diagrams to see the new diagram '''
 		PRINT 'END TRY'
 		PRINT 'BEGIN CATCH'
 		PRINT '    -- If we got here, the [definition] updates didn''t complete, so delete the diagram row'
