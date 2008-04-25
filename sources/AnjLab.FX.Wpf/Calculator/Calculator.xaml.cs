@@ -10,6 +10,8 @@ namespace AnjLab.FX.Wpf.Calculator
     /// </summary>
     public partial class Calculator : UserControl
     {
+        public static readonly DependencyProperty ResultProperty = DependencyProperty.Register("Result", typeof (double),
+                                                                                               typeof (Calculator));
         public Calculator()
         {
             InitializeComponent();
@@ -32,6 +34,12 @@ namespace AnjLab.FX.Wpf.Calculator
         private Operation LastOper;
         private string _last_val;
         private string _mem_val;
+
+        public double Result
+        {
+            get { return (double)GetValue(ResultProperty); }
+            set { SetValue(ResultProperty, value); }
+        }
 
         //flag to erase or just add to current display flag
         private bool EraseDisplay { get; set; }
@@ -320,12 +328,16 @@ namespace AnjLab.FX.Wpf.Calculator
             else
                 BMemBox.Text = "Memory: [empty]";
         }
+
         private void CalcResults()
         {
             if (LastOper == Operation.None)
                 return;
 
             double d = Calc(LastOper);
+
+            Result = d;
+
             Display = d.ToString();
 
             UpdateDisplay();

@@ -69,6 +69,7 @@
     <Compile Include="Converters\ErrorContentConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Converters\StringToDoubleConverter.cs" />
     <Compile Include="GenericTreeView\ItemMonitor.cs" />
     <Compile Include="GenericTreeView\RoutedTreeItemEventArgs.cs" />
     <Compile Include="GenericTreeView\TreeLayout.cs" />

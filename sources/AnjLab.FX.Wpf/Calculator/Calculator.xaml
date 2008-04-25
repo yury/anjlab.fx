@@ -106,15 +106,19 @@
             <Button Name="BEqual" 	 Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="5" Grid.Row="4" >=</Button>
 
 
-            <Button Name="BC"  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="1" ToolTip="Clear All">C</Button>
-            <Button Name="BCE" Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="1"  ToolTip="Clear Current Entry">CE</Button>
+            <Button Name="BC"  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="1" ToolTip="Очистить все">C</Button>
+            <Button Name="BCE" Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="1"  ToolTip="Очистить текущую ячейку">CE</Button>
 
 
-            <Button Name="BMemClear" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="1"  ToolTip="Clear Memory" >MC</Button>
-            <Button Name="BMemRecall"   Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="2"  ToolTip="Recall Memory">MR</Button>
-            <Button Name="BMemSave" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="3"  ToolTip="Store in Memory">MS</Button>
-            <Button Name="BMemPlus" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="4"  ToolTip="Add To Memory">M+</Button>
-            <TextBlock  Name="BMemBox" Visibility="Collapsed"	Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">Memory: [empty]</TextBlock>
+            <Button Name="BMemClear" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="1"  ToolTip="Очистить" >MC</Button>
+            <Button Name="BMemRecall"   Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="2"  Content="MR">
+                <Button.ToolTip>
+                    <TextBlock  Name="BMemBox"	Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">Память: [пусто]</TextBlock>
+                </Button.ToolTip>
+            </Button>
+            <Button Name="BMemSave" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="3"  ToolTip="Сохранить">MS</Button>
+            <Button Name="BMemPlus" 	  Click="OperBtn_Click" Background="LightPink" Style="{StaticResource DigitBtn}"  Grid.Column="0" Grid.Row="4"  ToolTip="Добавить в память">M+</Button>
+            
 
             <TextBox Grid.ColumnSpan="4" Grid.Row="0" Margin="5" Name="DisplayBox" VerticalAlignment="Center" PreviewGotKeyboardFocus="displayBox_PreviewGotKeyboardFocus" >
             </TextBox>
