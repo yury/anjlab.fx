@@ -3,11 +3,17 @@ drop function fx.fnGetEmptyRowSet
 go
 
 /*
+<summary>
 This funtion returns rowset with defined number of record
-Author: Alex M. Zakharov
-Date: 07\11\2007
-Example:
+</summary>
+
+<author>Alex M. Zakharov</author>
+
+<date>7\11\2007</date>
+
+<example>
 select * from fx.fnGetEmptyRowSet(5)
+</example>
 */
 
 CREATE FUNCTION fx.fnGetEmptyRowSet(@Records int) 

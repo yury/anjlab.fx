@@ -3,10 +3,13 @@ drop function fx.fnCheckLeapYear
 go
 
 /*
+<summary>
 This function returns 1 if year of input date is leap or 0 in other case
-Author: Alex M. Zakharov
-Example: 
+</summary>
+<author>Alex M. Zakharov</author>
+<example>
 print fx.fnCheckLeapYear(getDate())
+</example>
 */
 
 CREATE FUNCTION fx.fnCheckLeapYear(@dt datetime)

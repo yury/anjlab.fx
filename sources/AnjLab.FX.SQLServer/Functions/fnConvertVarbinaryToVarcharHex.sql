@@ -2,7 +2,7 @@ if exists (select * from sysobjects where id = object_id(N'fx.fnConvertVarbinary
 	DROP FUNCTION fx.fnConvertVarbinaryToVarcharHex
 GO
 
-/**
+/*
 <summary>
 Based on ufn_VarbinaryToVarcharHex by Clay Beatty.
 
@@ -19,7 +19,9 @@ hexadecimal characters and recursively calling the function
 with the more significant bytes until none remain (four recursive
 calls in total).
 </summary>
+
 <author>Craig Dunn</author>
+
 <remarks>
 Clay Beatty's original function was written for Sql Server 2000.
 Sql Server 2005 introduces the VARBINARY(max) datatype which this 
@@ -34,9 +36,12 @@ http://msdn2.microsoft.com/en-us/library/ms178158.aspx
 http://www.thescripts.com/forum/thread81534.html or
 http://groups-beta.google.com/group/comp.databases.ms-sqlserver/browse_frm/thread/ca9a9229d06a56f9?dq=&hl=en&lr=&ie=UTF-8&oe=UTF-8&prev=/groups%3Fdq%3D%26num%3D25%26hl%3Den%26lr%3D%26ie%3DUTF-8%26oe%3DUTF-8%26group%3Dcomp.databases.ms-sqlserver%26start%3D25
 </remarks>
+
 <param name="VarbinaryValue">binary data to be converted to Hexadecimal </param>
+
 <returns>Hexadecimal representation of binary data, using chars [0-0a-f]</returns>
 */
+
 CREATE FUNCTION fx.fnConvertVarbinaryToVarcharHex
 (
 	@VarbinaryValue	VARBINARY(max)

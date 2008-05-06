@@ -3,11 +3,21 @@ drop function fx.fnCalculateYield
 go
 
 /*
-This funtion returns yield (in %%), based on time period (taking into account leap years) and revenue.
-Author: Alex M. Zakharov
-Date: 09\27\2007
-Example
-print fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+<summary>
+This funtion returns yield (in %%), based on time period (taking into account leap years) 
+and revenue.
+<summary>
+
+<author>Alex M. Zakharov</author>
+
+<date>09\27\2007</date>
+
+<example>
+NOTE: table valued function fx.fnGetEmptyRowSet and scalar function fx.fnCheckLeapYear
+must be created before using.
+
+PRINT fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+</example>
 */
 
 CREATE FUNCTION fx.fnCalculateYield(@StartDate datetime, @EndDate datetime, @PresentValue money, @FutureValue money) 

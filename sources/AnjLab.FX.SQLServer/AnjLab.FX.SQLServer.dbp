@@ -1,9 +1,9 @@
 # Microsoft Developer Studio Project File - Database Project
 Begin DataProject = "AnjLab.FX.SQLServer"
    MSDTVersion = "80"
-   DefDBRef = "jocker\sqlexpress.master.dbo"
+   DefDBRef = ".\sqlexpress.master.dbo"
    Begin DBRefFolder = "Database References"
-      Begin DBRefNode = "jocker\sqlexpress.master.dbo"
+      Begin DBRefNode = ".\sqlexpress.master.dbo"
          ConnectStr = "Data Source=.\sqlexpress;Initial Catalog=master;Integrated Security=True"
          Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
          Colorizer = 6
@@ -18,6 +18,7 @@ Begin DataProject = "AnjLab.FX.SQLServer"
    End
    Begin Folder = "Procedures"
       Script = "procScriptDiagram.sql"
+      Script = "procDecryptObject.sql"
    End
    Node = "Install.cmd"
    Script = "Schema.sql"
