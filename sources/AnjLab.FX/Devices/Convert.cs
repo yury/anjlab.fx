@@ -108,8 +108,11 @@ namespace AnjLab.FX.Devices
 
         public static ushort HexStringToUInt16(string str)
         {
-            BinaryReader reader = new BinaryReader(new MemoryStream(HexStringToBytes(str)));
-            return reader.ReadUInt16();
+            byte[] bytes = HexStringToBytes(str);
+            Guard.IsTrue(bytes.Length <= 2, "to large hex string for uint16");
+            ushort res = (ushort)(bytes[0] << 8);
+            res = (ushort)(res + bytes[1]);
+            return res;
         }
 
         public static string UInt16ToReversedHexString(ushort n)
