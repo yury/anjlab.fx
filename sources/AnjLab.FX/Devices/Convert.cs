@@ -106,15 +106,6 @@ namespace AnjLab.FX.Devices
             return new string(res);
         }
 
-        public static ushort HexStringToUInt16(string str)
-        {
-            byte[] bytes = HexStringToBytes(str);
-            Guard.IsTrue(bytes.Length <= 2, "to large hex string for uint16");
-            ushort res = (ushort)(bytes[0] << 8);
-            res = (ushort)(res + bytes[1]);
-            return res;
-        }
-
         public static string UInt16ToReversedHexString(ushort n)
         {
             byte high = (byte)(n >> 8);
