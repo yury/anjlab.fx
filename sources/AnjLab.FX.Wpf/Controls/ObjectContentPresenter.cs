@@ -94,6 +94,20 @@ namespace AnjLab.FX.Wpf.Controls
             }
         }
 
+        public static readonly DependencyProperty KeyPathProperty = DependencyProperty.Register("KeyPath", typeof(string), typeof(ObjectContentPresenter));
+
+        public string KeyPath
+        {
+            get
+            {
+                return this.GetValue(KeyPathProperty) as string;
+            }
+            set
+            {
+                this.SetValue(KeyPathProperty, value);
+            }
+        }
+
         private void TryToFindObject()
         {
             if(ObjectSource == null || Key == null) return;
@@ -104,12 +118,19 @@ namespace AnjLab.FX.Wpf.Controls
 
                 try
                 {
-                    foreach (var obj in ObjectSource)
+                    var key = Key;
+                    if (!string.IsNullOrEmpty(KeyPath))
+                        key = Reflector.GetValue(Key, KeyPath);
+
+                    if (key != null)
                     {
-                        if (Key.Equals(Reflector.GetValue(obj, KeyMemberPath)))
+                        foreach (var obj in ObjectSource)
                         {
-                            Object = obj;
-                            break;
+                            if (key.Equals(Reflector.GetValue(obj, KeyMemberPath)))
+                            {
+                                Object = obj;
+                                break;
+                            }
                         }
                     }
                 }
