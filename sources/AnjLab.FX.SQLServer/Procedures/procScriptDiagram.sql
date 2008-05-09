@@ -6,11 +6,6 @@ GO
 Script Sql Server 2005 diagrams (inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty)
 </summary>
 
-<example>
-NOTE: Scalar-valued Function fx.fnConvertVarbinaryToVarcharHex must exist before this script is run
-EXEC fx.procScriptDiagram 'DatabaseName'
-</example>
-
 <author>Craig Dunn</author>
 
 <remarks>
@@ -28,6 +23,12 @@ http://groups-beta.google.com/group/comp.databases.ms-sqlserver/browse_frm/threa
 </remarks>
 
 <param name="name">Name of the diagram in the Sql Server database instance</param>
+
+<example>
+NOTE: Scalar-valued Function fx.fnConvertVarbinaryToVarcharHex must exist before this script is run
+EXEC fx.procScriptDiagram 'DatabaseName'
+</example>
+
 */
 CREATE PROCEDURE fx.procScriptDiagram
 (

@@ -40,21 +40,19 @@ object and the binary version of the object in clear-text
 is used to decrypt the original object.
 <description>					 
 
-<author>Omri Bahat</author>
+<author>
+Omri Bahat
+
+Copyright  SQL Farms Solutions, www.sqlfarms.com. All rights reserved.
+This code can be used only for non-redistributable purposes.
+The code can be used for free as long as this copyright notice is not removed.
+</author>
 
 <date>01/01/2007</date>
 
 <param name="Schema">object's schema name</param>
 
 <param name="ObjectName">encrypted object name</param>
-
-<remarks>
-Copyright  SQL Farms Solutions, www.sqlfarms.com. All rights reserved.
-This code can be used only for non-redistributable purposes.
-The code can be used for free as long as this copyright notice is not removed.
-</remarks>
-
-exec fx.procDecryptObject 'fx', 'procScriptDiagram'
 
 */
 
