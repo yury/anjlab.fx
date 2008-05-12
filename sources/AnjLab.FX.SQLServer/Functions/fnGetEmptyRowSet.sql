@@ -4,15 +4,19 @@ go
 
 /*
 <summary>
-This funtion returns rowset with defined number of record
+	This funtion returns rowset with defined number of record
 </summary>
 
-<author>Alex M. Zakharov</author>
+<author>
+	Alex Zakharov
+	Copyright © AnjLab 2008, http://anjlab.com. All rights reserved.
+	The code can be used for free as long as this copyright notice is not removed.
+<author>
 
 <date>7\11\2007</date>
 
 <example>
-select * from fx.fnGetEmptyRowSet(5)
+	select * from fx.fnGetEmptyRowSet(5)
 </example>
 */
 

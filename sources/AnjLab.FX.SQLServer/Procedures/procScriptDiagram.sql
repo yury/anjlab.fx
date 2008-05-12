@@ -3,37 +3,40 @@ DROP PROCEDURE fx.procScriptDiagram
 GO
 /*
 <summary>
-Script Sql Server 2005 diagrams (inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty)
+	Script Sql Server 2005 diagrams 
 </summary>
 
-<author>Craig Dunn</author>
-
 <remarks>
-Helpful Articles
-----------------
-1) Upload / Download to Sql 2005
-http://staceyw.spaces.live.com/blog/cns!F4A38E96E598161E!404.entry
-
-2) MSDN: Using Large-Value Data Types
-http://msdn2.microsoft.com/en-us/library/ms178158.aspx
-
-3) "original" Script, Save, Export SQL 2000 Database Diagrams
-http://www.thescripts.com/forum/thread81534.html
-http://groups-beta.google.com/group/comp.databases.ms-sqlserver/browse_frm/thread/ca9a9229d06a56f9?dq=&hl=en&lr=&ie=UTF-8&oe=UTF-8&prev=/groups%3Fdq%3D%26num%3D25%26hl%3Den%26lr%3D%26ie%3DUTF-8%26oe%3DUTF-8%26group%3Dcomp.databases.ms-sqlserver%26start%3D25
+	Helpful Articles
+	----------------
+	1) Upload / Download to Sql 2005
+	http://staceyw.spaces.live.com/blog/cns!F4A38E96E598161E!404.entry
+	
+	2) MSDN: Using Large-Value Data Types
+	http://msdn2.microsoft.com/en-us/library/ms178158.aspx
+	
+	3) "original" Script, Save, Export SQL 2000 Database Diagrams
+	http://www.thescripts.com/forum/thread81534.html
+	http://groups-beta.google.com/group/comp.databases.ms-sqlserver/browse_frm/thread/ca9a9229d06a56f9?dq=&hl=en&lr=&ie=UTF-8&oe=UTF-8&prev=/groups%3Fdq%3D%26num%3D25%26hl%3Den%26lr%3D%26ie%3DUTF-8%26oe%3DUTF-8%26group%3Dcomp.databases.ms-sqlserver%26start%3D25
 </remarks>
 
-<param name="name">Name of the diagram in the Sql Server database instance</param>
+<author>
+	Craig Dunn
+	
+	inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty
+</author>
 
 <example>
-NOTE: Scalar-valued Function fx.fnConvertVarbinaryToVarcharHex must exist before this script is run
-EXEC fx.procScriptDiagram 'DatabaseName'
+	NOTE: Scalar-valued Function fx.fnConvertVarbinaryToVarcharHex must exist before this script is run
+	EXEC fx.procScriptDiagram 'DatabaseName'
 </example>
 
+<param name="name">Name of the diagram in the Sql Server database instance</param>
 */
 CREATE PROCEDURE fx.procScriptDiagram
 (
 	@name VARCHAR(128)
-) with encryption
+)
 AS
 BEGIN
 	DECLARE @diagram_id		INT

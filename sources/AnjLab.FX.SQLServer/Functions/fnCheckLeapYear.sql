@@ -4,11 +4,17 @@ go
 
 /*
 <summary>
-This function returns 1 if year of input date is leap or 0 in other case
+	This function returns 1 if year of input date is leap or 0 in other case
 </summary>
-<author>Alex M. Zakharov</author>
+
+<author>
+	Alex Zakharov
+	Copyright © AnjLab 2008, http://anjlab.com. All rights reserved.
+	The code can be used for free as long as this copyright notice is not removed.
+<author>
+
 <example>
-print fx.fnCheckLeapYear(getDate())
+	print fx.fnCheckLeapYear(getDate())
 </example>
 */
 

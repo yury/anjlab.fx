@@ -4,19 +4,22 @@ go
 
 /*
 <summary>
-This funtion returns yield (in %%), based on time period (taking into account leap years) 
-and revenue.
+	This funtion returns yield (in %%), based on time period (taking into account leap years) 
+	and revenue.
 <summary>
 
-<author>Alex M. Zakharov</author>
+<author>
+	Alex Zakharov
+	Copyright © AnjLab 2008, http://anjlab.com. All rights reserved.
+	The code can be used for free as long as this copyright notice is not removed.
+<author>
 
 <date>09\27\2007</date>
 
 <example>
-NOTE: table valued function fx.fnGetEmptyRowSet and scalar function fx.fnCheckLeapYear
-must be created before using.
-
-PRINT fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+	NOTE: table valued function fx.fnGetEmptyRowSet and scalar function fx.fnCheckLeapYear
+	must be created before using.
+	PRINT fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
 </example>
 */
 

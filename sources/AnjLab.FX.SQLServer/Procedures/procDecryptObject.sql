@@ -3,55 +3,55 @@ DROP PROCEDURE fx.procDecryptObject
 GO
 /*
 <summary>
-Decrypt SQL 2005 stored procedures, functions, views, and triggers
+	Decrypt SQL 2005 stored procedures, functions, views, and triggers
 </summary>
 
 <description>
-HEADS UP: In order to run this script you must log in
-to the server in DAC mode: To do so, type
-ADMIN:<SQLInstanceName> as your server name and use the "sa"
-or any other server admin user with the appropriate password.
+	HEADS UP: In order to run this script you must log in
+	to the server in DAC mode: To do so, type
+	ADMIN:<SQLInstanceName> as your server name and use the "sa"
+	or any other server admin user with the appropriate password.
                         
-CAUTION! DAC (dedicated admin access) will kick out all other
-server users.
+	CAUTION! DAC (dedicated admin access) will kick out all other
+	server users.
                         
-The script below accepts an object (schema name + object name)
-that were created using the WITH ENCRYPTION option and returns
-the decrypted script that creates the object. This script
-is useful to decrypt stored procedures, views, functions,
-and triggers that were created WITH ENCRYPTION.
+	The script below accepts an object (schema name + object name)
+	that were created using the WITH ENCRYPTION option and returns
+	the decrypted script that creates the object. This script
+	is useful to decrypt stored procedures, views, functions,
+	and triggers that were created WITH ENCRYPTION.
                         
-The algorithm used below is the following:
-1. Check that the object exists and that it is encrypted.
-2. In order to decrypt the object, the script ALTER (!!!) it
-and later restores the object to its original one. This is
-required as part of the decryption process: The object
-is altered to contain dummy text (the ALTER uses WITH ENCRYPTION)
-and then compared to the CREATE statement of the same dummy
-content. 
+	The algorithm used below is the following:
+	1. Check that the object exists and that it is encrypted.
+
+	2. In order to decrypt the object, the script ALTER (!!!) it
+	and later restores the object to its original one. This is
+	required as part of the decryption process: The object
+	is altered to contain dummy text (the ALTER uses WITH ENCRYPTION)
+	and then compared to the CREATE statement of the same dummy
+	content. 
                         
-Note: The object is altered in a transaction, which is rolled
-back immediately after the object is changed to restore
-all previous settings.
+	Note: The object is altered in a transaction, which is rolled
+	back immediately after the object is changed to restore
+	all previous settings.
                         
-3. A XOR operation between the original binary stream of the
-enrypted object with the binary representation of the dummy
-object and the binary version of the object in clear-text
-is used to decrypt the original object.
+	3. A XOR operation between the original binary stream of the
+	enrypted object with the binary representation of the dummy
+	object and the binary version of the object in clear-text
+	is used to decrypt the original object.
 <description>					 
 
 <author>
-Omri Bahat
+	Omri Bahat
 
-Copyright  SQL Farms Solutions, www.sqlfarms.com. All rights reserved.
-This code can be used only for non-redistributable purposes.
-The code can be used for free as long as this copyright notice is not removed.
+	Copyright © SQL Farms Solutions, http://www.sqlfarms.com. All rights reserved.
+	This code can be used only for non-redistributable purposes.
+	The code can be used for free as long as this copyright notice is not removed.
 </author>
 
 <date>01/01/2007</date>
 
 <param name="Schema">object's schema name</param>
-
 <param name="ObjectName">encrypted object name</param>
 
 */

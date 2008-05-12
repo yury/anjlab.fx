@@ -1,6 +1,16 @@
 /* 
+<summary>
 	This script creates non-clustered indexes for all fields which are used in foreign keys,
 	if they are not indexed. Index name template is IX_<table name><column name>.
+</summary>
+
+<author>
+	Alex Zakharov
+	Copyright © AnjLab 2008, http://anjlab.com. All rights reserved.
+	The code can be used for free as long as this copyright notice is not removed.
+<author>
+
+<date>10/2/2008</date>
 */
 
 
