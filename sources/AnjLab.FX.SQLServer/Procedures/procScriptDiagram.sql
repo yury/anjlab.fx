@@ -8,7 +8,7 @@ GO
 
 <remarks>
 	Helpful Articles
-	----------------
+	
 	1) Upload / Download to Sql 2005
 	http://staceyw.spaces.live.com/blog/cns!F4A38E96E598161E!404.entry
 	
@@ -22,7 +22,6 @@ GO
 
 <author>
 	Craig Dunn
-	
 	inspired by usp_ScriptDatabaseDiagrams for Sql Server 2000 by Clay Beatty
 </author>
 
@@ -33,6 +32,7 @@ GO
 
 <param name="name">Name of the diagram in the Sql Server database instance</param>
 */
+
 CREATE PROCEDURE fx.procScriptDiagram
 (
 	@name VARCHAR(128)

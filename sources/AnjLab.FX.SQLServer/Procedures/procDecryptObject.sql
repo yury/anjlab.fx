@@ -53,7 +53,6 @@ GO
 
 <param name="Schema">object's schema name</param>
 <param name="ObjectName">encrypted object name</param>
-
 */
 
 CREATE PROCEDURE fx.procDecryptObject 
