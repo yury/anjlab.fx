@@ -166,6 +166,7 @@
     <Compile Include="Sys\ICommand.cs" />
     <Compile Include="Sys\IDataTableAdapter.cs" />
     <Compile Include="Sys\InitObjectAction.cs" />
+    <Compile Include="Sys\Linq\Dynamic\DynamicExtensions.cs" />
     <Compile Include="Sys\Lst.cs" />
     <Compile Include="Sys\MemberAttribute.cs" />
     <Compile Include="Sys\OpenService.cs">
