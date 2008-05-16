@@ -594,21 +594,27 @@ namespace AnjLab.FX.Sys.Linq.Dynamic
         static readonly Type[] predefinedTypes = {
                                                      typeof(Object),
                                                      typeof(Boolean),
+                                                     typeof(Boolean?),
                                                      typeof(Char),
                                                      typeof(String),
                                                      typeof(SByte),
                                                      typeof(Byte),
+                                                     typeof(Byte?),
                                                      typeof(Int16),
+                                                     typeof(Int16?),
                                                      typeof(UInt16),
                                                      typeof(Int32),
                                                      typeof(Int32?),
                                                      typeof(UInt32),
                                                      typeof(Int64),
+                                                     typeof(Int64?),
                                                      typeof(UInt64),
                                                      typeof(Single),
                                                      typeof(Double),
                                                      typeof(Decimal),
+                                                     typeof(Decimal?),
                                                      typeof(DateTime),
+                                                     typeof(DateTime?),
                                                      typeof(TimeSpan),
                                                      typeof(Guid),
                                                      typeof(Math),
@@ -2236,7 +2242,7 @@ namespace AnjLab.FX.Sys.Linq.Dynamic
             d.Add(keywordIt, keywordIt);
             d.Add(keywordIif, keywordIif);
             d.Add(keywordNew, keywordNew);
-            foreach (Type type in predefinedTypes) d.Add(type.Name, type);
+            foreach (Type type in predefinedTypes) d.Add(type.FullName, type);
             return d;
         }
     }
