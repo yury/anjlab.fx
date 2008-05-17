@@ -82,6 +82,10 @@ namespace AnjLab.FX.Wpf.Controls
 
         public static readonly DependencyProperty KeyMemberPathProperty = DependencyProperty.Register("KeyMemberPath", typeof(string), typeof(ObjectContentPresenter));
 
+        /// <summary>
+        /// Gets or sets the path to key field in object from ObjectSource.
+        /// </summary>
+        /// <value>The key member path.</value>
         public string KeyMemberPath
         {
             get
@@ -96,6 +100,10 @@ namespace AnjLab.FX.Wpf.Controls
 
         public static readonly DependencyProperty KeyPathProperty = DependencyProperty.Register("KeyPath", typeof(string), typeof(ObjectContentPresenter));
 
+        /// <summary>
+        /// Gets or sets the path to key field.
+        /// </summary>
+        /// <value>The key path.</value>
         public string KeyPath
         {
             get
