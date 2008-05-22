@@ -64,6 +64,7 @@
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ObjectContentPresenter.cs" />
+    <Compile Include="Converters\FormattingConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToValueConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
