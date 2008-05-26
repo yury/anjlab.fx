@@ -287,7 +287,10 @@ WHILE @Column_ID IS NOT NULL
 		--making sure, not to lose any data from flot, real, money, smallmomey, datetime columns
 		SET @Actual_Values = @Actual_Values  +
 		CASE 
-			WHEN @Data_Type IN ('char','varchar','nchar','nvarchar') 
+			WHEN @Data_Type IN ('nchar','nvarchar') 
+				THEN 
+					'COALESCE(''N'''''' + REPLACE(RTRIM(' + @Column_Name + '),'''''''','''''''''''')+'''''''',''NULL'')'
+			WHEN @Data_Type IN ('char','varchar') 
 				THEN 
 					'COALESCE('''''''' + REPLACE(RTRIM(' + @Column_Name + '),'''''''','''''''''''')+'''''''',''NULL'')'
 			WHEN @Data_Type IN ('datetime','smalldatetime') 
