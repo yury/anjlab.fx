@@ -12,7 +12,7 @@ namespace AnjLab.FX.Wpf.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !Equals(value, parameter) ? Visibility.Collapsed : Visibility.Visible;
+            return value == null || parameter == null || !Equals(value.ToString(), parameter.ToString()) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
