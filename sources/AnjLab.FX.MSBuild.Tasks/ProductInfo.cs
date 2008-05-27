@@ -16,7 +16,7 @@ namespace AnjLab.FX.MSBuild.Tasks
 
     public class ProductInfo: Task
     {
-        string[] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices", "AnjLab.FX.System" };
+        string[] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices", "AnjLab.FX.Sys" };
 
         private string _infoFile;
         private string _outputFile;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Hosting;
 using System.Web.UI;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 using System.Web.UI.WebControls;
 
 namespace AnjLab.FX.Web.Controls

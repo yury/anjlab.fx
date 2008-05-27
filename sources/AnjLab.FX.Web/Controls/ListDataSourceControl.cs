@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing.Design;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AnjLab.FX.System;
+using AnjLab.FX.Sys;
 using System.Collections;
 
 namespace AnjLab.FX.Web.Controls
