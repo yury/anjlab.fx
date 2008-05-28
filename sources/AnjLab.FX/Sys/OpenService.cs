@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration.Install;
+using System.IO;
 using System.ServiceProcess;
 
 namespace AnjLab.FX.Sys
@@ -154,23 +155,81 @@ namespace AnjLab.FX.Sys
             installer.Uninstall(null);
         }
 
-        public static void Install(Type exeType, IEnumerable<OpenService> services)
+        public static void Uninstall(IEnumerable<OpenService> services)
         {
-            ServiceProcessInstaller spi = new ServiceProcessInstaller();
-            spi.Account = ServiceAccount.LocalSystem;
-            spi.Username = null;
-            spi.Password = null;
-            spi.Context = new InstallContext("install.txt", new string[0]);
+            foreach(var service in services)
+            {
+                service.Uninstall();
+            }
+        }
+
+        public static void Install(Type exeType, IEnumerable<OpenService> services, string username, string password)
+        {
+            var spi = new ServiceProcessInstaller
+                          {
+                              Account = ServiceAccount.LocalSystem,
+                              Username = username,
+                              Password = password,
+                              Context = new InstallContext("install.txt", new string[0])
+                          };
+
             spi.Context.Parameters["assemblypath"] = exeType.Assembly.Location;
+            
             foreach (OpenService service in services)
                 service.AddInstaller(spi);
 
             spi.Install(new Hashtable());
         }
 
+        public static void Install(Type exeType, IEnumerable<OpenService> services)
+        {
+            Install(exeType, services, null, null);
+        }
+
+        /// <summary>
+        /// List <code>services</code> to the <code>output</code> using ASCII graphics.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="output"></param>
+        public static void ListServices(ICollection<OpenService> services, TextWriter output)
+        {
+            Guard.ArgumentNotNull("services", services);
+
+            output.WriteLine("------------------------------+-----------+-----------+-------------------------");
+            output.WriteLine(" Service Name                 | Installed | State     | Display Name");
+            output.WriteLine("------------------------------+-----------+-----------+-------------------------");
+            foreach (OpenService service in services)
+            {
+                OpenService.ServiceInfo info = service.GetInfo();
+                output.WriteLine(" {0, -29}| {1, -10}| {2, -10}| {3}",
+                    info.Name, info.Installed, info.WinState, info.DisplayName);
+            }
+            output.WriteLine("------------------------------+-----------+-----------+-------------------------");
+        }
+
+        public static void RunServicesInConsole(OpenService[] services, TextReader input, TextWriter output)
+        {
+            output.WriteLine("Running in console mode");
+            output.Write("Starting {0} services...", services.Length);
+
+            Run(services, false);
+
+            output.WriteLine(" done");
+
+            ListServices(services, output);
+
+            output.WriteLine("Press enter to stop services");
+            input.ReadLine();
+
+            output.WriteLine("Stopping services...");
+            
+            Stop(services);
+        }
+
         public virtual string [] DependedOn
         {
             get { return null; }
         }
+
     }
 }
