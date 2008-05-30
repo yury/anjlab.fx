@@ -23,6 +23,11 @@ namespace AnjLab.FX.Net
 
         public static Binding CreateBindingFromScheme(Uri uri)
         {
+            return CreateBindingFromScheme(uri, TransferMode.Buffered);
+        }
+
+        public static Binding CreateBindingFromScheme(Uri uri, TransferMode transferMode)
+        {
             Guard.ArgumentNotNull("uri", uri);
 
             switch (uri.Scheme.ToLower())
@@ -33,6 +38,7 @@ namespace AnjLab.FX.Net
                     netTcp.ReaderQuotas.MaxStringContentLength = int.MaxValue;
                     netTcp.ReaderQuotas.MaxArrayLength = int.MaxValue;
                     netTcp.SendTimeout = MessageSentTimeout;
+                    netTcp.TransferMode = transferMode;
                     return netTcp;
 
                 //                service can't call application wcf service thought net.pipe on vista
@@ -43,7 +49,7 @@ namespace AnjLab.FX.Net
                     netPipe.ReaderQuotas.MaxStringContentLength = int.MaxValue;
                     netPipe.ReaderQuotas.MaxArrayLength = int.MaxValue;
                     netPipe.SendTimeout = MessageSentTimeout;
-
+                    netPipe.TransferMode = transferMode;
                     return netPipe;
                 case "http":
                     var http = new BasicHttpBinding();
@@ -51,6 +57,7 @@ namespace AnjLab.FX.Net
                     http.ReaderQuotas.MaxStringContentLength = int.MaxValue;
                     http.ReaderQuotas.MaxArrayLength = int.MaxValue;
                     http.SendTimeout = MessageSentTimeout;
+                    http.TransferMode = transferMode;
                     return http;
                 default: throw new InvalidOperationException();
             }
