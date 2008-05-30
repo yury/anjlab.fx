@@ -28,15 +28,15 @@ OPEN ForeignKeys
 FETCH NEXT FROM ForeignKeys INTO @fkname, @tabname, @colname
 WHILE @@FETCH_STATUS = 0
 BEGIN
-	IF not exists (select * from sys.indexes where name = N'IX_' + @tabname + N'_' + @colname)
+	IF not exists (select * from sys.indexes where name = N'ix' + @tabname + @colname)
 	BEGIN
 		BEGIN TRY
-			SET @sql = N'CREATE NONCLUSTERED INDEX IX_'+ @tabname + @colname + N' ON ' + @tabname + N'(' + @colname + N' ASC)'
+			SET @sql = N'create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
 			EXEC sp_executesql @sql
-			print N'Index ' + N'IX_' + @tabname + @colname + N' is created successfully'
+			print N'Index ' + N'ix' + @tabname + @colname + N' is created successfully'
 		END TRY
 		BEGIN CATCH
-			print N'Error while creating index: ' + N'IX_' + @tabname + @colname
+			print N'Error while creating index: ' + N'ix' + @tabname + @colname
 		END CATCH
 	END
 	FETCH NEXT FROM ForeignKeys INTO @fkname, @tabname, @colname
