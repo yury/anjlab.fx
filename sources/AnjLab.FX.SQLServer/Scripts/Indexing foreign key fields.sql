@@ -13,6 +13,7 @@
 <date>10/2/2008</date>
 */
 
+SET NOCOUNT ON -- Hide (1 row affected) messages
 
 DECLARE ForeignKeys CURSOR FOR
 	select fk.name as fkname, so.name as tabname, c.name as colname
