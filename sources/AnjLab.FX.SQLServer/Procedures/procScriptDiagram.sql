@@ -57,9 +57,7 @@ BEGIN
 
 	IF @diagram_id IS NULL
 	BEGIN
-		PRINT '/**<error>
-Diagram name [' + @name + '] could not be found.
-</error>*/' 
+		PRINT '/**<error>Diagram name [' + @name + '] could not be found.</error>*/' 
 	END
 	ELSE -- Diagram exists
 	BEGIN
@@ -73,7 +71,7 @@ Diagram name [' + @name + '] could not be found.
 		PRINT '</remarks>'
 		PRINT '<generated>' + LEFT(CONVERT(VARCHAR(23), GETDATE(), 121), 16) + '</generated>'
 		PRINT '*/'
-		PRINT 'PRINT ''=== Restoring diagram [' + @name + '] ==='''
+		PRINT 'PRINT ''   - Start restoring diagram [' + @name + '] '''
 		PRINT '	-- If the sysdiagrams table has not been created in this database, create it!
 				IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ''sysdiagrams'')
 				BEGIN
@@ -97,22 +95,21 @@ Diagram name [' + @name + '] could not be found.
 					)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) 
 					) 
 					EXEC sys.sp_addextendedproperty @name=N''microsoft_database_tools_support'', @value=1 , @level0type=N''SCHEMA'',@level0name=N''dbo'', @level1type=N''TABLE'',@level1name=N''sysdiagrams''
-					PRINT ''[sysdiagrams] table was created as it did not already exist''
+					PRINT ''   - Supporting diagrams is enabled for the database...''
 				END
 				-- Target table will now exist, if it didn''t before'
 		PRINT 'SET NOCOUNT ON -- Hide (1 row affected) messages'
 		PRINT 'DECLARE @newid INT'
 		PRINT 'DECLARE @DiagramSuffix          varchar (50)'
 		PRINT ''
-		PRINT 'PRINT ''Suffix diagram name with date, to ensure uniqueness'''	
+		PRINT 'PRINT ''   - Suffix diagram name with date, to ensure uniqueness...'''	
 		PRINT 'SET @DiagramSuffix = '' '' + LEFT(CONVERT(VARCHAR(23), GETDATE(), 121), 16)'
 		PRINT ''
-		PRINT 'PRINT ''Create row for new diagram'''
 		-- Output the INSERT that _creates_ the diagram record, with a non-NULL [definition],
 		-- important because .WRITE *cannot* be called against a NULL value (in the WHILE loop)
 		-- so we insert 0x so that .WRITE has 'something' to append to...
 		PRINT 'BEGIN TRY'
-		PRINT '    PRINT ''Write diagram ' + @name + ' into new row (and get [diagram_id])'''
+		PRINT 'PRINT ''   - Creating diagram entity [' + @name + ']'
 		SELECT @line =  
 			  '    INSERT INTO sysdiagrams ([name], [principal_id], [version], [definition])'
 			+ ' VALUES (''' + [name] + '''+@DiagramSuffix, '+ CAST (principal_id AS VARCHAR(100))+', '+CAST (version AS VARCHAR(100))+', 0x)'
@@ -121,12 +118,12 @@ Diagram name [' + @name + '] could not be found.
 		PRINT '    SET @newid = SCOPE_IDENTITY()'
 		PRINT 'END TRY'
 		PRINT 'BEGIN CATCH'
-		PRINT '    PRINT ''XxXxX '' + Error_Message() + '' XxXxX'''
-		PRINT '    PRINT ''XxXxX END Diagram Script - fix the error before running again XxXxX'''
+		PRINT '    PRINT ''   - Error occured: '' + Error_Message() + '' '''
+		PRINT '    PRINT ''   - End diagram Script - fix the error before running again.'''
 		PRINT '    RETURN'
 		PRINT 'END CATCH'
 		PRINT ''
-		PRINT 'PRINT ''Now add all the binary data...'''
+		PRINT 'PRINT ''   - Filling diagram binary data ...'''
 		PRINT 'BEGIN TRY'
 		WHILE @index < @size
 		BEGIN
@@ -142,15 +139,15 @@ Diagram name [' + @name + '] could not be found.
 			SET @index = @index + @chunk
 		END
 		PRINT ''
-		PRINT '    PRINT ''Finished writing diagram id '' + CAST(@newid AS VARCHAR(100)) + ''  '''
-		PRINT '    PRINT ''Refresh your Databases-[DbName]-Database Diagrams to see the new diagram '''
+		PRINT '    PRINT ''   - Finished writing diagram id '' + CAST(@newid AS VARCHAR(100)) + ''  '''
+
 		PRINT 'END TRY'
 		PRINT 'BEGIN CATCH'
 		PRINT '    -- If we got here, the [definition] updates didn''t complete, so delete the diagram row'
 		PRINT '    -- (and hope it doesn''t fail!)'
 		PRINT '    DELETE FROM sysdiagrams WHERE diagram_id = @newid'
-		PRINT '    PRINT ''XxXxX '' + Error_Message() + '' XxXxX'''
-		PRINT '    PRINT ''XxXxX END Diagram Script - fix the error before running again XxXxX'''
+		PRINT '    PRINT ''   - Error occured: '' + Error_Message() + '' '''
+		PRINT '    PRINT ''	  - End diagram Script - fix the error before running again.'''
 		PRINT '    RETURN'
 		PRINT 'END CATCH'
 	END

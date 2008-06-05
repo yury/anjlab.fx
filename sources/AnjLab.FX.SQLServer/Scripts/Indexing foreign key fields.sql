@@ -31,12 +31,12 @@ BEGIN
 	IF not exists (select * from sys.indexes where name = N'ix' + @tabname + @colname)
 	BEGIN
 		BEGIN TRY
-			SET @sql = N'create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
+			SET @sql = N'Create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
 			EXEC sp_executesql @sql
-			print N'Index ' + N'ix' + @tabname + @colname + N' is created successfully'
+			print N'   - Index ' + N'ix' + @tabname + @colname + N' is created.'
 		END TRY
 		BEGIN CATCH
-			print N'Error while creating index: ' + N'ix' + @tabname + @colname
+			print N'   - Error while creating index: ' + N'ix' + @tabname + @colname
 		END CATCH
 	END
 	FETCH NEXT FROM ForeignKeys INTO @fkname, @tabname, @colname
