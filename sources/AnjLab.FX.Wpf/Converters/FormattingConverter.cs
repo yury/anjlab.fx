@@ -7,6 +7,9 @@ using System.Windows.Data;
 
 namespace AnjLab.FX.Wpf.Converters
 {
+    /// <summary>
+    /// example: ConverterParameter='\{0:d\}'
+    /// </summary>
     [ValueConversion(typeof(object), typeof(string))]
     public class FormattingConverter : IValueConverter
     {
