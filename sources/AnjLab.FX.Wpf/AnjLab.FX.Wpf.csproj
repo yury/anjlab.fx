@@ -63,7 +63,9 @@
     <Compile Include="Calculator\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
+    <Compile Include="Controls\MaskedTextBox.cs" />
     <Compile Include="Controls\ObjectContentPresenter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualToVisibilityConverter.cs" />
