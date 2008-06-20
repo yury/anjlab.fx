@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using System.Globalization;
 
@@ -10,6 +11,11 @@ namespace AnjLab.FX.Wpf.Controls
 {
     public class NumericTextBox : MaskedTextBox
     {
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof (object),
+                                                                                              typeof (NumericTextBox),
+                                                                                              new PropertyMetadata(
+                                                                                                  Value_Changed));
+
         public NumericTextBox()
         {
             Mask = "0.00";
@@ -18,19 +24,39 @@ namespace AnjLab.FX.Wpf.Controls
             ForceCaretPosition = false;
         }
 
-        public double Value
+        public object Value
         {
-            get
-            {
-                double result;
-                return double.TryParse(Text, out result) ? result : result;
-            }
-            set
-            {
-                Mask = numRegex.Replace(value.ToString(CultureInfo.InvariantCulture), "0");
-                Text = value.ToString(Mask);
-            }
+            get { return GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
+
+        
+        private static void Value_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (NumericTextBox) d;
+            if (instance._isTextChanged) return;
+
+            
+            var value = Convert.ToDouble(e.NewValue);
+
+            var mask = numRegex.Replace(value.ToString(CultureInfo.InvariantCulture), "0");
+            instance.Mask = mask;
+            instance.Text = value.ToString(instance.Mask);
+        }
+
+        private bool _isTextChanged;
+        protected override void OnTextChanged(System.Windows.Controls.TextChangedEventArgs e)
+        {
+            _isTextChanged = true;
+
+            base.OnTextChanged(e);
+            
+            double result;
+            Value = double.TryParse(Text, out result) ? result : result;
+
+            _isTextChanged = false;
+        }
+
 
         static readonly Regex numRegex = new Regex(@"\d", RegexOptions.Compiled);
 
