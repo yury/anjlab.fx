@@ -4,7 +4,7 @@ go
 
 /*
 <summary>
-	This funtion returns yield (in %%), based on time period (taking into account leap years) 
+	Returns yield (in %%), based on time period (taking into account leap years) 
 	and revenue.
 <summary>
 
@@ -23,33 +23,34 @@ go
 </example>
 */
 
-CREATE FUNCTION fx.fnCalculateYield(@StartDate datetime, @EndDate datetime, @PresentValue money, @FutureValue money) 
-RETURNS real AS
-BEGIN
+create function fx.fnCalculateYield(@StartDate datetime, @EndDate datetime, @PresentValue money, @FutureValue money) 
+returns real as
+begin
 
-DECLARE @Yield real
+set nocount on
+declare @Yield real
 
-SELECT @Yield = 
+select @Yield = 
 	100 * ((@FutureValue - @PresentValue ) / @PresentValue ) * 
 	1/(cast(sum(Days * cast(LeapYear - 1 as bit)) as real)/365 + cast(sum(Days * LeapYear) as real)/366)
-FROM (
-	SELECT 
+from (
+	select 
 		datediff(day, YearStartDate, YearEndDate) as Days,
 		fx.fnCheckLeapYear(YearStartDate) as LeapYear
-	FROM (
-		SELECT 
+	from (
+		select 
 			YearStartDate = CASE Years WHEN year(@StartDate) THEN @StartDate ELSE '01/01/' + str(Years) END,
 			YearEndDate   = CASE Years WHEN year(@EndDate)   THEN @EndDate	 ELSE '01/01/' + str(Years + 1) END
-		FROM (
-			SELECT Year(@StartDate) + RecordId - 1 as Years
-			FROM fx.fnGetEmptyRowSet(datediff(year, @StartDate, @EndDate) + 1)
+		from (
+			select Year(@StartDate) + RecordId - 1 as Years
+			from fx.fnGetEmptyRowSet(datediff(year, @StartDate, @EndDate) + 1)
 		) as a
 	) as b
 ) as c
 
 
-RETURN @Yield
+return @Yield
 
-END
+end
 
 GO

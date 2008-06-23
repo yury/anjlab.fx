@@ -1,12 +1,12 @@
 if exists (select * from sysobjects where id = object_id(N'fx.procDecryptObject') and xtype in (N'P'))
-DROP PROCEDURE fx.procDecryptObject
+drop procedure fx.procDecryptObject
 GO
 /*
 <summary>
-	Decrypt SQL 2005 stored procedures, functions, views, and triggers
+	Decrypt SQL Server 2005 stored procedures, functions, views, and triggers
 </summary>
 
-<description>
+<remarks>
 	HEADS UP: In order to run this script you must log in
 	to the server in DAC mode: To do so, type
 	ADMIN:<SQLInstanceName> as your server name and use the "sa"
@@ -39,7 +39,7 @@ GO
 	enrypted object with the binary representation of the dummy
 	object and the binary version of the object in clear-text
 	is used to decrypt the original object.
-<description>					 
+</remarks>					 
 
 <author>
 	Omri Bahat
@@ -51,140 +51,141 @@ GO
 
 <date>01/01/2007</date>
 
-<param name="Schema">object's schema name</param>
-<param name="ObjectName">encrypted object name</param>
+<param name="Schema">Object's schema name</param>
+<param name="ObjectName">Encrypted object name</param>
 */
 
-CREATE PROCEDURE fx.procDecryptObject 
+create procedure fx.procDecryptObject 
 ( 
-	@Schema NVARCHAR(128)=N'dbo', 
-	@ObjectName NVARCHAR(128)=N'myproc'
+	@Schema nvarchar(128)=N'dbo', 
+	@ObjectName nvarchar(128)=N'myproc'
 ) AS
-BEGIN
+begin
 
-DECLARE @i INT
-DECLARE @ObjectDataLength INT
-DECLARE @ContentOfEncryptedObject NVARCHAR(MAX)
-DECLARE @ContentOfDecryptedObject NVARCHAR(MAX)
-DECLARE @ContentOfFakeObject NVARCHAR(MAX)
-DECLARE @ContentOfFakeEncryptedObject NVARCHAR(MAX)
-DECLARE @ObjectType NVARCHAR(128)
-DECLARE @ObjectID INT
+set nocount on
+declare @i int
+declare @Objectdatalength int
+declare @ContentOfEncryptedObject nvarchar(MAX)
+declare @ContentOfDecryptedObject nvarchar(MAX)
+declare @ContentOfFakeObject nvarchar(MAX)
+declare @ContentOfFakeEncryptedObject nvarchar(MAX)
+declare @ObjectType nvarchar(128)
+declare @ObjectID int
 
-SET NOCOUNT ON
+set nocount on
 
-SET @ObjectID = OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']')
+set @ObjectID = object_id('[' + @Schema + '].[' + @ObjectName + ']')
 
 -- Check that the provided object exists in the database.
-IF @ObjectID IS NULL
-BEGIN
-	RAISERROR('The object name or schema provided does not exist in the database', 16, 1)
-	RETURN
-END
+if @ObjectID is null
+begin
+	raiserror('The object name or schema provided does not exist in the database', 16, 1)
+	return
+end
 
 -- Check that the provided object is encrypted.
-IF NOT EXISTS(SELECT TOP 1 * FROM syscomments WHERE id = @ObjectID AND encrypted = 1)
-BEGIN
-	RAISERROR('The object provided exists however it is not encrypted. Aborting.', 16, 1)
-	RETURN
-END
+if not exists(select top 1 * from syscomments where id = @ObjectID and encrypted = 1)
+begin
+	raiserror('The object provided exists however it is not encrypted. Aborting.', 16, 1)
+	return
+end
 
 -- Determine the type of the object
-IF OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']', 'PROCEDURE') IS NOT NULL
-	SET @ObjectType = 'PROCEDURE'
-ELSE
-	IF OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']', 'TRIGGER') IS NOT NULL
-		SET @ObjectType = 'TRIGGER'
-	ELSE
-		IF OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']', 'VIEW') IS NOT NULL
-			SET @ObjectType = 'VIEW'
-		ELSE
-			SET @ObjectType = 'FUNCTION'
+if object_id('[' + @Schema + '].[' + @ObjectName + ']', 'PROCEDURE') is not null
+	set @ObjectType = 'PROCEDURE'
+else
+	if object_id('[' + @Schema + '].[' + @ObjectName + ']', 'TRIGGER') is not null
+		set @ObjectType = 'TRIGGER'
+	else
+		if object_id('[' + @Schema + '].[' + @ObjectName + ']', 'VIEW') is not null
+			set @ObjectType = 'VIEW'
+		else
+			set @ObjectType = 'FUNCTION'
 
 -- Get the binary representation of the object- syscomments no longer holds
 -- the content of encrypted object.
-SELECT TOP 1 @ContentOfEncryptedObject = imageval
-FROM sys.sysobjvalues
-WHERE objid = OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']')
-        AND valclass = 1 and subobjid = 1
+select top 1 @ContentOfEncryptedObject = imageval
+from sys.sysobjvalues
+where objid = object_id('[' + @Schema + '].[' + @ObjectName + ']')
+        and valclass = 1 and subobjid = 1
 
-SET @ObjectDataLength = DATALENGTH(@ContentOfEncryptedObject)/2
+set @Objectdatalength = datalength(@ContentOfEncryptedObject)/2
 
 
 -- We need to alter the existing object and make it into a dummy object
 -- in order to decrypt its content. This is done in a transaction
 -- (which is later rolled back) to ensure that all changes have a minimal
 -- impact on the database.
-SET @ContentOfFakeObject = N'ALTER ' + @ObjectType + N' [' + @Schema + N'].[' + @ObjectName + N'] WITH ENCRYPTION AS'
+set @ContentOfFakeObject = N'ALTER ' + @ObjectType + N' [' + @Schema + N'].[' + @ObjectName + N'] WITH ENCRYPTION AS'
 
-WHILE DATALENGTH(@ContentOfFakeObject)/2 < @ObjectDataLength
-BEGIN
-        IF DATALENGTH(@ContentOfFakeObject)/2 + 4000 < @ObjectDataLength
-                SET @ContentOfFakeObject = @ContentOfFakeObject + REPLICATE(N'-', 4000)
-        ELSE
-                SET @ContentOfFakeObject = @ContentOfFakeObject + REPLICATE(N'-', @ObjectDataLength - (DATALENGTH(@ContentOfFakeObject)/2))
-END
+while datalength(@ContentOfFakeObject)/2 < @Objectdatalength
+begin
+        if datalength(@ContentOfFakeObject)/2 + 4000 < @Objectdatalength
+                set @ContentOfFakeObject = @ContentOfFakeObject + replicate(N'-', 4000)
+        else
+                set @ContentOfFakeObject = @ContentOfFakeObject + replicate(N'-', @Objectdatalength - (datalength(@ContentOfFakeObject)/2))
+end
 
 -- Since we need to alter the object in order to decrypt it, this is done
 -- in a transaction
-SET XACT_ABORT OFF
-BEGIN TRAN
+set xact_abort off
+begin tran
 
-EXEC(@ContentOfFakeObject)
+exec(@ContentOfFakeObject)
 
-IF @@ERROR <> 0
-        ROLLBACK TRAN
+if @@error <> 0
+        rollback tran
 
 -- Get the encrypted content of the new "fake" object.
-SELECT TOP 1 @ContentOfFakeEncryptedObject = imageval
-FROM sys.sysobjvalues
-WHERE objid = OBJECT_ID('[' + @Schema + '].[' + @ObjectName + ']')
-        AND valclass = 1 and subobjid = 1
+select top 1 @ContentOfFakeEncryptedObject = imageval
+from sys.sysobjvalues
+where objid = object_id('[' + @Schema + '].[' + @ObjectName + ']')
+        and valclass = 1 and subobjid = 1
 
-IF @@TRANCOUNT > 0
-        ROLLBACK TRAN
+if @@trancount > 0
+        rollback tran
 
 -- Generate a CREATE script for the dummy object text.
-SET @ContentOfFakeObject = N'CREATE ' + @ObjectType + N' [' + @Schema + N'].[' + @ObjectName + N'] WITH ENCRYPTION AS'
+set @ContentOfFakeObject = N'CREATE ' + @ObjectType + N' [' + @Schema + N'].[' + @ObjectName + N'] WITH ENCRYPTION AS'
 
-WHILE DATALENGTH(@ContentOfFakeObject)/2 < @ObjectDataLength
-BEGIN
-        IF DATALENGTH(@ContentOfFakeObject)/2 + 4000 < @ObjectDataLength
-                SET @ContentOfFakeObject = @ContentOfFakeObject + REPLICATE(N'-', 4000)
-        ELSE
-                SET @ContentOfFakeObject = @ContentOfFakeObject + REPLICATE(N'-', @ObjectDataLength - (DATALENGTH(@ContentOfFakeObject)/2))
-END
+while datalength(@ContentOfFakeObject)/2 < @Objectdatalength
+begin
+        if datalength(@ContentOfFakeObject)/2 + 4000 < @Objectdatalength
+                set @ContentOfFakeObject = @ContentOfFakeObject + replicate(N'-', 4000)
+        else
+                set @ContentOfFakeObject = @ContentOfFakeObject + replicate(N'-', @Objectdatalength - (datalength(@ContentOfFakeObject)/2))
+end
 
 
-SET @i = 1
+set @i = 1
 
 --Fill the variable that holds the decrypted data with a filler character
-SET @ContentOfDecryptedObject = N''
+set @ContentOfDecryptedObject = N''
 
-WHILE DATALENGTH(@ContentOfDecryptedObject)/2 < @ObjectDataLength
-BEGIN
-        IF DATALENGTH(@ContentOfDecryptedObject)/2 + 4000 < @ObjectDataLength
-                SET @ContentOfDecryptedObject = @ContentOfDecryptedObject + REPLICATE(N'A', 4000)
-        ELSE
-                SET @ContentOfDecryptedObject = @ContentOfDecryptedObject + REPLICATE(N'A', @ObjectDataLength - (DATALENGTH(@ContentOfDecryptedObject)/2))
-END
+while datalength(@ContentOfDecryptedObject)/2 < @Objectdatalength
+begin
+        if datalength(@ContentOfDecryptedObject)/2 + 4000 < @Objectdatalength
+                set @ContentOfDecryptedObject = @ContentOfDecryptedObject + replicate(N'A', 4000)
+        else
+                set @ContentOfDecryptedObject = @ContentOfDecryptedObject + replicate(N'A', @Objectdatalength - (datalength(@ContentOfDecryptedObject)/2))
+end
 
 
-WHILE @i <= @ObjectDataLength
-BEGIN
+while @i <= @Objectdatalength
+begin
         --xor real & fake & fake encrypted
-        SET @ContentOfDecryptedObject = STUFF(@ContentOfDecryptedObject, @i, 1,
-                NCHAR(
-                        UNICODE(SUBSTRING(@ContentOfEncryptedObject, @i, 1)) ^
+        set @ContentOfDecryptedObject = stuff(@ContentOfDecryptedObject, @i, 1,
+                nchar(
+                        unicode(substring(@ContentOfEncryptedObject, @i, 1)) ^
                         (
-                                UNICODE(SUBSTRING(@ContentOfFakeObject, @i, 1)) ^
-                                UNICODE(SUBSTRING(@ContentOfFakeEncryptedObject, @i, 1))
+                                unicode(substring(@ContentOfFakeObject, @i, 1)) ^
+                                unicode(substring(@ContentOfFakeEncryptedObject, @i, 1))
                         )))
 
-        SET @i = @i + 1
-END
+        set @i = @i + 1
+end
 
--- PRINT the content of the decrypted object
-PRINT(@ContentOfDecryptedObject)
+-- PRint the content of the decrypted object
+print(@ContentOfDecryptedObject)
 
-END
+end

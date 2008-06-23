@@ -4,7 +4,7 @@ go
 
 /*
 <summary>
-	This function returns date value from given datetime variable 
+	Returns date value from given datetime variable 
 </summary>
 
 <author>

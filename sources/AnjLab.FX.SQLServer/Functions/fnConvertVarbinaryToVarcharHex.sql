@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnConvertVarbinaryToVarcharHex') and xtype in (N'FN', N'IF', N'TF'))
-	DROP FUNCTION fx.fnConvertVarbinaryToVarcharHex
+if exists (select * from sysobjects where id = object_id(N'fx.fnConvertVarbinaryToVarcharHex') and xtype in (N'FN', N'if', N'TF'))
+	drop function fx.fnConvertVarbinaryToVarcharHex
 GO
 
 /*
@@ -29,7 +29,7 @@ GO
 
 <remarks>
 	Clay Beatty's original function was written for Sql Server 2000.
-	Sql Server 2005 introduces the VARBINARY(max) datatype which this 
+	Sql Server 2005 introduces the varbinary(max) datatype which this 
 	function now uses.
 
 	References
@@ -47,35 +47,37 @@ GO
 <returns>Hexadecimal representation of binary data, using chars [0-0a-f]</returns>
 */
 
-CREATE FUNCTION fx.fnConvertVarbinaryToVarcharHex
+create function fx.fnConvertVarbinaryToVarcharHex
 (
-	@VarbinaryValue	VARBINARY(max)
+	@VarbinaryValue	varbinary(max)
 )
-RETURNS VARCHAR(max) AS
-	BEGIN
-	DECLARE @NumberOfBytes 	INT
+returns varchar(max) AS
+	begin
 
-	SET @NumberOfBytes = DATALENGTH(@VarbinaryValue)
+	set nocount on
+	declare @NumberOfBytes 	int
+
+	set @NumberOfBytes = datalength(@VarbinaryValue)
 	-- PART ONE --
-	IF (@NumberOfBytes > 4)
-	BEGIN
-		DECLARE @FirstHalfNumberOfBytes INT
-		DECLARE @SecondHalfNumberOfBytes INT
-		SET @FirstHalfNumberOfBytes  = @NumberOfBytes/2
-		SET @SecondHalfNumberOfBytes = @NumberOfBytes - @FirstHalfNumberOfBytes
+	if (@NumberOfBytes > 4)
+	begin
+		declare @FirstHalfNumberOfBytes int
+		declare @SecondHalfNumberOfBytes int
+		set @FirstHalfNumberOfBytes  = @NumberOfBytes/2
+		set @SecondHalfNumberOfBytes = @NumberOfBytes - @FirstHalfNumberOfBytes
 		-- Call this function recursively with the two parts of the input split in half
-		RETURN fx.fnConvertVarbinaryToVarcharHex(CAST(SUBSTRING(@VarbinaryValue, 1					        , @FirstHalfNumberOfBytes)  AS VARBINARY(max)))
-			 + fx.fnConvertVarbinaryToVarcharHex(CAST(SUBSTRING(@VarbinaryValue, @FirstHalfNumberOfBytes+1 , @SecondHalfNumberOfBytes) AS VARBINARY(max)))
-	END
+		return fx.fnConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, 1					        , @FirstHalfNumberOfBytes)  as varbinary(max)))
+			 + fx.fnConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, @FirstHalfNumberOfBytes+1 , @SecondHalfNumberOfBytes) as varbinary(max)))
+	end
 	
-	IF (@NumberOfBytes = 0)
-	BEGIN
-		RETURN ''	-- No bytes found, therefore no 'hex string' is returned
-	END
+	if (@NumberOfBytes = 0)
+	begin
+		return ''	-- No bytes found, therefore no 'hex string' is returned
+	end
 	
 	-- PART TWO --
-	DECLARE @LowByte 		INT
-	DECLARE @HighByte 		INT
+	declare @LowByte 		int
+	declare @HighByte 		int
 	-- @NumberOfBytes <= 4 (four or less characters/8 hex digits were input)
 	--						 eg. 88887777 66665555 44443333 22221111
 	-- We'll process ONLY the right-most (least-significant) Byte, which consists
@@ -84,32 +86,32 @@ RETURNS VARCHAR(max) AS
 
 	-- 1. Carve off the rightmost four bits/single hex digit (ie 1111)
 	--    BINARY AND 15 will result in a number with maxvalue of 15
-	SET @LowByte = CAST(@VarbinaryValue AS INT) & 15
+	set @LowByte = CAST(@VarbinaryValue as int) & 15
 	-- Now determine which ASCII char value
-	SET @LowByte = CASE 
-	WHEN (@LowByte < 10)		-- 9 or less, convert to digits [0-9]
-		THEN (48 + @LowByte)	-- 48 ASCII = 0 ... 57 ASCII = 9
-		ELSE (87 + @LowByte)	-- else 10-15, convert to chars [a-f]
-	END							-- (87+10)97 ASCII = a ... (87+15_102 ASCII = f
+	set @LowByte = case 
+	when (@LowByte < 10)		-- 9 or less, convert to digits [0-9]
+		then (48 + @LowByte)	-- 48 ASCII = 0 ... 57 ASCII = 9
+		else (87 + @LowByte)	-- else 10-15, convert to chars [a-f]
+	end							-- (87+10)97 ASCII = a ... (87+15_102 ASCII = f
 
 	-- 2. Carve off the rightmost eight bits/single hex digit (ie 22221111)
 	--    Divide by 16 does a shift-left (now processing 2222)
-	SET @HighByte = CAST(@VarbinaryValue AS INT) & 255
-	SET @HighByte = (@HighByte / 16)
+	set @HighByte = CAST(@VarbinaryValue as int) & 255
+	set @HighByte = (@HighByte / 16)
 	-- Again determine which ASCII char value	
-	SET @HighByte = CASE 
-	WHEN (@HighByte < 10)		-- 9 or less, convert to digits [0-9]
-		THEN (48 + @HighByte)	-- 48 ASCII = 0 ... 57 ASCII = 9
-		ELSE (87 + @HighByte)	-- else 10-15, convert to chars [a-f]
-	END							-- (87+10)97 ASCII = a ... (87+15)102 ASCII = f
+	set @HighByte = case 
+	when (@HighByte < 10)		-- 9 or less, convert to digits [0-9]
+		then (48 + @HighByte)	-- 48 ASCII = 0 ... 57 ASCII = 9
+		else (87 + @HighByte)	-- else 10-15, convert to chars [a-f]
+	end							-- (87+10)97 ASCII = a ... (87+15)102 ASCII = f
 	
 	-- 3. Trim the byte (two hex values) from the right (least significant) input Binary
 	--    in preparation for further parsing
-	SET @VarbinaryValue = SUBSTRING(@VarbinaryValue, 1, (@NumberOfBytes-1))
+	set @VarbinaryValue = substring(@VarbinaryValue, 1, (@NumberOfBytes-1))
 
 	-- 4. Recursively call this method on the remaining Binary data, concatenating the two 
 	--    hexadecimal 'values' we just decoded as their ASCII character representation
 	--    ie. we pass 88887777 66665555 44443333 back to this function, adding XY to the result string
-	RETURN fx.fnConvertVarbinaryToVarcharHex(@VarbinaryValue) + CHAR(@HighByte) + CHAR(@LowByte)
-END
+	return fx.fnConvertVarbinaryToVarcharHex(@VarbinaryValue) + char(@HighByte) + char(@LowByte)
+end
 GO

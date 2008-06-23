@@ -4,7 +4,7 @@ go
 
 /*
 <summary>
-	This funtion returns rowset with defined number of record
+	Returns rowset with defined number of record
 </summary>
 
 <author>
@@ -16,21 +16,33 @@ go
 <date>7\11\2007</date>
 
 <example>
-	select * from fx.fnGetEmptyRowSet(5)
+	Example 1. Multiply scalar value 
+		select 'Hello, World!' from fx.fnGetEmptyRowSet(5)
+	Example 2. Get list of numbers between two values (5 and 10)
+		select RecordId from fx.fnGetEmptyRowSet(10) where RecordID >= 5
+	Example 3. Get list of missed numbers in sequence
+		declare @test table (RecordID int)
+		insert into @test select top 10 RecordID from fx.fnGetEmptyRowSet(20) order by newid()
+		select f.RecordID
+			from fx.fnGetEmptyRowSet(20) f
+			left join @test t on f.RecordID = t.RecordID
+			where t.RecordID is null
+			order by f.RecordID desc
+	Example 4. Get list of years between two dates (now and 1000 days ago)
+		select RecordId from fx.fnGetEmptyRowSet(year(getDate())) where RecordID >= year(getDate()-1000)	
 </example>
 */
 
-CREATE FUNCTION fx.fnGetEmptyRowSet(@Records int) 
-RETURNS @Empty table(RecordId int) AS
-BEGIN
+create function fx.fnGetEmptyRowSet(@Records int) 
+returns @Empty table(RecordId int) as
+begin
 
-WHILE @Records > 0 
-BEGIN
-	INSERT INTO @Empty VALUES(@Records)
-	SET @Records = @Records - 1
-END
+while @Records > 0 begin
+	insert into @Empty values(@Records)
+	set @Records = @Records - 1
+end
 
-RETURN
+return
 
-END
+end
 
