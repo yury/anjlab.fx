@@ -54,7 +54,6 @@ create function fx.fnConvertVarbinaryToVarcharHex
 returns varchar(max) AS
 	begin
 
-	set nocount on
 	declare @NumberOfBytes 	int
 
 	set @NumberOfBytes = datalength(@VarbinaryValue)

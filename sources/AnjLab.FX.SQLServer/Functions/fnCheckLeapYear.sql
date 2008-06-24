@@ -21,10 +21,11 @@ go
 create function fx.fnCheckLeapYear(@dt datetime)
 returns bit as
 begin
-  set nocount on
+
   declare @y int
   select @y = year(@dt)
   return case when (@y % 4 = 0) and ((@y % 100 <> 0) or (@y % 400 = 0)) then 1 else 0 end
+
 end
 GO
 

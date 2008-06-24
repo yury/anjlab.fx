@@ -16,6 +16,7 @@ Begin DataProject = "AnjLab.FX.SQLServer"
       Script = "fnGetTimeFromDateTime.sql"
       Script = "fnConvertVarbinaryToVarcharHex.sql"
       Script = "fnGetDateAsString.sql"
+      Script = "fnRemoveDuplicateSymbols.sql"
       Script = "fnGetEmptyRowSet.sql"
    End
    Node = "Install.cmd"

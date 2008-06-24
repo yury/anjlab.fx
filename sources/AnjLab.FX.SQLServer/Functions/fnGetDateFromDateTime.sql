@@ -11,6 +11,7 @@ go
 	Alex Zakharov
 	Copyright © AnjLab 2008, http://anjlab.com. All rights reserved.
 	The code can be used for free as long as this copyright notice is not removed.
+	The main idea was discussed on http://sql.ru
 <author>
 
 <example>
@@ -19,7 +20,7 @@ go
 */
 
 create function fx.fnGetDateFromDateTime(@dt datetime)
-returns datetime AS
+returns datetime as
 begin
 	return convert(datetime, floor(convert(float, @dt)))
 end

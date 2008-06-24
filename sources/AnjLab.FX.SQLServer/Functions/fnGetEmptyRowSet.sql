@@ -34,7 +34,7 @@ go
 */
 
 create function fx.fnGetEmptyRowSet(@Records int) 
-returns @Empty table(RecordId int) as
+returns @Empty table(RecordID int) as
 begin
 
 while @Records > 0 begin

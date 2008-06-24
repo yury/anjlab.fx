@@ -19,7 +19,8 @@ go
 <example>
 	NOTE: table valued function fx.fnGetEmptyRowSet and scalar function fx.fnCheckLeapYear
 	must be created before using.
-	PRINT fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+	print fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+	> 36.5191
 </example>
 */
 
@@ -27,7 +28,6 @@ create function fx.fnCalculateYield(@StartDate datetime, @EndDate datetime, @Pre
 returns real as
 begin
 
-set nocount on
 declare @Yield real
 
 select @Yield = 
