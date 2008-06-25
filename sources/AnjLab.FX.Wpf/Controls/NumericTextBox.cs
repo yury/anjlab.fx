@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Globalization;
+using System.ComponentModel;
 
 namespace AnjLab.FX.Wpf.Controls
 {
@@ -13,8 +14,21 @@ namespace AnjLab.FX.Wpf.Controls
     {
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof (object),
                                                                                               typeof (NumericTextBox),
-                                                                                              new PropertyMetadata(
-                                                                                                  Value_Changed));
+                                                                                              new FrameworkPropertyMetadata(
+                                                                                                  Value_Changed) { BindsTwoWayByDefault = true});
+
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged",
+                                                                                                RoutingStrategy.Bubble,
+                                                                                                typeof (
+                                                                                                    RoutedEventHandler),
+                                                                                                typeof (NumericTextBox));
+
+        public static readonly DependencyProperty ValueTypeProperty = DependencyProperty.Register("ValueType",
+                                                                                                  typeof (Type),
+                                                                                                  typeof (NumericTextBox),
+                                                                                                  new PropertyMetadata(
+                                                                                                      typeof(double)));
+
 
         public NumericTextBox()
         {
@@ -30,18 +44,51 @@ namespace AnjLab.FX.Wpf.Controls
             set { SetValue(ValueProperty, value); }
         }
 
+        public event RoutedEventHandler ValueChanged
+        {
+            add { AddHandler(ValueChangedEvent, value);}
+            remove {RemoveHandler(ValueChangedEvent, value);}
+        }
+
+        public Type ValueType
+        {
+            get { return GetValue(ValueTypeProperty) as Type; }
+            set { SetValue(ValueTypeProperty, value); }
+        }
         
         private static void Value_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericTextBox) d;
             if (instance._isTextChanged) return;
 
-            
-            var value = Convert.ToDouble(e.NewValue);
+            if (e.NewValue != null)
+                instance.ValueType = e.NewValue.GetType();
 
-            var mask = numRegex.Replace(value.ToString(CultureInfo.InvariantCulture), "0");
-            instance.Mask = mask;
-            instance.Text = value.ToString(instance.Mask);
+            instance.OnValueChanged(Convert.ToString(e.NewValue));
+        }
+
+        protected void OnValueChanged(string newValue)
+        {
+            if (string.IsNullOrEmpty(newValue)) newValue = "0";
+
+            var converter = TypeDescriptor.GetConverter(ValueType);
+            var value = converter.ConvertFrom(newValue);
+
+            var mask = numRegex.Replace(converter.ConvertToInvariantString(value), "0");
+
+            var msp = GetDecimalSeparatorPosition(mask);
+            var decPlaces = Mask.Length - GetDecimalSeparatorPosition(Mask) - 1;
+
+            if (decPlaces > 0)
+            {
+                if (mask.Length > msp && mask.Length < msp + 1 + decPlaces)
+                    mask = mask.Insert(msp + 1, 0.ToString("D" + (decPlaces + msp + 1 - mask.Length)));
+                else if (!mask.Contains("."))
+                    mask = mask + "." + 0.ToString("D" + decPlaces);
+            }
+
+            Mask = FormatMask(mask);
+            Text = Convert.ToDouble(value).ToString(Mask);
         }
 
         private bool _isTextChanged;
@@ -50,9 +97,16 @@ namespace AnjLab.FX.Wpf.Controls
             _isTextChanged = true;
 
             base.OnTextChanged(e);
-            
+
+            var converter = TypeDescriptor.GetConverter(ValueType);
+
             double result;
-            Value = double.TryParse(Text, out result) ? result : result;
+            if(double.TryParse(Text, out result))
+                Value = converter.ConvertFromInvariantString(result.ToString(CultureInfo.InvariantCulture));
+            else
+                Value = converter.ConvertFromString("0");
+
+            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
 
             _isTextChanged = false;
         }
