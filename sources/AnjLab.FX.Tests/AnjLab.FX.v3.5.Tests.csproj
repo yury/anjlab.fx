@@ -91,6 +91,7 @@
     <Compile Include="Sys\LstTests.cs" />
     <Compile Include="Sys\OpenServiceTests.cs" />
     <Compile Include="Sys\PairTests.cs" />
+    <Compile Include="Sys\ReflectorTests.cs" />
     <Compile Include="Sys\StrTests.cs" />
     <Compile Include="Tasks\Scheduling\EventQueueTests.cs" />
     <Compile Include="Tasks\Scheduling\TriggerTests.cs" />
