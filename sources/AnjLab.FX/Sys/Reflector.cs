@@ -31,23 +31,23 @@ namespace AnjLab.FX.Sys
             }
         }
 
-        public static IEnumerable<KeyValuePair<string, object>> GetMemberEnumerable(object obj)
+        public static IEnumerable<Pair<string, object>> GetMemberEnumerable(object obj)
         {
             return GetMemberEnumerable(obj, BindingFlags.Public | BindingFlags.Instance);
         }
 
-        public static IEnumerable<KeyValuePair<string, object>> GetMemberEnumerable(object obj, BindingFlags flags)
+        public static IEnumerable<Pair<string, object>> GetMemberEnumerable(object obj, BindingFlags flags)
         {
             foreach(var field in obj.GetType().GetFields(flags))
             {
                 if(IsBrowsable(field))
-                    yield return new KeyValuePair<string, object>(GetMemberDescription(field), field.GetValue(obj));
+                    yield return new Pair<string, object>(GetMemberDescription(field), field.GetValue(obj));
             }
 
             foreach(var property in obj.GetType().GetProperties(flags))
             {
                 if(IsBrowsable(property))
-                    yield return new KeyValuePair<string, object>(GetMemberDescription(property), property.GetValue(obj, null));
+                    yield return new Pair<string, object>(GetMemberDescription(property), property.GetValue(obj, null));
             }
         }
 
