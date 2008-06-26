@@ -41,16 +41,16 @@ namespace AnjLab.FX.Tests.Sys
 
             result = Reflector.GetMemberEnumerable(new TestClass2());
             Assert.AreEqual(1, result.Count());
-            Assert.AreEqual("TestField1", result.First().Key);
-            Assert.AreEqual(null, result.First().Value);
+            Assert.AreEqual("TestField1", result.First().A);
+            Assert.AreEqual(null, result.First().B);
 
             result = Reflector.GetMemberEnumerable(new TestClass3 { TestProperty1 = "Test"});
             Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("Тестовое поле", result.First().Key);
-            Assert.AreEqual("Test", result.First().Value);
+            Assert.AreEqual("Тестовое поле", result.First().A);
+            Assert.AreEqual("Test", result.First().B);
 
-            Assert.AreEqual("TestProperty1", result.ToArray()[1].Key);
-            Assert.AreEqual("Test", result.ToArray()[1].Value);
+            Assert.AreEqual("TestProperty1", result.ToArray()[1].A);
+            Assert.AreEqual("Test", result.ToArray()[1].B);
         }
     }
 }
