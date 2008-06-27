@@ -9,14 +9,33 @@ namespace AnjLab.FX.Net
     {
         private static readonly TimeSpan MessageSentTimeout = TimeSpan.FromMinutes(10);
 
-        public static ServiceChannel<TChannel> CreateChannel<TChannel>(Uri endpoint)
+        public static ServiceChannel<TChannel> CreateChannel<TChannel>(Uri endpoint) where TChannel : class
         {
             Guard.ArgumentNotNull("endpoint", endpoint);
 
-            return new ServiceChannel<TChannel>(ChannelFactory<TChannel>.CreateChannel(CreateBindingFromScheme(endpoint), new EndpointAddress(endpoint)));
+            var c = new ChannelFactory<TChannel>(CreateBindingFromScheme(endpoint),
+                                                           new EndpointAddress(endpoint));
+
+            if (endpoint.Scheme.ToLower() == "https")
+            {
+                try
+                {
+                    c.Credentials.ClientCertificate.SetCertificate(
+                        System.Security.Cryptography.X509Certificates.StoreLocation.LocalMachine,
+                        System.Security.Cryptography.X509Certificates.StoreName.My,
+                        System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
+                        endpoint.Authority);
+                } catch
+                {
+                    throw new Exception("Can't find certificate");
+                }
+            }
+
+            return new ServiceChannel<TChannel>(c.CreateChannel());
         }
 
         public static ServiceChannel<TChannel> InitChannel<TChannel>(out ServiceChannel<TChannel> channel, Uri endpoint)
+            where TChannel : class
         {
             return channel = CreateChannel<TChannel>(endpoint);
         }
@@ -58,7 +77,20 @@ namespace AnjLab.FX.Net
                     http.ReaderQuotas.MaxArrayLength = int.MaxValue;
                     http.SendTimeout = MessageSentTimeout;
                     http.TransferMode = transferMode;
+                    
                     return http;
+
+                case "https":
+                    var https = new BasicHttpBinding();
+                    https.MaxReceivedMessageSize = int.MaxValue;
+                    https.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+                    https.ReaderQuotas.MaxArrayLength = int.MaxValue;
+                    https.SendTimeout = MessageSentTimeout;
+                    https.TransferMode = transferMode;
+                    https.Security.Mode = BasicHttpSecurityMode.TransportWithMessageCredential;
+                    https.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.Certificate;
+
+                    return https;
                 default: throw new InvalidOperationException();
             }
         }
