@@ -16,20 +16,24 @@ namespace AnjLab.FX.Net
             var c = new ChannelFactory<TChannel>(CreateBindingFromScheme(endpoint),
                                                            new EndpointAddress(endpoint));
 
-            if (endpoint.Scheme.ToLower() == "https")
-            {
-                try
-                {
-                    c.Credentials.ClientCertificate.SetCertificate(
-                        System.Security.Cryptography.X509Certificates.StoreLocation.LocalMachine,
-                        System.Security.Cryptography.X509Certificates.StoreName.My,
-                        System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
-                        endpoint.Authority);
-                } catch
-                {
-                    throw new Exception("Can't find certificate");
-                }
-            }
+            //if (endpoint.Scheme.ToLower() == "https")
+            //{
+            //    try
+            //    {
+            //        c.Credentials.ClientCertificate.SetCertificate(
+            //            System.Security.Cryptography.X509Certificates.StoreLocation.CurrentUser,
+            //            System.Security.Cryptography.X509Certificates.StoreName.My,
+            //            System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
+            //            endpoint.Authority);
+            //        c.Credentials.ServiceCertificate.SetDefaultCertificate(
+            //            System.Security.Cryptography.X509Certificates.StoreLocation.LocalMachine,
+            //            System.Security.Cryptography.X509Certificates.StoreName.My,
+            //            System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
+            //            endpoint.Authority);
+            //    } catch(Exception exc)
+            //    {
+            //    }
+            //}
 
             return new ServiceChannel<TChannel>(c.CreateChannel());
         }
@@ -87,7 +91,7 @@ namespace AnjLab.FX.Net
                     https.ReaderQuotas.MaxArrayLength = int.MaxValue;
                     https.SendTimeout = MessageSentTimeout;
                     https.TransferMode = transferMode;
-                    https.Security.Mode = BasicHttpSecurityMode.TransportWithMessageCredential;
+                    https.Security.Mode = BasicHttpSecurityMode.Transport;
                     https.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.Certificate;
 
                     return https;
