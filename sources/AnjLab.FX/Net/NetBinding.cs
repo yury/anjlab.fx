@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using AnjLab.FX.Sys;
+using System.ServiceModel.Description;
 
 namespace AnjLab.FX.Net
 {
@@ -15,25 +16,19 @@ namespace AnjLab.FX.Net
 
             var c = new ChannelFactory<TChannel>(CreateBindingFromScheme(endpoint),
                                                            new EndpointAddress(endpoint));
+            
+            return new ServiceChannel<TChannel>(c.CreateChannel());
+        }
 
-            //if (endpoint.Scheme.ToLower() == "https")
-            //{
-            //    try
-            //    {
-            //        c.Credentials.ClientCertificate.SetCertificate(
-            //            System.Security.Cryptography.X509Certificates.StoreLocation.CurrentUser,
-            //            System.Security.Cryptography.X509Certificates.StoreName.My,
-            //            System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
-            //            endpoint.Authority);
-            //        c.Credentials.ServiceCertificate.SetDefaultCertificate(
-            //            System.Security.Cryptography.X509Certificates.StoreLocation.LocalMachine,
-            //            System.Security.Cryptography.X509Certificates.StoreName.My,
-            //            System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName,
-            //            endpoint.Authority);
-            //    } catch(Exception exc)
-            //    {
-            //    }
-            //}
+        public static ServiceChannel<TChannel> CreateChannel<TChannel>(Uri endpoint, params IEndpointBehavior[] behaviors) where TChannel : class
+        {
+            Guard.ArgumentNotNull("endpoint", endpoint);
+
+            var c = new ChannelFactory<TChannel>(CreateBindingFromScheme(endpoint),
+                                                           new EndpointAddress(endpoint));
+
+            foreach(var behavior in behaviors)
+                c.Endpoint.Behaviors.Add(behavior);
 
             return new ServiceChannel<TChannel>(c.CreateChannel());
         }
