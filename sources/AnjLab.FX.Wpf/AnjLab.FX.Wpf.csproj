@@ -67,6 +67,7 @@
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\MaskedTextBox.cs" />
     <Compile Include="Controls\ObjectContentPresenter.cs" />
+    <Compile Include="Converters\BoolToFontWeightConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualToVisibilityConverter.cs" />
     <Compile Include="Converters\FormattingConverter.cs" />
