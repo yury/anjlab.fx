@@ -35,7 +35,7 @@ namespace AnjLab.FX.IO.Compression
 
         private static void Decompress(Stream source, Stream destination)
         {
-            using (var input = new GZipStream(source, CompressionMode.Decompress))
+            using (var input = new GZipStream(source, CompressionMode.Decompress, true))
             {
                 Pump(input, destination);
             }
