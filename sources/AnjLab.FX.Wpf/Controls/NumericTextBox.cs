@@ -29,11 +29,16 @@ namespace AnjLab.FX.Wpf.Controls
                                                                                                   new PropertyMetadata(
                                                                                                       typeof(double)));
 
+        static NumericTextBox()
+        {
+            MaskedTextBox.MaskProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata("0.00"));
+            MaskedTextBox.PromptCharProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata('0'));
+        }
 
         public NumericTextBox()
         {
-            Mask = "0.00";
-            PromptChar = '0';
+            //Mask = "0.00";
+            //PromptChar = '0';
             TextAlignment = System.Windows.TextAlignment.Right;
             ForceCaretPosition = false;
         }
