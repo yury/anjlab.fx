@@ -16,11 +16,18 @@ namespace AnjLab.FX.Log4Net
 
         public static void LoadLog4NetConfig(string relativePathToConfig)
         {
+            System.Diagnostics.Debugger.Break();
+
             string pathToConfig = Path.Combine(Path.GetDirectoryName(typeof(Log4NetLog).Assembly.Location), relativePathToConfig);
             if (!File.Exists(pathToConfig))
             {
 
                 pathToConfig = Path.Combine(Environment.CurrentDirectory, relativePathToConfig);
+            }
+
+            if (!File.Exists(pathToConfig))
+            {
+                pathToConfig = Path.Combine(Path.GetDirectoryName(new Uri(typeof(Log4NetLog).Assembly.CodeBase).AbsolutePath), relativePathToConfig);
             }
 
             FileInfo fi = new FileInfo(pathToConfig);
