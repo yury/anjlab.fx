@@ -27,7 +27,7 @@ namespace AnjLab.FX.Sys
         protected override void ApplySortCore(PropertyDescriptor property, ListSortDirection direction)
         {
             // Get list to sort
-            List<T> items = Items as List<T>;
+            var items = Items as List<T>;
             
             if(_sortPair.Key == property.Name)
             {
@@ -38,7 +38,7 @@ namespace AnjLab.FX.Sys
                 
             if (items != null)
             {
-                PropertyComparer<T> pc = new PropertyComparer<T>(property, direction);
+                var pc = new PropertyComparer<T>(property, direction);
                 items.Sort(pc);
                 _isSorted = true;
             }
