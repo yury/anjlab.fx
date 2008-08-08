@@ -73,6 +73,7 @@
     <Compile Include="IO\BasedBitWriterTests.cs" />
     <Compile Include="IO\BitReaderTests.cs" />
     <Compile Include="IO\BitWriterTests.cs" />
+    <Compile Include="IO\CSVReaderTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
     <Compile Include="IO\TraceLogTests.cs" />
     <Compile Include="Net\Feeds\AtomFeedTests.cs" />
@@ -121,6 +122,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="IO\CSVReaderData.txt" />
     <Content Include="Net\Feeds\AtomFeed1.xml" />
     <Content Include="Net\Feeds\AtomFeed2.xml" />
   </ItemGroup>

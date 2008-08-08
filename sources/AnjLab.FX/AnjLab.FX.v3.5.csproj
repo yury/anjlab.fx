@@ -81,6 +81,7 @@
     <Compile Include="Gsm\SmsBase.cs" />
     <Compile Include="Gsm\SmsStatusReport.cs" />
     <Compile Include="IO\Compression\GZip.cs" />
+    <Compile Include="IO\CSVReader.cs" />
     <Compile Include="Net\NetBinding.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\RepositoryFilterType.cs" />
