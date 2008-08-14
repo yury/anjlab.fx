@@ -86,7 +86,7 @@ namespace AnjLab.FX.IO
             _ordinals.Add(definition.Name, _headerColumns.Count - 1);
         }
 
-        public void AddComputedColumnDefinition(CSVReaderColumnDefinition definition, Func<IDataReader, object> computeFunc)
+        public void AddComputedColumnDefinition(CSVReaderColumnDefinition definition, Func<CSVReader, object> computeFunc)
         {
             definition.ComputeFunc = computeFunc;
             AddColumnDefinition(definition);
@@ -112,6 +112,11 @@ namespace AnjLab.FX.IO
         public Type GetFieldType(int i)
         {
             return _headerColumns[i].Type;
+        }
+
+        public object GetValue(string name)
+        {
+            return GetValue(GetOrdinal(name));
         }
 
         public object GetValue(int i)
@@ -223,14 +228,29 @@ namespace AnjLab.FX.IO
             return Convert.ToDouble(GetValue(i));
         }
 
+        public string GetString(string name)
+        {
+            return GetString(GetOrdinal(name));
+        }
+
         public string GetString(int i)
         {
             return Convert.ToString(GetValue(i));
         }
 
+        public decimal GetDecimal(string name)
+        {
+            return GetDecimal(GetOrdinal(name));
+        }
+
         public decimal GetDecimal(int i)
         {
             return Convert.ToDecimal(GetValue(i));
+        }
+
+        public DateTime GetDateTime(string name)
+        {
+            return GetDateTime(GetOrdinal(name));
         }
 
         public DateTime GetDateTime(int i)
@@ -318,6 +338,6 @@ namespace AnjLab.FX.IO
 
         public bool IsComputed { get { return ComputeFunc != null; } }
 
-        internal Func<IDataReader, object> ComputeFunc { get; set; }
+        internal Func<CSVReader, object> ComputeFunc { get; set; }
     }
 }
