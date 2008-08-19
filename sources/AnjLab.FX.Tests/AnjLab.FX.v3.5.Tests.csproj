@@ -76,6 +76,7 @@
     <Compile Include="IO\CSVReaderTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
     <Compile Include="IO\TraceLogTests.cs" />
+    <Compile Include="Net\CookieHelperTests.cs" />
     <Compile Include="Net\Feeds\AtomFeedTests.cs" />
     <Compile Include="Net\HttpRequestResponseTests.cs" />
     <Compile Include="Patterns\Generic\KeyedFactoryTests.cs" />
