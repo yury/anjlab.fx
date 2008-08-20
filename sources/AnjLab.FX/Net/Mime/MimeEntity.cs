@@ -415,8 +415,12 @@ namespace AnjLab.FX.Net.Mime
 
         private static bool IsAttachment(MimeEntity child)
         {
-            return (child.ContentDisposition != null)
-                && (string.Equals(child.ContentDisposition.DispositionType, DispositionTypeNames.Attachment, StringComparison.InvariantCultureIgnoreCase));
+            return child.ContentDisposition != null
+                &&
+                (  string.Equals(child.ContentDisposition.DispositionType, DispositionTypeNames.Attachment, StringComparison.InvariantCultureIgnoreCase)
+                || string.Equals(child.ContentType.MediaType, MediaTypeNames.Application.Octet, StringComparison.InvariantCultureIgnoreCase)
+                || string.Equals(child.ContentType.MediaType, MediaTypeNames.Application.Zip, StringComparison.InvariantCultureIgnoreCase)
+                );
         }
 
         /// <summary>
