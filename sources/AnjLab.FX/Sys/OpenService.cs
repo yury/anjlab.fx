@@ -167,7 +167,7 @@ namespace AnjLab.FX.Sys
         {
             var spi = new ServiceProcessInstaller
                           {
-                              Account = ServiceAccount.LocalSystem,
+                              Account = string.IsNullOrEmpty(username) ? ServiceAccount.LocalSystem : ServiceAccount.User,
                               Username = username,
                               Password = password,
                               Context = new InstallContext("install.txt", new string[0])
