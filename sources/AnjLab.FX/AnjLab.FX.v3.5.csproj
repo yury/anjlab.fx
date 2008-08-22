@@ -82,6 +82,7 @@
     <Compile Include="Gsm\SmsStatusReport.cs" />
     <Compile Include="IO\Compression\GZip.cs" />
     <Compile Include="IO\CSVReader.cs" />
+    <Compile Include="IO\DataReaderExtensions.cs" />
     <Compile Include="IO\StreamExtensions.cs" />
     <Compile Include="Net\CookieHelper.cs" />
     <Compile Include="Net\Mail\ConnectCommand.cs" />
