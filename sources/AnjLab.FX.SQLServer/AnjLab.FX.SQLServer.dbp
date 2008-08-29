@@ -24,6 +24,7 @@ Begin DataProject = "AnjLab.FX.SQLServer"
       Script = "procDecryptObject.sql"
       Script = "procGenerateInserts.sql"
       Script = "procScriptDiagram.sql"
+      Script = "procCleanServerCashe.sql"
    End
    Script = "Schema.sql"
    Begin Folder = "Scripts"
