@@ -63,6 +63,7 @@
     <Compile Include="Calculator\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GenericDataTemplateSelector.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\MaskedTextBox.cs" />
