@@ -44,6 +44,10 @@ namespace AnjLab.FX.Tasks.Scheduling
             get { return _interval; }
         }
 
+        public DateTime StartTime
+        {
+            get { return _startTime; }
+        }
 
         public override string ToString()
         {

@@ -178,5 +178,27 @@ namespace AnjLab.FX.Tests.Tasks.Scheduling
             Assert.AreEqual(29, monthly.MonthDay);
             Assert.AreEqual(TimeSpan.FromHours(23), monthly.TimeOfDay);
         }
+
+        [Test]
+        public void TestWriteTriggers()
+        {
+            var triggers = new List<ITrigger>
+                               {
+                                   Trigger.Daily("restoreDB", new TimeSpan(5, 4, 3, 4)),
+                                   Trigger.Hourly("hourlyTrigger", 56),
+                                   Trigger.Interval("interval", new DateTime(2008, 1, 5), new TimeSpan(5, 4, 5)),
+                                   Trigger.Monthly("monthly", 5, new TimeSpan(5, 3, 4)),
+                                   Trigger.Once("once", new DateTime(2008, 4, 5, 4, 3, 4)),
+                                   Trigger.Weekly("weekly", new TimeSpan(4, 5, 4), DayOfWeek.Monday, DayOfWeek.Sunday,
+                                                  DayOfWeek.Wednesday)
+                               };
+
+            var result = Trigger.SaveTriggers(triggers);
+
+            var readedTriggers = Trigger.ReadTriggers(result);
+
+            for(int i=0; i < triggers.Count; i++)
+                Assert.AreEqual(triggers[i].ToString(), readedTriggers[i].ToString());
+        }
     }
 }

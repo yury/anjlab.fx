@@ -1,4 +1,7 @@
 using System;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -37,5 +40,7 @@ namespace AnjLab.FX.Tasks.Scheduling
         {
             return string.Format(Resources.DailyAt_TimeOfDay_Tag, _timeOfDay, _tag);
         }
+
+
     }
 }

@@ -73,6 +73,11 @@ namespace AnjLab.FX.Tasks.Scheduling
             get { return _timeOfDay; }
         }
 
+        public DayOfWeek[] WeekDays
+        {
+            get { return _weekDays; }
+        }
+
         public override string ToString()
         {
             return string.Format(Resources.Weekly_OnTime_AtTimeOfDay_Tag, Lst.ToString(_weekDays), _tag, _timeOfDay);
