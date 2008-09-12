@@ -196,6 +196,8 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public static IList<ITrigger> ReadTriggers(string xml)
         {
+            if (string.IsNullOrEmpty(xml)) return new List<ITrigger>();
+
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 return ReadTriggers(reader);    
