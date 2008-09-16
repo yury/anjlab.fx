@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using AnjLab.FX.Properties;
 using AnjLab.FX.Sys;
 
@@ -65,6 +66,14 @@ namespace AnjLab.FX.Tasks.Scheduling
         public override string ToString()
         {
             return string.Format(Resources.MonthlyEveryDayAt_TimeOfDay_Tag_DateTime, _timeOfDay, _tag, _monthDay);
+        }
+
+        public string ToString(CultureInfo culture)
+        {
+            if (culture.Name == "ru-RU")
+                return string.Format("≈жемес€чно на {0} день в {1}", _monthDay, _timeOfDay);
+            else
+                return ToString();
         }
     }
 }

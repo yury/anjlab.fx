@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Xml.Serialization;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -7,5 +8,6 @@ namespace AnjLab.FX.Tasks.Scheduling
     {
         DateTime ? GetNextTriggerTime(DateTime currentTime);
         string Tag {get;}
+        string ToString(CultureInfo culture);
     }
 }

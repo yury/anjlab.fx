@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -41,6 +42,12 @@ namespace AnjLab.FX.Tasks.Scheduling
             return string.Format(Resources.DailyAt_TimeOfDay_Tag, _timeOfDay, _tag);
         }
 
-
+        public string ToString(CultureInfo culture)
+        {
+            if (culture.Name == "ru-RU")
+                return string.Format("≈жедневно в {0}", _timeOfDay);
+            else
+                return ToString();
+        }
     }
 }

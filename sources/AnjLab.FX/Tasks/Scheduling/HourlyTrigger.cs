@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using AnjLab.FX.Properties;
 using AnjLab.FX.Sys;
 
@@ -52,6 +53,14 @@ namespace AnjLab.FX.Tasks.Scheduling
         public override string ToString()
         {
             return string.Format(Resources.HourlyAt_Minutes_Tag, _minutes, _tag);
+        }
+
+        public string ToString(CultureInfo culture)
+        {
+            if (culture.Name == "ru-RU")
+                return string.Format("Каждый час в {0} минут", _minutes);
+            else
+                return ToString();
         }
     }
 }

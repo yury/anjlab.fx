@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
@@ -40,6 +41,14 @@ namespace AnjLab.FX.Tasks.Scheduling
         public override string ToString()
         {
             return string.Format(Resources.OnceAt_Time_Tag, _dateTime, _tag);
+        }
+
+        public string ToString(CultureInfo culture)
+        {
+            if (culture.Name == "ru-RU")
+                return string.Format("ќдин раз в {0}", _dateTime);
+            else
+                return ToString();
         }
     }
 }
