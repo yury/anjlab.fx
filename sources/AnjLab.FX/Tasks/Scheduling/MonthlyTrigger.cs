@@ -6,7 +6,7 @@ using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class MonthlyTrigger: ITrigger
+    public class MonthlyTrigger : ITrigger
     {
         private readonly string _tag;
         private readonly TimeSpan _timeOfDay;

@@ -73,6 +73,7 @@ namespace AnjLab.FX.Tasks.Scheduling
             reader.MoveToContent();
             
             int depth = reader.Depth;
+
             do
             {
                 reader.Read();
@@ -114,7 +115,9 @@ namespace AnjLab.FX.Tasks.Scheduling
                         break;
                 }
             } while (depth != reader.Depth);
-            reader.ReadEndElement();
+
+            if(reader.NodeType != XmlNodeType.None)
+                reader.ReadEndElement();
 
             return triggers;
         }

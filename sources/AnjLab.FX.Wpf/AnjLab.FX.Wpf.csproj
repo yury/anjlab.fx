@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{52E4A8B3-517D-43F1-9ECC-256C3CF44CF3}</ProjectGuid>
     <OutputType>library</OutputType>
@@ -70,6 +70,7 @@
     <Compile Include="Controls\ObjectContentPresenter.cs" />
     <Compile Include="Converters\BindingExpressionConverter.cs" />
     <Compile Include="Converters\BoolToFontWeightConverter.cs" />
+    <Compile Include="Converters\TimeSpanToDateTimeConverter.cs" />
     <Compile Include="Converters\NullableTypeConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualToVisibilityConverter.cs" />

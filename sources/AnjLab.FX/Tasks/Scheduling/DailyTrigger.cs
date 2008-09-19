@@ -7,7 +7,7 @@ using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class DailyTrigger: ITrigger
+    public class DailyTrigger: ITrigger
     {
         private readonly string _tag;
         private readonly TimeSpan _timeOfDay;

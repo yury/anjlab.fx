@@ -5,7 +5,7 @@ using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class IntervalTrigger: ITrigger
+    public class IntervalTrigger : ITrigger
     {
         private readonly string _tag;
         private DateTime _startTime;

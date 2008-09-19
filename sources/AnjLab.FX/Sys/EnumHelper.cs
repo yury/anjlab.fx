@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
 using System.Text;
 //using AnjLab.FX.Windows.Data;
 
@@ -52,6 +52,13 @@ namespace AnjLab.FX.Sys
         public EnumHelperPair GetPair(Enum eNum)
         {
             return _pairs[eNum];
+        }
+
+        public static string GetDescription(Enum eNum)
+        {
+            var fieldInfo = eNum.GetType().GetField(eNum.ToString());
+            var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return ((attributes.Length > 0) ? attributes[0].Description : eNum.ToString());
         }
     }
 

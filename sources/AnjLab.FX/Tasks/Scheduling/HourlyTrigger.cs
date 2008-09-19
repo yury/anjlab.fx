@@ -5,7 +5,7 @@ using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class HourlyTrigger: ITrigger
+    public class HourlyTrigger : ITrigger
     {
         private readonly string _tag;
         private readonly int _minutes;

@@ -1,11 +1,12 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using AnjLab.FX.Properties;
 using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class WeeklyTrigger: ITrigger
+    public class WeeklyTrigger : ITrigger
     {
         private readonly string _tag;
         private readonly TimeSpan _timeOfDay;
@@ -87,7 +88,7 @@ namespace AnjLab.FX.Tasks.Scheduling
         public string ToString(CultureInfo culture)
         {
             if (culture.Name == "ru-RU")
-                return string.Format("≈женедельно по {0} в {1}", Lst.ToString(_weekDays), _timeOfDay);
+                return string.Format("≈женедельно по дн€м: {0} в {1}", Lst.ToString(WeekDays.Select(wd => culture.DateTimeFormat.DayNames[(int)wd])), _timeOfDay);
             else
                 return ToString();
         }

@@ -4,7 +4,7 @@ using AnjLab.FX.Properties;
 
 namespace AnjLab.FX.Tasks.Scheduling
 {
-    internal class OnceTrigger: ITrigger
+    public class OnceTrigger : ITrigger
     {
         private readonly string _tag;
         private readonly DateTime _dateTime;
