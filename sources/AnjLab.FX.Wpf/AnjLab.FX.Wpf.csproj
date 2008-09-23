@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{52E4A8B3-517D-43F1-9ECC-256C3CF44CF3}</ProjectGuid>
     <OutputType>library</OutputType>
@@ -63,7 +63,21 @@
     <Compile Include="Calculator\Calculator.xaml.cs">
       <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CalendarDataGenerator.cs" />
+    <Compile Include="Controls\CalendarDate.cs" />
+    <Compile Include="Controls\Converters.cs" />
+    <Compile Include="Controls\DatePicker.cs" />
+    <Compile Include="Controls\DatePickerHelper.cs" />
+    <Compile Include="Controls\DateSelectionChangedEventArgs.cs" />
+    <Compile Include="Controls\DateTimeValueConverter.cs" />
     <Compile Include="Controls\GenericDataTemplateSelector.cs" />
+    <Compile Include="Controls\InvalidEntryEventArgs.cs" />
+    <Compile Include="Controls\MonthCalendar.cs" />
+    <Compile Include="Controls\MonthCalendarContainer.cs" />
+    <Compile Include="Controls\MonthCalendarDayHeaderWeekNumber.cs" />
+    <Compile Include="Controls\MonthCalendarHelper.cs" />
+    <Compile Include="Controls\MonthCalendarItem.cs" />
+    <Compile Include="Controls\MonthCalendarTitle.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\MaskedTextBox.cs" />
@@ -161,6 +175,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Swordfish.WPF.Charts\XYLineChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DateControls.generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
