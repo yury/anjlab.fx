@@ -115,6 +115,11 @@ namespace AnjLab.FX.Wpf.Controls
             return null;
         }
 
+        public void RefreshDays()
+        {
+            _mccContainer.ItemsSource = null;
+            _mccContainer.ItemsSource = VisibleDays;
+        }
         #endregion
 
         //-------------------------------------------------------------------
