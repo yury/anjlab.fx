@@ -26,7 +26,7 @@ namespace AnjLab.FX.Wpf.Controls
     /// selection range.  You might consider using a DatePicker control instead of a MonthCalendar 
     /// if you need custom date formatting and limit the selection to just one date.
     /// </summary>
-    [TemplatePart(Name = "PART_EditableTextBox", Type = typeof(TextBox))]
+    [TemplatePart(Name = "PART_EditableTextBox", Type = typeof(MaskedTextBox))]
     [TemplatePart(Name = "PART_DatePickerCalendar", Type = typeof(MonthCalendar))]
     public class DatePicker : Control
     {
@@ -105,6 +105,19 @@ namespace AnjLab.FX.Wpf.Controls
 
         #region Public Properties
 
+        public static readonly DependencyProperty MaskProperty =
+            DependencyProperty.Register(
+                "Mask",
+                typeof (string),
+                typeof (DatePicker),
+                new PropertyMetadata("00/00/00"));
+
+        public string Mask
+        {
+            get { return (string) GetValue(MaskProperty); }
+            set { SetValue(MaskProperty, value); }
+        }
+
         #region IsDropDownOpen
 
         /// <summary>
@@ -177,7 +190,8 @@ namespace AnjLab.FX.Wpf.Controls
                     datepicker.SetFlag(Flags.IgnoreDateSelectionChanged, true);
                     try
                     {
-                        datepicker.MonthCalendar.SelectedDate = datepicker.Value;
+                        if(datepicker.Value != null)
+                            datepicker.MonthCalendar.SelectedDate = datepicker.Value.Value.Date;
                     }
                     finally
                     {
@@ -406,7 +420,7 @@ namespace AnjLab.FX.Wpf.Controls
 
             if (value != null)
             {
-                DateTime newValue = ((DateTime)value).Date;
+                DateTime newValue = (DateTime)value;
 
                 DateTime min = datepicker.MinDate;
                 if (newValue < min)
@@ -419,8 +433,6 @@ namespace AnjLab.FX.Wpf.Controls
                 {
                     return max;
                 }
-
-                return newValue;
             }
             return value;
         }
@@ -440,7 +452,10 @@ namespace AnjLab.FX.Wpf.Controls
                 datepicker.SetFlag(Flags.IgnoreDateSelectionChanged, true);
                 try
                 {
-                    datepicker.MonthCalendar.SelectedDate = newValue;
+                    if(newValue != null)
+                        datepicker.MonthCalendar.SelectedDate = newValue.Value.Date;
+                    else
+                        datepicker.MonthCalendar.SelectedDate = newValue;
                 }
                 finally
                 {
@@ -853,7 +868,7 @@ namespace AnjLab.FX.Wpf.Controls
         {
             DetachFromVisualTree();
 
-            EditableTextBoxSite = GetTemplateChild(c_EditableTextBoxTemplateName) as TextBox;
+            EditableTextBoxSite = GetTemplateChild(c_EditableTextBoxTemplateName) as MaskedTextBox;
             if (EditableTextBoxSite != null)
             {
                 EditableTextBoxSite.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(OnEditableTextBoxLostFocus);
@@ -1311,6 +1326,11 @@ namespace AnjLab.FX.Wpf.Controls
             return DoFormat(Value);
         }
 
+        protected virtual string GetDateFormat(CultureInfo cultureInfo)
+        {
+            return cultureInfo.DateTimeFormat.ShortDatePattern;
+        }
+
         private string DoFormat(DateTime? date)
         {
             string text;
@@ -1321,11 +1341,11 @@ namespace AnjLab.FX.Wpf.Controls
                 object o = null;
                 if (DateConverter != null)
                 {
-                    o = DateConverter.Convert(date.Value, typeof(string), null, cultureInfo);
+                    o = DateConverter.Convert(date.Value, typeof(string), GetDateFormat(cultureInfo), cultureInfo);
                 }
                 else
                 {
-                    o = _defaultDateConverter.Convert(date.Value, typeof(string), null, cultureInfo);
+                    o = _defaultDateConverter.Convert(date.Value, typeof(string), GetDateFormat(cultureInfo), cultureInfo);
                 }
 
                 text = Convert.ToString(o, cultureInfo);
@@ -1397,13 +1417,13 @@ namespace AnjLab.FX.Wpf.Controls
 
         #region Private Fields
 
-        private TextBox EditableTextBoxSite
+        protected MaskedTextBox EditableTextBoxSite
         {
             get { return _editableTextBoxSite; }
             set { _editableTextBoxSite = value; }
         }
 
-        private TextBox _editableTextBoxSite;
+        private MaskedTextBox _editableTextBoxSite;
 
         private MonthCalendar MonthCalendar
         {

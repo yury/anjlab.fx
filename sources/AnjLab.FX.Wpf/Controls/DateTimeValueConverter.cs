@@ -36,10 +36,14 @@ namespace AnjLab.FX.Wpf.Controls
                 throw new ArgumentNullException("culture.DateTimeFormat");
             }
 
+            var pattern = parameter as string;
+            if (pattern == null)
+                pattern = dateTimeFormat.ShortDatePattern;
+
             if (value != null && value is DateTime)
             {
                 DateTime date = (DateTime)value;
-                return date.ToString(dateTimeFormat.ShortDatePattern, dateTimeFormat);
+                return date.ToString(pattern, dateTimeFormat);
             }
             else
             {

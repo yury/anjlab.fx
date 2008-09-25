@@ -24,7 +24,8 @@ namespace AnjLab.FX.Wpf.Controls
                 {
                     maskProvider = new MaskedTextProvider(Mask) {PromptChar = PromptChar};
 
-                    maskProvider.Set(Text);
+                    if(Text != null)
+                        maskProvider.Set(Text);
                 }
                 return maskProvider;
             }
@@ -102,8 +103,9 @@ namespace AnjLab.FX.Wpf.Controls
         {
             if (Mask != null)
             {
-                var provider = new MaskedTextProvider(Mask);
-                provider.Set((string)value);
+                var provider = new MaskedTextProvider(Mask) { PromptChar = PromptChar};
+                if(value != null)
+                    provider.Set((string)value);
                 return provider.ToDisplayString();
             }
 
@@ -217,6 +219,8 @@ namespace AnjLab.FX.Wpf.Controls
         //refreshes the text of the textbox
         protected void RefreshText(MaskedTextProvider provider, int position)
         {
+            if (provider == null) return;
+
             Text = provider.ToDisplayString();
             SelectionStart = position;
         }

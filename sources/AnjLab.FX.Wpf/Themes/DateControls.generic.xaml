@@ -520,8 +520,10 @@
                 <TextBlock x:Name="UnEditableSite" Grid.Column="1" 
                            VerticalAlignment="Center" 
                            Text="{TemplateBinding Text}" />
-                <TextBox x:Name="PART_EditableTextBox" Grid.Column="1" 
+                <DateControls:MaskedTextBox x:Name="PART_EditableTextBox" Grid.Column="1" 
                          Style="{StaticResource DatePickerEditableTextBox}" 
+                         Mask="{Binding Path=Mask, RelativeSource={RelativeSource TemplatedParent}}"
+                         PromptChar="_"
                          Visibility="Collapsed" 
                          IsReadOnly="{Binding Path=IsReadOnly,RelativeSource={RelativeSource TemplatedParent}}" 
                          Margin="{TemplateBinding Padding}" />
