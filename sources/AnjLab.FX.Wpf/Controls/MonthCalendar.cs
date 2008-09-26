@@ -1118,6 +1118,7 @@ namespace AnjLab.FX.Wpf.Controls
 
         #endregion
 
+        internal bool IsRecentInputDeviceKeyboard { get; set; }
         #endregion
 
         //------------------------------------------------------
@@ -1155,6 +1156,8 @@ namespace AnjLab.FX.Wpf.Controls
         /// </remarks>
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            IsRecentInputDeviceKeyboard = true;
+
             switch (e.Key)
             {
                 case Key.PageUp:
@@ -1230,6 +1233,14 @@ namespace AnjLab.FX.Wpf.Controls
             }
         }
 
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            IsRecentInputDeviceKeyboard = false;
+
+            base.OnPreviewMouseDown(e);
+        }
+
+        
         #endregion
 
         //-------------------------------------------------------------------
@@ -1765,7 +1776,7 @@ namespace AnjLab.FX.Wpf.Controls
             {
                 return;
             }
-
+            
             SetFlag(Flags.IsChangingSelectorSelection, true); //temporary disable the listener
 
             try
@@ -2602,6 +2613,8 @@ namespace AnjLab.FX.Wpf.Controls
 
             #endregion
         }
+
+        
 
         #endregion
     }

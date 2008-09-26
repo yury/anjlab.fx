@@ -110,7 +110,7 @@ namespace AnjLab.FX.Wpf.Controls
         /// <param name="genericTarget">The current object along the event's route.</param>
         protected override void InvokeEventHandler(Delegate genericHandler, object genericTarget)
         {
-            DateSelectionChangedEventHandler handler = (DateSelectionChangedEventHandler)genericHandler;
+            var handler = (DateSelectionChangedEventHandler)genericHandler;
 
             handler(genericTarget, this);
         }

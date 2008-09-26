@@ -110,7 +110,7 @@ namespace AnjLab.FX.Wpf.Controls
                 "Mask",
                 typeof (string),
                 typeof (DatePicker),
-                new PropertyMetadata("00/00/00"));
+                new PropertyMetadata("00/00/0000"));
 
         public string Mask
         {
@@ -1047,8 +1047,9 @@ namespace AnjLab.FX.Wpf.Controls
                 Value = MonthCalendar.SelectedDate;
 
                 //
-                if ((InputManager.Current.MostRecentInputDevice is MouseDevice)
-                    && !GetFlag(Flags.IsNormalVisibleMonthChanged))
+                if (!_datepickerCalendar.IsRecentInputDeviceKeyboard
+                    && 
+                         !GetFlag(Flags.IsNormalVisibleMonthChanged))
                 {
                     IsDropDownOpen = false;
                 }
