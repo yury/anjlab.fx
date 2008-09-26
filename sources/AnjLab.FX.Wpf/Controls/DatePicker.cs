@@ -447,7 +447,7 @@ namespace AnjLab.FX.Wpf.Controls
             datepicker.SetValue(IsValidPropertyKey, newValue.HasValue);
             datepicker.DoFormat(newValue);
 
-            if (datepicker.MonthCalendar != null)
+            if (datepicker.MonthCalendar != null && datepicker.MonthCalendar.SelectedDate != newValue)
             {
                 datepicker.SetFlag(Flags.IgnoreDateSelectionChanged, true);
                 try
