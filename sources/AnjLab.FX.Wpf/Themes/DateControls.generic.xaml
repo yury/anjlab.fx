@@ -580,7 +580,7 @@
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
             </Trigger>
             <Trigger Property="Width" Value="Auto">
-              <Setter Property="MinWidth" Value="150"/>
+              <Setter Property="MinWidth" Value="90"/>
             </Trigger>
             <Trigger Property="Height" Value="Auto">
               <Setter Property="MinHeight" Value="20"/>
