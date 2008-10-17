@@ -71,6 +71,13 @@
     <Compile Include="Controls\DateSelectionChangedEventArgs.cs" />
     <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\DateTimeValueConverter.cs" />
+    <Compile Include="Controls\BrushesComboBox.xaml.cs">
+      <DependentUpon>BrushesComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ColorsComboBox.xaml.cs">
+      <DependentUpon>ColorsComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Controls\GenericDataTemplateSelector.cs" />
     <Compile Include="Controls\InvalidEntryEventArgs.cs" />
     <Compile Include="Controls\MonthCalendar.cs" />
@@ -163,6 +170,14 @@
     <Page Include="Calculator\Calculator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BrushesComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ColorsComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Swordfish.WPF.Charts\ColorLabel.xaml">
       <Generator>MSBuild:Compile</Generator>
