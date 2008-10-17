@@ -8,9 +8,9 @@ namespace AnjLab.FX.Tests.Windows.Media
     public class BrushesHelperTests
     {
         [Test]
-        public void TestGetColors()
+        public void TestBrushes()
         {
-            Assert.That(BrushesHelper.GetBrushes().Length, Is.GreaterThan(0));
+            Assert.That(BrushesHelper.Brushes.Length, Is.GreaterThan(0));
         }
     }
 }

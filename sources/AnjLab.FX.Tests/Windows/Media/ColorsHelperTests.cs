@@ -10,7 +10,7 @@ namespace AnjLab.FX.Tests.Windows.Media
         [Test]
         public void TestGetColors()
         {
-            Assert.That(ColorsHelper.GetColors().Length, Is.GreaterThan(0));
+            Assert.That(ColorsHelper.Colors.Length, Is.GreaterThan(0));
         }
     }
 }
