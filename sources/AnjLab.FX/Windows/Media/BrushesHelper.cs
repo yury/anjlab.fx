@@ -6,16 +6,23 @@ namespace AnjLab.FX.Windows.Media
 {
     public class BrushesHelper
     {
-        public static Brush[] GetBrushes()
+        public static BrushData[] Brushes
         {
-            var list = new List<Brush>();
-            foreach (PropertyInfo propInfo in typeof(Brushes).GetProperties(BindingFlags.Static | BindingFlags.Public))
+            get
             {
-                object instance = null;
+                var list = new List<BrushData>(1) { new BrushData { Name = "None", Brush = null } };
+                foreach (PropertyInfo propInfo in typeof(Brushes).GetProperties(BindingFlags.Static | BindingFlags.Public))
+                {
+                    object instance = null;
 
-                list.Add((Brush)propInfo.GetValue(instance, null));
+                    list.Add(new BrushData
+                    {
+                        Brush = (Brush)propInfo.GetValue(instance, null),
+                        Name = propInfo.Name
+                    });
+                }
+                return list.ToArray();
             }
-            return list.ToArray();
         }
     }
 }

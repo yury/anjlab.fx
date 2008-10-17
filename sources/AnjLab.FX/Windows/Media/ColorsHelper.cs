@@ -6,17 +6,23 @@ namespace AnjLab.FX.Windows.Media
 {
     public class ColorsHelper
     {
-        public static Color[] GetColors()
+        public static ColorData[] Colors
         {
-            var list = new List<Color>();
-            foreach (PropertyInfo propInfo in typeof(Colors).GetProperties(BindingFlags.Static | BindingFlags.Public))
+            get
             {
-                object instance = null;
+                var list = new List<ColorData>();
+                foreach (PropertyInfo propInfo in typeof(Colors).GetProperties(BindingFlags.Static | BindingFlags.Public))
+                {
+                    object instance = null;
 
-                if (propInfo.PropertyType.Equals(typeof(Color)))
-                    list.Add((Color)propInfo.GetValue(instance, null));
+                    list.Add(new ColorData
+                    {
+                        Color = (Color)propInfo.GetValue(instance, null),
+                        Name = propInfo.Name
+                    });
+                }
+                return list.ToArray();
             }
-            return list.ToArray();
         }
     }
 }

@@ -236,8 +236,10 @@
     <Compile Include="UI\IStatusStripProvider.cs" />
     <Compile Include="UI\RuNumberFormat.cs" />
     <Compile Include="Windows\Data\EnumHelperValueConverter.cs" />
+    <Compile Include="Windows\Media\BrushData.cs" />
     <Compile Include="Windows\Media\BrushesHelper.cs" />
     <Compile Include="Windows\Media\ColorsHelper.cs" />
+    <Compile Include="Windows\Media\ColorData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
