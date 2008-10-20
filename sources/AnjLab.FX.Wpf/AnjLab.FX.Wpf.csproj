@@ -105,6 +105,13 @@
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\StringToDoubleConverter.cs" />
+    <Compile Include="Dialogs\SelectFontDialog.xaml.cs">
+      <DependentUpon>SelectFontDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\fontfamilylistitem.cs" />
+    <Compile Include="Dialogs\fontsizelistitem.cs" />
+    <Compile Include="Dialogs\namedictionaryhelper.cs" />
+    <Compile Include="Dialogs\typefacelistitem.cs" />
     <Compile Include="GenericTreeView\ItemMonitor.cs" />
     <Compile Include="GenericTreeView\RoutedTreeItemEventArgs.cs" />
     <Compile Include="GenericTreeView\TreeLayout.cs" />
@@ -176,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ColorsComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\SelectFontDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

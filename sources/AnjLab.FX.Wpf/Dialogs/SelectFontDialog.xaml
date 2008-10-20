@@ -1,0 +1,76 @@
+﻿<Window x:Class="AnjLab.FX.Wpf.Dialogs.SelectFontDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Настройки шрифта" Width="582" Height="413" Background="{x:Static SystemColors.ControlBrush}">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: Selection controls -->
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="55.726*" />
+                <RowDefinition Height="23.276*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Families -->
+            <Label Grid.Column="0" Grid.Row="0" Content="_Название шрифта"/>
+            <DockPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
+                <TextBox DockPanel.Dock="Top" Name="fontFamilyTextBox"/>
+                <ListBox Name="fontFamilyList"/>
+            </DockPanel>
+
+            <!-- Family Typefaces (weight, style, stretch) -->
+            <Label Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Content="_Стиль:"/>
+            <ListBox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Name="typefaceList"/>
+
+            <!-- Font sizes -->
+            <Label Grid.Column="2" Grid.Row="2" Margin="0,12,0,0" Content="_Размер:"/>
+            <DockPanel Grid.Column="2" Grid.Row="3">
+                <TextBox DockPanel.Dock="Top" Name="sizeTextBox"/>
+                <ListBox Height="60" Name="sizeList"/>
+            </DockPanel>
+
+            <!-- Text decorations -->
+            <DockPanel Grid.Column="4" Grid.Row="3">
+                <CheckBox DockPanel.Dock="Top" Content="Подчеркнутый" Name="underlineCheckBox"/>
+                <CheckBox DockPanel.Dock="Top" Content="Baseline" Name="baselineCheckBox" Visibility="Hidden" />
+                <CheckBox DockPanel.Dock="Top" Content="Зачеркнутых" Name="strikethroughCheckBox"/>
+                <CheckBox Content="Overline" Name="overlineCheckBox" Visibility="Hidden" />
+            </DockPanel>
+        </Grid>
+
+        <!-- Row 1: Preview text -->
+        <DockPanel Grid.Column="0" Grid.Row="1" Margin="0,12,0,0">
+            <TextBlock DockPanel.Dock="Top">Просмотр:</TextBlock>
+            <TextBox
+                FontSize="16" AcceptsReturn="True" 
+                TextAlignment="Center" 
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto"
+                Name="previewTextBox"
+                >
+                Съешь ещё этих мягких французских булок, да выпей чаю
+            </TextBox>
+        </DockPanel>
+
+        <!-- Row 2: OK and Cancel buttons -->
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="OK" Width="86" IsDefault="True" Click="OnOKButtonClicked"/>
+            <Button Content="Cancel" Width="86" Click="OnCancelButtonClicked"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
