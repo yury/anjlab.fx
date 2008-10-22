@@ -19,7 +19,11 @@ namespace AnjLab.FX.Wpf.Controls
                 foreach(var selectorItem in DataTemplateSelectorItems)
                 {
                     var value = Reflector.GetValue(item, selectorItem.PropertyName);
-                    if (selectorItem.Value.Equals(Convert.ToString(value)))
+
+                    if (selectorItem.DataType != null && value != null && value.GetType().Equals(selectorItem.DataType))
+                        return selectorItem.Template;
+                    
+                    if (selectorItem.Value != null && selectorItem.Value.Equals(value))
                         return selectorItem.Template;
                 }
             }
@@ -32,7 +36,8 @@ namespace AnjLab.FX.Wpf.Controls
     public class DataTemplateSelectorItem
     {
         public string PropertyName { get; set; }
-        public string Value { get; set; }
-        public DataTemplate Template { get; set; } 
+        public object Value { get; set; }
+        public DataTemplate Template { get; set; }
+        public Type DataType { get; set; }
     }
 }
