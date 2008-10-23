@@ -68,5 +68,44 @@ namespace AnjLab.FX.Sys
 
             return ((DescriptionAttribute) attrs[0]).Description;
         }
+
+        private static Type FindType(string typeName)
+        {
+            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type t in a.GetTypes())
+                    if (t.Name.Equals(typeName))
+                        return t;
+            }
+            return null;
+        }
+
+        public static object ReadAttachedProperty(string propertyName, object propertyContainer)
+        {
+            string[] propertyPath = propertyName.Split(new [] {"."}, StringSplitOptions.RemoveEmptyEntries);
+            Type propertyOwnerType = FindType(propertyPath[0]);
+            if (propertyOwnerType != null)
+            {
+                var propertyMethod = propertyOwnerType.GetMethod("Get" + propertyPath[1]);
+                if (propertyMethod != null)
+                {
+                    var result = propertyMethod.Invoke(null, new[] { propertyContainer });
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        public static void WriteAttachedProperty(string propertyName, object propertyValue, object propertyContainer)
+        {
+            string[] propertyPath = propertyName.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            Type propertyOwnerType = FindType(propertyPath[0]);
+            if (propertyOwnerType != null)
+            {
+                var propertyMethod = propertyOwnerType.GetMethod("Set" + propertyPath[1]);
+                if (propertyMethod != null)
+                    propertyMethod.Invoke(null, new object[] { propertyContainer, propertyValue });
+            }
+        }
     }
 }
