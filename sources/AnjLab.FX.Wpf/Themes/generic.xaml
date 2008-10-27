@@ -3,6 +3,7 @@
 
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="/AnjLab.FX.Wpf;component/Themes/DateControls.generic.xaml" />
+      <ResourceDictionary Source="/AnjLab.FX.Wpf;component/Themes/ColorPicker.generic.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

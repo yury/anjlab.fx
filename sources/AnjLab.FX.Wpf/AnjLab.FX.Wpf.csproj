@@ -65,6 +65,8 @@
     </Compile>
     <Compile Include="Controls\CalendarDataGenerator.cs" />
     <Compile Include="Controls\CalendarDate.cs" />
+    <Compile Include="Controls\ColorPicker.cs" />
+    <Compile Include="Controls\ColorSelector.cs" />
     <Compile Include="Controls\Converters.cs" />
     <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\DatePickerHelper.cs" />
@@ -108,10 +110,6 @@
     <Compile Include="Dialogs\SelectFontDialog.xaml.cs">
       <DependentUpon>SelectFontDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\fontfamilylistitem.cs" />
-    <Compile Include="Dialogs\fontsizelistitem.cs" />
-    <Compile Include="Dialogs\namedictionaryhelper.cs" />
-    <Compile Include="Dialogs\typefacelistitem.cs" />
     <Compile Include="GenericTreeView\ItemMonitor.cs" />
     <Compile Include="GenericTreeView\RoutedTreeItemEventArgs.cs" />
     <Compile Include="GenericTreeView\TreeLayout.cs" />
@@ -205,6 +203,10 @@
     <Page Include="Swordfish.WPF.Charts\XYLineChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ColorPicker.generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\DateControls.generic.xaml">
       <Generator>MSBuild:Compile</Generator>
