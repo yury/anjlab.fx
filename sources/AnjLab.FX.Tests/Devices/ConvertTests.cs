@@ -36,5 +36,46 @@ namespace AnjLab.FX.Tests.Devices
             Assert.AreEqual("ffff", Convert.BytesToHexString(Convert.HexStringToBytes("0xffff")).ToString());
         }
 
+        [Test]
+        public void TestSplitToBytes()
+        {
+            CollectionAssert.AreEqual(new [] {0, 0}, Convert.SplitToBytes(0));
+            CollectionAssert.AreEqual(new[] { 0, 0xF1 }, Convert.SplitToBytes(0x00F1));
+            CollectionAssert.AreEqual(new[] { 0x43, 0x21 }, Convert.SplitToBytes(0x4321));
+        }
+
+        [Test]
+        public void TestReverseBytes()
+        {
+            CollectionAssert.AreEqual(null, Convert.ReverseBytes(null));
+            CollectionAssert.AreEqual(new[] { 0, 0 }, Convert.ReverseBytes(new byte[] { 0, 0 }));
+            CollectionAssert.AreEqual(new[] { 0x6A, 0xA6 }, Convert.ReverseBytes(new byte[] { 0xA6, 0x6A }));
+            CollectionAssert.AreEqual(new[] { 0x81, 0 }, Convert.ReverseBytes(new byte[] { 0, 0x81 }));
+        }
+
+        [Test]
+        public void TestReverseWordBytes()
+        {
+            Assert.AreEqual(0, Convert.ReverseWordBytes(0));
+            Assert.AreEqual(0xFF00, Convert.ReverseWordBytes(0x00FF));
+            Assert.AreEqual(0x3412, Convert.ReverseWordBytes(0x1234));
+        }
+
+        [Test]
+        public void TestShortToBitsArray()
+        {
+            CollectionAssert.AreEqual(Convert.ShortToBitsArray(0), new [] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false});
+            CollectionAssert.AreEqual(Convert.ShortToBitsArray(1), new[] { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            CollectionAssert.AreEqual(Convert.ShortToBitsArray(8), new[] { false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
+        }
+
+        [Test]
+        public void TestBitsArrayToShort()
+        {
+            Assert.AreEqual(0, Convert.BitsArrayToShort(new[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }));
+            Assert.AreEqual(2, Convert.BitsArrayToShort(new[] { false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false }));
+            Assert.AreEqual(10, Convert.BitsArrayToShort(new[] { false, true, false, true, false, false, false, false, false, false, false, false, false, false, false, false }));
+        }
+
     }
 }

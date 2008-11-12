@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Text;
 using AnjLab.FX.Sys;
 
@@ -111,6 +110,52 @@ namespace AnjLab.FX.Devices
             byte high = (byte)(n >> 8);
             byte low = (byte)((n << 8) >> 8);
             return ByteToHexString(high) + ByteToHexString(low);
+        }
+
+        public static ushort ReverseWordBytes(ushort sourceWord)
+        {
+            var high = (byte)(sourceWord >> 8);
+            var low = (byte)(sourceWord & 0xFF);
+            return (ushort)((low << 8) + high);
+        }
+
+        public static byte[] SplitToBytes(short word)
+        {
+            return new [] { (byte)(word >> 8), (byte)(word & 0xFF) };
+        }
+
+        public static byte[] ReverseBytes(byte[] bytes)
+        {
+            if (bytes == null)
+                return null;
+            var newBytes = new byte[bytes.Length];
+            for (int i = 0; i < bytes.Length; i++)
+                newBytes[i] = bytes[bytes.Length - i - 1];
+            return newBytes;
+        }
+
+        public static bool[] ShortToBitsArray (short s)
+        {
+            short mask = 1;
+            var array = new bool[16];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = (s & mask) != 0;
+                mask = (short)(mask << 1);
+            }
+            return array;
+        }
+
+        public static short BitsArrayToShort(bool[] array)
+        {
+            short word = 0;
+            for (int i = array.Length - 1; i >= 0 ; i--)
+            {
+                word |= System.Convert.ToInt16(array[i]);
+                word = (short)(word << 1);
+            }
+            word = (short)(word >> 1);
+            return word;
         }
     }
 }
