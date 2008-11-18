@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.ComponentModel;
+
 namespace AnjLab.FX.Sys
 {
     public class Reflector
@@ -69,22 +70,28 @@ namespace AnjLab.FX.Sys
             return ((DescriptionAttribute) attrs[0]).Description;
         }
 
-        private static Type FindType(string typeName)
+        private static readonly Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        private static List<Type> FindTypeList(Assembly[] typeAssemblies, string typeName)
         {
-            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            var list = new List<Type>();
+            foreach (Assembly a in typeAssemblies)
             {
-                foreach (Type t in a.GetTypes())
-                    if (t.Name.Equals(typeName))
-                        return t;
+                var typeList = new List<Type>(a.GetTypes());
+                list.AddRange(typeList.FindAll(type => type.Name.Equals(typeName)));
             }
-            return null;
+            return list;
         }
 
         public static object ReadAttachedProperty(string propertyName, object propertyContainer)
         {
-            string[] propertyPath = propertyName.Split(new [] {"."}, StringSplitOptions.RemoveEmptyEntries);
-            Type propertyOwnerType = FindType(propertyPath[0]);
-            if (propertyOwnerType != null)
+            return ReadAttachedProperty(propertyName, propertyContainer, loadedAssemblies);
+        }
+
+        public static object ReadAttachedProperty(string propertyName, object propertyContainer, Assembly[] typeAssemblies)
+        {
+            string[] propertyPath = propertyName.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (Type propertyOwnerType in FindTypeList(typeAssemblies, propertyPath[0]))
             {
                 var propertyMethod = propertyOwnerType.GetMethod("Get" + propertyPath[1]);
                 if (propertyMethod != null)
@@ -98,13 +105,20 @@ namespace AnjLab.FX.Sys
 
         public static void WriteAttachedProperty(string propertyName, object propertyValue, object propertyContainer)
         {
+            WriteAttachedProperty(propertyName, propertyValue, propertyContainer, loadedAssemblies);
+        }
+
+        public static void WriteAttachedProperty(string propertyName, object propertyValue, object propertyContainer, Assembly[] typeAssemblies)
+        {
             string[] propertyPath = propertyName.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
-            Type propertyOwnerType = FindType(propertyPath[0]);
-            if (propertyOwnerType != null)
+            foreach (Type propertyOwnerType in FindTypeList(typeAssemblies, propertyPath[0]))
             {
                 var propertyMethod = propertyOwnerType.GetMethod("Set" + propertyPath[1]);
                 if (propertyMethod != null)
-                    propertyMethod.Invoke(null, new object[] { propertyContainer, propertyValue });
+                {
+                    propertyMethod.Invoke(null, new [] {propertyContainer, propertyValue});
+                    return;
+                }
             }
         }
     }
