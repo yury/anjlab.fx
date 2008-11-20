@@ -119,6 +119,16 @@
     <Compile Include="GenericTreeView\TreeViewBase.Declarations.cs" />
     <Compile Include="LogicalTree.cs" />
     <Compile Include="Markup\ObjectReference.cs" />
+    <Compile Include="ParticleSystems\Engine\Controls\Meatball.cs" />
+    <Compile Include="ParticleSystems\Engine\Controls\Particle.cs" />
+    <Compile Include="ParticleSystems\Engine\Controls\ParticleSystem.cs" />
+    <Compile Include="ParticleSystems\Engine\Emitters\Emitter.cs" />
+    <Compile Include="ParticleSystems\Engine\Emitters\LineEmitter.cs" />
+    <Compile Include="ParticleSystems\Engine\Emitters\MeatballEmitter.cs" />
+    <Compile Include="ParticleSystems\Engine\Emitters\PointEmitter.cs" />
+    <Compile Include="ParticleSystems\Engine\Forces\Force.cs" />
+    <Compile Include="ParticleSystems\Engine\Forces\Spring.cs" />
+    <Compile Include="ParticleSystems\Engine\RandomNumberGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -207,6 +217,10 @@
     <Page Include="Themes\ColorPicker.generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ParticleSystems.generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\DateControls.generic.xaml">
       <Generator>MSBuild:Compile</Generator>
