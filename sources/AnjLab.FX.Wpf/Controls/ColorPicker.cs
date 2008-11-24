@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -68,7 +65,7 @@ namespace AnjLab.FX.Wpf.Controls
         void okButton_Click(object sender, RoutedEventArgs e)
         {
             var colorSelector = GetTemplateChild("colorSelector") as ColorSelector;
-            if (colorSelector != null) this.SelectedColor = colorSelector.SelectedColor;
+            if (colorSelector != null) SelectedColor = colorSelector.SelectedColor;
 
             ClosePopup();
         }
@@ -78,7 +75,7 @@ namespace AnjLab.FX.Wpf.Controls
             var colorSelector = GetTemplateChild("colorSelector") as ColorSelector;
             if (colorSelector != null)
             {
-                colorSelector.SelectedColor = this.SelectedColor;
+                colorSelector.SelectedColor = SelectedColor;
                 colorSelector.Focus();
             }
         }
@@ -92,9 +89,7 @@ namespace AnjLab.FX.Wpf.Controls
 
         private static void SelectedColor_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var solidBrush = ((ColorPicker) d).SelectedBrush as SolidColorBrush;
-            if (solidBrush != null && solidBrush.Color != (Color)e.NewValue)
-                ((ColorPicker) d).SelectedBrush = new SolidColorBrush((Color)e.NewValue);
+            ((ColorPicker) d).SelectedBrush = new SolidColorBrush((Color)e.NewValue);
         }
     }
 }
