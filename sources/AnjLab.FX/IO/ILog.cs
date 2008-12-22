@@ -1,4 +1,7 @@
-﻿namespace AnjLab.FX.IO
+﻿using System;
+using AnjLab.FX.Sys;
+
+namespace AnjLab.FX.IO
 {
     public interface ILog
     {
@@ -19,5 +22,7 @@
         bool IsErrorEnabled { get; }
         bool IsFatalEnabled { get; }
         bool IsDebugEnabled { get; }
+
+        event EventHandler<EventArgs<string, string>> LogMessage;
     }
 }
