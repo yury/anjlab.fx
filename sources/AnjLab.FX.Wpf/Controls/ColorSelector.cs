@@ -406,7 +406,7 @@ namespace AnjLab.FX.Wpf.Controls
                     updateMarkerPosition(m_color);
                 }
             }
-            catch (FormatException fException)
+            catch (FormatException)
             {
                 SetValue(HexadecimalStringProperty, oldValue);
             }
@@ -556,7 +556,6 @@ namespace AnjLab.FX.Wpf.Controls
         private static readonly string ColorDetailName = "PART_ColorDetail";
         private static readonly string ColorMarkerName = "PART_ColorMarker";
         private static readonly string ColorSliderName = "PART_ColorSlider";
-        private static readonly string HexNotationTextBoxName = "PART_HexNotationTextBox";
         private readonly TranslateTransform markerTransform = new TranslateTransform();
         private bool isAlphaChange;
         private Color m_color;
