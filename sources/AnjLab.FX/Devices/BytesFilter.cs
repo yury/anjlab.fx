@@ -14,13 +14,13 @@ namespace AnjLab.FX.Devices
             _packetEnd = packetEnd;
         }
 
-        private object _syncObj = new object();
-        byte[] _buffer = null;
+        private readonly object _syncObj = new object();
+        byte[] _buffer;
         public byte[][] Proccess(byte[] bytes)
         {
             lock (_syncObj)
             {
-                List<byte[]> packets = new List<byte[]>();
+                var packets = new List<byte[]>();
                 for (int i = 0; i < bytes.Length; i++)
                 {
                     if (bytes[i] == _packetStart && _buffer == null)
@@ -34,7 +34,7 @@ namespace AnjLab.FX.Devices
                         _buffer = AddByteIntoArray(_buffer, bytes[i]);
                         if (_buffer != null)
                         {
-                            byte[] newPacket = new byte[_buffer.Length];
+                            var newPacket = new byte[_buffer.Length];
                             _buffer.CopyTo(newPacket, 0);
                             _buffer = null;
                             packets.Add(newPacket);
@@ -49,12 +49,12 @@ namespace AnjLab.FX.Devices
             }
         }
 
-        private byte[] AddByteIntoArray(byte[] array, byte newByte)
+        private static byte[] AddByteIntoArray(byte[] array, byte newByte)
         {
-            return AddBytesIntoArray(array, new byte[] { newByte });
+            return AddBytesIntoArray(array, new [] { newByte });
         }
 
-        private byte[] AddBytesIntoArray(byte[] array, byte[] newBytes)
+        private static byte[] AddBytesIntoArray(byte[] array, byte[] newBytes)
         {
             if (array != null)
             {

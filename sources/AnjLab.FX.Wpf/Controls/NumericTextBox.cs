@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -31,8 +28,8 @@ namespace AnjLab.FX.Wpf.Controls
 
         static NumericTextBox()
         {
-            MaskedTextBox.MaskProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata("0.00"));
-            MaskedTextBox.PromptCharProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata('0'));
+            MaskProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata("0.00"));
+            PromptCharProperty.OverrideMetadata(typeof(NumericTextBox), new UIPropertyMetadata('0'));
         }
 
         public NumericTextBox()
@@ -106,10 +103,7 @@ namespace AnjLab.FX.Wpf.Controls
             var converter = TypeDescriptor.GetConverter(ValueType);
 
             double result;
-            if(double.TryParse(Text, out result))
-                Value = converter.ConvertFromInvariantString(result.ToString(CultureInfo.InvariantCulture));
-            else
-                Value = converter.ConvertFromString("0");
+            Value = double.TryParse(Text, out result) ? converter.ConvertFromInvariantString(result.ToString(CultureInfo.InvariantCulture)) : converter.ConvertFromString("0");
 
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
 
@@ -123,11 +117,12 @@ namespace AnjLab.FX.Wpf.Controls
         {
             var position = SelectionStart;
             
-            if ((Mask.Length > position && Mask[position] == '.') || (Mask.Length == position && Mask.IndexOf('.') == -1))
-            {
-                IncreaseMask(position);
-            }
-           
+            if (!e.Text.Equals("\r"))
+                if ((Mask.Length > position && Mask[position] == '.') || (Mask.Length == position && Mask.IndexOf('.') == -1))
+                {
+                    IncreaseMask(position);
+                }
+
             base.OnPreviewTextInput(e);
         }
 
