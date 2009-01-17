@@ -7,12 +7,12 @@ GO
 </summary>
 
 <remarks>
-	The procedure should be run under administrator account
+	The procedure should be executed under administrator account
 </remarks>
 
 <author>
 	Nick Zhebrun
-	Copyright c AnjLab 2008, http://anjlab.com. All rights reserved.
+	Copyright (c) AnjLab 2008, http://anjlab.com. All rights reserved.
 	The code can be used for free as long as this copyright notice is not removed.
 </author>
 
@@ -25,8 +25,8 @@ GO
 create procedure fx.procCleanServerCashe as
 begin
 
-	CHECKPOINT
-    DBCC DROPCLEANBUFFERS
-    DBCC FREESYSTEMCACHE ('All')
+	checkpoint
+    dbcc dropcleanbuffers
+	dbcc freesystemcashe('All')
 
 end
