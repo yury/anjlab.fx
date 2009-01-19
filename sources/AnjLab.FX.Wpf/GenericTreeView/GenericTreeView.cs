@@ -105,6 +105,7 @@ namespace AnjLab.FX.Wpf.GenericTreeView
                 _dictionary.Remove(key);
                 _keys.Remove(element);
                 _childRelations.Remove(element);
+                _bindingList.Remove(element);
             }
         }
 
