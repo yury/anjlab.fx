@@ -25,10 +25,13 @@ Begin DataProject = "AnjLab.FX.SQLServer"
       Script = "procGenerateInserts.sql"
       Script = "procScriptDiagram.sql"
       Script = "procCleanServerCashe.sql"
+      Script = "procSearchObjectByText.sql"
+      Script = "procWriteStringToFile.sql"
    End
    Script = "Schema.sql"
    Begin Folder = "Scripts"
       Script = "Indexing foreign key fields.sql"
+      Script = "Generate procedures to delete records.sql"
    End
    Begin Folder = "Tables"
       Script = "BusinessLegalForms.sql"
