@@ -66,7 +66,7 @@ begin
 
 	select @objErrorObject=@objFileSystem , @strErrorMessage = 'creating file "' + @FileAndPath + '"'
 	execute @hr = sp_OAMethod   @objFileSystem   , 'CreateTextFile'	, @objTextStream out, @FileAndPath,2, True
-	Select @objErrorObject=@objTextStream, @strErrorMessage = 'writing to the file "' + @FileAndPath + '"'
+	select @objErrorObject=@objTextStream, @strErrorMessage = 'writing to the file "' + @FileAndPath + '"'
 	execute @hr = sp_OAMethod  @objTextStream, 'Write', Null, @String
 	select @objErrorObject=@objTextStream, @strErrorMessage = 'closing the file "' + @FileAndPath + '"'
 	execute @hr = sp_OAMethod  @objTextStream, 'Close'
@@ -80,6 +80,7 @@ end else begin
 	raiserror (@strErrorMessage,16,1)
 
 end
+
 execute  sp_OADestroy @objTextStream
 execute sp_OADestroy @objTextStream
 

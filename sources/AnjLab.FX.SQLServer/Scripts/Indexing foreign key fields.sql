@@ -24,6 +24,8 @@ declare ForeignKeys cursor for
 
 declare @fkname nvarchar(255), @tabname nvarchar(255), @colname nvarchar(255), @sql nvarchar(max)
 
+print 'Indexing columns used for foreign keys'
+
 open ForeignKeys
 fetch next from ForeignKeys into @fkname, @tabname, @colname
 while @@fetch_status = 0
@@ -33,10 +35,10 @@ begin
 		begin try
 			set @sql = N'Create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
 			exec sp_executesql @sql
-			print N'   - Index ' + N'ix' + @tabname + @colname + N' is created.'
+			print N' * Index ' + N'ix' + @tabname + @colname + N' is created.'
 		end try
 		begin catch
-			print N'   - Error while creating index: ' + N'ix' + @tabname + @colname
+			print N' * Error while creating index: ' + N'ix' + @tabname + @colname
 		end catch
 	end
 	fetch next from ForeignKeys into @fkname, @tabname, @colname
@@ -44,5 +46,7 @@ end
 
 close ForeignKeys
 deallocate ForeignKeys
+
+print 'Done'
 
 go
