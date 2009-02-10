@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using AnjLab.FX.IO;
 
 namespace AnjLab.FX.Devices
@@ -14,11 +15,11 @@ namespace AnjLab.FX.Devices
         {
             byte[] reverseBytes = Convert.ReverseBitsInBytes(data);
 
-            using (MemoryStream s = new MemoryStream(reverseBytes))
-            using (BitReader reader = new BitReader(s))
+            using (var s = new MemoryStream(reverseBytes))
+            using (var reader = new BitReader(s))
             {
-                using (MemoryStream encoded = new MemoryStream())
-                using (BitWriter writer = new BitWriter(encoded))
+                using (var encoded = new MemoryStream())
+                using (var writer = new BitWriter(encoded))
                 {
                     int counter = 0;
                     while (reader.CanRead)
@@ -46,13 +47,26 @@ namespace AnjLab.FX.Devices
 
         public static byte[] Decode(byte[] data, int bitsInterval)
         {
-            byte[] reverseBytes = Convert.ReverseBitsInBytes(data);
+            return Decode(data, 0, data.Length - 1, bitsInterval);
+        }
 
-            using (MemoryStream s = new MemoryStream(reverseBytes))
-            using (BitReader reader = new BitReader(s))
+        public static byte[] Decode(byte[] data, int from, int to)
+        {
+            return Decode(data, from, to, 5);
+        }
+
+        public static byte[] Decode(byte[] data, int from, int to, int bitsInterval)
+        {
+            var copiedData = new byte[to - from + 1];
+            Array.Copy(data, from, copiedData, 0, copiedData.Length);
+
+            byte[] reverseBytes = Convert.ReverseBitsInBytes(copiedData);
+
+            using (var s = new MemoryStream(reverseBytes))
+            using (var reader = new BitReader(s))
             {
-                using (MemoryStream decoded = new MemoryStream())
-                using (BitWriter writer = new BitWriter(decoded))
+                using (var decoded = new MemoryStream())
+                using (var writer = new BitWriter(decoded))
                 {
                     int counter = 0;
                     while (reader.CanRead)

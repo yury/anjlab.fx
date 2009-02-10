@@ -159,5 +159,17 @@ namespace AnjLab.FX.Devices
             word = (short)(word >> 1);
             return word;
         }
+
+        public static string IntToHexString(int value)
+        {
+            var bytes = new []
+                            {
+                                (byte) (value >> 24),
+                                (byte) ((value & 0x00ff0000) >> 16),
+                                (byte) ((value & 0x0000ff00) >> 8),
+                                (byte) (value & 0x000000ff),
+                            };
+            return BytesToHexString(bytes).ToString();
+        }
     }
 }
