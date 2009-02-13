@@ -171,5 +171,15 @@ namespace AnjLab.FX.Devices
                             };
             return BytesToHexString(bytes).ToString();
         }
+
+        public static unsafe float UIntToSingle(uint num)
+        {
+            return *(((float*)&num));
+        }
+
+        public static float IntToSingle(int num)
+        {
+            return UIntToSingle((uint) num);
+        }
     }
 }
