@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'tools.fnFixStringCase') and xtype in (N'FN', N'IF', N'TF'))
-drop function tools.fnFixStringCase
+if exists (select * from sysobjects where id = object_id(N'fx.fnFixStringCase') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.fnFixStringCase
 go
 
 /*
@@ -24,7 +24,7 @@ go
 */
 
 
-create function tools.fnFixStringCase(@String nvarchar(max)) returns nvarchar(max) as
+create function fx.fnFixStringCase(@String nvarchar(max)) returns nvarchar(max) as
 begin
 
 	declare 
