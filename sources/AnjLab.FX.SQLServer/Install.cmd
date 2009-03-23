@@ -1,6 +1,7 @@
 @echo off
 color 1E
 
+
 set server=%1%
 set database=%2%
 
