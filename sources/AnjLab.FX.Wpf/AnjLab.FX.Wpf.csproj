@@ -79,6 +79,7 @@
     <Compile Include="Controls\ColorsComboBox.xaml.cs">
       <DependentUpon>ColorsComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Controls\GenericDataTemplateSelector.cs" />
     <Compile Include="Controls\InvalidEntryEventArgs.cs" />
