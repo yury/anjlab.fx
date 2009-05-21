@@ -16,7 +16,14 @@ namespace AnjLab.FX.MSBuild.Tasks
 
     public class ProductInfo: Task
     {
-        string[] _imports = new string[] { "System", "System.Reflection", "System.Runtime.CompilerServices", "System.Runtime.InteropServices", "AnjLab.FX.Sys" };
+        readonly string[] _imports = new []
+                                         {
+                                             "System", 
+                                             "System.Reflection", 
+                                             "System.Runtime.CompilerServices", 
+                                             "System.Runtime.InteropServices", 
+                                             "AnjLab.FX.Sys"
+                                         };
 
         private string _infoFile;
         private string _outputFile;
@@ -60,7 +67,9 @@ namespace AnjLab.FX.MSBuild.Tasks
 
             _buildNumber = GenerateBuildNumber();
             if (!GetRevistionFromEnvironment() && !GetRevisionFromSvn())
+            {
                 _revision = 0;
+            }
 
             GenerateFile();
             
@@ -70,15 +79,17 @@ namespace AnjLab.FX.MSBuild.Tasks
         private bool GetRevistionFromEnvironment() {
             string version = Environment.GetEnvironmentVariable("BUILD_VCS_NUMBER.1");
             if (string.IsNullOrEmpty(version))
+            {
                 return false;
+            }
             return int.TryParse(version, out _revision);
         }
 
         private void GenerateFile()
         {
-            using (StreamWriter writer = new StreamWriter(_outputFile))
+            using (var writer = new StreamWriter(_outputFile))
             {
-                CSharpCodeProvider provider = new CSharpCodeProvider();
+                var provider = new CSharpCodeProvider();
                 CodeCompileUnit ccu = BuildCompilationUnit();
                 provider.GenerateCodeFromCompileUnit(ccu, writer, new CodeGeneratorOptions());
             }
@@ -86,30 +97,29 @@ namespace AnjLab.FX.MSBuild.Tasks
 
         private CodeCompileUnit BuildCompilationUnit()
         {
-            CodeCompileUnit ccu = new CodeCompileUnit();
-            CodeNamespace cn = new CodeNamespace();
+            var ccu = new CodeCompileUnit();
+            var cn = new CodeNamespace();
             foreach (string import in _imports)
             {
                 cn.Imports.Add(new CodeNamespaceImport(import));
             }
             ccu.Namespaces.Add(cn);
             string version = Version;
-            CodeAttributeDeclaration cad =
-                new CodeAttributeDeclaration("AssemblyVersion",
-                                             new CodeAttributeArgument(
-                                                 new CodePrimitiveExpression(version)));
+            var cad = new CodeAttributeDeclaration("AssemblyVersion",
+                                                   new CodeAttributeArgument(
+                                                       new CodePrimitiveExpression(version)));
             ccu.AssemblyCustomAttributes.Add(cad);
 
-            cad =
-                new CodeAttributeDeclaration("AssemblyFileVersion",
-                                             new CodeAttributeArgument(
-                                                 new CodePrimitiveExpression(version)));
+            cad = new CodeAttributeDeclaration("AssemblyFileVersion",
+                                               new CodeAttributeArgument(
+                                                   new CodePrimitiveExpression(version)));
             ccu.AssemblyCustomAttributes.Add(cad);
 
 
             cad = new CodeAttributeDeclaration("AssemblyBuildDate",
-                                 new CodeAttributeArgument(
-                                     new CodePrimitiveExpression(DateTime.Now.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
+                                               new CodeAttributeArgument(
+                                                   new CodePrimitiveExpression(
+                                                       DateTime.Now.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
             ccu.AssemblyCustomAttributes.Add(cad);
 
             if (!string.IsNullOrEmpty(_company))
@@ -133,15 +143,16 @@ namespace AnjLab.FX.MSBuild.Tasks
         {
             try
             {
-                ProcessStartInfo psi = new ProcessStartInfo("svn");
-                psi.Arguments = "info --xml";
-                psi.WorkingDirectory = Path.GetDirectoryName(_infoFile);
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
-                psi.RedirectStandardError = true;
-                psi.CreateNoWindow = true;
-                Process p = new Process();
-                p.StartInfo = psi;
+                var psi = new ProcessStartInfo("svn")
+                              {
+                                  Arguments = "info --xml",
+                                  WorkingDirectory = Path.GetDirectoryName(_infoFile),
+                                  UseShellExecute = false,
+                                  RedirectStandardOutput = true,
+                                  RedirectStandardError = true,
+                                  CreateNoWindow = true
+                              };
+                var p = new Process {StartInfo = psi};
                 p.Start();
                 if (!p.WaitForExit(10*1000))
                 {
@@ -149,7 +160,7 @@ namespace AnjLab.FX.MSBuild.Tasks
                 }
                 string result = p.StandardOutput.ReadToEnd();
 
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.LoadXml(result);
                 _revision = int.Parse(doc.DocumentElement["entry"].Attributes["revision"].Value, CultureInfo.InvariantCulture);
                 return true;
@@ -164,9 +175,11 @@ namespace AnjLab.FX.MSBuild.Tasks
         private int GenerateBuildNumber()
         {
             if (DateTime.Now.Date <= _startDate.Date)
+            {
                 return 0;
-            else
-                return (int)(DateTime.Now.Date - _startDate.Date).TotalDays;
+            }
+
+            return (int)(DateTime.Now.Date - _startDate.Date).TotalDays;
         }
 
         public bool ReadVersionFile()
@@ -179,7 +192,7 @@ namespace AnjLab.FX.MSBuild.Tasks
 
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(_infoFile);
                 ReadTag(doc.DocumentElement, "major-version", out _majorVersion);
                 ReadTag(doc.DocumentElement, "minor-version", out _minorVersion);
@@ -198,7 +211,9 @@ namespace AnjLab.FX.MSBuild.Tasks
         private static void ReadTag<T>(XmlNode node, string name, out T value)
         {
             if (node[name] == null)
+            {
                 throw new InvalidOperationException(string.Format("Can't find tag with name {0}", name));
+            }
 
             value =(T)Convert.ChangeType(node[name].InnerText, typeof (T), CultureInfo.InvariantCulture);
         }

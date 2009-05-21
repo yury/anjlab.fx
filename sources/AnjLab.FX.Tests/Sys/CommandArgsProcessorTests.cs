@@ -34,5 +34,30 @@ namespace AnjLab.FX.Tests.Sys
 
             Assert.IsTrue(defaultExecuted);
         }
+
+        [Test]
+        public void TestParams()
+        {
+            var args = new[] { "/p:username=user", "/p:password=secret" };
+
+            var proc = new CommandArgsProcessor(args);
+
+            Assert.That(proc.HasParam("username"));
+            Assert.AreEqual("user", proc.GetParamValue("username"));
+
+            Assert.That(proc.HasParam("password"));
+            Assert.AreEqual("secret", proc.GetParamValue("password"));
+        }
+
+        [Test]
+        public void TestKeyInsensitiveParamKeys()
+        {
+            var args = new[] { "/P:username=user" };
+
+            var proc = new CommandArgsProcessor(args);
+
+            Assert.That(proc.HasParam("UserName"));
+            Assert.AreEqual("user", proc.GetParamValue("USERNAME"));
+        }
     }
 }
