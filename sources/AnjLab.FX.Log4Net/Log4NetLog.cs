@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Diagnostics;
 using AnjLab.FX.IO;
 using System.IO;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Log4Net
 {
     public class Log4NetLog : ILog
     {
         private readonly log4net.ILog _log;
-        private const string _relativePathToConfig = @"Properties\log4net.config";
+        private const string RelativePathToConfig = @"Properties\log4net.config";
 
         public static void LoadLog4NetConfig()
         {
-            LoadLog4NetConfig(_relativePathToConfig);
+            LoadLog4NetConfig(RelativePathToConfig);
         }
 
         public static void LoadLog4NetConfig(string relativePathToConfig)
@@ -29,7 +29,7 @@ namespace AnjLab.FX.Log4Net
                 pathToConfig = Path.Combine(Path.GetDirectoryName(new Uri(typeof(Log4NetLog).Assembly.CodeBase).AbsolutePath), relativePathToConfig);
             }
 
-            FileInfo fi = new FileInfo(pathToConfig);
+            var fi = new FileInfo(pathToConfig);
             if (fi.Exists)
             {
                 log4net.Config.XmlConfigurator.ConfigureAndWatch(fi);
@@ -129,5 +129,7 @@ namespace AnjLab.FX.Log4Net
         {
             get { return _log.IsDebugEnabled; }
         }
+
+        public event EventHandler<EventArgs<string, string>> LogMessage;
     }
 }

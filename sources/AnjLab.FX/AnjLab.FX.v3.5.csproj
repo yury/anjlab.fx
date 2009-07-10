@@ -1,3 +1,4 @@
+<<<<<<< HEAD:sources/AnjLab.FX/AnjLab.FX.v3.5.csproj
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -270,6 +271,273 @@
     <None Include="anjlab.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+=======
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AnjLab.FX</RootNamespace>
+    <AssemblyName>AnjLab.FX</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>anjlab.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_3_5</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_3_5</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\ByteBitArray.cs" />
+    <Compile Include="Collections\INonSerializableItem.cs" />
+    <Compile Include="Collections\PriorityQueue.cs" />
+    <Compile Include="Collections\SerializableList.cs" />
+    <Compile Include="Data\RepositoryFilter.cs" />
+    <Compile Include="Devices\DES.cs" />
+    <Compile Include="Devices\Md5.cs" />
+    <Compile Include="Gsm\ATRequest.cs" />
+    <Compile Include="Gsm\ATResponse.cs" />
+    <Compile Include="Gsm\Exceptions.cs" />
+    <Compile Include="Gsm\IModem.cs" />
+    <Compile Include="Gsm\GenericModem.cs" />
+    <Compile Include="Gsm\Sms.cs" />
+    <Compile Include="Gsm\SmsBase.cs" />
+    <Compile Include="Gsm\SmsStatusReport.cs" />
+    <Compile Include="IO\Compression\GZip.cs" />
+    <Compile Include="IO\CSVReader.cs" />
+    <Compile Include="IO\DataReaderExtensions.cs" />
+    <Compile Include="IO\LogLevel.cs" />
+    <Compile Include="IO\StreamExtensions.cs" />
+    <Compile Include="Net\CookieHelper.cs" />
+    <Compile Include="Net\Behaviors\HandleErrorsBehavior.cs" />
+    <Compile Include="Net\Behaviors\HandleErrorsBehaviorExtensionElement.cs" />
+    <Compile Include="Net\Mail\ConnectCommand.cs" />
+    <Compile Include="Net\Mail\ConnectResponse.cs" />
+    <Compile Include="Net\Mail\DeleCommand.cs" />
+    <Compile Include="Net\Mail\ListCommand.cs" />
+    <Compile Include="Net\Mail\ListResponse.cs" />
+    <Compile Include="Net\Mail\MailHeaders.cs" />
+    <Compile Include="Net\Mail\MailMessageEx.cs" />
+    <Compile Include="Net\Mail\NoopCommand.cs" />
+    <Compile Include="Net\Mail\PassCommand.cs" />
+    <Compile Include="Net\Mail\Pop3Client.cs" />
+    <Compile Include="Net\Mail\Pop3Command.cs" />
+    <Compile Include="Net\Mail\Pop3Commands.cs" />
+    <Compile Include="Net\Mail\Pop3Exception.cs" />
+    <Compile Include="Net\Mail\Pop3ListItem.cs" />
+    <Compile Include="Net\Mail\Pop3Response.cs" />
+    <Compile Include="Net\Mail\Pop3Responses.cs" />
+    <Compile Include="Net\Mail\Pop3State.cs" />
+    <Compile Include="Net\Mail\QuitCommand.cs" />
+    <Compile Include="Net\Mail\RetrCommand.cs" />
+    <Compile Include="Net\Mail\RetrResponse.cs" />
+    <Compile Include="Net\Mail\RsetCommand.cs" />
+    <Compile Include="Net\Mail\Stat.cs" />
+    <Compile Include="Net\Mail\StatCommand.cs" />
+    <Compile Include="Net\Mail\StatResponse.cs" />
+    <Compile Include="Net\Mail\TopCommand.cs" />
+    <Compile Include="Net\Mail\UserCommand.cs" />
+    <Compile Include="Net\Mime\MediaTypes.cs" />
+    <Compile Include="Net\Mime\MimeEntity.cs" />
+    <Compile Include="Net\Mime\MimeHeaders.cs" />
+    <Compile Include="Net\Mime\MimeReader.cs" />
+    <Compile Include="Net\Mime\QuotedPrintableEncoding.cs" />
+    <Compile Include="Net\NetBinding.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\RepositoryFilterType.cs" />
+    <Compile Include="Datetime\DateUtils.cs" />
+    <Compile Include="Devices\BytesFilter.cs" />
+    <Compile Include="Devices\Convert.cs" />
+    <Compile Include="Devices\CheckSum.cs" />
+    <Compile Include="Drawing\Palette.cs" />
+    <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Devices\Ax25.cs" />
+    <Compile Include="Finance\TimeInterval.cs" />
+    <Compile Include="Finance\Yield.cs" />
+    <Compile Include="Html\HtmlProcessor.cs" />
+    <Compile Include="IO\BasedBitReader.cs" />
+    <Compile Include="IO\BasedBitWriter.cs" />
+    <Compile Include="IO\BitReader.cs" />
+    <Compile Include="IO\BitWriter.cs" />
+    <Compile Include="IO\CSVExport.cs" />
+    <Compile Include="IO\DirectoryHelper.cs" />
+    <Compile Include="IO\ILog.cs" />
+    <Compile Include="IO\Ports\SerialPortDelay.cs">
+    </Compile>
+    <Compile Include="IO\TraceLog.cs" />
+    <Compile Include="Mathematics\DiscreteVariate.cs" />
+    <Compile Include="Net\Feeds\AtomFeed.cs" />
+    <Compile Include="Net\Feeds\FeedAuthor.cs" />
+    <Compile Include="Net\Feeds\FeedContent.cs" />
+    <Compile Include="Net\Feeds\FeedEntry.cs" />
+    <Compile Include="Net\Feeds\FeedGenerator.cs" />
+    <Compile Include="Net\Feeds\FeedLink.cs" />
+    <Compile Include="Net\HttpRequest.cs" />
+    <Compile Include="Net\HttpResponse.cs" />
+    <Compile Include="Net\UserAgents.cs" />
+    <Compile Include="Patterns\Generic\KeyedFactory.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\NextBytesCondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\StreamMapperBuilder.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\CodeGenerationContext.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\ValueCondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\While.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\MapInfo.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\ContainerMapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\ICondition.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\Do.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Instructions\If.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapByName.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytes.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBits.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapBytesSegment.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Mappings\MapElement.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\ICodeGeneratorNode.cs" />
+    <Compile Include="StreamMapping\BinaryStreamMapper.cs" />
+    <Compile Include="StreamMapping\AbstractBinaryStreamMapper.cs" />
+    <Compile Include="StreamMapping\IBinaryMapper.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\IOperation.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Add.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\Sub.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\RightShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\LeftShift.cs" />
+    <Compile Include="StreamMapping\CodeGeneration\Operations\ValueOperation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Collections\UniqueList.cs" />
+    <Compile Include="Sys\Action.cs" />
+    <Compile Include="Sys\AssemblyBuildDateAttribute.cs" />
+    <Compile Include="Sys\AttributeSearcher.cs" />
+    <Compile Include="Sys\CaseFormatProvider.cs" />
+    <Compile Include="Sys\CodeBuilder.cs" />
+    <Compile Include="Sys\Command.cs" />
+    <Compile Include="Sys\CommandArgsProcessor.cs" />
+    <Compile Include="Sys\ComparerFactory.cs" />
+    <Compile Include="Sys\Console\BoolArg.cs" />
+    <Compile Include="Sys\Console\CommandArg.cs" />
+    <Compile Include="Sys\Console\CommandArgs.cs" />
+    <Compile Include="Sys\Console\ICommandArg.cs" />
+    <Compile Include="Sys\Console\IntArg.cs" />
+    <Compile Include="Sys\Console\StringArg.cs" />
+    <Compile Include="Sys\DataTableAdapterFactory.cs" />
+    <Compile Include="Sys\EnumHelper.cs" />
+    <Compile Include="Sys\EventArgs.cs" />
+    <Compile Include="Sys\FactoryMethod.cs" />
+    <Compile Include="Sys\GetObjectAction.cs" />
+    <Compile Include="Sys\Guard.cs" />
+    <Compile Include="Sys\ICommand.cs" />
+    <Compile Include="Sys\IDataTableAdapter.cs" />
+    <Compile Include="Sys\InitObjectAction.cs" />
+    <Compile Include="Sys\Linq\Dynamic\DynamicExtensions.cs" />
+    <Compile Include="Sys\Lst.cs" />
+    <Compile Include="Sys\MemberAttribute.cs" />
+    <Compile Include="Sys\OpenService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Sys\Operation.cs" />
+    <Compile Include="Sys\Pair.cs" />
+    <Compile Include="Sys\Predicate.cs" />
+    <Compile Include="Sys\PropertyComparer.cs" />
+    <Compile Include="Sys\PrototypeFactoryMethod.cs" />
+    <Compile Include="Sys\Reflector.cs" />
+    <Compile Include="Sys\ServiceChannel.cs" />
+    <Compile Include="Sys\SortableBindingList.cs" />
+    <Compile Include="Sys\Str.cs" />
+    <Compile Include="Sys\StringExtentions.cs" />
+    <Compile Include="Sys\TypeReflector.cs" />
+    <Compile Include="Sys\VoidAction.cs" />
+    <Compile Include="Tasks\Scheduling\DailyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\EventQueue.cs" />
+    <Compile Include="Tasks\Scheduling\HourlyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\IntervalTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\ITrigger.cs" />
+    <Compile Include="Tasks\Scheduling\MonthlyTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\OnceTrigger.cs" />
+    <Compile Include="Tasks\Scheduling\Scheduler.cs" />
+    <Compile Include="Tasks\Scheduling\Trigger.cs" />
+    <Compile Include="Tasks\Scheduling\WeeklyTrigger.cs" />
+    <Compile Include="UI\IStatusStripProvider.cs" />
+    <Compile Include="UI\RuNumberFormat.cs" />
+    <Compile Include="Windows\Data\EnumHelperValueConverter.cs" />
+    <Compile Include="Windows\Dialogs\FolderBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Media\BrushData.cs" />
+    <Compile Include="Windows\Media\BrushesHelper.cs" />
+    <Compile Include="Windows\Media\ColorsHelper.cs" />
+    <Compile Include="Windows\Media\ColorData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="anjlab.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+>>>>>>> 916309b6f57f943cba3cee92ba94d6e2d95611b6:sources/AnjLab.FX/AnjLab.FX.v3.5.csproj
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
