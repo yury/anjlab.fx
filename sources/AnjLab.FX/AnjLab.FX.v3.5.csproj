@@ -238,6 +238,12 @@
     <Compile Include="Tasks\Scheduling\WeeklyTrigger.cs" />
     <Compile Include="UI\IStatusStripProvider.cs" />
     <Compile Include="UI\RuNumberFormat.cs" />
+    <Compile Include="Windows\Controls\ColorComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\ColorComboBox.Designer.cs">
+      <DependentUpon>ColorComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Data\EnumHelperValueConverter.cs" />
     <Compile Include="Windows\Dialogs\FolderBrowser.cs">
       <SubType>Component</SubType>
@@ -252,6 +258,9 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Controls\ColorComboBox.resx">
+      <DependentUpon>ColorComboBox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
