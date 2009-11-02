@@ -172,6 +172,21 @@ namespace AnjLab.FX.Devices
             return BytesToHexString(bytes).ToString();
         }
 
+        public static int HexStringToInt(string hex)
+        {
+            var bytes = HexStringToBytes(hex);
+            int result = 0;
+            if (bytes.Length >= 4)
+                result = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3];
+            else
+                if (bytes.Length >= 2)
+                    result = (bytes[0] << 8) + bytes[1];
+                else
+                    if (bytes.Length == 1)
+                        result = bytes[0];
+            return result;
+        }
+
         public static unsafe float UIntToSingle(uint num)
         {
             return *(((float*) &num));
