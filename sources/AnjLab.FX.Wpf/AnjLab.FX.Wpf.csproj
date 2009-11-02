@@ -79,7 +79,10 @@
     <Compile Include="Controls\ColorsComboBox.xaml.cs">
       <DependentUpon>ColorsComboBox.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD:sources/AnjLab.FX.Wpf/AnjLab.FX.Wpf.csproj
+=======
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+>>>>>>> 916309b6f57f943cba3cee92ba94d6e2d95611b6:sources/AnjLab.FX.Wpf/AnjLab.FX.Wpf.csproj
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Controls\GenericDataTemplateSelector.cs" />
     <Compile Include="Controls\InvalidEntryEventArgs.cs" />

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using AnjLab.FX.Patterns.Generic;
 
 namespace AnjLab.FX.Sys
@@ -72,6 +74,46 @@ namespace AnjLab.FX.Sys
             {
                 _commands.Create(NoKey).Execute();
             }
+        }
+
+        private IDictionary<string, string> _params;
+
+        public bool	HasParam(string key)
+        {
+            return GetParams().ContainsKey(key.ToLower());
+        }
+
+        private IDictionary<string, string> GetParams()
+        {
+            if (_params == null)
+            {
+                _params = ParseParams(_args);
+            }
+            return _params;
+        }
+
+        private static IDictionary<string, string> ParseParams(IEnumerable<string> args)
+        {
+            var result = new Dictionary<string, string>();
+
+            foreach(var arg in args)
+            {
+                var paramRegex = new Regex("/[pP]:(?<key>.*)=(?<value>.*)");
+
+                var match = paramRegex.Match(arg);
+
+                if (match.Success)
+                {
+                    result.Add(match.Groups["key"].Value.ToLower(), match.Groups["value"].Value);
+                }
+            }
+
+            return result;
+        }
+
+        public string GetParamValue(string key)
+        {
+            return GetParams()[key.ToLower()];
         }
     }
 }

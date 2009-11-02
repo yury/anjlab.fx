@@ -109,12 +109,6 @@
     <Compile Include="Windows\Media\ColorsHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
-      <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
-      <Name>AnjLab.FX.v3.5</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="anjlab.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
+      <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
+      <Name>AnjLab.FX.v3.5</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
