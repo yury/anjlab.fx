@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnRemoveDuplicateSymbols') and xtype in (N'FN', N'if', N'TF'))
-	drop function fx.fnRemoveDuplicateSymbols
+if exists (select * from sysobjects where id = object_id(N'fx.RemoveDuplicateSymbols') and xtype in (N'FN', N'if', N'TF'))
+	drop function fx.RemoveDuplicateSymbols
 GO
 
 /*
@@ -21,12 +21,12 @@ GO
 <returns>Truncated string</returns>
 
 <example>
-print fx.fnRemoveDuplicateSymbols(N'       b    c d     e     ', N' ')
+print fx.RemoveDuplicateSymbols(N'       b    c d     e     ', N' ')
 result ' b c d e '
 </example>
 */
 
-create function fx.fnRemoveDuplicateSymbols
+create function fx.RemoveDuplicateSymbols
 (
 	@StringValue nvarchar(max),
 	@SymbolValue nchar(1) = N' '

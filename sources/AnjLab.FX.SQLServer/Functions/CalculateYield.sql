@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnCalculateYield') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnCalculateYield
+if exists (select * from sysobjects where id = object_id(N'fx.CalculateYield') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.CalculateYield
 go
 
 /*
@@ -17,14 +17,14 @@ go
 <date>09\27\2007</date>
 
 <example>
-	NOTE: table valued function fx.fnGetEmptyRowSet and scalar function fx.fnCheckLeapYear
+	NOTE: table valued function fx.GetEmptyRowSet and scalar function fx.CheckLeapYear
 	must be created before using.
-	print fx.fnCalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
+	print fx.CalculateYield(getDate(), getDate()+1000, 100.00, 200.00)
 	> 36.5191
 </example>
 */
 
-create function fx.fnCalculateYield(@StartDate datetime, @EndDate datetime, @PresentValue money, @FutureValue money) 
+create function fx.CalculateYield(@StartDate datetime, @EndDate datetime, @PresentValue money, @FutureValue money) 
 returns real as
 begin
 
@@ -36,14 +36,14 @@ select @Yield =
 from (
 	select 
 		datediff(day, YearStartDate, YearEndDate) as Days,
-		fx.fnCheckLeapYear(YearStartDate) as LeapYear
+		fx.CheckLeapYear(YearStartDate) as LeapYear
 	from (
 		select 
 			YearStartDate = CASE Years WHEN year(@StartDate) THEN @StartDate ELSE '01/01/' + str(Years) END,
 			YearEndDate   = CASE Years WHEN year(@EndDate)   THEN @EndDate	 ELSE '01/01/' + str(Years + 1) END
 		from (
 			select Year(@StartDate) + RecordId - 1 as Years
-			from fx.fnGetEmptyRowSet(datediff(year, @StartDate, @EndDate) + 1)
+			from fx.GetEmptyRowSet(datediff(year, @StartDate, @EndDate) + 1)
 		) as a
 	) as b
 ) as c

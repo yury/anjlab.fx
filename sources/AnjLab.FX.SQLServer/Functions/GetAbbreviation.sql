@@ -1,6 +1,6 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnGetAbbreviation') and xtype in (N'FN', N'if', N'TF'))
-	drop function fx.fnGetAbbreviation
-GO
+if exists (select * from sysobjects where id = object_id(N'fx.GetAbbreviation') and xtype in (N'FN', N'if', N'TF'))
+	drop function fx.GetAbbreviation
+go
 
 /*
 <summary>
@@ -19,12 +19,12 @@ GO
 <returns>Abbreviation string</returns>
 
 <example>
-	print fx.fnGetAbbreviation(N'H. Gandall .2 (ss) hsgdhs ')
+	print fx.GetAbbreviation(N'H. Gandall .2 (ss) hsgdhs ')
 	result 'HG2SH'
 </example>
 */
 
-create function fx.fnGetAbbreviation(@String nvarchar(max))
+create function fx.GetAbbreviation(@String nvarchar(max))
 returns nvarchar(max) as
 begin
 
@@ -41,7 +41,7 @@ begin
 		set @ExcludeSymbols = substring(@ExcludeSymbols, 2, len(@ExcludeSymbols) - 1)
 	end
 
-	set @String = fx.fnRemoveDuplicateSymbols(@String, space(1))
+	set @String = fx.RemoveDuplicateSymbols(@String, space(1))
 	set @Abbreviation = space(0)
 
 	set @Index = charindex(space(1), @String)

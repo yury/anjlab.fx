@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnFormatPhoneNumber') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnFormatPhoneNumber
+if exists (select * from sysobjects where id = object_id(N'fx.FormatPhoneNumber') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.FormatPhoneNumber
 go
 /*
 <summary>
@@ -17,11 +17,11 @@ go
 <returns>Formatted string consists phone number</returns>
 
 <example>
-	print fx.fnFormatPhoneNumber(replicate(N'0', 11))
+	print fx.FormatPhoneNumber(replicate(N'0', 11))
 </example>
 */
 
-create function fx.fnFormatPhoneNumber(@String nvarchar(max)) 
+create function fx.FormatPhoneNumber(@String nvarchar(max)) 
 returns nvarchar(max) as
 begin
 

@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnRipPhoneNumber') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnRipPhoneNumber
+if exists (select * from sysobjects where id = object_id(N'fx.RipPhoneNumber') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.RipPhoneNumber
 go
 
 /*
@@ -20,11 +20,11 @@ go
 <returns>Substring consists phone number</returns>
 
 <example>
-	print fx.fnRipPhoneNumber(N'Alex Zakharov *(768)-9876-098 7call after 6PM')
+	print fx.RipPhoneNumber(N'Alex Zakharov *(768)-9876-098 7call after 6PM')
 </example>
 */
 
-create function fx.fnRipPhoneNumber(@String nvarchar(max)) 
+create function fx.RipPhoneNumber(@String nvarchar(max)) 
 returns nvarchar(max) as
 begin
 

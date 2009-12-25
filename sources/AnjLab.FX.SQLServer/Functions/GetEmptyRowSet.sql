@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnGetEmptyRowSet') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnGetEmptyRowSet
+if exists (select * from sysobjects where id = object_id(N'fx.GetEmptyRowSet') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.GetEmptyRowSet
 go
 
 /*
@@ -17,23 +17,23 @@ go
 
 <example>
 	Example 1. Multiply scalar value 
-		select 'Hello, World!' from fx.fnGetEmptyRowSet(5)
+		select 'Hello, World!' from fx.GetEmptyRowSet(5)
 	Example 2. Get list of numbers between two values (5 and 10)
-		select RecordId from fx.fnGetEmptyRowSet(10) where RecordID >= 5
+		select RecordId from fx.GetEmptyRowSet(10) where RecordID >= 5
 	Example 3. Get list of missed numbers in sequence
 		declare @test table (RecordID int)
-		insert into @test select top 10 RecordID from fx.fnGetEmptyRowSet(20) order by newid()
+		insert into @test select top 10 RecordID from fx.GetEmptyRowSet(20) order by newid()
 		select f.RecordID
-			from fx.fnGetEmptyRowSet(20) f
+			from fx.GetEmptyRowSet(20) f
 			left join @test t on f.RecordID = t.RecordID
 			where t.RecordID is null
 			order by f.RecordID desc
 	Example 4. Get list of years between two dates (now and 1000 days ago)
-		select RecordId from fx.fnGetEmptyRowSet(year(getDate())) where RecordID >= year(getDate()-1000)	
+		select RecordId from fx.GetEmptyRowSet(year(getDate())) where RecordID >= year(getDate()-1000)	
 </example>
 */
 
-create function fx.fnGetEmptyRowSet(@Records int) 
+create function fx.GetEmptyRowSet(@Records int) 
 returns @Empty table(RecordID int) as
 begin
 

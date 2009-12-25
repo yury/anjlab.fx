@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.procCleanServerCashe') and xtype in (N'P'))
-drop procedure fx.procCleanServerCashe
+if exists (select * from sysobjects where id = object_id(N'fx.CleanServerCashe') and xtype in (N'P'))
+drop procedure fx.CleanServerCashe
 GO
 /*
 <summary>
@@ -17,16 +17,17 @@ GO
 </author>
 
 <example>
-	exec fx.procCleanServerCashe
+	exec fx.CleanServerCashe
 </example>
 
 */
 
-create procedure fx.procCleanServerCashe as
+create procedure fx.CleanServerCashe as
 begin
 
 	checkpoint
-    dbcc dropcleanbuffers
-	dbcc freesystemcashe('All')
+    dbcc dropcleanbuffers with no_infomsgs
+	dbcc FREESYSTEMCACHE ('ALL') with no_infomsgs
+
 
 end

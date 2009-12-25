@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnConvertVarbinaryToVarcharHex') and xtype in (N'FN', N'if', N'TF'))
-	drop function fx.fnConvertVarbinaryToVarcharHex
+if exists (select * from sysobjects where id = object_id(N'fx.ConvertVarbinaryToVarcharHex') and xtype in (N'FN', N'if', N'TF'))
+	drop function fx.ConvertVarbinaryToVarcharHex
 GO
 
 /*
@@ -47,7 +47,7 @@ GO
 <returns>Hexadecimal representation of binary data, using chars [0-0a-f]</returns>
 */
 
-create function fx.fnConvertVarbinaryToVarcharHex
+create function fx.ConvertVarbinaryToVarcharHex
 (
 	@VarbinaryValue	varbinary(max)
 )
@@ -65,8 +65,8 @@ returns varchar(max) AS
 		set @FirstHalfNumberOfBytes  = @NumberOfBytes/2
 		set @SecondHalfNumberOfBytes = @NumberOfBytes - @FirstHalfNumberOfBytes
 		-- Call this function recursively with the two parts of the input split in half
-		return fx.fnConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, 1					        , @FirstHalfNumberOfBytes)  as varbinary(max)))
-			 + fx.fnConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, @FirstHalfNumberOfBytes+1 , @SecondHalfNumberOfBytes) as varbinary(max)))
+		return fx.ConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, 1					        , @FirstHalfNumberOfBytes)  as varbinary(max)))
+			 + fx.ConvertVarbinaryToVarcharHex(cast(substring(@VarbinaryValue, @FirstHalfNumberOfBytes+1 , @SecondHalfNumberOfBytes) as varbinary(max)))
 	end
 	
 	if (@NumberOfBytes = 0)
@@ -111,6 +111,6 @@ returns varchar(max) AS
 	-- 4. Recursively call this method on the remaining Binary data, concatenating the two 
 	--    hexadecimal 'values' we just decoded as their ASCII character representation
 	--    ie. we pass 88887777 66665555 44443333 back to this function, adding XY to the result string
-	return fx.fnConvertVarbinaryToVarcharHex(@VarbinaryValue) + char(@HighByte) + char(@LowByte)
+	return fx.ConvertVarbinaryToVarcharHex(@VarbinaryValue) + char(@HighByte) + char(@LowByte)
 end
 GO

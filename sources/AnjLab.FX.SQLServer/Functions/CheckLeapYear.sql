@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnCheckLeapYear') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnCheckLeapYear
+if exists (select * from sysobjects where id = object_id(N'fx.CheckLeapYear') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.CheckLeapYear
 go
 
 /*
@@ -14,11 +14,11 @@ go
 <author>
 
 <example>
-	print fx.fnCheckLeapYear(getDate())
+	print fx.CheckLeapYear(getDate())
 </example>
 */
 
-create function fx.fnCheckLeapYear(@dt datetime)
+create function fx.CheckLeapYear(@dt datetime)
 returns bit as
 begin
 

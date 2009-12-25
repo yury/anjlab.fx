@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnFixStringCase') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnFixStringCase
+if exists (select * from sysobjects where id = object_id(N'fx.FixStringCase') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.FixStringCase
 go
 
 /*
@@ -18,13 +18,13 @@ go
 <date>01\27\200</date>
 
 <example>
-	print tools.fnFixStringCase(N'SAN FRANCISCO')
-	print tools.fnFixStringCase(N'   funcTiOn        ')
+	print fx.FixStringCase(N'SAN FRANCISCO')
+	print fx.FixStringCase(N'   funcTiOn        ')
 </example>
 */
 
 
-create function fx.fnFixStringCase(@String nvarchar(max)) returns nvarchar(max) as
+create function fx.FixStringCase(@String nvarchar(max)) returns nvarchar(max) as
 begin
 
 	declare 

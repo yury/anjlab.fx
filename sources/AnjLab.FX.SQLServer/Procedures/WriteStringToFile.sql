@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.procWriteStringToFile') and xtype in (N'P'))
-drop procedure fx.procWriteStringToFile
+if exists (select * from sysobjects where id = object_id(N'fx.WriteStringToFile') and xtype in (N'P'))
+drop procedure fx.WriteStringToFile
 go
 
 /*
@@ -10,7 +10,8 @@ go
 <remarks>
  Using OLE automation procedures mast be switched on. Use the following code to
  turn it on:
-
+	sp_configure 'show advanced options', 1
+	reconfigure
 	sp_configure 'Ole Automation Procedures', 1
 	reconfigure
 
@@ -22,7 +23,7 @@ go
 </author>
 
 <example>
-	exec fx.procWriteStringToFile N'This is an example', N'c:\', N'example.txt'
+	exec fx.WriteStringToFile N'This is an example', N'c:\', N'example.txt'
 </example>
 
 <param name="String">String to write</param>
@@ -30,7 +31,7 @@ go
 <param name="Filename">File name</param>
 */
 
-create procedure fx.procWriteStringToFile(
+create procedure fx.WriteStringToFile(
 	@String nvarchar(max), --8000 in SQL Server 2000
 	@Path nvarchar(255),
 	@Filename nvarchar(100)
@@ -54,9 +55,15 @@ declare
 
 set nocount on
 
-select @ErrorMessage = 'opening the File System Object'
+if not exists(select * from sys.configurations where name = 'Ole Automation Procedures' and [Value] = 1)
+begin
+	print 'Ole Automation Procedures is not enabled'
+	return -1
+end
+
+set @ErrorMessage = 'opening the File System Object'
 execute @State = sp_OACreate 'Scripting.FileSystemObject' , @ObjectFileSystem out
-select @FileAndPath = @path + '\' + @Filename
+set @FileAndPath = @path + '\' + @Filename
 
 if @State=0 
 begin
@@ -72,13 +79,15 @@ end else begin
 
 	execute sp_OAGetErrorInfo @ObjectErrorObject, 
 		@source output, @Description output, @HelpFile output, @HelpID output
-	select @ErrorMessage = 'Error whilst ' + coalesce(@ErrorMessage, 'unknown action')
+	set @ErrorMessage = 'Error whilst ' + coalesce(@ErrorMessage, 'unknown action')
 			+ ', ' + coalesce(@Description,'')
 	raiserror (@ErrorMessage, 16, 1)
+	return -1
 
 end
 
 execute  sp_OADeStroy @ObjectTextStream
 execute sp_OADeStroy @ObjectTextStream
+return 0
 
 end

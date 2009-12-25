@@ -13,7 +13,7 @@
 <date>10/2/2008</date>
 */
 
-set nocount on -- Hide (1 row affected) messages
+set nocount on 
 
 declare ForeignKeys cursor for
 	select fk.name as fkname, so.name as tabname, c.name as colname
@@ -33,7 +33,7 @@ begin
 	if not exists (select * from sys.indexes where name = N'ix' + @tabname + @colname)
 	begin
 		begin try
-			set @sql = N'Create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
+			set @sql = N'create nonclustered index ix'+ @tabname + @colname + N' on ' + @tabname + N'(' + @colname + N' asc)'
 			exec sp_executesql @sql
 			print N' * Index ' + N'ix' + @tabname + @colname + N' is created.'
 		end try

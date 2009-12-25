@@ -1,5 +1,5 @@
-if exists (select * from sysobjects where id = object_id(N'fx.fnGetTimeFromDateTime') and xtype in (N'FN', N'IF', N'TF'))
-drop function fx.fnGetTimeFromDateTime
+if exists (select * from sysobjects where id = object_id(N'fx.GetTimeFromDateTime') and xtype in (N'FN', N'IF', N'TF'))
+drop function fx.GetTimeFromDateTime
 go
 
 /*
@@ -15,11 +15,11 @@ go
 <author>
 
 <example>
-	print fx.fnGetTimeFromDateTime(getDate())
+	print fx.GetTimeFromDateTime(getDate())
 </example>
 */
 
-create function fx.fnGetTimeFromDateTime(@dt datetime)
+create function fx.GetTimeFromDateTime(@dt datetime)
 returns varchar(8) AS
 begin
 	return convert(varchar(8), @dt, 108)
