@@ -30,17 +30,21 @@ Begin DataProject = "AnjLab.FX.SQLServer"
       Script = "SearchObjectByText.sql"
       Script = "WriteStringToFile.sql"
    End
-   Script = "Schema.sql"
    Begin Folder = "Scripts"
       Script = "Indexing foreign key fields.sql"
       Script = "Generate procedures to delete records.sql"
       Script = "Replacing empty values with null.sql"
    End
    Begin Folder = "Tables"
+   Begin Folder = "Rus"
       Script = "BusinessLegalForms.sql"
       Script = "Countries.sql"
       Script = "Currencies.sql"
       Script = "IdentityCardTypes.sql"
       Script = "MeasurementUnits.sql"
+   End
+   Begin Folder = "Eng"
+      Script = "Countries.sql"
+   End
    End
 End
