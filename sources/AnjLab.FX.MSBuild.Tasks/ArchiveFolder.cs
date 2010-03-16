@@ -59,11 +59,19 @@ namespace AnjLab.FX.MSBuild.Tasks
             return Archive();
         }
 
+        public static string _7Zip
+        {
+            get
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                string s7exe = Path.Combine(path, @"7-zip\7z.exe");
+                return !File.Exists(s7exe) ? s7exe.Replace("Program Files (x86)", "Program Files") : s7exe;
+            }
+        }
+
         private bool Archive()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            string sevenZipFolder = Path.Combine(path, "7-zip");
-            string sevenZ = Path.Combine(sevenZipFolder, "7z.exe");
+            string sevenZ = _7Zip;
             if (!File.Exists(sevenZ))
             {
                 Log.LogError("can't find 7zip");

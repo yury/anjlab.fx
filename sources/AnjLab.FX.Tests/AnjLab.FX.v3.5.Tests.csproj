@@ -36,7 +36,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_3_5</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_3_5</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Build.Tasks" />
+    <Reference Include="Microsoft.Build.Utilities" />
     <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\satellite.libraries\nunit.framework.dll</HintPath>
@@ -80,6 +99,7 @@
     <Compile Include="IO\CSVReaderTests.cs" />
     <Compile Include="IO\IOTestFixture.cs" />
     <Compile Include="IO\TraceLogTests.cs" />
+    <Compile Include="MsBuild\ArchiveFolderTaskTests.cs" />
     <Compile Include="Net\CookieHelperTests.cs" />
     <Compile Include="Net\Feeds\AtomFeedTests.cs" />
     <Compile Include="Net\HttpRequestResponseTests.cs" />
@@ -131,6 +151,10 @@
     <None Include="anjlab.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnjLab.FX.MSBuild.Tasks\AnjLab.FX.3.5.MSBuild.Tasks.csproj">
+      <Project>{5FC52267-CEB9-4E07-984E-B47DAF2DF0F3}</Project>
+      <Name>AnjLab.FX.3.5.MSBuild.Tasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AnjLab.FX\AnjLab.FX.v3.5.csproj">
       <Project>{91B5FE4B-C935-47C1-863E-33FD76D5D0C7}</Project>
       <Name>AnjLab.FX.v3.5</Name>
