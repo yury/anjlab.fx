@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using AnjLab.FX.Sys;
 
 namespace AnjLab.FX.Wpf.Controls
 {
@@ -24,6 +25,8 @@ namespace AnjLab.FX.Wpf.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPicker), new FrameworkPropertyMetadata(typeof(ColorPicker)));
         }
+
+        public event EventHandler<EventArgs<Color>> SelectedColorChanged;
 
         public Color SelectedColor
         {
@@ -65,7 +68,12 @@ namespace AnjLab.FX.Wpf.Controls
         void okButton_Click(object sender, RoutedEventArgs e)
         {
             var colorSelector = GetTemplateChild("colorSelector") as ColorSelector;
-            if (colorSelector != null) SelectedColor = colorSelector.SelectedColor;
+            if (colorSelector != null)
+            {
+                SelectedColor = colorSelector.SelectedColor;
+                if (SelectedColorChanged != null)
+                    SelectedColorChanged(this, EventArg.New(SelectedColor));
+            }
 
             ClosePopup();
         }

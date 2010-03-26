@@ -709,7 +709,7 @@
                 <ControlTemplate TargetType="{x:Type Controls:ColorPicker}">
                     <DockPanel Height="{TemplateBinding Height}"    Width="{TemplateBinding Width}">
                         <ToggleButton DockPanel.Dock="Right" Margin="5,0,0,0" Width="23" Height="{TemplateBinding Height}" 
-                                      Content="..." 
+                                      Content="..."
                                       ClickMode="Press" x:Name="PART_openButton"/>
                         
                         <Popup x:Name="colorSelectorPopup" Placement="Right" StaysOpen="True"
@@ -753,6 +753,53 @@
                             <Setter TargetName="PART_openButton" Property="IsChecked" Value="False"/>
                         </Trigger>
                     </ControlTemplate.Triggers>-->
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type Controls:ColorPickerLight}" TargetType="{x:Type Controls:ColorPickerLight}">
+        <Setter Property="BorderBrush" Value="{x:Static SystemColors.ControlDarkBrush}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:ColorPicker}">
+                    <DockPanel Height="{TemplateBinding Height}"    Width="{TemplateBinding Width}">
+                        <ToggleButton DockPanel.Dock="Left" 
+                                      Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                      ClickMode="Press" x:Name="PART_openButton">
+                            <ToggleButton.Background>
+                                <SolidColorBrush Color="{Binding Path=SelectedColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </ToggleButton.Background>
+                        </ToggleButton>
+
+                        <Popup x:Name="colorSelectorPopup" Placement="Right" StaysOpen="True"
+                               IsOpen="{Binding ElementName=PART_openButton, Path=IsChecked}"
+                               PlacementTarget="{Binding ElementName=PART_openButton}">
+
+                            <Border Background="{x:Static SystemColors.ControlBrush}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Controls:ColorSelector Grid.Row="0" Grid.ColumnSpan="3" Margin="5"  x:Name="colorSelector" Width="500"/>
+
+                                    <Button Grid.Row="1" Grid.Column="1" x:Name="PART_okButton" Width="80">OK</Button>
+                                    <Button Grid.Row="1" Grid.Column="2" Margin="5,0,5,0" x:Name="PART_cancelButton" Width="80">Cancel</Button>
+                                </Grid>
+                            </Border>
+                        </Popup>
+                    </DockPanel>
                 </ControlTemplate>
 
             </Setter.Value>

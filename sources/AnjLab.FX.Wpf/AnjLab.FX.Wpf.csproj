@@ -82,6 +82,7 @@
     <Compile Include="Controls\CalendarDataGenerator.cs" />
     <Compile Include="Controls\CalendarDate.cs" />
     <Compile Include="Controls\ColorPicker.cs" />
+    <Compile Include="Controls\ColorPickerLight.cs" />
     <Compile Include="Controls\ColorSelector.cs" />
     <Compile Include="Controls\Converters.cs" />
     <Compile Include="Controls\DatePicker.cs" />
