@@ -190,8 +190,8 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
                     UpdateMinMax(point);
                 }
 
-			    paths.Segments.Add(new LineSegment(point, true));
-			}
+                paths.Segments.Add(new LineSegment(point, true));
+            }
 			else
 			{
 				// First line being drawn so set the min/max points
@@ -408,6 +408,11 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
 				dashed = value;
 			}
 		}
+
+        /// <summary>
+        /// Gets/Sets if the chart should draw points for individual values or not
+        /// </summary>
+	    public bool ShowIndividualPoints { get; set; }
 
 		/// <summary>
 		/// Gets/Sets if the primitve should be shown in the plot legend.
