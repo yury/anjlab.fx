@@ -43,6 +43,8 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
 
     public partial class XYLineChart : UserControl
     {
+        
+
         #region Private Fields
 
         // user data
@@ -511,6 +513,31 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
         {
             get { return yTextForDigitalView; }
             set { yTextForDigitalView = value; }
+        }
+
+        private XYLineChartLegendPosition legendPosition;
+        public XYLineChartLegendPosition LegendPosition
+        {
+            get { return legendPosition; } 
+            set
+            {
+                legendPosition = value;
+                switch (value)
+                {
+                    case XYLineChartLegendPosition.Top:
+                        legendBox.SetValue(Grid.ColumnProperty, 2);
+                        legendBox.SetValue(Grid.RowProperty, 1);
+                        legendBox.SetValue(VerticalAlignmentProperty, VerticalAlignment.Stretch);
+                        legendBox.WrapMode = Orientation.Horizontal;
+                        break;
+                    case XYLineChartLegendPosition.Right:
+                        legendBox.WrapMode = Orientation.Vertical;
+                        legendBox.SetValue(Grid.ColumnProperty, 3);
+                        legendBox.SetValue(Grid.RowProperty, 2);
+                        legendBox.SetValue(VerticalAlignmentProperty, VerticalAlignment.Center);
+                        break;
+                }
+            }
         }
 
         #endregion Properties

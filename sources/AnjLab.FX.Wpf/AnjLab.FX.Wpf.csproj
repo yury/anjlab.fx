@@ -183,6 +183,7 @@
     <Compile Include="Swordfish.WPF.Charts\XYLineChart.xaml.cs">
       <DependentUpon>XYLineChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Swordfish.WPF.Charts\XYLineChartLegendPosition.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="VisualTree.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
