@@ -332,24 +332,35 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
                 scaleX = size.Width/(maxXY.X - minXY.X);
             if (maxXY.Y != minXY.Y)
                 scaleY = size.Height/(maxXY.Y - minXY.Y);
-            double optimalSpacingX = optimalGridLineSpacing.X/scaleX;
 
-            double spacingX = ChartUtilities.Closest_1_2_5_Pow10(optimalSpacingX);
+            double spacingX;
+            int startXmult, endXmult;
+            if (ScaleXHours.HasValue && scaleX != 0)
+            {
+                int diff = Math.Max(1, Convert.ToInt32(Math.Truncate((MaxDate - MinDate).TotalHours / ScaleXHours.Value)));
+                spacingX = (maxXY.X - minXY.X) / diff;
+                startXmult = 0;
+                endXmult = diff;
+            }
+            else
+            {
+                var optimalSpacingX = optimalGridLineSpacing.X/scaleX;
+                spacingX = ChartUtilities.Closest_1_2_5_Pow10(optimalSpacingX);
+                startXmult = (int) Math.Ceiling(minXY.X/spacingX);
+                endXmult = (int) Math.Floor(maxXY.X/spacingX);
+            }
 
-            double optimalSpacingY = optimalGridLineSpacing.Y/scaleY;
-            double spacingY = ChartUtilities.Closest_1_2_5_Pow10(optimalSpacingY);
-
-            var startXmult = (int) Math.Ceiling(minXY.X/spacingX);
-            var endXmult = (int) Math.Floor(maxXY.X/spacingX);
+            var optimalSpacingY = optimalGridLineSpacing.Y / scaleY;
+            var spacingY = ChartUtilities.Closest_1_2_5_Pow10(optimalSpacingY);
             var startYmult = (int) Math.Ceiling(minXY.Y/spacingY);
             var endYmult = (int) Math.Floor(maxXY.Y/spacingY);
 
             double maxXLabelHeight = 0;
 
             var pathFigure = new PathFigure();
-
+            
             // Draw all the vertical gridlines
-
+            double lastTextBorder = 0;
             for (int lineNo = startXmult; lineNo <= endXmult; ++lineNo)
             {
                 double xValue = lineNo*spacingX;
@@ -361,25 +372,30 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
                 pathFigure.Segments.Add(new LineSegment(startPoint, false));
                 pathFigure.Segments.Add(new LineSegment(endPoint, true));
 
-                var text = new TextBlock();
-                text.TextAlignment = TextAlignment.Center;
+                var text = new TextBlock
+                               {
+                                   TextAlignment = TextAlignment.Center,
+                                   Foreground = axisScaleBrush,
+                                   //FontSize = 8
+                               };
                 if (MinDate != DateTime.MaxValue)
                 {
                     DateTime date = MinDate.AddSeconds(xValue);
                     text.Text = (axisDateFormat != null) ? date.ToString(axisDateFormat) : date.ToString();
                 }
                 else
-                {
                     text.Text = xValue.ToString();
-                }
-                //text.FontSize = 8;
-                text.Foreground = axisScaleBrush;
-                text.Measure(size);
 
-                text.SetValue(Canvas.LeftProperty, xPos - text.DesiredSize.Width*.5);
-                text.SetValue(Canvas.TopProperty, size.Height + 1);
-                textCanvas.Children.Add(text);
-                maxXLabelHeight = Math.Max(maxXLabelHeight, text.DesiredSize.Height);
+                text.Measure(size);
+                if (lastTextBorder <= xPos - text.DesiredSize.Width * .5)
+                {
+                    text.SetValue(Canvas.LeftProperty, xPos - text.DesiredSize.Width*.5);
+                    text.SetValue(Canvas.TopProperty, size.Height + 1);
+                    textCanvas.Children.Add(text);
+                    maxXLabelHeight = Math.Max(maxXLabelHeight, text.DesiredSize.Height);
+
+                    lastTextBorder = xPos + text.DesiredSize.Width*.5;
+                }
             }
 
             xGridlineLabels.Height = maxXLabelHeight + 2;
@@ -490,6 +506,8 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
             get { return maxDate; }
             set { maxDate = value; }
         }
+
+        public int? ScaleXHours { get; set; }
 
         public string AxisDateFormat
         {
