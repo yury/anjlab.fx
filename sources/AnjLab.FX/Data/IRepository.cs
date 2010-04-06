@@ -12,7 +12,7 @@ namespace AnjLab.FX.Data
         IList<T> GetAll(string orderByField, bool ascending);
         IList<T> GetFirst(int count);
         IList<T> GetLast(string dateTimeProperty, DateTime dateTime, bool ascending);
-        IList<T> GetLastIn<TIn>(string dateTimeProperty, DateTime dateTime, bool ascending, string inProperty, params TIn[] inValues);
+        IList<T> GetLastIn<TIn>(string dateTimeProperty, DateTime dateTime, bool ascending, int count, string inProperty, params TIn[] inValues);
         IList<T> GetBeforeIn<TIn>(int count, string dateTimeProperty, DateTime dateTime, bool ascending, string inProperty, params TIn[] inValue);
         IList<T> GetBetweenIn<TIn>(string dateTimeProperty, DateTime beginTime, DateTime endTime, bool ascending, string inProperty, params TIn[] inValues);
         int GetCount();
