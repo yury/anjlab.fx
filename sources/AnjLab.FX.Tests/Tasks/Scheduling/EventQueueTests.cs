@@ -26,7 +26,7 @@ namespace AnjLab.FX.Tests.Tasks.Scheduling
                 occursCount++;
             };
 
-            q.Start();
+            q.Start(true);
             Thread.Sleep(TimeSpan.FromSeconds(3));
             Assert.AreEqual(6, occursCount);
             q.Stop();

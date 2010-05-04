@@ -1,3 +1,4 @@
+using System;
 using AnjLab.FX.Patterns.Generic;
 using AnjLab.FX.Sys;
 
@@ -15,6 +16,18 @@ namespace AnjLab.FX.Tasks.Scheduling
 
             _taskFactory = taskFactory;
             _eventQueue.EventOccurs += eventQueue_EventOccurs;
+        }
+
+        public event EventHandler<EventArgs<string>> ExceptionHandler
+        {
+            add
+            {
+                _eventQueue.ExceptionHandler += value;
+            }
+            remove
+            {
+                _eventQueue.ExceptionHandler -= value;
+            }
         }
 
         public void RegisterTriggers(params ITrigger [] triggers)
@@ -40,7 +53,12 @@ namespace AnjLab.FX.Tasks.Scheduling
 
         public void Start()
         {
-            _eventQueue.Start();
+            Start(true);
+        }
+
+        public void Start(bool background)
+        {
+            _eventQueue.Start(background);
         }
 
         public void Stop()

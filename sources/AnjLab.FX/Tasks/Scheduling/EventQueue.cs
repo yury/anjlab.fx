@@ -8,7 +8,8 @@ namespace AnjLab.FX.Tasks.Scheduling
     public class EventQueue
     {
         private readonly List<Pair<ITrigger, DateTime>> _innerQueue;
-        
+
+        public event EventHandler<EventArgs<string>> ExceptionHandler;
         public event EventHandler<EventArgs<string>> EventOccurs;
         private readonly object _syncObj = new object();
         private readonly AutoResetEvent _waitHandle = new AutoResetEvent(false);
@@ -18,7 +19,6 @@ namespace AnjLab.FX.Tasks.Scheduling
         {
             if (EventOccurs != null)
                 EventOccurs.BeginInvoke(this, EventArg.New(tag), null, null);
-            
         }
 
         public EventQueue()
@@ -38,7 +38,7 @@ namespace AnjLab.FX.Tasks.Scheduling
             
             lock (_syncObj)
             {
-                Pair<ITrigger, DateTime> pair = new Pair<ITrigger, DateTime>(trigger, time.Value);
+                var pair = new Pair<ITrigger, DateTime>(trigger, time.Value);
 
                 if (_innerQueue.Count == 0)
                 {
@@ -73,13 +73,11 @@ namespace AnjLab.FX.Tasks.Scheduling
                     _waitHandle.Set();
             }
         }
-        
 
-        public void Start()
+        public void Start(bool background)
         {
             _started = true;
-            _thread = new Thread(WorkingThread);
-            _thread.IsBackground = true;
+            _thread = new Thread(WorkingThread) {IsBackground = background};
             _thread.Start();
         }
 
@@ -89,11 +87,7 @@ namespace AnjLab.FX.Tasks.Scheduling
             _waitHandle.Set();
         }
 
-        ~EventQueue()
-        {
-        }
-
-        private bool _started = false;
+        private bool _started;
 
         public void WorkingThread()
         {
@@ -107,19 +101,27 @@ namespace AnjLab.FX.Tasks.Scheduling
                     }
                     else
                     {
-                        Pair<ITrigger, DateTime> next = _innerQueue[0];
+                        Pair<ITrigger, DateTime> next;
+
+                        lock (_syncObj)
+                        {
+                            next = _innerQueue[0];
+                        }
 
                         TimeSpan wait = next.B - DateTime.Now;
-                        bool doRemove = false;
+                        bool eventOccured = true;
                         if (wait.Ticks > 0)
-                           doRemove = _waitHandle.WaitOne(wait, false);
+                           eventOccured = !_waitHandle.WaitOne(wait, false);
 
-                        if (!doRemove)
+                        if (eventOccured)
                         {
-                            _innerQueue.Remove(next);
+                            lock (_syncObj)
+                            {
+                                _innerQueue.Remove(next);
+                            }
                             
                             OnBeginEventOccurs(next.A.Tag);
-                            Thread.Sleep(100);
+
                             Register(next.A);
                         }
                     }
@@ -127,7 +129,17 @@ namespace AnjLab.FX.Tasks.Scheduling
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                OnException(e);
+            }
+        }
+
+        private void OnException(Exception exception)
+        {
+            Console.WriteLine(exception);
+
+            if (ExceptionHandler != null)
+            {
+                ExceptionHandler(this, new EventArgs<string>(exception.ToString()));
             }
         }
     }
