@@ -91,6 +91,7 @@
     <Compile Include="Collections\SerializableList.cs" />
     <Compile Include="Data\RepositoryFilter.cs" />
     <Compile Include="Devices\DES.cs" />
+    <Compile Include="Devices\DeviceExtensions.cs" />
     <Compile Include="Devices\Md5.cs" />
     <Compile Include="Gsm\ATRequest.cs" />
     <Compile Include="Gsm\ATResponse.cs" />
