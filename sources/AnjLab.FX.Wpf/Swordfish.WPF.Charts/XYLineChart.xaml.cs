@@ -387,14 +387,17 @@ namespace AnjLab.FX.Wpf.Swordfish.WPF.Charts
                     text.Text = xValue.ToString();
 
                 text.Measure(size);
-                if (lastTextBorder <= xPos - text.DesiredSize.Width * .5)
+                var textX = xPos - text.DesiredSize.Width * .5;
+                if (lastTextBorder == 0 || lastTextBorder <= textX)
                 {
-                    text.SetValue(Canvas.LeftProperty, xPos - text.DesiredSize.Width*.5);
+                    if (textX + text.DesiredSize.Width > size.Width)
+                        textX = size.Width - text.DesiredSize.Width;
+                    text.SetValue(Canvas.LeftProperty, textX);
                     text.SetValue(Canvas.TopProperty, size.Height + 1);
                     textCanvas.Children.Add(text);
                     maxXLabelHeight = Math.Max(maxXLabelHeight, text.DesiredSize.Height);
 
-                    lastTextBorder = xPos + text.DesiredSize.Width*.5;
+                    lastTextBorder = textX + text.DesiredSize.Width;
                 }
             }
 
