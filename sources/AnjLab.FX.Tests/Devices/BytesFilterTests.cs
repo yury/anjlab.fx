@@ -26,6 +26,24 @@ namespace AnjLab.FX.Tests.Devices
             Assert.AreEqual(2, res.Length);
             Assert.AreEqual(6, res[0].Length);
             Assert.AreEqual(3, res[1].Length);
+
+            res = f.Proccess("106400070210031070c900ffab020009501d00000000000000001003".ToBytes());
+            Assert.AreEqual(2, res.Length);
+            Assert.AreEqual(7, res[0].Length);
+            Assert.AreEqual(21, res[1].Length);
+
+            f.Clear();
+            f.Proccess("10".ToBytes());
+            f.Proccess("64".ToBytes());
+            f.Proccess("0a".ToBytes());
+            f.Proccess("07".ToBytes());
+            f.Proccess("02".ToBytes());
+            f.Proccess("10".ToBytes());
+            f.Proccess("03".ToBytes());
+            f.Proccess("10".ToBytes());
+            f.Proccess("6400".ToBytes());
+            res = f.Proccess("07021003".ToBytes());
+            Assert.AreEqual(1, res.Length);
         }
 
         [Test]

@@ -35,6 +35,14 @@ namespace AnjLab.FX.Devices
             {
                 var packets = new List<byte[]>();
                 int i = 0;
+                if ((_packetStart.Length > 1 || _packetEnd.Length > 1) && _buffer != null)
+                {
+                    var oldLength = _buffer.Length;
+                    Array.Resize(ref _buffer, bytes.Length + _buffer.Length);
+                    Array.Copy(bytes, 0, _buffer, oldLength, bytes.Length);
+                    bytes = _buffer;
+                    _buffer = null;
+                }
                 while (i < bytes.Length)
                 {
                     if (DataStartsFrom(_packetStart, bytes, i) && _buffer == null)
