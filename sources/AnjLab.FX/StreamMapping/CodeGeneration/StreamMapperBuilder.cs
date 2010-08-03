@@ -49,7 +49,7 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
         private CodeCompileUnit GenerateCompileUnit()
         {
             AddReference(typeof(IBinaryMapper<>));
-            AddReference(_mappedType);
+            AddInheritedReferences(_mappedType);
 
             _generatedMapper = new CodeTypeDeclaration(MapperTypeName);
             _generatedMapper.Attributes = MemberAttributes.Public;
@@ -62,7 +62,6 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
             CodeNamespace ns = new CodeNamespace(_namespace);
             ns.Types.Add(_generatedMapper);
             ns.Imports.Add(new CodeNamespaceImport("System = global::System"));
-
             CodeCompileUnit unit = new CodeCompileUnit();
             unit.Namespaces.Add(ns);
             
@@ -136,7 +135,18 @@ namespace AnjLab.FX.StreamMapping.CodeGeneration
 
         public void AddReference(Type type)
         {
-            _compileParameters.ReferencedAssemblies.Add(type.Assembly.Location);
+            var assemblyLocation = type.Assembly.Location;
+            if (!_compileParameters.ReferencedAssemblies.Contains(assemblyLocation))
+                _compileParameters.ReferencedAssemblies.Add(assemblyLocation);
+        }
+
+        public void AddInheritedReferences(Type type)
+        {
+            if (type != typeof(object))
+            {
+                AddReference(type);
+                AddInheritedReferences(type.BaseType);
+            }
         }
 
         public CodeMemberMethod AddNewMethod()
