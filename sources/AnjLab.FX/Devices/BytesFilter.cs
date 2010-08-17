@@ -6,8 +6,6 @@ namespace AnjLab.FX.Devices
 {
     public class BytesFilter : IBytesFilter
     {
-        private readonly byte[] _packetStart;
-        private readonly byte[] _packetEnd;
         private readonly object _syncObj = new object();
         byte[] _buffer;
 
@@ -18,8 +16,8 @@ namespace AnjLab.FX.Devices
 
         public BytesFilter(byte[] packetStart, byte[] packetEnd)
         {
-            _packetStart = packetStart;
-            _packetEnd = packetEnd;
+            PacketStart = packetStart;
+            PacketEnd = packetEnd;
         }
 
         public BytesFilter(string packetStartHexString, string packetEndHexString)
@@ -40,7 +38,7 @@ namespace AnjLab.FX.Devices
             {
                 var packets = new List<byte[]>();
                 int i = 0;
-                if ((_packetStart.Length > 1 || _packetEnd.Length > 1) && _buffer != null)
+                if ((PacketStart.Length > 1 || PacketEnd.Length > 1) && _buffer != null)
                 {
                     var oldLength = _buffer.Length;
                     Array.Resize(ref _buffer, bytes.Length + _buffer.Length);
@@ -50,15 +48,15 @@ namespace AnjLab.FX.Devices
                 }
                 while (i < bytes.Length)
                 {
-                    if (DataStartsFrom(_packetStart, bytes, i) && _buffer == null)
+                    if (DataStartsFrom(PacketStart, bytes, i) && _buffer == null)
                     {
-                        _buffer = AddBytesIntoArray(new byte[0], _packetStart);
-                        i += _packetStart.Length;
+                        _buffer = AddBytesIntoArray(new byte[0], PacketStart);
+                        i += PacketStart.Length;
                         continue;
                     }
-                    if (DataStartsFrom(_packetEnd, bytes, i))
+                    if (DataStartsFrom(PacketEnd, bytes, i))
                     {
-                        _buffer = AddBytesIntoArray(_buffer, _packetEnd);
+                        _buffer = AddBytesIntoArray(_buffer, PacketEnd);
                         if (_buffer != null)
                         {
                             var newPacket = new byte[_buffer.Length];
@@ -66,7 +64,7 @@ namespace AnjLab.FX.Devices
                             _buffer = null;
                             packets.Add(newPacket);
                         }
-                        i += _packetEnd.Length;
+                        i += PacketEnd.Length;
                         continue;
                     }
                     if (_buffer != null) // append to packet
@@ -75,13 +73,13 @@ namespace AnjLab.FX.Devices
                 }
                 //for (int i = 0; i < bytes.Length; i++)
                 //{
-                //    if (bytes[i] == _packetStart && _buffer == null)
+                //    if (bytes[i] == PacketStart && _buffer == null)
                 //    {
                 //        _buffer = AddByteIntoArray(new byte[0], bytes[i]);
                 //        continue;
                 //    }
 
-                //    if (bytes[i] == _packetEnd)
+                //    if (bytes[i] == PacketEnd)
                 //    {
                 //        _buffer = AddByteIntoArray(_buffer, bytes[i]);
                 //        if (_buffer != null)
@@ -126,5 +124,9 @@ namespace AnjLab.FX.Devices
         {
             get { return _buffer; }
         }
+
+        public byte[] PacketStart { get; set; }
+
+        public byte[] PacketEnd { get; set; }
     }
 }
