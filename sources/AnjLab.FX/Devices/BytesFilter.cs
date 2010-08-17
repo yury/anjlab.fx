@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AnjLab.FX.Devices
 {
-    public class BytesFilter
+    public class BytesFilter : IBytesFilter
     {
         private readonly byte[] _packetStart;
         private readonly byte[] _packetEnd;
