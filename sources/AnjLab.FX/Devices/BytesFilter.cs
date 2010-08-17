@@ -22,6 +22,11 @@ namespace AnjLab.FX.Devices
             _packetEnd = packetEnd;
         }
 
+        public BytesFilter(string packetStartHexString, string packetEndHexString)
+            : this(packetStartHexString.ToBytes(), packetEndHexString.ToBytes())
+        {
+        }
+
         public static bool DataStartsFrom(byte[] data, byte[] source, int startIndex)
         {
             if (startIndex + data.Length > source.Length)
