@@ -64,10 +64,10 @@ namespace AnjLab.FX.Tests.Devices
         [Test]
         public void TestShortToBitsArray()
         {
-            CollectionAssert.AreEqual(Convert.ShortToBitsArray(0, 16), new [] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false});
-            CollectionAssert.AreEqual(Convert.ShortToBitsArray(1, 16), new[] { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            CollectionAssert.AreEqual(Convert.ShortToBitsArray(8, 16), new[] { false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            CollectionAssert.AreEqual(Convert.ShortToBitsArray(8, 8), new[] { false, false, false, true, false, false, false, false});
+            CollectionAssert.AreEqual(Convert.IntToBitsArray(0, 16), new [] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false});
+            CollectionAssert.AreEqual(Convert.IntToBitsArray(1, 16), new[] { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            CollectionAssert.AreEqual(Convert.IntToBitsArray(8, 16), new[] { false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
+            CollectionAssert.AreEqual(Convert.IntToBitsArray(8, 8), new[] { false, false, false, true, false, false, false, false });
         }
 
         [Test]

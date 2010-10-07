@@ -134,16 +134,16 @@ namespace AnjLab.FX.Devices
             return newBytes;
         }
 
-        public static bool[] ShortToBitsArray (short s, byte size)
+        public static bool[] IntToBitsArray(int s, byte size)
         {
             if (size > 16)
                 size = 16;
-            short mask = 1;
+            int mask = 1;
             var array = new bool[size];
             for (int i = 0; i < size; i++)
             {
                 array[i] = (s & mask) != 0;
-                mask = (short)(mask << 1);
+                mask = mask << 1;
             }
             return array;
         }
